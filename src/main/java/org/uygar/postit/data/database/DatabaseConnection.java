@@ -1,4 +1,4 @@
-package org.uygar.postit.data.Database;
+package org.uygar.postit.data.database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -6,29 +6,22 @@ import java.sql.SQLException;
 
 public class DatabaseConnection {
 
-    private String databasePath;
     private Connection connection;
 
-    {
-        loadSQLiteClass();
-    }
-
     public DatabaseConnection(String databasePath) {
-        this.databasePath = databasePath;
-        connection = initConnection(this.databasePath);
+        loadSQLiteClass();
+        this.initConnection(databasePath);
     }
 
-    private Connection initConnection(String databasePath) {
+    private void initConnection(String databasePath) {
         try {
-            return DriverManager.getConnection(databasePath);
-        } catch (SQLException e) {
-            return null;
-        }
+            connection =  DriverManager.getConnection(databasePath);
+        } catch (SQLException e) { e.printStackTrace(); }
     }
 
     private void loadSQLiteClass() {
         try {
-            Class.forName("org.sqlite.SQLiteConnection");
+            Class.forName("org.sqlite.JDBC");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }

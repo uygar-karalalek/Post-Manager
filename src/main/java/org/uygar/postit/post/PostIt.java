@@ -1,5 +1,7 @@
 package org.uygar.postit.post;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import org.uygar.postit.post.properties.Colore;
@@ -8,16 +10,28 @@ import java.time.LocalDateTime;
 
 public class PostIt {
 
+    private IntegerProperty id;
     private SimpleObjectProperty<LocalDateTime> dataCreazione;
     private SimpleObjectProperty<Colore> colore;
     private SimpleStringProperty testo;
     private SimpleObjectProperty<Post> padre;
 
-    public PostIt(LocalDateTime dataCreazione, Colore colore, String testo, Post padre) {
+    public PostIt(int id, LocalDateTime dataCreazione, Colore colore, String testo, Post padre) {
+        this.id = new SimpleIntegerProperty(id);
         this.dataCreazione = new SimpleObjectProperty<>(dataCreazione);
         this.colore = new SimpleObjectProperty<>(colore);
         this.testo = new SimpleStringProperty(testo);
         this.padre = new SimpleObjectProperty<>(padre);
+    }
+
+    public int getId() {
+        return id.get();
+    }
+    public IntegerProperty idProperty() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id.set(id);
     }
 
     public LocalDateTime getDataCreazione() {

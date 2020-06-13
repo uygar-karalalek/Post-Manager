@@ -4,8 +4,8 @@ import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
-@CucumberOptions(plugin = {"pretty"}, tags = "not @Ignore")
 @RunWith(Cucumber.class)
-public class RunCucumberTests {
-
-}
+@CucumberOptions(plugin = {"pretty"},
+        tags = "not @Ignore", glue = "src/main/test/steps/",
+        features = "src/main/test/features/database.feature")
+public class RunCucumberTests {}
