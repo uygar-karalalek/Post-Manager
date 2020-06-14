@@ -20,12 +20,12 @@ public class Main extends Application {
     public void start(Stage stage) {
         this.stage = new Stage();
         this.stage.setWidth(898);
-        this.stage.setHeight(740);
+        this.stage.setHeight(715);
         System.out.println(getClass().getClassLoader().getResource("org/uygar/fxml/app/app.fxml"));
         this.root = (VBox) FXLoader.getLoadedParent("app", "app");
         this.scene = new Scene(root);
         this.stage.setScene(scene);
-        this.stage.heightProperty().addListener(this::onHeightChanged);
+        //this.stage.heightProperty().addListener(this::onHeightChanged);
         this.stage.show();
     }
 
