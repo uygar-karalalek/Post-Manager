@@ -13,13 +13,14 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="696.0" prefWidth="898.0" spacing="30.0"
-      stylesheets="@../../stylesheets/main/app_black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.AppController">
+<VBox fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="898.0" stylesheets="@../../stylesheets/main/app_black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.AppController">
    <children>
-      <MenuBar id="menuBar" nodeOrientation="LEFT_TO_RIGHT" prefHeight="36.0" prefWidth="898.0">
+      <MenuBar id="menuBar" nodeOrientation="LEFT_TO_RIGHT" prefHeight="58.0" prefWidth="898.0">
          <menus>
             <Menu mnemonicParsing="false" text="File">
                <items>
@@ -48,11 +49,11 @@
             <Insets left="10.0" top="4.0" />
          </padding>
       </MenuBar>
-      <HBox id="postBox" alignment="CENTER" prefHeight="591.0" prefWidth="898.0">
+      <HBox id="postBox" alignment="CENTER" prefHeight="701.0" prefWidth="898.0">
          <children>
-            <VBox alignment="CENTER" prefHeight="532.0" prefWidth="836.0">
+            <VBox alignment="TOP_CENTER" prefHeight="643.0" prefWidth="858.0">
                <children>
-                  <Text id="title" fx:id="title" accessibleText="52" strokeType="OUTSIDE" strokeWidth="0.0" text="POST IT MANAGER" textAlignment="CENTER" wrappingWidth="747.4375">
+                  <Text id="title" fx:id="title" accessibleText="52" strokeType="OUTSIDE" strokeWidth="0.0" text="POST IT MANAGER" textAlignment="CENTER" wrappingWidth="726.92578125">
                      <effect>
                         <Blend mode="GREEN" />
                      </effect>
@@ -60,17 +61,25 @@
                         <Font size="16.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="30.0" />
+                        <Insets bottom="60.0" top="30.0" />
                      </VBox.margin>
+                     <fill>
+                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                           <stops>
+                              <Stop color="#59bd31" />
+                              <Stop color="WHITE" offset="1.0" />
+                           </stops>
+                        </RadialGradient>
+                     </fill>
                   </Text>
-                  <Label id="iTuoiPost" alignment="CENTER" prefHeight="40.0" prefWidth="836.0" text="I tuoi post">
+                  <Label id="iTuoiPost" alignment="CENTER" prefHeight="40.0" prefWidth="10000.0" text="I tuoi post">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Label>
                   <ScrollPane prefHeight="376.0" prefWidth="836.0">
                      <content>
-                        <GridPane id="postGrid" fx:id="postGrid" prefHeight="344.0" prefWidth="834.0">
+                        <GridPane id="postGrid" fx:id="postGrid" prefHeight="371.0" prefWidth="900.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                               <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -95,6 +104,9 @@
                      </padding>
                   </HBox>
                </children>
+               <HBox.margin>
+                  <Insets left="20.0" right="20.0" />
+               </HBox.margin>
             </VBox>
          </children>
       </HBox>
