@@ -2,14 +2,14 @@ package org.uygar.postit.data.database.queries;
 
 public interface DQL extends Query {
 
-    Query select(String...tables);
-    Query selectAll();
-    Query from(String table);
-    Query where();
-    Query where(String condition);
-    Query field(String field);
-    Query like(String valueOfField);
-    Query equalsTo(String valueOfField);
-    Query is(String operator, String value);
+    DQL select(String column, String...columns);
+    DQL selectAll();
+    DQL from(String table);
+    DQL where();
+    DQL where(String condition);
+    DQL field(String field);
+    DQL like(String valueOfField);
+    DQL equalsTo(String valueOfField);
+    DQL is(String operator, String value);
 
 }

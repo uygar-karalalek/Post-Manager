@@ -6,6 +6,6 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(plugin = {"pretty"},
-        tags = "not @Ignore", glue = "src/main/test/steps/",
-        features = "src/main/test/features/database.feature")
+        tags = "not @Ignore", glue = "src/main/test/java_tests/steps/",
+        features = "src/main/test/java_tests/features/")
 public class RunCucumberTests {}

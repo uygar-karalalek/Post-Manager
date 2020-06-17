@@ -10,16 +10,24 @@ import java.time.LocalDateTime;
 public class Post {
 
     private SimpleIntegerProperty id;
-    private SimpleStringProperty nome;
+    private SimpleStringProperty name;
     private SimpleObjectProperty<LocalDateTime> creationDate, lastModifiedDate;
     private SimpleObjectProperty<Sort> sortType;
 
-    public Post(int id, String nome, LocalDateTime creationDate, LocalDateTime lastModifiedDate, Sort sortType) {
+    public Post(int id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate, Sort sortType) {
         this.id = new SimpleIntegerProperty(id);
-        this.nome = new SimpleStringProperty(nome);
+        this.name = new SimpleStringProperty(name);
         this.creationDate = new SimpleObjectProperty<>(creationDate);
         this.lastModifiedDate = new SimpleObjectProperty<>(lastModifiedDate);
         this.sortType = new SimpleObjectProperty<>(sortType);
+    }
+
+    public Post(int id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.creationDate = new SimpleObjectProperty<>(creationDate);
+        this.lastModifiedDate = new SimpleObjectProperty<>(lastModifiedDate);
+        this.sortType = new SimpleObjectProperty<>(Sort.DONE);
     }
 
     public int getId() {
@@ -52,14 +60,14 @@ public class Post {
         this.sortType.set(sortType);
     }
 
-    public String getNome() {
-        return nome.get();
+    public String getName() {
+        return name.get();
     }
-    public SimpleStringProperty nomeProperty() {
-        return nome;
+    public SimpleStringProperty nameProperty() {
+        return name;
     }
-    public void setNome(String nome) {
-        this.nome.set(nome);
+    public void setName(String name) {
+        this.name.set(name);
     }
 
     public LocalDateTime getCreationDate() {

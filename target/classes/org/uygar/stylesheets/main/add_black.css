@@ -1,3 +1,57 @@
 #root {
     -fx-background-color: linear-gradient(black, blue);
 }
+
+#okBtn {
+    -fx-pref-width: 60;
+    -fx-background-radius: 5em;
+}
+
+#annullaBtn {
+    -fx-pref-width: 100;
+    -fx-background-radius: 5em;
+}
+
+.split-menu-button {
+    -fx-background-color: white;
+    -fx-background-radius: 5em;
+}
+
+.split-menu-button .label {
+    -fx-background-radius: 5em;
+    -fx-background-color: linear-gradient(grey, blue);
+    -fx-text-fill: linen;
+}
+
+.split-menu-button .arrow-button {
+    -fx-background-radius: 5em;
+    -fx-background-color: salmon;
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+}
+
+.split-menu-button .arrow-button:hover {
+    -fx-background-radius: 5em;
+    -fx-background-color: seagreen;
+}
+
+.split-menu-button .arrow {
+    -fx-background-radius: 5em;
+    -fx-background-color: navy;
+}
+
+.split-menu-button .menu-item {
+    -fx-background-color: linear-gradient(crimson, blue);
+}
+
+.split-menu-button .menu-item:hover {
+    -fx-background-color: linear-gradient(darkgreen, blue);
+}
+
+.split-menu-button .menu-item .label {
+    -fx-background-color: transparent;
+}
+
+#sortLbl {
+    -fx-text-fill: radial-gradient(center 35px 15px, radius 30px, black, greenyellow);
+}

@@ -1,114 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.effect.Blend?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.RadialGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<VBox fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="898.0" stylesheets="@../../stylesheets/main/app_black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.AppController">
-   <children>
-      <MenuBar id="menuBar" nodeOrientation="LEFT_TO_RIGHT" prefHeight="58.0" prefWidth="898.0">
-         <menus>
-            <Menu mnemonicParsing="false" text="File">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="Close" />
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Edit">
-               <items>
-                  <Menu mnemonicParsing="false" text="Theme">
-                     <items>
-                        <MenuItem mnemonicParsing="false" text="Black" />
-                     </items>
-                  </Menu>
-               </items>
-            </Menu>
-            <Menu mnemonicParsing="false" text="Help">
-               <items>
-                  <MenuItem mnemonicParsing="false" text="About" />
-               </items>
-            </Menu>
-         </menus>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="954.0" stylesheets="@../../stylesheets/main/app_black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.AppController">
+   <top>
+      <MenuBar id="menuBar" prefHeight="31.0" prefWidth="779.0" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="Delete" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="About" />
+            </items>
+          </Menu>
+        </menus>
          <padding>
-            <Insets left="10.0" top="4.0" />
+            <Insets left="4.0" top="3.0" />
          </padding>
       </MenuBar>
-      <HBox id="postBox" alignment="CENTER" prefHeight="701.0" prefWidth="898.0">
-         <children>
-            <VBox alignment="TOP_CENTER" prefHeight="643.0" prefWidth="858.0">
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.36164736164736166" prefHeight="471.0" prefWidth="779.0" BorderPane.alignment="CENTER">
+         <items>
+            <VBox id="vbox" alignment="TOP_CENTER" maxHeight="492.0" maxWidth="600.0" prefHeight="0.0" prefWidth="258.0" spacing="20.0">
                <children>
-                  <Text id="title" fx:id="title" accessibleText="52" strokeType="OUTSIDE" strokeWidth="0.0" text="POST IT MANAGER" textAlignment="CENTER" wrappingWidth="726.92578125">
-                     <effect>
-                        <Blend mode="GREEN" />
-                     </effect>
-                     <font>
-                        <Font size="16.0" />
-                     </font>
-                     <VBox.margin>
-                        <Insets bottom="60.0" top="30.0" />
-                     </VBox.margin>
-                     <fill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                           <stops>
-                              <Stop color="#59bd31" />
-                              <Stop color="WHITE" offset="1.0" />
-                           </stops>
-                        </RadialGradient>
-                     </fill>
-                  </Text>
-                  <Label id="iTuoiPost" alignment="CENTER" prefHeight="40.0" prefWidth="10000.0" text="I tuoi post">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
-                  <ScrollPane prefHeight="376.0" prefWidth="836.0">
+                  <Text id="title" fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="I tuoi post" wrappingWidth="344.79296875" />
+                  <HBox alignment="CENTER" prefHeight="56.0" prefWidth="345.0">
+                     <children>
+                        <Label id="srcLabel" prefHeight="44.0" prefWidth="72.0" text="Cerca" />
+                        <TextField prefHeight="32.0" />
+                     </children>
+                  </HBox>
+                  <ScrollPane prefHeight="374.0" prefWidth="251.0">
                      <content>
-                        <GridPane id="postGrid" fx:id="postGrid" prefHeight="371.0" prefWidth="900.0">
-                           <columnConstraints>
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                           </columnConstraints>
-                           <cursor>
-                              <Cursor fx:constant="HAND" />
-                           </cursor>
+                        <GridPane id="postGrid" fx:id="postGrid" prefHeight="332.0" prefWidth="558.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                          </columnConstraints>
                         </GridPane>
                      </content>
                   </ScrollPane>
-                  <HBox id="buttonBox" alignment="CENTER" prefHeight="92.0" prefWidth="836.0" spacing="20.0">
-                     <children>
-                        <Button id="btnAggiungi" fx:id="addButton" mnemonicParsing="false" onAction="#onAddClicked" prefHeight="40.0" prefWidth="300.0" text="Aggiungi" />
-                        <Button id="btnFiltra" fx:id="filterButton" mnemonicParsing="false" onAction="#onFilterClicked" prefHeight="40.0" prefWidth="300.0" text="Filtra" />
-                        <Button id="btnEsci" fx:id="exitBtn" mnemonicParsing="false" onAction="#onExitClicked" prefHeight="40.0" prefWidth="300.0" text="Esci" />
-                     </children>
-                     <VBox.margin>
-                        <Insets />
-                     </VBox.margin>
-                     <padding>
-                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                     </padding>
-                  </HBox>
                </children>
-               <HBox.margin>
-                  <Insets left="20.0" right="20.0" />
-               </HBox.margin>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="40.0" top="40.0" />
+               </padding>
             </VBox>
-         </children>
-      </HBox>
-   </children>
-</VBox>
+            <VBox id="vbox" alignment="CENTER_LEFT" maxHeight="492.0" maxWidth="370.0" prefHeight="492.0" prefWidth="370.0" spacing="20.0">
+               <children>
+                  <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifica" wrappingWidth="197.79296875" />
+                  <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" onAction="#onAddClicked" prefWidth="200.0" text="Aggiungi" />
+                  <Button fx:id="filterButton" alignment="CENTER" mnemonicParsing="false" onAction="#onFilterClicked" prefWidth="200.0" text="Filtra" />
+                  <Button alignment="CENTER" mnemonicParsing="false" prefWidth="200.0" text="Statistiche" />
+                  <Button id="btnEsci" alignment="CENTER" mnemonicParsing="false" onAction="#onExitClicked" prefWidth="200.0" text="Esci" />
+                  <ButtonBar prefHeight="40.0" prefWidth="200.0" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="40.0" top="40.0" />
+               </padding>
+            </VBox>
+         </items>
+      </SplitPane>
+   </center>
+</BorderPane>

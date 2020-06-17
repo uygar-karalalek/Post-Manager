@@ -5,8 +5,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -16,7 +16,7 @@ import org.uygar.postit.post.Post;
 public class AppController {
 
     @FXML
-    VBox rootPane;
+    BorderPane rootPane;
 
     @FXML
     Text title;
@@ -32,7 +32,7 @@ public class AppController {
     @FXML
     public void onAddClicked() {
         double prefWidth = 366;
-        double prefHeight = 200;
+        double prefHeight = 274;
         Parent root = FXLoader.getLoadedParent("add", "app");
         fadedParent(root, 1);
         Scene scene = new Scene(root);
@@ -74,7 +74,7 @@ public class AppController {
 
     @FXML
     public void onExitClicked() {
-        this.postGrid.getScene().getWindow().hide();
+        this.rootPane.getScene().getWindow().hide();
     }
 
     public void fadedParent(Parent root, int seconds) {
