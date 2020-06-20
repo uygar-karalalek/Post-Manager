@@ -1,4 +1,5 @@
 org\uygar\postit\Main.class
+org\uygar\postit\data\database\queries\DQLQueryBuilder.class
 org\uygar\postit\controllers\app\FilterController.class
 org\uygar\postit\data\structures\PostContainer.class
 org\uygar\postit\post\PostIt.class
@@ -6,14 +7,14 @@ org\uygar\postit\post\Post.class
 org\uygar\postit\data\database\queries\DML.class
 org\uygar\postit\data\database\queries\DQL.class
 org\uygar\postit\post\properties\Sort.class
-org\uygar\postit\data\database\queries\DMLQuery.class
 org\uygar\postit\data\database\DatabaseConnection.class
 org\uygar\postit\data\database\DataMiner.class
-org\uygar\postit\data\database\queries\DQLQuery.class
 org\uygar\postit\data\structures\Container.class
+org\uygar\postit\controllers\app\exception\FieldsNotCompletedException.class
 org\uygar\postit\data\structures\PostitContainer.class
 org\uygar\postit\controllers\app\AggiungiController.class
 org\uygar\postit\controllers\app\AppController.class
+org\uygar\postit\data\database\queries\DMLQueryBuilder.class
 org\uygar\postit\controllers\app\FXLoader.class
 org\uygar\postit\data\database\queries\Query.class
 org\uygar\postit\post\properties\Colore.class

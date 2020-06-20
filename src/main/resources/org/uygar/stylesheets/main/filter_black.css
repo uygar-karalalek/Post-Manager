@@ -6,7 +6,7 @@
     -fx-fill: navajowhite;
     -fx-font-family: Arial;
     -fx-font-size: 18pt;
-    -fx-text-alignment: LEFT;
+    -fx-text-alignment: RIGHT;
 }
 
 .check-box > .box {
@@ -40,6 +40,6 @@
 }
 
 .text-field:focused {
-    -fx-background-color: darkgrey;
+    -fx-background-color: linear-gradient(grey, #00ffa0);
     -fx-text-fill: black;
 }

@@ -1,5 +1,31 @@
 .root {
     -fx-background-color: linear-gradient(black, grey);
+    -fx-border-color: linear-gradient(cornflowerblue, grey);
+    -fx-border-width: 2px;
+}
+
+#searchBox {
+    -fx-background-color: linear-gradient(black, grey);
+    -fx-background-radius: 5em;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-background-color: transparent;
+}
+
+#modificaBox {
+    -fx-background-radius: 3em;
+    /*-fx-background-color: linear-gradient(mediumspringgreen, burlywood);*/
+    -fx-background-color: radial-gradient(center 220px 180px, radius 400px, grey, black);
+}
+
+#modifica {
+    -fx-text-alignment: center;
+    -fx-font-family: Arial;
+    -fx-font-size: 30;
+    -fx-fill: radial-gradient(center 90px 50px, radius 100px, darkturquoise, burlywood);
+    -fx-font-weight: bolder;
+    -fx-alignment: top-center;
 }
 
 .scroll-pane > .viewport{
@@ -68,7 +94,7 @@
     -fx-text-alignment: center;
     -fx-font-family: Arial;
     -fx-font-size: 30;
-    -fx-fill: linear-gradient(cyan 50%, darkblue);
+    -fx-fill: radial-gradient(center 90px 50px, radius 100px, darkturquoise, burlywood);
     -fx-font-weight: bolder;
 }
 

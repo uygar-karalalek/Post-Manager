@@ -5,8 +5,8 @@ Feature: Modify database
 
   Scenario: Insert data to database
     When it asks to insert a post
-      | id | name | creationDate | lastModifiedDate | sort |
-      | 1  | test | 2001-01-01   | 2001-01-01       | NONE |
+      | id | name | sort | creationDate               | lastModifiedDate           |
+      | 1  | test | NONE | 2020-01-01T00:00:00.000000 | 2020-01-02T00:00:00.000000 |
     And I ask data of column "*" of table "post"
     Then it should insert the data
 

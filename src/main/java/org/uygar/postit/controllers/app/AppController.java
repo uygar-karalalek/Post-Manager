@@ -32,7 +32,7 @@ public class AppController {
     @FXML
     public void onAddClicked() {
         double prefWidth = 366;
-        double prefHeight = 274;
+        double prefHeight = 285;
         Parent root = FXLoader.getLoadedParent("add", "app");
         fadedParent(root, 1);
         Scene scene = new Scene(root);

@@ -1,19 +1,27 @@
 package org.uygar.postit.data.structures;
 
 import org.uygar.postit.data.database.DataMiner;
+import org.uygar.postit.data.database.queries.DQL;
+import org.uygar.postit.data.database.queries.DQLQueryBuilder;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.properties.Sort;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 public class PostContainer implements Container {
 
     public static int numOfPosts = 0;
-    private DataMiner dataMiner = new DataMiner();
+    private DataMiner dataMiner;
     private ArrayList<Post> postList = new ArrayList<>();
     private Sort sortType;
+
+    public PostContainer(DataMiner dataMiner) {
+        this.dataMiner = dataMiner;
+        initStructure();
+    }
 
     @Override
     public void sort() {
@@ -31,9 +39,15 @@ public class PostContainer implements Container {
     }
 
     // TODO : Add elements to the structure from the db.
-    @Override
-    public void initStructure() {
+    private void initStructure() {
+        DQL dql = new DQLQueryBuilder().selectAll().from("post");
+        dataMiner.executeQuery(dql);
 
+        Map<String, List<String>> posts = dataMiner.getListOfResult();
+        numOfPosts = posts.get("id").size();
+
+        for (int i = 0; i < numOfPosts; i++)
+            add(getPost(posts, i));
     }
 
     public void add(Post post) {
@@ -53,4 +67,24 @@ public class PostContainer implements Container {
         postList.remove(index);
     }
 
+    private Post getPost(Map<String, List<String>> posts, int index) {
+        int id = Integer.parseInt(posts.get("id").get(index));
+        String name = posts.get("name").get(index);
+        LocalDateTime creation = LocalDateTime.parse(posts.get("creationDate").get(index));
+        LocalDateTime lastModified = LocalDateTime.parse(posts.get("lastModifiedDate").get(index));
+        Sort sort = Sort.valueOf(posts.get("sort").get(index));
+
+        return new Post(id, name, creation, lastModified, sort);
+    }
+
+    public ArrayList<Post> getPostList() {
+        return postList;
+    }
+
+    @Override
+    public String toString() {
+        return "PostContainer{" +
+                "postList=" + postList +
+                '}';
+    }
 }

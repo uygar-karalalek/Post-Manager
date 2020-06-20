@@ -1,6 +1,6 @@
 package org.uygar.postit.data.database.queries;
 
-public class DQLQuery implements DQL {
+public class DQLQueryBuilder implements DQL {
 
     private String query = "";
 
@@ -58,7 +58,7 @@ public class DQLQuery implements DQL {
     @Override
     public DQL is(String operator, String value) {
         this.query += operator + "'" + value + "'";
-        return null;
+        return this;
     }
 
     @Override

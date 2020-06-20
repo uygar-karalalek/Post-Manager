@@ -9,6 +9,10 @@ import java.time.LocalDateTime;
 
 public class Post {
 
+    /**
+     * Order: id, creationDate, name, sort, lastModifiedDate
+    */
+
     private SimpleIntegerProperty id;
     private SimpleStringProperty name;
     private SimpleObjectProperty<LocalDateTime> creationDate, lastModifiedDate;

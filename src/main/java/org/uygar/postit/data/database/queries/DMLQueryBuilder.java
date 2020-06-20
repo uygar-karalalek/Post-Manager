@@ -2,7 +2,7 @@ package org.uygar.postit.data.database.queries;
 
 import java.util.InputMismatchException;
 
-public class DMLQuery implements DML {
+public class DMLQueryBuilder implements DML {
 
     private String query = "";
 
@@ -29,11 +29,18 @@ public class DMLQuery implements DML {
 
     @Override
     public DML values(String... values) {
-        this.query += " VALUES ('" + values[0] + "'";
+        convertValues(values);
+        this.query += " VALUES (" + values[0];
         for (int i = 1; i < values.length; i++)
-            this.query += ", '" + values[i] + "'";
+            this.query += ", " + values[i];
         this.query += ")";
         return this;
+    }
+
+    public void convertValues(String[] values) {
+        for (int i = 0; i < values.length; i++)
+            if (!values[i].equals("null"))
+                values[i] = "'" + values[i] + "'";
     }
 
     @Override

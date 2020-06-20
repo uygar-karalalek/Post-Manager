@@ -5,7 +5,7 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.uygar.postit.data.database.DataMiner;
-import org.uygar.postit.data.database.queries.DMLQuery;
+import org.uygar.postit.data.database.queries.DMLQueryBuilder;
 import setup.Config;
 
 import java.util.List;
@@ -14,12 +14,12 @@ import java.util.Map;
 public class DMLQueriesSteps {
 
     DataMiner dataMiner;
-    DMLQuery query;
+    DMLQueryBuilder query;
     Config config;
 
     public DMLQueriesSteps(DataMiner dataMiner) {
         this.config = new Config();
-        this.query = new DMLQuery();
+        this.query = new DMLQueryBuilder();
         this.dataMiner = dataMiner;
     }
 
@@ -27,12 +27,12 @@ public class DMLQueriesSteps {
     public void it_asks_to_insert_a_post(DataTable dataTable) {
         Map<String, String> post = dataTable.asMaps().get(0);
 
-        DMLQuery query = new DMLQuery();
+        DMLQueryBuilder query = new DMLQueryBuilder();
         query.insert().into("post").values(
                 post.get("id"),
-                post.get("creationDate"),
                 post.get("name"),
                 post.get("sort"),
+                post.get("creationDate"),
                 post.get("lastModifiedDate")
         );
 

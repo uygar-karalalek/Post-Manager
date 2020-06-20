@@ -6,22 +6,21 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.DatabaseConnection;
-import org.uygar.postit.data.database.queries.DQLQuery;
+import org.uygar.postit.data.database.queries.DQLQueryBuilder;
 import setup.Config;
 
-import java.sql.ResultSet;
 import java.util.List;
 import java.util.Map;
 
 public class DQLQueriesSteps {
 
     DataMiner dataMiner;
-    DQLQuery query;
+    DQLQueryBuilder query;
     Config config;
 
     public DQLQueriesSteps(DataMiner dataMiner) {
         this.config = new Config();
-        this.query = new DQLQuery();
+        this.query = new DQLQueryBuilder();
         this.dataMiner = dataMiner;
     }
 

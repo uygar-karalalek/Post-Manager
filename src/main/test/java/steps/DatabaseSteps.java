@@ -6,12 +6,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.DatabaseConnection;
-import org.uygar.postit.data.database.queries.DQL;
-import org.uygar.postit.data.database.queries.DQLQuery;
 import setup.Config;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class DatabaseSteps {
 
@@ -30,8 +25,7 @@ public class DatabaseSteps {
 
     @When("I ask to connect to the database")
     public void i_ask_to_connect_to_the_database() {
-        String databasePath = "jdbc:sqlite:post.db";
-        this.dataMiner.dbConnection = new DatabaseConnection(databasePath);
+        this.dataMiner.dbConnection = new DatabaseConnection(config.getDbURI());
     }
 
     @Then("it should connect to the database")
