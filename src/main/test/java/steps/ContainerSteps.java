@@ -2,22 +2,18 @@ package steps;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
-import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
 import org.junit.Assert;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.DatabaseConnection;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
-import org.uygar.postit.data.structures.PostContainer;
+import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
 import setup.Config;
 
-import java.time.LocalDateTime;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.*;
@@ -28,7 +24,7 @@ public class ContainerSteps {
     DataMiner dataMiner;
     DMLQueryBuilder query;
     Config config;
-    PostContainer postContainer;
+    PostContainerOrganizer<Post> postContainer;
 
     public ContainerSteps(DataMiner dataMiner) {
         this.config = new Config();
@@ -53,7 +49,7 @@ public class ContainerSteps {
 
     @When("it asks to get all the posts")
     public void itAsksToGetAllThePosts() {
-        postContainer = new PostContainer(dataMiner);
+        postContainer = new PostContainerOrganizer<>(dataMiner);
     }
 
     @Then("it should print the posts")

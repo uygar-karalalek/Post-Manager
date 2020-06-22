@@ -59,15 +59,7 @@
                         <Insets left="40.0" right="40.0" />
                      </VBox.margin>
                   </HBox>
-                  <ScrollPane prefHeight="374.0" prefWidth="251.0">
-                     <content>
-                        <GridPane id="postGrid" fx:id="postGrid" prefHeight="332.0" prefWidth="519.0">
-                          <columnConstraints>
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                          </columnConstraints>
-                        </GridPane>
-                     </content>
+                  <ScrollPane fx:id="scrollPane" prefHeight="374.0" prefWidth="251.0">
                   </ScrollPane>
                </children>
                <padding>

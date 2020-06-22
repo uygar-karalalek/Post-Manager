@@ -26,6 +26,7 @@ public class DatabaseSteps {
     @When("I ask to connect to the database")
     public void i_ask_to_connect_to_the_database() {
         this.dataMiner.dbConnection = new DatabaseConnection(config.getDbURI());
+        System.out.println(this.dataMiner.dbConnection.getConnection());
     }
 
     @Then("it should connect to the database")

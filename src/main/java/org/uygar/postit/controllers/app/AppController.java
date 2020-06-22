@@ -2,18 +2,29 @@ package org.uygar.postit.controllers.app;
 
 import javafx.animation.FadeTransition;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.uygar.postit.data.database.DataMiner;
+import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
+import org.uygar.postit.viewers.PostGridViewer;
 
-public class AppController {
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.nio.file.Paths;
+import java.util.ResourceBundle;
+
+public class AppController implements Initializable {
 
     @FXML
     BorderPane rootPane;
@@ -25,9 +36,21 @@ public class AppController {
     Button addButton, filterButton;
 
     @FXML
-    GridPane postGrid;
+    ScrollPane scrollPane;
+
+    @FXML
+    PostGridViewer postGrid;
 
     Post selectedPost;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        initPostGrid();
+    }
+
+    private void initPostGrid() {
+        postGrid = new PostGridViewer(new PostContainerOrganizer<>(new DataMiner()));
+    }
 
     @FXML
     public void onAddClicked() {
@@ -65,11 +88,11 @@ public class AppController {
     }
 
     private void setStageX(double prefWidth, Stage stage) {
-        stage.setX((getStage().getWidth() / 2 - prefWidth/2) + getStage().getX());
+        stage.setX((getStage().getWidth() / 2 - prefWidth / 2) + getStage().getX());
     }
 
     private void setStageY(double prefHeight, Stage stage) {
-        stage.setY((getStage().getHeight() / 2 - prefHeight/2) + getStage().getY());
+        stage.setY((getStage().getHeight() / 2 - prefHeight / 2) + getStage().getY());
     }
 
     @FXML
@@ -87,5 +110,4 @@ public class AppController {
     public Stage getStage() {
         return (Stage) this.rootPane.getScene().getWindow();
     }
-
 }

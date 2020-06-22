@@ -1,6 +1,7 @@
 package org.uygar.postit.data.database;
 
 import org.uygar.postit.data.database.queries.Query;
+import org.uygar.postit.data.structures.PostContainer;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,6 +14,10 @@ public class DataMiner {
 
     public DatabaseConnection dbConnection;
     public ResultSet response;
+
+    public DataMiner() {
+        this.dbConnection = new DatabaseConnection(PostContainer.DB_PATH);
+    }
 
     public void execute(Query query) {
         final String SQL_QUERY = query.getQuery();

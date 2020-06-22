@@ -1,4 +1,6 @@
 org\uygar\postit\Main.class
+org\uygar\postit\viewers\PostGridViewer.class
+org\uygar\postit\data\structures\PostContainerOrganizer.class
 org\uygar\postit\data\database\queries\DQLQueryBuilder.class
 org\uygar\postit\controllers\app\FilterController.class
 org\uygar\postit\data\structures\PostContainer.class
@@ -7,6 +9,7 @@ org\uygar\postit\post\Post.class
 org\uygar\postit\data\database\queries\DML.class
 org\uygar\postit\data\database\queries\DQL.class
 org\uygar\postit\post\properties\Sort.class
+org\uygar\postit\viewers\PostViewer.class
 org\uygar\postit\data\database\DatabaseConnection.class
 org\uygar\postit\data\database\DataMiner.class
 org\uygar\postit\data\structures\Container.class
