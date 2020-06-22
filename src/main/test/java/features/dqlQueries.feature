@@ -1,4 +1,4 @@
-Feature: Select opperations
+Feature: Select operations
 
   Scenario: Getting data from tables
     Given a sqlite connection

@@ -1,0 +1,13 @@
+.dialog-pane {
+    -fx-background-color: #380202;
+}
+
+#gridPane {
+    -fx-background-color: black;
+}
+
+.label {
+    -fx-text-fill: papayawhip;
+    -fx-font-family: Arial;
+    -fx-font-size: 12;
+}

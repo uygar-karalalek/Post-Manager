@@ -132,3 +132,7 @@
     -fx-font-size: 12pt;
     -fx-text-fill: white;
 }
+
+#post {
+    -fx-background-radius: 5em;
+}

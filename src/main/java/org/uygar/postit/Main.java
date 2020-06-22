@@ -26,7 +26,6 @@ public class Main extends Application {
         this.scene = new Scene(root);
         addTransition();
         this.stage.setScene(scene);
-        //this.stage.heightProperty().addListener(this::onHeightChanged);
         this.stage.show();
     }
 
@@ -35,11 +34,6 @@ public class Main extends Application {
         transition.setFromValue(0);
         transition.setToValue(1);
         transition.play();
-    }
-
-    public void onHeightChanged(ObservableValue<? extends Number> obs, Number oldVal, Number newVal) {
-        HBox hBox = (HBox) root.getChildren().filtered(node -> node.getId().equals("postBox")).get(0);
-        hBox.setPrefHeight(hBox.getPrefHeight() + ((double) oldVal + (double) newVal));
     }
 
 }

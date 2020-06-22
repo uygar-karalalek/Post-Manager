@@ -17,6 +17,7 @@ import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.viewers.PostGridViewer;
+import org.uygar.postit.viewers.PostViewer;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +42,10 @@ public class AppController implements Initializable {
     @FXML
     PostGridViewer postGrid;
 
+    DataMiner dataMiner = new DataMiner();
+
+    PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
+
     Post selectedPost;
 
     @Override
@@ -49,7 +54,11 @@ public class AppController implements Initializable {
     }
 
     private void initPostGrid() {
-        postGrid = new PostGridViewer(new PostContainerOrganizer<>(new DataMiner()));
+        postGrid = new PostGridViewer(postOrganizer);
+        double prefWidth = scrollPane.getPrefWidth();
+        double prefHeight = scrollPane.getPrefHeight();
+        postGrid.setPrefSize(prefHeight, prefWidth);
+        this.scrollPane.setContent(postGrid);
     }
 
     @FXML
@@ -110,4 +119,5 @@ public class AppController implements Initializable {
     public Stage getStage() {
         return (Stage) this.rootPane.getScene().getWindow();
     }
+
 }

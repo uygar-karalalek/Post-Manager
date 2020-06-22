@@ -13,4 +13,11 @@ public enum Sort {
         return name;
     }
 
+    public static Sort getSortFromName(String name) {
+        for (Sort element : values())
+            if (element.name.equals(name))
+                return element;
+        return null;
+    }
+
 }

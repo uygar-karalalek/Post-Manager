@@ -19,17 +19,12 @@ public class DataMiner {
         this.dbConnection = new DatabaseConnection(PostContainer.DB_PATH);
     }
 
-    public void execute(Query query) {
+    public void execute(Query query) throws SQLException {
         final String SQL_QUERY = query.getQuery();
-        try {
-            dbConnection
-                    .getConnection()
-                    .createStatement().execute(SQL_QUERY);
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            query.clear();
-        }
+        dbConnection
+                .getConnection()
+                .createStatement().execute(SQL_QUERY);
+        query.clear();
     }
 
     public void executeQuery(Query query) {
@@ -60,6 +55,15 @@ public class DataMiner {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public boolean tryExecute(Query query) {
+        try {
+            this.execute(query);
+            return true;
+        } catch (SQLException e) {
+        }
+        return false;
     }
 
 }

@@ -36,7 +36,7 @@ public class DMLQueriesSteps {
                 post.get("lastModifiedDate")
         );
 
-        this.dataMiner.execute(query);
+        this.dataMiner.tryExecute(query);
     }
 
     @Then("it should insert the data")
@@ -58,7 +58,7 @@ public class DMLQueriesSteps {
                 .set("name", newName)
                 .where().field("id").equalsTo(id);
 
-        dataMiner.execute(query);
+        this.dataMiner.tryExecute(query);
     }
 
     @Then("it updates the post with name {string}")
@@ -74,7 +74,7 @@ public class DMLQueriesSteps {
     public void it_asks_to_delete_the_post_with_name(String postName) {
         query.delete().from("post").where().field("name").like(postName);
 
-        dataMiner.execute(query);
+        this.dataMiner.tryExecute(query);
     }
 
     @Then("it deletes the post")
