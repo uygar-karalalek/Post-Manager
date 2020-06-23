@@ -9,10 +9,12 @@ import javafx.stage.Window;
 import org.uygar.postit.controllers.app.exception.WrongFieldsException;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
+import org.uygar.postit.data.database.queries.DQLQueryBuilder;
+import org.uygar.postit.post.Post;
 import org.uygar.postit.post.properties.Sort;
+import org.uygar.postit.viewers.PostGridViewer;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
@@ -31,6 +33,8 @@ public class AggiungiController implements Initializable {
     SplitMenuButton sortType;
 
     DataMiner dataMiner = new DataMiner();
+
+    PostGridViewer postGridViewer;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,7 +66,6 @@ public class AggiungiController implements Initializable {
             throw new WrongFieldsException("Inserisci tutti i campi!", windowX, windowY);
 
         LocalDateTime creationDate = LocalDateTime.now();
-        LocalDateTime lastModifiedDate = creationDate;
 
         DMLQueryBuilder query = new DMLQueryBuilder();
         query.insert().into("post").values(
@@ -70,16 +73,32 @@ public class AggiungiController implements Initializable {
                 name,
                 sortType.toString(),
                 creationDate.toString(),
-                lastModifiedDate.toString());
+                creationDate.toString()); // l'ultima modifica è la volta in cui lo crei
 
         if (!dataMiner.tryExecute(query))
             throw new WrongFieldsException("Il post esiste già!", windowX, windowY);
+
+        Integer id = getMaxId();
+        this.postGridViewer.postOrganizer.add(new Post(id, name, creationDate, creationDate));
         this.root.getScene().getWindow().hide();
+        this.postGridViewer.updateLast();
+    }
+
+    private Integer getMaxId() {
+        DQLQueryBuilder dql = new DQLQueryBuilder();
+        dql.select("MAX(id) as id").from("post");
+        dataMiner.executeQuery(dql);
+        String result = dataMiner.getListOfResult().get("id").get(0);
+        return Integer.parseInt(result);
     }
 
     @FXML
     public void onAnnulla() {
         root.getScene().getWindow().hide();
+    }
+
+    public void setPostGridViewer(PostGridViewer postGridViewer) {
+        this.postGridViewer = postGridViewer;
     }
 
 }

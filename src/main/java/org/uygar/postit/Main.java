@@ -11,6 +11,8 @@ import javafx.util.Duration;
 import org.uygar.postit.controllers.app.FXLoader;
 
 import java.io.IOException;
+import java.util.Objects;
+import java.util.TreeSet;
 
 public class Main extends Application {
 
@@ -21,9 +23,8 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = new Stage();
-        System.out.println(getClass().getClassLoader().getResource("org/uygar/fxml/app/app.fxml"));
         this.root = (BorderPane) FXLoader.getLoadedParent("app", "app");
-        this.scene = new Scene(root);
+        this.scene = new Scene(Objects.requireNonNull(root));
         addTransition();
         this.stage.setScene(scene);
         this.stage.show();

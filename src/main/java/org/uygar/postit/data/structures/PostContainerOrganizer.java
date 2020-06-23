@@ -19,7 +19,6 @@ public class PostContainerOrganizer implements PostContainer, Iterable<Post> {
     public static int numOfPosts = 0;
     private DataMiner dataMiner;
     private ArrayList<Post> postList = new ArrayList<>();
-    private Sort sortType;
 
     public PostContainerOrganizer(DataMiner dataMiner) {
         this.dataMiner = dataMiner;
@@ -85,6 +84,17 @@ public class PostContainerOrganizer implements PostContainer, Iterable<Post> {
     public Iterator<Post> iterator() {
         Iterator<Post> iterator = postList.iterator();
         return iterator;
+    }
+
+    public Post getLastPost() {
+        if (!postList.isEmpty()) {
+            Post last = this.postList.get(0);
+            for (int i = 1; i < postList.size(); i++)
+                if (postList.get(i).getId() > last.getId())
+                    last = postList.get(i);
+            return last;
+        }
+        return null;
     }
 
 }

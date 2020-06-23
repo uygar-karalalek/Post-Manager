@@ -26,7 +26,7 @@ public class ContainerSteps {
     DataMiner dataMiner;
     DMLQueryBuilder query;
     Config config;
-    PostContainerOrganizer<Post> postContainer;
+    PostContainerOrganizer postContainer;
 
     public ContainerSteps(DataMiner dataMiner) {
         this.config = new Config();
@@ -51,7 +51,7 @@ public class ContainerSteps {
 
     @When("it asks to get all the posts")
     public void itAsksToGetAllThePosts() {
-        postContainer = new PostContainerOrganizer<>(dataMiner);
+        postContainer = new PostContainerOrganizer(dataMiner);
     }
 
     @Then("it should print the posts")

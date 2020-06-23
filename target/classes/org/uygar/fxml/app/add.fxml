@@ -50,11 +50,6 @@
                </font>
             </Label>
             <SplitMenuButton fx:id="sortType" mnemonicParsing="false" popupSide="RIGHT" prefHeight="27.0" prefWidth="158.0">
-              <items>
-                <MenuItem mnemonicParsing="false" text="Action 2" />
-                  <MenuItem mnemonicParsing="false" text="Action 2" />
-                  <MenuItem mnemonicParsing="false" text="Action 2" />
-              </items>
             </SplitMenuButton>
          </children>
          <VBox.margin>

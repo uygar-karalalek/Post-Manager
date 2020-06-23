@@ -15,8 +15,7 @@
 
 #modificaBox {
     -fx-background-radius: 3em;
-    /*-fx-background-color: linear-gradient(mediumspringgreen, burlywood);*/
-    -fx-background-color: radial-gradient(center 220px 180px, radius 400px, grey, black);
+    -fx-background-color: radial-gradient(center -100px 180px, radius 400px, black 40%, aliceblue);
 }
 
 #modifica {
@@ -28,8 +27,16 @@
     -fx-alignment: top-center;
 }
 
-.scroll-pane > .viewport{
+.scroll-pane {
+    -fx-background-color: radial-gradient(center 450px 180px, radius 500px, grey, black);
+    -fx-background-radius: 2em;
+    -fx-alignment: CENTER;
+    -fx-padding: 0 20 0 0;
+}
+
+.scroll-pane > .viewport {
     -fx-background-color: transparent;
+    -fx-alignment: CENTER;
 }
 
 .scroll-bar {
@@ -43,14 +50,9 @@
 }
 
 .scroll-bar:horizontal {
-    -fx-translate-y: -10;
+    -fx-translate-y: -1;
     -fx-translate-x: 10;
     -fx-scale-x: 0.75;
-}
-
-.scroll-pane{
-    -fx-background-color: radial-gradient(center 450px 180px, radius 500px, grey, black);
-    -fx-background-radius: 5em;
 }
 
 .split-pane {
@@ -99,7 +101,8 @@
 }
 
 .button {
-    -fx-background-color: linear-gradient(black 40%, darkblue 50%, grey);
+    -fx-background-color: linear-gradient(grey 1%, black 50%, grey);
+    -fx-pref-height: 35;
     -fx-background-radius: 5em;
     -fx-text-fill: white;
     -fx-font-family: Arial;
@@ -107,7 +110,7 @@
 }
 
 .button:pressed {
-    -fx-background-color: lightsalmon;
+    -fx-background-color: lightcoral;
     -fx-text-fill: black;
 }
 
@@ -116,8 +119,13 @@
     -fx-background-color: linear-gradient(white, grey);
 }
 
-#postGrid {
+#postGridViewer {
     -fx-background-color: transparent;
+    -fx-background-radius: 5em;
+    -fx-hgap: 10;
+    -fx-vgap: 10;
+    -fx-padding: 10 0 10 10;
+    -fx-alignment: TOP_CENTER;
 }
 
 #btnEsci {
@@ -135,4 +143,19 @@
 
 #post {
     -fx-background-radius: 5em;
+    -fx-border-radius: 5em;
+    -fx-border-width: 2 3 6 3;
+    -fx-border-color: black;
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, darkcyan, darkblue);
+    -fx-text-fill: wheat;
+    -fx-font-family: Arial;
+    -fx-font-size: 12pt;
+}
+
+#post:hover {
+    -fx-scale-y: 1.1;
+    -fx-background-color: linear-gradient(brown, grey);
+    -fx-text-fill: wheat;
+    -fx-font-family: Arial;
+    -fx-font-size: 13pt;
 }

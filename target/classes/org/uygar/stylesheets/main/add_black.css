@@ -7,7 +7,6 @@
     -fx-background-radius: 5em;
 }
 
-
 #annullaBtn {
     -fx-pref-width: 100;
     -fx-background-radius: 5em;
@@ -22,7 +21,8 @@
     -fx-font-family: "Arial";
     -fx-font-size: 12pt;
     -fx-background-radius: 5em;
-    -fx-background-color: linear-gradient(grey, black);
+    -fx-background-color: linear-gradient(burlywood, grey);
+    -fx-alignment: CENTER;
     -fx-text-fill: linen;
 }
 

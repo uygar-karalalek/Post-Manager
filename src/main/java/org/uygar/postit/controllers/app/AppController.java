@@ -1,12 +1,14 @@
 package org.uygar.postit.controllers.app;
 
 import javafx.animation.FadeTransition;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -42,6 +44,9 @@ public class AppController implements Initializable {
     @FXML
     PostGridViewer postGrid;
 
+    @FXML
+    TextField searchField;
+
     DataMiner dataMiner = new DataMiner();
 
     PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
@@ -51,13 +56,11 @@ public class AppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPostGrid();
+        this.searchField.textProperty().addListener(this::onSearchChanged);
     }
 
     private void initPostGrid() {
         postGrid = new PostGridViewer(postOrganizer);
-        double prefWidth = scrollPane.getPrefWidth();
-        double prefHeight = scrollPane.getPrefHeight();
-        postGrid.setPrefSize(prefHeight, prefWidth);
         this.scrollPane.setContent(postGrid);
     }
 
@@ -65,9 +68,10 @@ public class AppController implements Initializable {
     public void onAddClicked() {
         double prefWidth = 366;
         double prefHeight = 285;
-        Parent root = FXLoader.getLoadedParent("add", "app");
-        fadedParent(root, 1);
-        Scene scene = new Scene(root);
+        AggiungiController ac = (AggiungiController) FXLoader.getLoadedController("add", "app");
+        ac.setPostGridViewer(this.postGrid);
+        fadedParent(ac.root, 1);
+        Scene scene = new Scene(ac.root);
         Stage stage = createApplicationStage(prefWidth, prefHeight);
         stage.setScene(scene);
         stage.showAndWait();
@@ -114,6 +118,10 @@ public class AppController implements Initializable {
         transition.setFromValue(0);
         transition.setToValue(1);
         transition.play();
+    }
+
+    public void onSearchChanged(ObservableValue<? extends String> obs, String oldVal, String newVal) {
+        this.postGrid.filter(newVal);
     }
 
     public Stage getStage() {
