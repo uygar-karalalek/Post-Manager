@@ -63,11 +63,6 @@ public class PostContainerOrganizer implements PostContainer, Iterable<Post> {
         return new Post(id, name, creation, lastModified, sort);
     }
 
-    @Override
-    public void filter() {
-
-    }
-
     public ArrayList<Post> getPostList() {
         return postList;
     }

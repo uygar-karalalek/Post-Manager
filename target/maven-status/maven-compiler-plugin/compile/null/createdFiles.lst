@@ -9,6 +9,7 @@ org\uygar\postit\post\Post.class
 org\uygar\postit\data\database\queries\DML.class
 org\uygar\postit\data\database\queries\DQL.class
 org\uygar\postit\post\properties\Sort.class
+org\uygar\postit\data\properties\ApplicationProperties.class
 org\uygar\postit\viewers\PostViewer.class
 org\uygar\postit\data\database\DatabaseConnection.class
 org\uygar\postit\data\database\DataMiner.class

@@ -81,10 +81,11 @@ public class AppController implements Initializable {
     public void onFilterClicked() {
         double prefWidth = 486;
         double prefHeight = 400;
+        FilterController fc = (FilterController) FXLoader.getLoadedController("filter", "app");
         Stage stage = createApplicationStage(prefWidth, prefHeight);
-        Parent root = FXLoader.getLoadedParent("filter", "app");
-        fadedParent(root, 1);
-        Scene scene = new Scene(root);
+        fc.setPostGridViewer(this.postGrid);
+        fadedParent(fc.root, 1);
+        Scene scene = new Scene(fc.root);
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -111,6 +112,11 @@ public class AppController implements Initializable {
     @FXML
     public void onExitClicked() {
         this.rootPane.getScene().getWindow().hide();
+    }
+
+    @FXML
+    public void onAbout() {
+
     }
 
     public void fadedParent(Parent root, int seconds) {

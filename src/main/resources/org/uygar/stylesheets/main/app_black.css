@@ -103,7 +103,7 @@
 .button {
     -fx-background-color: linear-gradient(grey 1%, black 50%, grey);
     -fx-pref-height: 35;
-    -fx-background-radius: 5em;
+    -fx-background-radius: 1em;
     -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
@@ -133,12 +133,15 @@
 }
 
 .text-field {
-    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, blue, grey);
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, grey, blue);
     -fx-background-radius: 5em;
     -fx-font-family: Arial;
     -fx-alignment: center;
     -fx-font-size: 12pt;
     -fx-text-fill: white;
+    -fx-border-radius: 5em;
+    -fx-border-width: 4px;
+    -fx-border-color: black;
 }
 
 #post {
