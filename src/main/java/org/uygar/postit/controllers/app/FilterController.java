@@ -72,18 +72,18 @@ public class FilterController implements Initializable {
                 textFinisce = getTextFromField(finisceField, ignoraMaiusc);
         LocalDate data1 = this.data1.getValue(), data2 = this.data2.getValue();
 
-        if (this.inizio.isSelected())
-            inizio = post -> post.getName().indexOf(textInizio) == 0;
+        if (this.inizio.isSelected() && ignoraMaiusc) inizio = post -> post.getName().toLowerCase().indexOf(textInizio) == 0;
+        else if(this.inizio.isSelected()) inizio = post -> post.getName().indexOf(textInizio) == 0;
 
-        if (this.tra.isSelected())
-            tra = post -> post.getCreationDate().toLocalDate().isAfter(data1) &&
-                    post.getCreationDate().toLocalDate().isBefore(data2);
+        if (this.tra.isSelected()) tra = post -> (post.getCreationDate().toLocalDate().isAfter(data1) || post.getCreationDate().toLocalDate().isEqual(data1)) &&
+                (post.getCreationDate().toLocalDate().isBefore(data2) || post.getCreationDate().toLocalDate().isAfter(data1) &&
+                post.getCreationDate().toLocalDate().isEqual(data2));
 
-        if (this.contiene.isSelected())
-            contiene = post -> post.getName().contains(textContiene);
+        if (this.contiene.isSelected() && ignoraMaiusc) contiene = post -> post.getName().toLowerCase().contains(textContiene);
+        else if (this.contiene.isSelected()) contiene = post -> post.getName().contains(textContiene);
 
-        if (this.finisce.isSelected())
-            finisce = post -> post.getName().endsWith(textFinisce);
+        if (this.finisce.isSelected() && ignoraMaiusc) finisce = post -> post.getName().toLowerCase().endsWith(textFinisce);
+        else if (this.finisce.isSelected()) finisce = post -> post.getName().endsWith(textFinisce);
 
         postGridViewer.filter(inizio.and(tra).and(contiene).and(finisce));
     }
@@ -108,9 +108,10 @@ public class FilterController implements Initializable {
         this.root.getScene().getWindow().hide();
     }
 
-    public String getTextFromField(TextField field, boolean lower) {
+    public String getTextFromField(TextField field, boolean ignore) {
         String text = field.getText();
-        text = lower ? text.toLowerCase() : text;
+        text = ignore ? text.toLowerCase() : text;
+        System.out.println(text);
         return text;
     }
 

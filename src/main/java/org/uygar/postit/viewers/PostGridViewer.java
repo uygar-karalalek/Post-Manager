@@ -53,7 +53,7 @@ public class PostGridViewer extends GridPane {
     }
 
     public void filter(String letters) {
-        init(post -> post.getName().contains(letters.toLowerCase()));
+        init(post -> post.getName().toLowerCase().contains(letters.toLowerCase()));
     }
 
     public void filter(Predicate<Post> predicate) {
