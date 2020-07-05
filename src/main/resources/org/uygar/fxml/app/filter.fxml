@@ -18,7 +18,7 @@
 <GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
           minWidth="-Infinity" prefHeight="401.0" prefWidth="486.0"
           stylesheets="@../../stylesheets/main/filter_black.css" xmlns="http://javafx.com/javafx/11.0.1"
-          xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.FilterController">
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.filter.FilterController">
     <columnConstraints>
         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="317.0" minWidth="10.0" prefWidth="227.0"/>
         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="265.0"/>

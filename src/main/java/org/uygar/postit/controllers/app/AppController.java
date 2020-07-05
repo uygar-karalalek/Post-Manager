@@ -1,6 +1,7 @@
 package org.uygar.postit.controllers.app;
 
 import javafx.animation.FadeTransition;
+import javafx.animation.Interpolator;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,21 +11,17 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.uygar.postit.controllers.app.filter.FilterController;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.viewers.PostGridViewer;
-import org.uygar.postit.viewers.PostViewer;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 public class AppController implements Initializable {
@@ -72,7 +69,7 @@ public class AppController implements Initializable {
         ac.setPostGridViewer(this.postGrid);
         fadedParent(ac.root, 1);
         Scene scene = new Scene(ac.root);
-        Stage stage = createApplicationStage(prefWidth, prefHeight);
+        Stage stage = createApplicationStage(prefWidth, prefHeight, Modality.APPLICATION_MODAL);
         stage.setScene(scene);
         stage.showAndWait();
     }
@@ -82,21 +79,21 @@ public class AppController implements Initializable {
         double prefWidth = 486;
         double prefHeight = 400;
         FilterController fc = (FilterController) FXLoader.getLoadedController("filter", "app");
-        Stage stage = createApplicationStage(prefWidth, prefHeight);
+        Stage stage = createApplicationStage(prefWidth, prefHeight, Modality.WINDOW_MODAL);
         fc.setPostGridViewer(this.postGrid);
-        fadedParent(fc.root, 1);
+        fadedParent(fc.root, 0.4);
         Scene scene = new Scene(fc.root);
         stage.setScene(scene);
         stage.showAndWait();
     }
 
-    private Stage createApplicationStage(double prefWidth, double prefHeight) {
+    private Stage createApplicationStage(double prefWidth, double prefHeight, Modality modality) {
         Stage stage = new Stage();
         stage.setWidth(prefWidth);
         stage.setHeight(prefHeight);
         setStageX(prefWidth, stage);
         setStageY(prefHeight, stage);
-        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.initModality(modality);
         stage.setResizable(false);
         return stage;
     }
@@ -119,8 +116,9 @@ public class AppController implements Initializable {
 
     }
 
-    public void fadedParent(Parent root, int seconds) {
+    public void fadedParent(Parent root, double seconds) {
         FadeTransition transition = new FadeTransition(Duration.seconds(seconds), root);
+        transition.setInterpolator(Interpolator.EASE_BOTH);
         transition.setFromValue(0);
         transition.setToValue(1);
         transition.play();

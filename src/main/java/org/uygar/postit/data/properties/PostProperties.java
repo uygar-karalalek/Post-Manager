@@ -1,54 +1,54 @@
 package org.uygar.postit.data.properties;
 
 import java.io.*;
-import java.nio.channels.Channel;
-import java.nio.channels.SeekableByteChannel;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.time.LocalDateTime;
 import java.util.Properties;
 
-public class ApplicationProperties {
+public class PostProperties {
 
     Path propPath;
     Properties properties;
 
-    public ApplicationProperties(Path propPath) {
+    public PostProperties(Path propPath) {
         this.propPath = propPath;
         properties = new Properties();
-        loadPropertiesFile();
+        loadProperties();
     }
 
-    public ApplicationProperties() {
+    public PostProperties() {
         this.propPath = Paths.get("application.properties");
-        loadPropertiesFile();
+        loadProperties();
     }
 
-    public void storeProperty(String key, String value) {
+    public void putProperty(String key, Object value) {
         properties.put(key, value);
     }
 
-    public void storePropertiesFile() {
+    public String getProperty(String propertyName) {
+        return (String) this.properties.get(propertyName);
+    }
+
+    public void storeProperties() {
         File property = new File(propPath.toAbsolutePath().toString());
         try {
             OutputStream stream = new
                     BufferedOutputStream(new FileOutputStream(property));
-            properties.store(stream, "changed properties: "+ LocalDateTime.now());
+            properties.store(stream, "changed properties: " + LocalDateTime.now());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private void loadPropertiesFile() {
+    public void loadProperties() {
         File property = new File(propPath.toAbsolutePath().toString());
         try {
             InputStream stream = new
                     BufferedInputStream(new FileInputStream(property));
             properties.load(stream);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("The file not already exists!");
         }
     }
 
