@@ -36,6 +36,7 @@ public class FXLoader {
 
     @NotNull
     private static URL getUrl(String initPath, String endPath) {
+        System.out.println(initPath + endPath);
         return Objects.requireNonNull(FXLoader.class.getClassLoader().
                 getResource(initPath + endPath));
     }

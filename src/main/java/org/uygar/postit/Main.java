@@ -2,24 +2,29 @@ package org.uygar.postit;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
-import javafx.beans.value.ObservableValue;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.uygar.postit.controllers.app.FXLoader;
+import org.uygar.postit.data.properties.LogProperties;
 
-import java.io.IOException;
 import java.util.Objects;
-import java.util.TreeSet;
 
 public class Main extends Application {
 
     Stage stage;
     BorderPane root;
     Scene scene;
+    LogProperties properties;
+
+    @Override
+    public void init() {
+        this.properties = new LogProperties();
+        properties.addHourLog();
+        properties.addMonthLog();
+        properties.storeProperties();
+    }
 
     @Override
     public void start(Stage stage) {

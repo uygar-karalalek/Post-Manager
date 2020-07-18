@@ -21,9 +21,9 @@
     -fx-font-family: "Arial";
     -fx-font-size: 12pt;
     -fx-background-radius: 5em;
-    -fx-background-color: linear-gradient(burlywood, grey);
+    -fx-background-color: linear-gradient(cadetblue, grey);
     -fx-alignment: CENTER;
-    -fx-text-fill: linen;
+    -fx-text-fill: springgreen;
 }
 
 .split-menu-button .arrow-button {

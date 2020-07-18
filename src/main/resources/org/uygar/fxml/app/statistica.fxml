@@ -1,29 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="515.0"
-         prefWidth="829.0" tabClosingPolicy="UNAVAILABLE"
-         xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1"
-         fx:controller="org.uygar.postit.controllers.app.StatisticaController">
+<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="635.0" prefWidth="1147.0" stylesheets="@../../stylesheets/main/statistica_black.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.statistica.StatisticaController">
     <tabs>
         <Tab text="Grafico a dispersione">
-            <content>
-                <AnchorPane fx:id="dispersionePane" minHeight="0.0" minWidth="0.0" prefHeight="180.0"
-                            prefWidth="200.0"/>
-            </content>
+         <content>
+            <SplitPane fx:id="dispersionePane" dividerPositions="0.26416739319965127" prefHeight="160.0" prefWidth="200.0">
+               <items>
+                  <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="scatterBox" prefHeight="486.0" prefWidth="613.0" />
+               </items>
+            </SplitPane>
+         </content>
         </Tab>
         <Tab text="Grafico a linee">
-            <content>
-                <AnchorPane fx:id="lineePane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-            </content>
-        </Tab>
-        <Tab text="Grafico a bolle">
-            <content>
-                <AnchorPane fx:id="bollePane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0"/>
-            </content>
-        </Tab>
+         <content>
+            <SplitPane fx:id="lineePane" dividerPositions="0.26416739319965127" prefHeight="160.0" prefWidth="200.0">
+              <items>
+                  <VBox id="vbox" prefHeight="200.0" prefWidth="100.0" />
+                  <VBox fx:id="lineBox" prefHeight="200.0" prefWidth="100.0">
+                     <children>
+                     </children></VBox>
+              </items>
+            </SplitPane>
+         </content></Tab>
+      <Tab text="Tabella dei valori">
+         <content>
+            <ScrollPane fx:id="valoriPane" />
+         </content>
+      </Tab>
     </tabs>
 </TabPane>

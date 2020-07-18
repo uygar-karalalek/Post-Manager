@@ -16,6 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.uygar.postit.controllers.app.filter.FilterController;
+import org.uygar.postit.controllers.app.statistica.StatisticaController;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
@@ -88,13 +89,19 @@ public class AppController implements Initializable {
     }
 
     private Stage createApplicationStage(double prefWidth, double prefHeight, Modality modality) {
-        Stage stage = new Stage();
+        Stage stage = createApplicationStage(modality, false);
         stage.setWidth(prefWidth);
         stage.setHeight(prefHeight);
         setStageX(prefWidth, stage);
         setStageY(prefHeight, stage);
-        stage.initModality(modality);
         stage.setResizable(false);
+        return stage;
+    }
+
+    private Stage createApplicationStage(Modality modality, boolean resizable) {
+        Stage stage = new Stage();
+        stage.initModality(modality);
+        stage.setResizable(resizable);
         return stage;
     }
 
@@ -114,6 +121,16 @@ public class AppController implements Initializable {
     @FXML
     public void onAbout() {
 
+    }
+
+    @FXML
+    public void onStatisticaClicked() {
+        Stage stage = createApplicationStage(Modality.WINDOW_MODAL, true);
+        StatisticaController sc = (StatisticaController)
+                FXLoader.getLoadedController("statistica", "app");
+        Scene scene = new Scene(sc.root);
+        stage.setScene(scene);
+        stage.showAndWait();
     }
 
     public void fadedParent(Parent root, double seconds) {

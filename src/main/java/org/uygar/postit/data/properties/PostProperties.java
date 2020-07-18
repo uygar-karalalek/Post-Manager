@@ -18,7 +18,8 @@ public class PostProperties {
     }
 
     public PostProperties() {
-        this.propPath = Paths.get("application.properties");
+        this.propPath = Paths.get("src/main/resources/application.properties");
+        properties = new Properties();
         loadProperties();
     }
 
@@ -26,8 +27,12 @@ public class PostProperties {
         properties.put(key, value);
     }
 
-    public String getProperty(String propertyName) {
+    public String getStringProperty(String propertyName) {
         return (String) this.properties.get(propertyName);
+    }
+
+    public Object getProperty(String propertyName) {
+        return this.properties.get(propertyName);
     }
 
     public void storeProperties() {
