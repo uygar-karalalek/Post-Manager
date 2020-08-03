@@ -49,8 +49,6 @@ public class AppController implements Initializable {
 
     PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
 
-    Post selectedPost;
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPostGrid();
@@ -59,6 +57,7 @@ public class AppController implements Initializable {
 
     private void initPostGrid() {
         postGrid = new PostGridViewer(postOrganizer);
+        postGrid.selected.addListener(this::onSelectedChange);
         this.scrollPane.setContent(postGrid);
     }
 
@@ -147,6 +146,14 @@ public class AppController implements Initializable {
 
     public Stage getStage() {
         return (Stage) this.rootPane.getScene().getWindow();
+    }
+
+    public void onSelectedChange(ObservableValue<? extends Post> v, Post oldV, Post newV) {
+        this.loadPost(newV);
+    }
+
+    private void loadPost(Post post) {
+
     }
 
 }

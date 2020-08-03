@@ -1,5 +1,7 @@
 package org.uygar.postit.data.structures;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DQL;
@@ -18,7 +20,7 @@ public class PostContainerOrganizer implements PostContainer, Iterable<Post> {
 
     public static int numOfPosts = 0;
     private DataMiner dataMiner;
-    private ArrayList<Post> postList = new ArrayList<>();
+    private ObservableList<Post> postList = FXCollections.observableArrayList();
 
     public PostContainerOrganizer(DataMiner dataMiner) {
         this.dataMiner = dataMiner;
@@ -63,7 +65,7 @@ public class PostContainerOrganizer implements PostContainer, Iterable<Post> {
         return new Post(id, name, creation, lastModified, sort);
     }
 
-    public ArrayList<Post> getPostList() {
+    public ObservableList<Post> getPostList() {
         return postList;
     }
 

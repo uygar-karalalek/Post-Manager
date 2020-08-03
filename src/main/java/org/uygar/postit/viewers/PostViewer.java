@@ -1,5 +1,7 @@
 package org.uygar.postit.viewers;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import org.uygar.postit.post.Post;
@@ -29,13 +31,10 @@ public class PostViewer extends Post {
     public void initView() {
         this.view = new Button(this.getName());
         this.view.setId("post");
-        this.view.addEventFilter(MouseEvent.MOUSE_CLICKED, this::onViewClicked);
+        BooleanProperty selected = new SimpleBooleanProperty();
+        this.view.setUserData(selected);
     }
 
     public Button getView() { return view; }
-
-    public void onViewClicked(MouseEvent event) {
-        // TODO : Implementare finestra
-    }
 
 }
