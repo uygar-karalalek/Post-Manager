@@ -1,4 +1,4 @@
-package setup;
+package java_tests.setup;
 
 public class Config {
 

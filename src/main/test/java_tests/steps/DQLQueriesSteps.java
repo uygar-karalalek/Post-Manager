@@ -1,4 +1,4 @@
-package steps;
+package java_tests.steps;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -7,7 +7,7 @@ import org.junit.Assert;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.DatabaseConnection;
 import org.uygar.postit.data.database.queries.DQLQueryBuilder;
-import setup.Config;
+import java_tests.setup.Config;
 
 import java.util.List;
 import java.util.Map;

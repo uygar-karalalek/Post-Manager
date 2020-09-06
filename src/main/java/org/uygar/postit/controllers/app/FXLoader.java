@@ -13,8 +13,7 @@ public class FXLoader {
         try {
             String initPath = "org/uygar/fxml/";
             String endPath = pkg + "/" + fxml + ".fxml";
-            Parent root = FXMLLoader.load(getUrl(initPath, endPath));
-            return root;
+            return FXMLLoader.load(getUrl(initPath, endPath));
         } catch (IOException e) {
             e.printStackTrace();
         }

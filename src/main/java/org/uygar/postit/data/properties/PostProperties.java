@@ -23,8 +23,8 @@ public class PostProperties {
         loadProperties();
     }
 
-    public void putProperty(String key, Object value) {
-        properties.put(key, value);
+    public Object putProperty(String key, Object value) {
+        return properties.put(key, value);
     }
 
     public String getStringProperty(String propertyName) {

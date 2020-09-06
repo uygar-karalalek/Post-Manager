@@ -40,7 +40,7 @@
       </MenuBar>
    </top>
    <center>
-      <SplitPane dividerPositions="0.638771186440678" prefHeight="501.0" prefWidth="878.0" BorderPane.alignment="CENTER">
+      <SplitPane dividerPositions="0.638771186440678" prefHeight="524.0" prefWidth="796.0" BorderPane.alignment="CENTER">
          <items>
             <VBox id="vbox" alignment="TOP_CENTER" maxHeight="492.0" maxWidth="600.0" prefHeight="0.0" prefWidth="258.0" spacing="20.0">
                <children>
@@ -57,7 +57,7 @@
                         <Insets left="40.0" right="40.0" />
                      </VBox.margin>
                   </HBox>
-                  <ScrollPane fx:id="scrollPane" prefHeight="374.0" prefWidth="251.0">
+                  <ScrollPane fx:id="scrollPane" prefHeight="326.0" prefWidth="530.0">
                   </ScrollPane>
                </children>
                <padding>
@@ -75,7 +75,7 @@
                            </VBox.margin>
                         </Button>
                         <Button fx:id="filterButton" alignment="CENTER" mnemonicParsing="false" onAction="#onFilterClicked" prefWidth="200.0" text="Filtra" />
-                        <Button alignment="CENTER" mnemonicParsing="false" prefWidth="200.0" text="Statistiche" onAction="#onStatisticaClicked"/>
+                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onStatisticaClicked" prefWidth="200.0" text="Statistiche" />
                         <Button id="btnEsci" alignment="CENTER" mnemonicParsing="false" onAction="#onExitClicked" prefWidth="200.0" text="Esci" />
                      </children>
                      <padding>

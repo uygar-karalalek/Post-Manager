@@ -1,4 +1,4 @@
-package steps;
+package java_tests.steps;
 
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.After;
@@ -10,12 +10,9 @@ import org.junit.Assert;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.DatabaseConnection;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
-import org.uygar.postit.data.database.queries.Query;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
-import org.uygar.postit.post.Post;
-import setup.Config;
+import java_tests.setup.Config;
 
-import java.sql.SQLException;
 import java.util.Map;
 
 import static org.hamcrest.CoreMatchers.*;

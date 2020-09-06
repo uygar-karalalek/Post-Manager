@@ -101,16 +101,16 @@
 }
 
 .button {
-    -fx-background-color: linear-gradient(grey 1%, black 50%, grey);
+    -fx-background-color: linear-gradient(black, grey);
     -fx-pref-height: 35;
-    -fx-background-radius: 1em;
+    -fx-background-radius: 0.5em;
     -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
 }
 
 .button:pressed {
-    -fx-background-color: lightcoral;
+    -fx-background-color: linear-gradient(cornsilk, coral);
     -fx-text-fill: black;
 }
 
@@ -158,7 +158,7 @@
 #post:hover {
     -fx-scale-y: 1.04;
     -fx-background-color: linear-gradient(cyan, grey);
-    -fx-text-fill: wheat;
+    -fx-text-fill: black;
     -fx-font-family: Arial;
     -fx-font-size: 12.3pt;
 }

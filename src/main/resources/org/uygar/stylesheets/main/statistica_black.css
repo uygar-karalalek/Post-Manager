@@ -1,10 +1,70 @@
 .root {
-    -fx-background-color: black;
+    -fx-background-color: linear-gradient(grey, black);
 }
 
-#vbox {
-    -fx-background-color: radial-gradient(center 90px 10px, radius 500px, cadetblue, darkblue);
-    -fx-max-width: 300;
+/* TEXT */
+
+.table-view {
+    -fx-background-color: linear-gradient(black, grey);
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(black, dimgray);
+    -fx-pref-height: 40;
+}
+
+.table-row-cell {
+    -fx-text-fill: black;
+    -fx-font-family: Arial;
+    -fx-font-size: 14px;
+}
+
+.table-cell {
+    -fx-alignment: CENTER;
+}
+
+#titleModificaDati {
+    -fx-font-style: "Bookman Old Style";
+    -fx-text-fill: linear-gradient(navajowhite, grey);
+}
+
+.label {
+    -fx-text-fill: white;
+}
+
+#titoloDati {
+    -fx-fill: linear-gradient(gold, lightslategray);
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 24pt;
+    -fx-translate-x: 10px;
+    -fx-translate-y: 0;
+    -fx-font-weight: bold;
+}
+
+#textDati {
+    -fx-fill: white;
+    -fx-translate-x: 10px;
+    -fx-font-family: Arial;
+    -fx-font-size: 13pt;
+}
+
+/* TEXT END */
+
+.separator {
+    -fx-border-color: linear-gradient(darkolivegreen, white);
+}
+
+#grid {
+    -fx-background-color: black;
+    -fx-pref-width: 400;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-background-color: linear-gradient(wheat, cornflowerblue, cornsilk);
+}
+
+#hbox {
+    -fx-background-color: radial-gradient(center 90px -170px, radius 500px, black, black);
 }
 
 #scatterBox {
@@ -46,8 +106,18 @@
 
 /* CHARTS */
 
+.chart-legend {
+    -fx-translate-y: -10px;
+    -fx-translate-x: 40px;
+    -fx-background-color: linear-gradient(grey, black);
+}
+
+.chart-legend:hover {
+    -fx-background-color: linear-gradient(grey, darkblue);
+}
+
 .chart-symbol {
-    -fx-background-color: brown;
+    -fx-background-color: linear-gradient(crimson, coral);
     -fx-background-radius: 2px;
     -fx-padding: 6px;
 }

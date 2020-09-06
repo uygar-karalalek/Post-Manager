@@ -16,6 +16,7 @@ import org.uygar.postit.viewers.PostGridViewer;
 import java.io.File;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 import java.util.function.Predicate;
 
@@ -87,7 +88,7 @@ public class FilterController implements Initializable {
         double y = window.getY() + window.getHeight() / 4;
 
         if (!areFieldsValid())
-            throw new WrongFieldsException("Devi completare tutti i campi!", x, y);
+            throw new WrongFieldsException("Hai sbagliato a compilare i campi!", x, y);
 
         boolean ignoraMaiusc = this.ignoraMaiusc.isSelected();
         Predicate<Post> inizio, tra, contiene, finisce;
@@ -170,8 +171,10 @@ public class FilterController implements Initializable {
 
     public boolean isTraValid() {
         boolean valid = true;
-        if (tra.isSelected())
-            valid = data1.getValue() != null && data2.getValue() != null;
+        if (tra.isSelected()) {
+            valid = data1.getValue() != null && data2.getValue() != null
+            && (data1.getValue().isBefore(data2.getValue()) || data1.getValue().isEqual(data2.getValue()));
+        }
         return valid;
     }
 

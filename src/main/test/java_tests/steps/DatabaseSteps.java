@@ -1,4 +1,4 @@
-package steps;
+package java_tests.steps;
 
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -6,7 +6,7 @@ import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.DatabaseConnection;
-import setup.Config;
+import java_tests.setup.Config;
 
 public class DatabaseSteps {
 
