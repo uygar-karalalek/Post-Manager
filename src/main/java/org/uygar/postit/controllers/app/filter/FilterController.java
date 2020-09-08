@@ -10,15 +10,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
 import org.uygar.postit.controllers.app.exception.WrongFieldsException;
-import org.uygar.postit.post.Post;
+import org.uygar.postit.controllers.app.filter.util.FilterBuilder;
+import org.uygar.postit.controllers.app.filter.util.FilterSerializer;
 import org.uygar.postit.viewers.PostGridViewer;
 
 import java.io.File;
 import java.net.URL;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
 public class FilterController implements Initializable {
 
@@ -36,7 +34,7 @@ public class FilterController implements Initializable {
 
     PostGridViewer postGridViewer;
 
-    Filter filter;
+    FilterSerializer filter;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -51,7 +49,7 @@ public class FilterController implements Initializable {
     }
 
     private void deserializeFilter() {
-        Filter filter = Filter.deserialize();
+        FilterSerializer filter = FilterSerializer.deserialize();
         if (filter != null)
             filter.applyFilter(this);
     }
@@ -90,38 +88,15 @@ public class FilterController implements Initializable {
         if (!areFieldsValid())
             throw new WrongFieldsException("Hai sbagliato a compilare i campi!", x, y);
 
-        boolean ignoraMaiusc = this.ignoraMaiusc.isSelected();
-        Predicate<Post> inizio, tra, contiene, finisce;
-        inizio = tra = contiene = finisce = post -> true;
-
-        String textInizio = getTextFromField(inizioField, ignoraMaiusc),
-                textContiene = getTextFromField(contieneField, ignoraMaiusc),
-                textFinisce = getTextFromField(finisceField, ignoraMaiusc);
-        LocalDate data1 = this.data1.getValue(), data2 = this.data2.getValue();
-
-        // Making filter controls
-        if (this.inizio.isSelected() && ignoraMaiusc)
-            inizio = post -> post.getName().toLowerCase().indexOf(textInizio) == 0;
-        else if (this.inizio.isSelected()) inizio = post -> post.getName().indexOf(textInizio) == 0;
-
-        if (this.tra.isSelected())
-            tra = post -> (post.getCreationDate().toLocalDate().isAfter(data1) || post.getCreationDate().toLocalDate().isEqual(data1)) &&
-                    (post.getCreationDate().toLocalDate().isBefore(data2) || post.getCreationDate().toLocalDate().isAfter(data1) &&
-                            post.getCreationDate().toLocalDate().isEqual(data2));
-
-        if (this.contiene.isSelected() && ignoraMaiusc)
-            contiene = post -> post.getName().toLowerCase().contains(textContiene);
-        else if (this.contiene.isSelected()) contiene = post -> post.getName().contains(textContiene);
-
-        if (this.finisce.isSelected() && ignoraMaiusc)
-            finisce = post -> post.getName().toLowerCase().endsWith(textFinisce);
-        else if (this.finisce.isSelected()) finisce = post -> post.getName().endsWith(textFinisce);
+        FilterBuilder builder = new FilterBuilder(inizioField.getText(), contieneField.getText(), finisceField.getText(),
+                this.data1.getValue(), this.data2.getValue(), this.ignoraMaiusc.isSelected(),
+                inizio.isSelected(), tra.isSelected(), contiene.isSelected(), finisce.isSelected());
 
         // Filter contents
-        postGridViewer.filter(inizio.and(tra).and(contiene).and(finisce));
+        postGridViewer.filter(builder.getMergedPostPredicates());
 
         initFilter();
-        Filter.serialize(filter);
+        FilterSerializer.serialize(filter);
     }
 
     @FXML
@@ -132,10 +107,10 @@ public class FilterController implements Initializable {
     }
 
     public void reset() {
-        selectedValue(inizio, false);
-        selectedValue(tra, false);
-        selectedValue(contiene, false);
-        selectedValue(finisce, false);
+        inizio.setSelected(false);
+        tra.setSelected(false);
+        contiene.setSelected(false);
+        finisce.setSelected(false);
         inizioField.setText(null);
         data1.setValue(null);
         data2.setValue(null);
@@ -152,13 +127,6 @@ public class FilterController implements Initializable {
     @FXML
     public void onAnnulla() {
         this.root.getScene().getWindow().hide();
-    }
-
-    public String getTextFromField(TextField field, boolean ignore) {
-        String text = field.getText();
-        if (text != null)
-            text = ignore ? text.toLowerCase() : text;
-        return text;
     }
 
     public void setPostGridViewer(PostGridViewer postGridViewer) {
@@ -178,12 +146,8 @@ public class FilterController implements Initializable {
         return valid;
     }
 
-    public void selectedValue(CheckBox checkBox, boolean value) {
-        checkBox.selectedProperty().set(value);
-    }
-
     public void initFilter() {
-        filter = new Filter(inizioField.getText(), contieneField.getText(),
+        filter = new FilterSerializer(inizioField.getText(), contieneField.getText(),
                 finisceField.getText(), ignoraMaiusc.isSelected(),
                 data1.getValue(), data2.getValue());
     }

@@ -12,7 +12,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="Post-Manager" options="--add-exports javafx.controls/com.sun.javafx.charts=Post.Manager" />
+      <module name="Post-Manager" options="" />
     </option>
   </component>
 </project>

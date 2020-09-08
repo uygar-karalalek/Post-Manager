@@ -42,12 +42,12 @@ public class StatisticaUtils {
     }
 
     @NotNull
-    public static List<XYChart.Data<Number, Number>> getHourFrequence(LogProperties properties) {
+    public static List<XYChart.Data<Number, Number>> getHourFrequency(LogProperties properties) {
         List<XYChart.Data<Number, Number>> dataList = new ArrayList<>();
 
-        properties.getHoursAndFrequencies().forEach((hour, frequence) -> {
-            if (frequence != 0)
-                dataList.add(new XYChart.Data<>(hour, frequence));
+        properties.getHoursAndFrequencies().forEach((hour, frequency) -> {
+            if (frequency != 0)
+                dataList.add(new XYChart.Data<>(hour, frequency));
         });
 
         return dataList;
@@ -58,8 +58,8 @@ public class StatisticaUtils {
         List<XYChart.Data<String, Number>> dataList = new ArrayList<>();
         for (Month month : Month.values()) {
             String nTimes = properties.getStringProperty(month.name());
-            double frequence = Double.parseDouble(nTimes);
-            dataList.add(new XYChart.Data<>(month.name(), frequence / 10));
+            double frequency = Double.parseDouble(nTimes);
+            dataList.add(new XYChart.Data<>(month.name(), frequency / 10));
         }
         return dataList;
     }

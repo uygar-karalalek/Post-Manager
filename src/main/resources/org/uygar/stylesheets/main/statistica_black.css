@@ -24,8 +24,9 @@
 }
 
 #titleModificaDati {
-    -fx-font-style: "Bookman Old Style";
-    -fx-text-fill: linear-gradient(navajowhite, grey);
+    -fx-font-family: "Arial";
+    -fx-font-size: 30pt;
+    -fx-text-fill: linear-gradient(oldlace, lightcoral);
 }
 
 .label {

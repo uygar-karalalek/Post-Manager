@@ -12,22 +12,22 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="705.0" prefWidth="1028.0" stylesheets="@../../stylesheets/main/statistica_black.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.statistica.StatisticaController">
+<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="872.0" stylesheets="@../../stylesheets/main/statistica_black.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.app.statistica.StatisticaController">
     <tabs>
         <Tab text="Grafico a dispersione">
             <content>
                 <SplitPane prefHeight="160.0" prefWidth="200.0">
                     <items>
-                        <SplitPane fx:id="dispersionePane" dividerPositions="0.9083" orientation="VERTICAL" prefHeight="150.0" prefWidth="160.0">
+                        <SplitPane fx:id="dispersionePane" dividerPositions="0.8360655737704918" orientation="VERTICAL" prefHeight="150.0" prefWidth="160.0">
                             <items>
                                 <VBox fx:id="scatterBox" prefHeight="541.0" prefWidth="1147.0" />
-                                <HBox id="hbox" fx:id="padiglioneDispersione" alignment="CENTER_LEFT" maxHeight="87.0" prefHeight="16.0" prefWidth="1147.0">
+                                <HBox id="hbox" fx:id="padiglioneDispersione" alignment="CENTER_LEFT" maxHeight="60.0" prefHeight="16.0" prefWidth="1147.0">
                                     <children>
                                         <Text id="titoloDati" fx:id="datiTitleDispersione" strokeType="OUTSIDE" strokeWidth="0.0" text="Dati" wrappingWidth="80.0">
                                  <HBox.margin>
                                     <Insets />
                                  </HBox.margin></Text>
-                              <Separator fx:id="datiSeparatorDispersione" orientation="VERTICAL" prefHeight="0.0" prefWidth="1.0" />
+                              <Separator fx:id="datiSeparatorDispersione" orientation="VERTICAL" prefHeight="50.0" prefWidth="15.0" />
                                     </children>
                                 </HBox>
                             </items>

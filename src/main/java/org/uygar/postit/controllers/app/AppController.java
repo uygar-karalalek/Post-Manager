@@ -118,10 +118,6 @@ public class AppController implements Initializable {
 
     }
 
-    public void setLogProperties(LogProperties properties) {
-        this.properties = properties;
-    }
-
     private class WindowInitializer {
 
         private Stage getApplicationStage(double prefWidth, double prefHeight, Modality modality) {
@@ -157,6 +153,10 @@ public class AppController implements Initializable {
             stage.setY((getStage().getHeight() / 2 - prefHeight / 2) + getStage().getY());
         }
 
+    }
+
+    public void setLogProperties(LogProperties properties) {
+        this.properties = properties;
     }
 
 }

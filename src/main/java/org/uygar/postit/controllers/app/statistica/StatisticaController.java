@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
-import org.uygar.postit.controllers.app.statistica.utility.TableColumnUtils;
+import org.uygar.postit.controllers.app.statistica.utility.TableViewColumnsBuilder;
 import org.uygar.postit.controllers.app.statistica.utility.grafico.Statistica;
 import org.uygar.postit.controllers.app.statistica.utility.grafico.StatisticaGrafico;
 import org.uygar.postit.controllers.app.statistica.utility.model.FrequencyModel;
@@ -19,6 +19,7 @@ import org.uygar.postit.controllers.app.statistica.utility.model.MonthFrequencyM
 import org.uygar.postit.data.properties.LogProperties;
 
 import java.util.List;
+import java.util.function.BiPredicate;
 
 import static javafx.collections.FXCollections.*;
 import static org.uygar.postit.controllers.app.statistica.utility.StatisticaUtils.*;
@@ -32,10 +33,10 @@ public class StatisticaController {
     HBox tableContainer;
 
     @FXML
-    VBox scatterBox, lineBox, valoriPane;
+    HBox padiglioneDispersione, padiglioneLinee;
 
     @FXML
-    HBox padiglioneDispersione, padiglioneLinee;
+    VBox scatterBox, lineBox, valoriPane;
 
     @FXML
     SplitPane dispersionePane, lineePane;
@@ -46,30 +47,36 @@ public class StatisticaController {
     @FXML
     TableView<MonthFrequencyModel> tabellaMesi;
 
+    TableViewColumnsBuilder<HourFrequencyModel> hourTableViewColumnsBuilder;
+    TableViewColumnsBuilder<MonthFrequencyModel> monthTableViewColumnsBuilder;
+
     @FXML
     Text datiTitleDispersione, datiTitleLinee;
+
+    Text[] scatterChartStatisticalData, lineChartStatisticalData;
 
     @FXML
     Separator datiSeparatorDispersione, datiSeparatorLinee;
 
-    ScatterChart<Number, Number> scatter;
+    ScatterChart<Number, Number> scatterChart;
 
-    LineChart<String, Number> line;
+    LineChart<String, Number> lineChart;
 
     LogProperties properties;
 
     public void init() {
-        initDatiDispersione();
-        initTableViews();
-        initDatiLinee();
-        initScatter();
-        initLine();
 
-        scatterBox.getChildren().add(scatter);
-        lineBox.getChildren().add(line);
+        updateStatisticalDataForScatterChart();
+        updateStatisticalDataForLineChart();
+        initDataEditorTableViews();
+        initScatterChart();
+        initLineChart();
+
+        scatterBox.getChildren().add(scatterChart);
+        lineBox.getChildren().add(lineChart);
     }
 
-    public void initTableViews() {
+    public void initDataEditorTableViews() {
         tableContainer.prefHeightProperty().bind(valoriPane.heightProperty().divide(1.3));
 
         initTableView(tabellaOre,
@@ -77,10 +84,16 @@ public class StatisticaController {
                 HourFrequencyModel.getHourColumn(),
                 HourFrequencyModel.getFrequencyColumn());
 
+        hourTableViewColumnsBuilder = new TableViewColumnsBuilder<>(tabellaOre, this);
+        hourTableViewColumnsBuilder.buildColumns();
+
         initTableView(tabellaMesi,
                 MonthFrequencyModel.Data.getMonthFrequencyData(properties),
                 MonthFrequencyModel.getMonthColumn(),
                 MonthFrequencyModel.getFrequencyColumn());
+
+        monthTableViewColumnsBuilder = new TableViewColumnsBuilder<>(tabellaMesi, this);
+        monthTableViewColumnsBuilder.buildColumns();
     }
 
     @SafeVarargs
@@ -89,104 +102,104 @@ public class StatisticaController {
         tableView.setEditable(true);
         tableView.getColumns().addAll(columns);
         tableView.prefWidthProperty().bind(tableContainer.widthProperty().divide(2));
-
-        // WARNING! do not copy-paste this BEFORE the line 'tableView.getColumns().addAll(columns);' !!!!
-        // Otherwise it will throw ILLEGALACCESSEXCEPTION
-        TableColumnUtils.handleTableViewCols(tableView, this);
     }
 
-    public void initScatter() {
+    public void initScatterChart() {
         initOreEFrequenza();
-        scatter.setTitle("Frequenza ore del giorno");
-        scatter.prefHeightProperty().bind(scatterBox.heightProperty());
+        scatterChart.setTitle("Frequenza ore del giorno");
+        scatterChart.prefHeightProperty().bind(scatterBox.heightProperty());
     }
 
     public void initOreEFrequenza() {
         NumberAxis frequenza_ore = getFrequenzaAxis(0, 100, 10, "Frequenza ore");
         NumberAxis oreAxis = getOreAxis();
-        scatter = new ScatterChart<>(oreAxis, frequenza_ore);
+        scatterChart = new ScatterChart<>(oreAxis, frequenza_ore);
 
-        List<XYChart.Data<Number, Number>> dataList = getHourFrequence(properties);
+        List<XYChart.Data<Number, Number>> dataList = getHourFrequency(properties);
         XYChart.Series<Number, Number> xyData = new XYChart.Series<>();
         xyData.getData().addAll(dataList);
         xyData.setName("Frequenza in una certa ora");
 
         ObservableList<XYChart.Series<Number, Number>> data = singletonObservableList(xyData);
 
-        scatter.setData(data);
+        scatterChart.setData(data);
     }
 
-    public void initLine() {
+    public void initLineChart() {
         CategoryAxis mese = getMeseAxis();
         NumberAxis frequenzaLine = getFrequenzaAxis(0, 2000, 100, "Frequenza mesi (in decine)");
 
-        line = new LineChart<>(mese, frequenzaLine);
-        line.setTitle("Frequenza nei mesi");
-        line.prefHeightProperty().bind(lineBox.heightProperty());
+        lineChart = new LineChart<>(mese, frequenzaLine);
+        lineChart.setTitle("Frequenza nei mesi");
+        lineChart.prefHeightProperty().bind(lineBox.heightProperty());
 
-        XYChart.Series<String, Number> xyData = getStringNumberSeries(getMonthFrequence(properties), "Frequenza in un certo mese");
+        XYChart.Series<String, Number> xyData = getMonthFrequences(getMonthFrequence(properties));
         ObservableList<XYChart.Series<String, Number>> data = singletonObservableList(xyData);
 
-        line.setData(data);
+        lineChart.setData(data);
     }
 
     @NotNull
-    private XYChart.Series<String, Number> getStringNumberSeries(List<XYChart.Data<String, Number>> monthFrequence, String s) {
+    private XYChart.Series<String, Number> getMonthFrequences(List<XYChart.Data<String, Number>> monthFrequence) {
         XYChart.Series<String, Number> xyData = new XYChart.Series<>();
         xyData.getData().addAll(monthFrequence);
-        xyData.setName(s);
+        xyData.setName("Frequenza in un certo mese");
         return xyData;
     }
 
-    public void initDatiDispersione() {
-        StatisticaGrafico stats =
+    public void updateStatisticalDataForScatterChart() {
+        StatisticaGrafico scatterChartStatistics =
                 new StatisticaGrafico(Statistica.TipoGrafico.ORE, properties);
 
-        initData(padiglioneDispersione, stats.getDataArray());
+        scatterChartStatisticalData = scatterChartStatistics.getDataAsTextNodes();
+
+        addStatisticalDataToChart(padiglioneDispersione, scatterChartStatisticalData);
     }
 
-    public void initDatiLinee() {
-        StatisticaGrafico stats =
+    public void updateStatisticalDataForLineChart() {
+        StatisticaGrafico lineChartStatistics =
                 new StatisticaGrafico(Statistica.TipoGrafico.MESI, properties);
 
-        initData(padiglioneLinee, stats.getDataArray());
+        lineChartStatisticalData = lineChartStatistics.getDataAsTextNodes();
+
+        addStatisticalDataToChart(padiglioneLinee, lineChartStatisticalData);
     }
 
-    public void initData(HBox padiglione, String[] data) {
+    public void addStatisticalDataToChart(HBox padiglione, Text[] nodes) {
         padiglione.getChildren().removeIf(this::removeNodeIfIsStatisticalOrSeparator);
 
-        for (String dataElement : data) {
-            Text textElement = new Text(dataElement);
-            textElement.setId("textDati");
-            padiglione.getChildren().add(textElement);
-            if (!dataElement.equals(data[data.length - 1])) {
+        BiPredicate<Text, Text[]> isLastTextNode = (current, texts) -> current == texts[texts.length - 1];
+
+        for (Text data : nodes) {
+            padiglione.getChildren().add(data);
+            if (!isLastTextNode.test(data, nodes)) {
                 padiglione.getChildren().add(new Separator(Orientation.VERTICAL));
-                textElement.setWrappingWidth(9 * dataElement.length());
+                data.setWrappingWidth(9 * data.getText().length());
             }
         }
     }
 
     public void updateGraphs() {
-        line.getData().get(0).getData().setAll(getMonthFrequence(properties));
-        scatter.getData().get(0).getData().setAll(getHourFrequence(properties));
-        initDatiLinee();
-        initDatiDispersione();
+        lineChart.getData().get(0).getData().setAll(getMonthFrequence(properties));
+        scatterChart.getData().get(0).getData().setAll(getHourFrequency(properties));
+        updateStatisticalDataForLineChart();
+        updateStatisticalDataForScatterChart();
+    }
+
+    public boolean removeNodeIfIsStatisticalOrSeparator(Node node) {
+        boolean nodeIsTheTitle = node == datiTitleDispersione || node == datiTitleLinee;
+        boolean nodeIsTheTitleSeparator = node == datiSeparatorDispersione || node == datiSeparatorLinee;
+
+        if (nodeIsTheTitle || nodeIsTheTitleSeparator)
+            return false;
+        return true;
     }
 
     public void setLogProperties(LogProperties properties) {
         this.properties = properties;
     }
-
     public LogProperties getLogProperties() {
         return this.properties;
-    }
-
-    public boolean removeNodeIfIsStatisticalOrSeparator(Node node) {
-        boolean equalsToDatiTitleText = node == datiTitleDispersione || node == datiTitleLinee;
-        boolean equalsToDatiSeparator = node == datiSeparatorDispersione || node == datiSeparatorLinee;
-        if (equalsToDatiTitleText || equalsToDatiSeparator)
-            return false;
-        return true;
     }
 
 }

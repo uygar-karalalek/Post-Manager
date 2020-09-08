@@ -1,5 +1,6 @@
 package org.uygar.postit.controllers.app.statistica.utility.grafico;
 
+import javafx.scene.text.Text;
 import org.uygar.postit.data.properties.LogProperties;
 
 import java.util.Collection;
@@ -7,34 +8,33 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Function;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 public class StatisticaGrafico implements Statistica {
 
-    private Collection<Integer> values;
+    private Collection<Integer> frequencyValues;
 
     public StatisticaGrafico(TipoGrafico tipoGrafico, LogProperties properties) {
-        this.values = tipoGrafico.getFrequence(properties);
+        this.frequencyValues = tipoGrafico.getFrequence(properties);
     }
 
     @Override
     public int getModa() {
-        ConcurrentHashMap<Integer, Integer> valueFrequences = new ConcurrentHashMap<>();
+        ConcurrentHashMap<Integer, Integer> valueFrequencies = new ConcurrentHashMap<>();
 
-        values.forEach(element -> {
-            if (valueFrequences.containsKey(element))
-                valueFrequences.put(element, valueFrequences.get(element)+1);
+        frequencyValues.forEach(element -> {
+            if (valueFrequencies.containsKey(element))
+                valueFrequencies.put(element, valueFrequencies.get(element)+1);
             else
-                valueFrequences.put(element, 0);
+                valueFrequencies.put(element, 0);
         });
 
-        return valueFrequences.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).
+        return valueFrequencies.entrySet().stream().max(Map.Entry.comparingByValue()).map(Map.Entry::getKey).
                 orElseThrow();
     }
 
     @Override
     public int getMin() {
-        return values.stream().min(Integer::compareTo).orElseThrow();
+        return frequencyValues.stream().min(Integer::compareTo).orElseThrow();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class StatisticaGrafico implements Statistica {
     }
 
     private IntStream valuesStream() {
-        return values.stream().mapToInt(Integer::intValue);
+        return frequencyValues.stream().mapToInt(Integer::intValue);
     }
 
     @Override
@@ -65,6 +65,18 @@ public class StatisticaGrafico implements Statistica {
 
     public String[] getDataArray() {
         return toString().split(",");
+    }
+
+    public Text[] getDataAsTextNodes() {
+        String[] stringData = getDataArray();
+        Text[] nodes = new Text[stringData.length];
+
+        for (int i = 0; i < stringData.length; i++) {
+            nodes[i] = new Text(stringData[i]);
+            nodes[i].setId("textDati");
+        }
+
+        return nodes;
     }
 
 }

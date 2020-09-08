@@ -66,7 +66,7 @@
         <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="226.0" spacing="10.0" GridPane.rowIndex="6">
             <children>
                 <Button fx:id="finitoBtn" mnemonicParsing="false" onAction="#onFinito" prefHeight="25.0"
-                        prefWidth="80.0" text="Finito"/>
+                        prefWidth="80.0" text="Filtra"/>
                 <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#onReset" prefHeight="25.0" prefWidth="80.0"
                         text="Reset"/>
                 <Button fx:id="annullaBtn" mnemonicParsing="false" onAction="#onAnnulla" prefHeight="25.0"

@@ -1,28 +1,20 @@
-package org.uygar.postit.controllers.app.filter;
+package org.uygar.postit.controllers.app.filter.util;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
+import org.uygar.postit.controllers.app.filter.FilterController;
 
 import java.io.*;
 import java.time.LocalDate;
 
-class Filter implements Serializable {
-
-    private String inizio, contiene, finisce;
-    private Boolean ignoraMaiusc;
-    private LocalDate data1, data2;
+public class FilterSerializer extends Filter implements Serializable {
 
     public static final long serialVersionUID = 10000L;
 
-    public Filter(String inizio, String contiene,
-                  String finisce, Boolean ignoraMaiusc,
-                  LocalDate data1, LocalDate data2) {
-        this.inizio = inizio;
-        this.contiene = contiene;
-        this.finisce = finisce;
-        this.ignoraMaiusc = ignoraMaiusc;
-        this.data1 = data1;
-        this.data2 = data2;
+    public FilterSerializer(String inizio, String contiene,
+                            String finisce, Boolean ignoraMaiusc,
+                            LocalDate data1, LocalDate data2) {
+        super(inizio, contiene, finisce, ignoraMaiusc, data1, data2);
     }
 
     public void applyFilter(FilterController controller) {
@@ -37,6 +29,8 @@ class Filter implements Serializable {
         if (ignoraMaiusc != null)
             controller.ignoraMaiusc.setSelected(this.ignoraMaiusc);
     }
+
+    public FilterSerializer() {}
 
     private boolean dateNotNull() {
         return data1 != null && data2 != null;
@@ -53,7 +47,7 @@ class Filter implements Serializable {
         field.setText(text);
     }
 
-    public static void serialize(Filter filterObject) {
+    public static void serialize(FilterSerializer filterObject) {
         File file = new File("filter.ser");
         if (file.exists())
             file.delete();
@@ -64,13 +58,13 @@ class Filter implements Serializable {
         }
     }
 
-    public static Filter deserialize() {
+    public static FilterSerializer deserialize() {
         File file = new File("filter.ser");
         if (!file.exists())
             return null;
-        Filter filterObject = null;
+        FilterSerializer filterObject = null;
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
-            filterObject = (Filter) ois.readObject();
+            filterObject = (FilterSerializer) ois.readObject();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
