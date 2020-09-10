@@ -1,11 +1,11 @@
-package org.uygar.postit.controllers.app.filter.util.predicates;
+package org.uygar.postit.controllers.application.filter.util.predicates;
 
-import org.uygar.postit.controllers.app.filter.util.FilterBuilder;
+import org.uygar.postit.controllers.application.filter.util.FilterBuilder;
 import org.uygar.postit.post.Post;
 
 import java.util.function.Predicate;
 
-class FilterPredicates {
+public class FilterPredicates {
 
     FilterBuilder filterBuilder;
 

@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app;
+package org.uygar.postit.controllers.application;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,17 +8,6 @@ import java.net.URL;
 import java.util.Objects;
 
 public class FXLoader {
-
-    public static Parent getLoadedParent(String fxml, String pkg) {
-        try {
-            String initPath = "org/uygar/fxml/";
-            String endPath = pkg + "/" + fxml + ".fxml";
-            return FXMLLoader.load(getUrl(initPath, endPath));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
-    }
 
     public static Object getLoadedController(String fxml, String pkg) {
         try {

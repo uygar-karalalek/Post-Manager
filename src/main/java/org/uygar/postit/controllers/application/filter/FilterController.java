@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app.filter;
+package org.uygar.postit.controllers.application.filter;
 
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
@@ -8,15 +8,15 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
-import org.uygar.postit.controllers.app.AppController;
-import org.uygar.postit.controllers.app.exception.WrongFieldsException;
-import org.uygar.postit.controllers.app.filter.util.FilterBuilder;
-import org.uygar.postit.controllers.app.filter.util.FilterSerializer;
+import org.uygar.postit.controllers.application.app.AppController;
+import org.uygar.postit.controllers.application.exception.WrongFieldsException;
+import org.uygar.postit.controllers.application.filter.util.FilterBuilder;
+import org.uygar.postit.controllers.application.filter.util.FilterSerializer;
 import org.uygar.postit.viewers.PostGridViewer;
 
 import java.io.File;
 
-import static org.uygar.postit.controllers.app.exception.WrongFieldsException.*;
+import static org.uygar.postit.controllers.application.exception.WrongFieldsException.*;
 
 public class FilterController {
 

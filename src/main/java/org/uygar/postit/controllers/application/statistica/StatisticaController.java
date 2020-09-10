@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app.statistica;
+package org.uygar.postit.controllers.application.statistica;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -10,19 +10,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
-import org.uygar.postit.controllers.app.statistica.utility.TableViewColumnsBuilder;
-import org.uygar.postit.controllers.app.statistica.utility.grafico.Statistica;
-import org.uygar.postit.controllers.app.statistica.utility.grafico.StatisticaGrafico;
-import org.uygar.postit.controllers.app.statistica.utility.model.FrequencyModel;
-import org.uygar.postit.controllers.app.statistica.utility.model.HourFrequencyModel;
-import org.uygar.postit.controllers.app.statistica.utility.model.MonthFrequencyModel;
+import org.uygar.postit.controllers.application.statistica.utility.TableViewColumnsBuilder;
+import org.uygar.postit.controllers.application.statistica.utility.grafico.Statistica;
+import org.uygar.postit.controllers.application.statistica.utility.grafico.StatisticaGrafico;
+import org.uygar.postit.controllers.application.statistica.utility.model.FrequencyModel;
+import org.uygar.postit.controllers.application.statistica.utility.model.HourFrequencyModel;
+import org.uygar.postit.controllers.application.statistica.utility.model.MonthFrequencyModel;
 import org.uygar.postit.data.properties.LogProperties;
 
 import java.util.List;
 import java.util.function.BiPredicate;
 
 import static javafx.collections.FXCollections.*;
-import static org.uygar.postit.controllers.app.statistica.utility.StatisticaUtils.*;
+import static org.uygar.postit.controllers.application.statistica.utility.StatisticaUtils.*;
 
 public class StatisticaController {
 

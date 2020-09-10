@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app.exception;
+package org.uygar.postit.controllers.application.exception;
 
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;

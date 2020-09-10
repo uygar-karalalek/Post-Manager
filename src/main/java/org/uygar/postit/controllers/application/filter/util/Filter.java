@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app.filter.util;
+package org.uygar.postit.controllers.application.filter.util;
 
 import java.io.Serializable;
 import java.time.LocalDate;

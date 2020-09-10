@@ -1,8 +1,8 @@
-package org.uygar.postit.controllers.app.filter.util;
+package org.uygar.postit.controllers.application.filter.util;
 
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
-import org.uygar.postit.controllers.app.filter.FilterController;
+import org.uygar.postit.controllers.application.filter.FilterController;
 
 import java.io.*;
 import java.time.LocalDate;

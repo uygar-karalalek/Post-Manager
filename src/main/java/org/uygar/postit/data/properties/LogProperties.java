@@ -28,8 +28,6 @@ public class LogProperties extends PostProperties {
     }
 
     private void storeLog(String now) {
-        System.out.println(now);
-        System.out.println(this.getStringProperty(now));
         int val = Integer.parseInt(this.getStringProperty(now));
         val = val == -1 ? 1 : val;
         this.putProperty(now, Integer.toString(++val));
@@ -48,7 +46,6 @@ public class LogProperties extends PostProperties {
                 hoursAndFrequencies.put(Integer.parseInt(stringKey), Integer.parseInt(value.toString()));
             else
                 monthsAndFrequencies.put(stringKey, Integer.parseInt(value.toString()));
-
         });
     }
 

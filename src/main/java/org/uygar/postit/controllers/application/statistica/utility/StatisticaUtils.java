@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app.statistica.utility;
+package org.uygar.postit.controllers.application.statistica.utility;
 
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;

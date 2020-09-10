@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app.statistica.utility.grafico;
+package org.uygar.postit.controllers.application.statistica.utility.grafico;
 
 import org.uygar.postit.data.properties.LogProperties;
 

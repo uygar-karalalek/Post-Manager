@@ -5,8 +5,8 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.uygar.postit.controllers.app.AppController;
-import org.uygar.postit.controllers.app.FXLoader;
+import org.uygar.postit.controllers.application.app.AppController;
+import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.data.properties.LogProperties;
 
 import java.util.Objects;

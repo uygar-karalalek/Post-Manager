@@ -1,5 +1,6 @@
-package org.uygar.postit.controllers.app.filter.util;
+package org.uygar.postit.controllers.application.filter.util;
 
+import org.uygar.postit.controllers.application.filter.util.predicates.FilterPredicates;
 import org.uygar.postit.post.Post;
 
 import java.time.LocalDate;

@@ -1,10 +1,10 @@
-package org.uygar.postit.controllers.app.statistica.utility;
+package org.uygar.postit.controllers.application.statistica.utility;
 
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import org.apache.commons.lang.StringUtils;
-import org.uygar.postit.controllers.app.statistica.StatisticaController;
-import org.uygar.postit.controllers.app.statistica.utility.model.FrequencyModel;
+import org.uygar.postit.controllers.application.statistica.StatisticaController;
+import org.uygar.postit.controllers.application.statistica.utility.model.FrequencyModel;
 
 import java.util.Map;
 

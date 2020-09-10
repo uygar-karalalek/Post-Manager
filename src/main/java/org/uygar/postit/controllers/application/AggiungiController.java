@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app;
+package org.uygar.postit.controllers.application;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
-import org.uygar.postit.controllers.app.exception.WrongFieldsException;
+import org.uygar.postit.controllers.application.exception.WrongFieldsException;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
 import org.uygar.postit.data.database.queries.DQLQueryBuilder;
@@ -18,12 +18,12 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-import static org.uygar.postit.controllers.app.exception.WrongFieldsException.*;
+import static org.uygar.postit.controllers.application.exception.WrongFieldsException.*;
 
 public class AggiungiController implements Initializable {
 
     @FXML
-    VBox root;
+    public VBox root;
 
     @FXML
     TextField nomePostField;
@@ -67,12 +67,12 @@ public class AggiungiController implements Initializable {
         WindowCoordinates coordinates = new WindowCoordinates(currentWindow);
 
         boolean fieldsNotValid = name.isEmpty() || sortingType == null;
-        throwWrongFieldExceptionIf(fieldsNotValid, "Hai sbagliato ad inserire i campi", coordinates);
+        throwWrongFieldExceptionIf(fieldsNotValid, "Hai sbagliato ad inserire i campi!", coordinates);
 
         boolean notCreatedCorrectly = !tryCreateNewPost(post);
         throwWrongFieldExceptionIf(notCreatedCorrectly, "Il post esiste già!", coordinates);
 
-        addPostToViewAndUpdate(new Post(getMaxId(), name));
+        addPostToViewAndUpdate(new Post(getLastCreatedPostId(), name));
     }
 
     public void throwWrongFieldExceptionIf(boolean condition, String message, WindowCoordinates coordinates) throws WrongFieldsException {
@@ -98,7 +98,7 @@ public class AggiungiController implements Initializable {
         this.postGridViewer.updateLast();
     }
 
-    private Integer getMaxId() {
+    private Integer getLastCreatedPostId() {
         DQLQueryBuilder dql = new DQLQueryBuilder();
         dql.select("MAX(id) as id").from("post");
         dataMiner.executeQuery(dql);

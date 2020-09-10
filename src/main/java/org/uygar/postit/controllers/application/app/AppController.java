@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.app;
+package org.uygar.postit.controllers.application.app;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -17,8 +17,10 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.uygar.postit.controllers.app.filter.FilterController;
-import org.uygar.postit.controllers.app.statistica.StatisticaController;
+import org.uygar.postit.controllers.application.AggiungiController;
+import org.uygar.postit.controllers.application.FXLoader;
+import org.uygar.postit.controllers.application.filter.FilterController;
+import org.uygar.postit.controllers.application.statistica.StatisticaController;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
@@ -51,6 +53,12 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        init();
+    }
+
+    private void init() {
+        searchField.setFocusTraversable(true);
+        searchField.requestFocus();
         initPostGrid();
         filterButton.disableProperty().bind(filterClosed.not());
         this.searchField.textProperty().addListener(this::onSearchChanged);
