@@ -58,11 +58,11 @@ public class PostGridViewer extends GridPane {
         this.add(postViewer.getView(), colCount++, rowCount);
     }
 
-    public void filter(String letters) {
+    public void filterPostsNameContaining(String letters) {
         init(post -> post.getName().toLowerCase().contains(letters.toLowerCase()));
     }
 
-    public void filter(Predicate<Post> predicate) {
+    public void filterPostsByUnionPredicates(Predicate<Post> predicate) {
         init(predicate);
     }
 

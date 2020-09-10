@@ -2,6 +2,8 @@ package org.uygar.postit.controllers.app;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -41,6 +43,7 @@ public class AppController implements Initializable {
     @FXML
     TextField searchField;
 
+    public BooleanProperty filterClosed = new SimpleBooleanProperty(true);
     DataMiner dataMiner = new DataMiner();
     PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
     LogProperties properties;
@@ -49,6 +52,7 @@ public class AppController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         initPostGrid();
+        filterButton.disableProperty().bind(filterClosed.not());
         this.searchField.textProperty().addListener(this::onSearchChanged);
     }
 
@@ -60,23 +64,26 @@ public class AppController implements Initializable {
 
     @FXML
     public void onAddClicked() {
-        Stage stage = windowInitializer.getApplicationStage(366, 285, Modality.APPLICATION_MODAL);
         AggiungiController ac = (AggiungiController) FXLoader.getLoadedController("add", "app");
         ac.setPostGridViewer(this.postGrid);
         windowInitializer.fadeWindowEffect(ac.root, 1);
-        Scene scene = new Scene(ac.root);
-        stage.setScene(scene);
-        stage.showAndWait();
+        showWindow(366, 285, Modality.APPLICATION_MODAL, ac.root);
     }
 
     @FXML
     public void onFilterClicked() {
+        filterClosed.set(!filterClosed.get());
         FilterController fc = (FilterController) FXLoader.getLoadedController("filter", "app");
-        Stage stage = windowInitializer.getApplicationStage(486, 400, Modality.WINDOW_MODAL);
-        fc.setPostGridViewer(this.postGrid);
+        fc.init(this.postGrid);
         windowInitializer.fadeWindowEffect(fc.root, 0.4);
-        Scene scene = new Scene(fc.root);
+        showWindow(486, 400, Modality.WINDOW_MODAL, fc.root);
+    }
+
+    public void showWindow(double prefWidth, double prefHeight, Modality modality, Parent root) {
+        Stage stage = windowInitializer.getStageWithModality(prefWidth, prefHeight, modality);
+        Scene scene = new Scene(root);
         stage.setScene(scene);
+        stage.setOnHidden(event -> this.filterClosed.set(true));
         stage.showAndWait();
     }
 
@@ -92,7 +99,7 @@ public class AppController implements Initializable {
 
     @FXML
     public void onStatisticaClicked() {
-        Stage stage = windowInitializer.getApplicationStage(Modality.WINDOW_MODAL, true);
+        Stage stage = windowInitializer.getStageWithModality(Modality.WINDOW_MODAL, true);
         StatisticaController sc = (StatisticaController)
                 FXLoader.getLoadedController("statistica", "app");
         sc.setLogProperties(properties);
@@ -103,7 +110,7 @@ public class AppController implements Initializable {
     }
 
     public void onSearchChanged(ObservableValue<? extends String> obs, String oldVal, String newVal) {
-        this.postGrid.filter(newVal);
+        this.postGrid.filterPostsNameContaining(newVal);
     }
 
     public Stage getStage() {
@@ -120,8 +127,8 @@ public class AppController implements Initializable {
 
     private class WindowInitializer {
 
-        private Stage getApplicationStage(double prefWidth, double prefHeight, Modality modality) {
-            Stage stage = getApplicationStage(modality, false);
+        private Stage getStageWithModality(double prefWidth, double prefHeight, Modality modality) {
+            Stage stage = getStageWithModality(modality, false);
             stage.setWidth(prefWidth);
             stage.setHeight(prefHeight);
             setStageX(prefWidth, stage);
@@ -130,7 +137,7 @@ public class AppController implements Initializable {
             return stage;
         }
 
-        private Stage getApplicationStage(Modality modality, boolean resizable) {
+        private Stage getStageWithModality(Modality modality, boolean resizable) {
             Stage stage = new Stage();
             stage.initModality(modality);
             stage.setResizable(resizable);

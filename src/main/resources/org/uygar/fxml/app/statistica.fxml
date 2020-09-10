@@ -25,7 +25,7 @@
                                     <children>
                                         <Text id="titoloDati" fx:id="datiTitleDispersione" strokeType="OUTSIDE" strokeWidth="0.0" text="Dati" wrappingWidth="80.0">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets right="10.0" />
                                  </HBox.margin></Text>
                               <Separator fx:id="datiSeparatorDispersione" orientation="VERTICAL" prefHeight="50.0" prefWidth="15.0" />
                                     </children>
@@ -40,12 +40,12 @@
             <content>
                 <SplitPane fx:id="lineePane" dividerPositions="0.9083" orientation="VERTICAL" prefHeight="160.0" prefWidth="200.0">
                     <items>
-                        <VBox fx:id="lineBox" prefHeight="608.0" prefWidth="1028.0" />
-                        <HBox id="hbox" fx:id="padiglioneLinee" alignment="CENTER_LEFT" maxHeight="87.0" prefHeight="56.0" prefWidth="1028.0">
+                        <VBox fx:id="lineBox" prefHeight="496.0" prefWidth="935.0" />
+                        <HBox id="hbox" fx:id="padiglioneLinee" alignment="CENTER_LEFT" maxHeight="60.0" prefHeight="56.0" prefWidth="1028.0">
                             <children>
                                 <Text id="titoloDati" fx:id="datiTitleLinee" strokeType="OUTSIDE" strokeWidth="0.0" text="Dati" wrappingWidth="81.0">
                            <HBox.margin>
-                              <Insets top="-0.0" />
+                              <Insets right="10.0" top="-0.0" />
                            </HBox.margin></Text>
                         <Separator fx:id="datiSeparatorLinee" orientation="VERTICAL" prefHeight="87.0" prefWidth="0.0" />
                             </children>

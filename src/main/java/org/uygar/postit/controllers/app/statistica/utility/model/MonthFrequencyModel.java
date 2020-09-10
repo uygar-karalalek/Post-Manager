@@ -58,4 +58,5 @@ public class MonthFrequencyModel extends FrequencyModel {
     public void setMese(String mese) {
         this.mese.set(mese);
     }
+
 }

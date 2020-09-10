@@ -45,10 +45,4 @@ public abstract class FrequencyModel {
 
     public abstract Map.Entry<String, String> getKeyAndValue();
 
-    @Override
-    public String toString() {
-        return "FrequencyModel{" +
-                "frequenza=" + frequenza +
-                '}';
-    }
 }

@@ -3,22 +3,22 @@ package org.uygar.postit.controllers.app.filter;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
+import org.uygar.postit.controllers.app.AppController;
 import org.uygar.postit.controllers.app.exception.WrongFieldsException;
 import org.uygar.postit.controllers.app.filter.util.FilterBuilder;
 import org.uygar.postit.controllers.app.filter.util.FilterSerializer;
 import org.uygar.postit.viewers.PostGridViewer;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-public class FilterController implements Initializable {
+import static org.uygar.postit.controllers.app.exception.WrongFieldsException.*;
+
+public class FilterController {
 
     @FXML
     public GridPane root;
@@ -34,24 +34,12 @@ public class FilterController implements Initializable {
 
     PostGridViewer postGridViewer;
 
-    FilterSerializer filter;
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        init();
-    }
-
-    public void init() {
-        reset();
+    public void init(PostGridViewer postGridViewer) {
+        this.postGridViewer = postGridViewer;
+        resetFields();
         bindProperties();
         addCheckListeners();
         deserializeFilter();
-    }
-
-    private void deserializeFilter() {
-        FilterSerializer filter = FilterSerializer.deserialize();
-        if (filter != null)
-            filter.applyFilter(this);
     }
 
     private void bindProperties() {
@@ -63,16 +51,22 @@ public class FilterController implements Initializable {
     }
 
     private void addCheckListeners() {
-        checkListener(inizio, inizioField);
-        checkListener(contiene, contieneField);
-        checkListener(finisce, finisceField);
+        addCheckChangeListenerToCheckBox(inizio, inizioField);
+        addCheckChangeListenerToCheckBox(contiene, contieneField);
+        addCheckChangeListenerToCheckBox(finisce, finisceField);
+    }
+
+    private void deserializeFilter() {
+        FilterSerializer filter = FilterSerializer.deserialize();
+        if (filter != null)
+            filter.applyFilter(this);
     }
 
     public void bindProperties(BooleanProperty property1, BooleanBinding property2) {
         property1.bind(property2);
     }
 
-    public void checkListener(CheckBox box, TextField field) {
+    public void addCheckChangeListenerToCheckBox(CheckBox box, TextField field) {
         box.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
             if (newVal) field.setText("");
             else field.setText(null);
@@ -81,36 +75,42 @@ public class FilterController implements Initializable {
 
     @FXML
     public void onFinito() throws WrongFieldsException {
+        if (fieldsNotValid())
+            throwNotValidException();
+
+        filterPostsInPostGridViewer();
+
+        FilterSerializer.serialize(getFilterSerializer());
+    }
+
+    private void filterPostsInPostGridViewer() {
+        FilterBuilder builder = getFilterBuilder();
+        postGridViewer.filterPostsByUnionPredicates(builder.unifiedPredicates());
+    }
+
+    private void throwNotValidException() throws WrongFieldsException {
         Window window = root.getScene().getWindow();
-        double x = window.getX() + window.getWidth() / 10;
-        double y = window.getY() + window.getHeight() / 4;
+        WindowCoordinates coordinates = new WindowCoordinates(window);
 
-        if (!areFieldsValid())
-            throw new WrongFieldsException("Hai sbagliato a compilare i campi!", x, y);
+        double windowXDividedBy = coordinates.getWindowXDividedBy(10);
+        double windowYDividedBy = coordinates.getWindowYDividedBy(4);
 
-        FilterBuilder builder = new FilterBuilder(inizioField.getText(), contieneField.getText(), finisceField.getText(),
-                this.data1.getValue(), this.data2.getValue(), this.ignoraMaiusc.isSelected(),
-                inizio.isSelected(), tra.isSelected(), contiene.isSelected(), finisce.isSelected());
-
-        // Filter contents
-        postGridViewer.filter(builder.getMergedPostPredicates());
-
-        initFilter();
-        FilterSerializer.serialize(filter);
+        throw new WrongFieldsException("Hai sbagliato a compilare i campi!", windowXDividedBy, windowYDividedBy);
     }
 
     @FXML
     public void onReset() {
-        reset();
-        postGridViewer.filter("");
+        resetFields();
+        postGridViewer.filterPostsNameContaining("");
         fileReset();
     }
 
-    public void reset() {
+    public void resetFields() {
         inizio.setSelected(false);
         tra.setSelected(false);
         contiene.setSelected(false);
         finisce.setSelected(false);
+
         inizioField.setText(null);
         data1.setValue(null);
         data2.setValue(null);
@@ -129,25 +129,33 @@ public class FilterController implements Initializable {
         this.root.getScene().getWindow().hide();
     }
 
-    public void setPostGridViewer(PostGridViewer postGridViewer) {
-        this.postGridViewer = postGridViewer;
-    }
-
-    public boolean areFieldsValid() {
-        return isTraValid();
+    public boolean fieldsNotValid() {
+        return !isTraValid();
     }
 
     public boolean isTraValid() {
         boolean valid = true;
-        if (tra.isSelected()) {
-            valid = data1.getValue() != null && data2.getValue() != null
-            && (data1.getValue().isBefore(data2.getValue()) || data1.getValue().isEqual(data2.getValue()));
-        }
+        if (tra.isSelected())
+            valid = data1.getValue() != null && data2.getValue() != null;
         return valid;
     }
 
-    public void initFilter() {
-        filter = new FilterSerializer(inizioField.getText(), contieneField.getText(),
+    public FilterBuilder getFilterBuilder() {
+        return new FilterBuilder(
+                inizioField.getText(),
+                contieneField.getText(),
+                finisceField.getText(),
+                data1.getValue(),
+                data2.getValue(),
+                ignoraMaiusc.isSelected(),
+                inizio.isSelected(),
+                tra.isSelected(),
+                contiene.isSelected(),
+                finisce.isSelected());
+    }
+
+    public FilterSerializer getFilterSerializer() {
+        return new FilterSerializer(inizioField.getText(), contieneField.getText(),
                 finisceField.getText(), ignoraMaiusc.isSelected(),
                 data1.getValue(), data2.getValue());
     }

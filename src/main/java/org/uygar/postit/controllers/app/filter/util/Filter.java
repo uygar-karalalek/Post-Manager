@@ -7,9 +7,9 @@ public class Filter implements Serializable {
 
     public static final long serialVersionUID = 10000L;
 
-    protected String inizio, contiene, finisce;
-    protected Boolean ignoraMaiusc;
-    protected LocalDate data1, data2;
+    public String inizio, contiene, finisce;
+    public Boolean ignoraMaiusc;
+    public LocalDate data1, data2;
 
     public Filter(String inizio, String contiene,
                             String finisce, Boolean ignoraMaiusc,
@@ -20,21 +20,14 @@ public class Filter implements Serializable {
         this.ignoraMaiusc = ignoraMaiusc;
         this.data1 = data1;
         this.data2 = data2;
-        swapIfFirstGreaterThanSecond();
+
+        // Swap if first is greater than second
+        if (data1 != null && data1.isAfter(data2)) {
+            this.data1 = data2;
+            this.data2 = data1;
+        }
     }
 
     public Filter() {}
-
-    public void swapIfFirstGreaterThanSecond() {
-        if (this.data1 == null || this.data2 == null)
-            return;
-
-        LocalDate data1Temp = this.data1;
-
-        if (this.data1.isAfter(this.data2))
-            this.data1 = this.data2;
-
-        this.data2 = data1Temp;
-    }
 
 }

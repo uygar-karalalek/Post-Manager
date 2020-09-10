@@ -18,7 +18,7 @@ public class Post {
     private SimpleObjectProperty<LocalDateTime> creationDate, lastModifiedDate;
     private SimpleObjectProperty<Sort> sortType;
 
-    public Post(int id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate, Sort sortType) {
+    public Post(Integer id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate, Sort sortType) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.creationDate = new SimpleObjectProperty<>(creationDate);
@@ -26,11 +26,37 @@ public class Post {
         this.sortType = new SimpleObjectProperty<>(sortType);
     }
 
-    public Post(int id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate) {
+    public Post(Integer id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate) {
         this.id = new SimpleIntegerProperty(id);
         this.name = new SimpleStringProperty(name);
         this.creationDate = new SimpleObjectProperty<>(creationDate);
         this.lastModifiedDate = new SimpleObjectProperty<>(lastModifiedDate);
+        this.sortType = new SimpleObjectProperty<>(Sort.DONE);
+    }
+
+    public Post(Integer id, String name, LocalDateTime creationAndLastModified) {
+        this.id = new SimpleIntegerProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.creationDate = new SimpleObjectProperty<>(creationAndLastModified);
+        this.lastModifiedDate = new SimpleObjectProperty<>(creationAndLastModified);
+        this.sortType = new SimpleObjectProperty<>(Sort.DONE);
+    }
+
+    public Post(Integer id, String name, LocalDateTime creationAndLastModified, Sort sortType) {
+        this.id = new SimpleIntegerProperty();
+        this.id.setValue(id);
+        this.name = new SimpleStringProperty(name);
+        this.creationDate = new SimpleObjectProperty<>(creationAndLastModified);
+        this.lastModifiedDate = new SimpleObjectProperty<>(creationAndLastModified);
+        this.sortType = new SimpleObjectProperty<>(sortType);
+    }
+
+    public Post(Integer id, String name) {
+        this.id = new SimpleIntegerProperty();
+        this.id.setValue(id);
+        this.name = new SimpleStringProperty(name);
+        this.creationDate = new SimpleObjectProperty<>(LocalDateTime.now());
+        this.lastModifiedDate = new SimpleObjectProperty<>(LocalDateTime.now());
         this.sortType = new SimpleObjectProperty<>(Sort.DONE);
     }
 

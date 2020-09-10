@@ -18,6 +18,8 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+import static org.uygar.postit.controllers.app.exception.WrongFieldsException.*;
+
 public class AggiungiController implements Initializable {
 
     @FXML
@@ -57,29 +59,41 @@ public class AggiungiController implements Initializable {
     @FXML
     public void onOk() throws WrongFieldsException {
         String name = nomePostField.getText();
-        Sort sortType = Sort.getSortFromName(this.sortType.getText());
+        Sort sortingType = Sort.getSortFromName(this.sortType.getText());
+
+        Post post = new Post(null, name, LocalDateTime.now(), sortingType);
+
         Window currentWindow = this.root.getScene().getWindow();
+        WindowCoordinates coordinates = new WindowCoordinates(currentWindow);
 
-        double windowY = currentWindow.getY();
-        double windowX = currentWindow.getX();
-        if (this.nomePostField.getText().isEmpty() || sortType == null)
-            throw new WrongFieldsException("Inserisci tutti i campi!", windowX, windowY);
+        boolean fieldsNotValid = name.isEmpty() || sortingType == null;
+        throwWrongFieldExceptionIf(fieldsNotValid, "Hai sbagliato ad inserire i campi", coordinates);
 
-        LocalDateTime creationDate = LocalDateTime.now();
+        boolean notCreatedCorrectly = !tryCreateNewPost(post);
+        throwWrongFieldExceptionIf(notCreatedCorrectly, "Il post esiste già!", coordinates);
 
+        addPostToViewAndUpdate(new Post(getMaxId(), name));
+    }
+
+    public void throwWrongFieldExceptionIf(boolean condition, String message, WindowCoordinates coordinates) throws WrongFieldsException {
+        if (condition)
+            throw new WrongFieldsException(message, coordinates);
+    }
+
+    public boolean tryCreateNewPost(Post post) {
         DMLQueryBuilder query = new DMLQueryBuilder();
         query.insert().into("post").values(
                 "null", // visto che c'è l'auto increment
-                name,
-                sortType.toString(),
-                creationDate.toString(),
-                creationDate.toString()); // l'ultima modifica è la volta in cui lo crei
+                post.getName(),
+                post.getSortType().toString(),
+                post.getCreationDate().toString(),
+                post.getCreationDate().toString()); // l'ultima modifica è la volta in cui lo crei
 
-        if (!dataMiner.tryExecute(query))
-            throw new WrongFieldsException("Il post esiste già!", windowX, windowY);
+        return dataMiner.tryExecute(query);
+    }
 
-        Integer id = getMaxId();
-        this.postGridViewer.postOrganizer.add(new Post(id, name, creationDate, creationDate));
+    private void addPostToViewAndUpdate(Post post) {
+        this.postGridViewer.postOrganizer.add(post);
         this.root.getScene().getWindow().hide();
         this.postGridViewer.updateLast();
     }

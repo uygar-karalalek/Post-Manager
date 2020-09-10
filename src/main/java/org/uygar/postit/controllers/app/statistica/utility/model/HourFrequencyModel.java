@@ -58,11 +58,4 @@ public class HourFrequencyModel extends FrequencyModel {
         this.ora.set(ora);
     }
 
-    @Override
-    public String toString() {
-        return "HourFrequencyModel{" +
-                "ora=" + ora +
-                ", frequenza=" + frequenza +
-                '}';
-    }
 }
