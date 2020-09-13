@@ -1,7 +1,5 @@
 package org.uygar.postit.controllers.application.app;
 
-import javafx.animation.FadeTransition;
-import javafx.animation.Interpolator;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
@@ -16,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import org.uygar.postit.controllers.application.AggiungiController;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.application.filter.FilterController;
@@ -49,7 +46,7 @@ public class AppController implements Initializable {
     DataMiner dataMiner = new DataMiner();
     PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
     LogProperties properties;
-    WindowInitializer windowInitializer = new WindowInitializer();
+    WindowInitializer windowInitializer = new WindowInitializer(this);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -130,43 +127,6 @@ public class AppController implements Initializable {
     }
 
     private void loadPost(Post post) {
-
-    }
-
-    private class WindowInitializer {
-
-        private Stage getStageWithModality(double prefWidth, double prefHeight, Modality modality) {
-            Stage stage = getStageWithModality(modality, false);
-            stage.setWidth(prefWidth);
-            stage.setHeight(prefHeight);
-            setStageX(prefWidth, stage);
-            setStageY(prefHeight, stage);
-            stage.setResizable(false);
-            return stage;
-        }
-
-        private Stage getStageWithModality(Modality modality, boolean resizable) {
-            Stage stage = new Stage();
-            stage.initModality(modality);
-            stage.setResizable(resizable);
-            return stage;
-        }
-
-        public void fadeWindowEffect(Parent root, double seconds) {
-            FadeTransition transition = new FadeTransition(Duration.seconds(seconds), root);
-            transition.setInterpolator(Interpolator.EASE_BOTH);
-            transition.setFromValue(0);
-            transition.setToValue(1);
-            transition.play();
-        }
-
-        private void setStageX(double prefWidth, Stage stage) {
-            stage.setX((getStage().getWidth() / 2 - prefWidth / 2) + getStage().getX());
-        }
-
-        private void setStageY(double prefHeight, Stage stage) {
-            stage.setY((getStage().getHeight() / 2 - prefHeight / 2) + getStage().getY());
-        }
 
     }
 
