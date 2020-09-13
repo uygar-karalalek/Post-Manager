@@ -3,6 +3,7 @@ package org.uygar.postit.controllers.application.app;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
@@ -118,10 +119,6 @@ public class AppController implements Initializable {
         this.postGrid.filterPostsNameContaining(newVal);
     }
 
-    public Stage getStage() {
-        return (Stage) this.rootPane.getScene().getWindow();
-    }
-
     public void onSelectedChange(ObservableValue<? extends Post> v, Post oldV, Post newV) {
         this.loadPost(newV);
     }
@@ -132,6 +129,18 @@ public class AppController implements Initializable {
 
     public void setLogProperties(LogProperties properties) {
         this.properties = properties;
+    }
+
+    public void onBlackClicked() {
+        this.rootPane.getStylesheets().setAll("org/uygar/stylesheets/main/app_black.css");
+    }
+
+    public void onNormalClicked() {
+        this.rootPane.getStylesheets().setAll("org/uygar/stylesheets/main/app_normal.css");
+    }
+
+    public void onBlueClicked() {
+
     }
 
 }

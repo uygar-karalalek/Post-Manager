@@ -41,11 +41,15 @@ class WindowInitializer {
     }
 
     void setStageX(double prefWidth, Stage stage) {
-        stage.setX((appController.getStage().getWidth() / 2 - prefWidth / 2) + appController.getStage().getX());
+        stage.setX((getStage().getWidth() / 2 - prefWidth / 2) + getStage().getX());
     }
 
     void setStageY(double prefHeight, Stage stage) {
-        stage.setY((appController.getStage().getHeight() / 2 - prefHeight / 2) + appController.getStage().getY());
+        stage.setY((getStage().getHeight() / 2 - prefHeight / 2) + getStage().getY());
+    }
+
+    public Stage getStage() {
+        return (Stage) appController.rootPane.getScene().getWindow();
     }
 
 }

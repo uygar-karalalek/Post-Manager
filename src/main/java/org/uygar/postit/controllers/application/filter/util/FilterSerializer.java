@@ -6,6 +6,8 @@ import org.uygar.postit.controllers.application.filter.FilterController;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class FilterSerializer extends Filter implements Serializable {
 

@@ -14,18 +14,25 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="800.0" stylesheets="@../../stylesheets/main/app_black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.app.AppController">
+<BorderPane fx:id="rootPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="800.0" stylesheets="@../../stylesheets/main/app_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.app.AppController">
    <top>
       <MenuBar id="menuBar" prefHeight="31.0" prefWidth="779.0" BorderPane.alignment="CENTER">
         <menus>
           <Menu mnemonicParsing="false" text="File">
             <items>
-              <MenuItem mnemonicParsing="false" onAction="#onExitClicked" text="Close" />
+              <MenuItem mnemonicParsing="false" onAction="#onExitClicked" text="Settings" />
+                  <MenuItem mnemonicParsing="false" onAction="#onExitClicked" text="Close" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Edit">
                <items>
-                  <MenuItem mnemonicParsing="false" text="Font" />
+                  <Menu mnemonicParsing="false" text="Style">
+                    <items>
+                      <MenuItem mnemonicParsing="false" onAction="#onNormalClicked" text="Normal" />
+                      <MenuItem mnemonicParsing="false" onAction="#onBlackClicked" text="Black" />
+                      <MenuItem mnemonicParsing="false" onAction="#onBlueClicked" text="Blue" />
+                    </items>
+                  </Menu>
                </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">
