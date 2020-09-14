@@ -58,7 +58,6 @@ public class AppController implements Initializable {
         searchField.setFocusTraversable(true);
         searchField.requestFocus();
         initPostGrid();
-        filterButton.disableProperty().bind(filterClosed.not());
         this.searchField.textProperty().addListener(this::onSearchChanged);
     }
 
