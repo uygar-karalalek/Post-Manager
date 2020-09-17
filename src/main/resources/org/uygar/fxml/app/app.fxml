@@ -82,7 +82,7 @@
                            </VBox.margin>
                         </Button>
                         <Button fx:id="filterButton" alignment="CENTER" mnemonicParsing="false" onAction="#onFilterClicked" prefWidth="200.0" text="Filtra" />
-                        <Button alignment="CENTER" mnemonicParsing="false" onAction="#onStatisticaClicked" prefWidth="200.0" text="Statistiche" />
+                        <Button alignment="CENTER" fx:id="statisticaBtn" mnemonicParsing="false" onAction="#onStatisticaClicked" prefWidth="200.0" text="Statistiche" />
                         <Button id="btnEsci" alignment="CENTER" mnemonicParsing="false" onAction="#onExitClicked" prefWidth="200.0" text="Esci" />
                      </children>
                      <padding>

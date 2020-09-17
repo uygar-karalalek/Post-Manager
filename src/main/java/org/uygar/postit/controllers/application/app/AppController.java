@@ -1,11 +1,10 @@
 package org.uygar.postit.controllers.application.app;
 
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Dimension2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -39,11 +38,11 @@ public class AppController implements Initializable {
     @FXML
     PostGridViewer postGrid;
     @FXML
-    Button addButton, filterButton;
+    Button addButton, filterButton, statisticaBtn;
     @FXML
     TextField searchField;
 
-    public BooleanProperty filterClosed = new SimpleBooleanProperty(true);
+    ButtonDisableBinding filterBinding, statisticaBinding;
     DataMiner dataMiner = new DataMiner();
     PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
     LogProperties properties;
@@ -58,6 +57,10 @@ public class AppController implements Initializable {
         searchField.setFocusTraversable(true);
         searchField.requestFocus();
         initPostGrid();
+
+        filterBinding = new ButtonDisableBinding(filterButton);
+        statisticaBinding = new ButtonDisableBinding(statisticaBtn);
+
         this.searchField.textProperty().addListener(this::onSearchChanged);
     }
 
@@ -69,32 +72,35 @@ public class AppController implements Initializable {
 
     @FXML
     public void onAddClicked() {
+        Dimension2D dimension = new Dimension2D(366, 285);
+        statisticaBinding.disableOpenWindowButton();
         AggiungiController ac = (AggiungiController) FXLoader.getLoadedController("add", "app");
         ac.setPostGridViewer(this.postGrid);
         windowInitializer.fadeWindowEffect(ac.root, 1);
-        showWindow(366, 285, Modality.APPLICATION_MODAL, ac.root);
+        showWindow(dimension, Modality.APPLICATION_MODAL, ac.root, filterBinding);
     }
 
     @FXML
     public void onFilterClicked() {
-        filterClosed.set(!filterClosed.get());
+        Dimension2D dimension2D = new Dimension2D(486, 400);
+        filterBinding.disableOpenWindowButton();
         FilterController fc = (FilterController) FXLoader.getLoadedController("filter", "app");
         fc.init(this.postGrid);
         windowInitializer.fadeWindowEffect(fc.root, 0.4);
-        showWindow(486, 400, Modality.WINDOW_MODAL, fc.root);
+        showWindow(dimension2D, Modality.WINDOW_MODAL, fc.root, statisticaBinding);
     }
 
-    public void showWindow(double prefWidth, double prefHeight, Modality modality, Parent root) {
-        Stage stage = windowInitializer.getStageWithModality(prefWidth, prefHeight, modality);
+    public void showWindow(Dimension2D dimension, Modality modality, Parent root, ButtonDisableBinding closeBinding) {
+        Stage stage = windowInitializer.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality);
         Scene scene = new Scene(root);
         stage.setScene(scene);
-        stage.setOnHidden(event -> this.filterClosed.set(true));
+        stage.setOnHidden(closeBinding::closedByEventClosed);
         stage.showAndWait();
     }
 
     @FXML
     public void onExitClicked() {
-        this.rootPane.getScene().getWindow().hide();
+        Platform.exit();
     }
 
     @FXML
@@ -104,6 +110,7 @@ public class AppController implements Initializable {
 
     @FXML
     public void onStatisticaClicked() {
+        statisticaBinding.disableOpenWindowButton();
         Stage stage = windowInitializer.getStageWithModality(Modality.WINDOW_MODAL, true);
         StatisticaController sc = (StatisticaController)
                 FXLoader.getLoadedController("statistica", "app");
