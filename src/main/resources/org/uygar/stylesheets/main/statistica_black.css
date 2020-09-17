@@ -26,7 +26,8 @@
 #titleModificaDati {
     -fx-font-family: "Arial";
     -fx-font-size: 30pt;
-    -fx-text-fill: linear-gradient(oldlace, lightcoral);
+    -fx-font-weight: bold;
+    -fx-text-fill: radial-gradient(center 110px 10px, radius 100px, grey, black);
 }
 
 .label {
