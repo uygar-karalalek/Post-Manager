@@ -8,11 +8,10 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
-import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.exception.WrongFieldsException;
 import org.uygar.postit.controllers.application.filter.util.FilterBuilder;
 import org.uygar.postit.controllers.application.filter.util.FilterSerializer;
-import org.uygar.postit.viewers.PostGridViewer;
+import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.io.File;
 

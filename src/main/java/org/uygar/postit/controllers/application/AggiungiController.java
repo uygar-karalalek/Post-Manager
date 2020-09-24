@@ -12,7 +12,7 @@ import org.uygar.postit.data.database.queries.DMLQueryBuilder;
 import org.uygar.postit.data.database.queries.DQLQueryBuilder;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.properties.Sort;
-import org.uygar.postit.viewers.PostGridViewer;
+import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.net.URL;
 import java.time.LocalDateTime;

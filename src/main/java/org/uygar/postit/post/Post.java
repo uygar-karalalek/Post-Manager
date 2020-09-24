@@ -1,8 +1,7 @@
 package org.uygar.postit.post;
 
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
+import javafx.collections.ObservableList;
 import org.uygar.postit.post.properties.Sort;
 
 import java.time.LocalDateTime;

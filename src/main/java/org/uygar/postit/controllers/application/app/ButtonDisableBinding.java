@@ -20,7 +20,8 @@ public class ButtonDisableBinding {
     }
 
     public void closedByEventClosed(Event event) {
-        this.disablePropertiy.set(true);
+        System.out.println(event);
+        this.disablePropertiy.set(false);
     }
 
 }

@@ -2,13 +2,20 @@ package org.uygar.postit;
 
 import javafx.animation.FadeTransition;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.FXLoader;
+import org.uygar.postit.data.database.DataMiner;
+import org.uygar.postit.data.database.queries.DQL;
+import org.uygar.postit.data.database.queries.DQLQueryBuilder;
 import org.uygar.postit.data.properties.LogProperties;
+import org.uygar.postit.post.properties.Colore;
+import org.uygar.postit.post.viewers.post_it.PostViewerImageBuilder;
 
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class Main extends Application {

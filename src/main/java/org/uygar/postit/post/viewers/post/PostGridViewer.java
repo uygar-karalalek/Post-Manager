@@ -1,27 +1,26 @@
-package org.uygar.postit.viewers;
+package org.uygar.postit.post.viewers.post;
 
-import javafx.beans.InvalidationListener;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.collections.ObservableList;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class PostGridViewer extends GridPane {
 
     public PostContainerOrganizer postOrganizer;
     public ObjectProperty<Post> selected = new SimpleObjectProperty<>();
-    final static double HEIGHT = 300, WIDTH = 500;
-    static final int DEF_COLS = 2;
+
+    private static final double POST_BUTTON_WIDTH_DIVISOR = 2.25;
+    private static final double HEIGHT = 300;
+    private static final double WIDTH = 500;
+
+    private static final int POST_BUTTON_HEIGHT = 40;
+    private static final int DEF_COLS = 2;
 
     int rowCount, colCount;
 
@@ -39,7 +38,7 @@ public class PostGridViewer extends GridPane {
             if (predicate.test(element)) {
                 Button view = new PostViewer(element).getView();
                 view.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> selected.set(element));
-                view.setPrefSize(this.getMinWidth() / 2.25, 40);
+                view.setPrefSize(this.getMinWidth() / POST_BUTTON_WIDTH_DIVISOR, POST_BUTTON_HEIGHT);
                 this.add(view, num % DEF_COLS, num++ / DEF_COLS);
             }
         }

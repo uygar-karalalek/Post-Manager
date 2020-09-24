@@ -16,6 +16,10 @@
     -fx-pref-width: 150;
 }
 
+.button:hover {
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, darkslategrey, chocolate);
+}
+
 .tab-pane .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
     -fx-alignment: CENTER;
     -fx-text-fill: white;
@@ -36,11 +40,33 @@
 .tab-pane > .tab-header-area > .headers-region > .tab:disabled:hover {
     -fx-color: -fx-base;
 }
+
 .tab-pane > .tab-header-area > .tab-header-background {
     /* TODO should not be using text-box-border I think? */
     -fx-background-color: linear-gradient(grey, white);
     -fx-border-insets: -10;
 
+}
+
+#srcLabel {
+    -fx-text-fill: mediumaquamarine;
+    -fx-font-family: Arial;
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-prompt-text-fill: black;
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, grey, cadetblue);
+    -fx-background-radius: 5em;
+    -fx-font-family: Arial;
+    -fx-alignment: center;
+    -fx-font-size: 10pt;
+    -fx-text-fill: white;
+    -fx-border-radius: 5em;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-insets: 5px;
 }
 
 #title {
@@ -56,7 +82,21 @@
     -fx-opacity: 0.9;
     -fx-alignment: top-center;
     -fx-spacing: 10;
-    -fx-border-width: 1 2 0 0;
-    -fx-border-radius: 0 40 0 0;
-    -fx-border-color: black linear-gradient(cadetblue, grey) darkred blue;
+    -fx-border-width: 1 2 2 0;
+    -fx-border-radius: 0 40 15 0;
+    -fx-border-color: black linear-gradient(cadetblue, grey) linear-gradient(grey, cadetblue) blue;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background: transparent;
+}
+
+#post_it_grid {
+    -fx-background-color: blue;
+    -fx-alignment: top-left;
+    -fx-padding: 10;
 }

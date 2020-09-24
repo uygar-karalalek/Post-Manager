@@ -1,9 +1,7 @@
 package org.uygar.postit.post;
 
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
+import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.post.properties.Colore;
 
 import java.time.LocalDateTime;
@@ -11,17 +9,20 @@ import java.time.LocalDateTime;
 public class PostIt {
 
     private IntegerProperty id;
-    private SimpleObjectProperty<LocalDateTime> dataCreazione;
+    private SimpleObjectProperty<LocalDateTime> dataCreazione, dataFine;
+    private SimpleStringProperty titolo;
     private SimpleObjectProperty<Colore> colore;
     private SimpleStringProperty testo;
-    private SimpleObjectProperty<Post> padre;
+    private SimpleBooleanProperty fatto;
 
-    public PostIt(int id, LocalDateTime dataCreazione, Colore colore, String testo, Post padre) {
+    public PostIt(int id, boolean fatto, String titolo, String testo, LocalDateTime dataCreazione, LocalDateTime dataFine, Colore colore) {
         this.id = new SimpleIntegerProperty(id);
-        this.dataCreazione = new SimpleObjectProperty<>(dataCreazione);
-        this.colore = new SimpleObjectProperty<>(colore);
+        this.fatto = new SimpleBooleanProperty(fatto);
+        this.titolo = new SimpleStringProperty(titolo);
         this.testo = new SimpleStringProperty(testo);
-        this.padre = new SimpleObjectProperty<>(padre);
+        this.dataCreazione = new SimpleObjectProperty<>(dataCreazione);
+        this.dataFine = new SimpleObjectProperty<>(dataFine);
+        this.colore = new SimpleObjectProperty<>(colore);
     }
 
     public int getId() {
@@ -34,24 +35,24 @@ public class PostIt {
         this.id.set(id);
     }
 
-    public LocalDateTime getDataCreazione() {
-        return dataCreazione.get();
+    public boolean isFatto() {
+        return fatto.get();
     }
-    public SimpleObjectProperty<LocalDateTime> dataCreazioneProperty() {
-        return dataCreazione;
+    public SimpleBooleanProperty fattoProperty() {
+        return fatto;
     }
-    public void setDataCreazione(LocalDateTime dataCreazione) {
-        this.dataCreazione.set(dataCreazione);
+    public void setFatto(boolean fatto) {
+        this.fatto.set(fatto);
     }
 
-    public Colore getColore() {
-        return colore.get();
+    public String getTitolo() {
+        return titolo.get();
     }
-    public SimpleObjectProperty<Colore> coloreProperty() {
-        return colore;
+    public SimpleStringProperty titoloProperty() {
+        return titolo;
     }
-    public void setColore(Colore colore) {
-        this.colore.set(colore);
+    public void setTitolo(String titolo) {
+        this.titolo.set(titolo);
     }
 
     public String getTesto() {
@@ -64,14 +65,65 @@ public class PostIt {
         this.testo.set(testo);
     }
 
-    public Post getPadre() {
-        return padre.get();
+    public LocalDateTime getDataCreazione() {
+        return dataCreazione.get();
     }
-    public SimpleObjectProperty<Post> padreProperty() {
-        return padre;
+    public SimpleObjectProperty<LocalDateTime> dataCreazioneProperty() {
+        return dataCreazione;
     }
-    public void setPadre(Post padre) {
-        this.padre.set(padre);
+    public void setDataCreazione(LocalDateTime dataCreazione) {
+        this.dataCreazione.set(dataCreazione);
     }
 
+    public LocalDateTime getDataFine() {
+        return dataFine.get();
+    }
+    public SimpleObjectProperty<LocalDateTime> dataFineProperty() {
+        return dataFine;
+    }
+    public void setDataFine(LocalDateTime dataFine) {
+        this.dataFine.set(dataFine);
+    }
+
+    public Colore getColore() {
+        return colore.get();
+    }
+    public SimpleObjectProperty<Colore> coloreProperty() {
+        return colore;
+    }
+    public void setColore(Colore colore) {
+        this.colore.set(colore);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof PostIt)
+            return this.getDataCreazione().isEqual(((PostIt) obj).getDataCreazione());
+        return false;
+    }
+
+    public int compareToDone(@NotNull PostIt postIt) {
+        if (isFatto() && !postIt.isFatto())
+            return 1;
+        if (!isFatto() && postIt.isFatto())
+            return -1;
+        return 0;
+    }
+
+    public int compareToUndone(@NotNull PostIt postIt) {
+        return compareToDone(postIt) * - 1;
+    }
+
+    @Override
+    public String toString() {
+        return "PostIt{" +
+                "id=" + id +
+                ", dataCreazione=" + dataCreazione +
+                ", dataFine=" + dataFine +
+                ", titolo=" + titolo +
+                ", colore=" + colore +
+                ", testo=" + testo +
+                ", fatto=" + fatto +
+                '}';
+    }
 }

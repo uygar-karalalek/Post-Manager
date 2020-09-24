@@ -1,4 +1,4 @@
-package org.uygar.postit.viewers;
+package org.uygar.postit.post.viewers.post;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

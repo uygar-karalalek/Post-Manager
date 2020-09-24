@@ -130,6 +130,10 @@
     -fx-background-color: linear-gradient(white, coral 70%);
 }
 
+#btnEsci:pressed {
+    -fx-text-fill: white;
+}
+
 .text-field {
     -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, white, grey);
     -fx-font-family: Arial;

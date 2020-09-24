@@ -1,6 +1,5 @@
 package org.uygar.postit.controllers.application.app;
 
-import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -18,11 +17,12 @@ import org.uygar.postit.controllers.application.AggiungiController;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.application.filter.FilterController;
 import org.uygar.postit.controllers.application.statistica.StatisticaController;
+import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
-import org.uygar.postit.viewers.PostGridViewer;
+import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -73,11 +73,11 @@ public class AppController implements Initializable {
     @FXML
     public void onAddClicked() {
         Dimension2D dimension = new Dimension2D(366, 285);
-        statisticaBinding.disableOpenWindowButton();
         AggiungiController ac = (AggiungiController) FXLoader.getLoadedController("add", "app");
         ac.setPostGridViewer(this.postGrid);
         windowInitializer.fadeWindowEffect(ac.root, 1);
-        showWindow(dimension, Modality.APPLICATION_MODAL, ac.root, filterBinding);
+        Stage stage = initializeWindowAndGet(dimension, Modality.APPLICATION_MODAL, ac.root);
+        setOnStageHidingAndShow(stage, filterBinding);
     }
 
     @FXML
@@ -87,20 +87,18 @@ public class AppController implements Initializable {
         FilterController fc = (FilterController) FXLoader.getLoadedController("filter", "app");
         fc.init(this.postGrid);
         windowInitializer.fadeWindowEffect(fc.root, 0.4);
-        showWindow(dimension2D, Modality.WINDOW_MODAL, fc.root, statisticaBinding);
+        Stage stage = initializeWindowAndGet(dimension2D, Modality.WINDOW_MODAL, fc.root);
+        setOnStageHidingAndShow(stage, filterBinding);
     }
 
-    public void showWindow(Dimension2D dimension, Modality modality, Parent root, ButtonDisableBinding closeBinding) {
-        Stage stage = windowInitializer.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setOnHidden(closeBinding::closedByEventClosed);
+    private void setOnStageHidingAndShow(Stage stage, ButtonDisableBinding disableBinding) {
+        stage.setOnHiding(disableBinding::closedByEventClosed);
         stage.showAndWait();
     }
 
     @FXML
     public void onExitClicked() {
-        Platform.exit();
+        System.exit(0);
     }
 
     @FXML
@@ -118,7 +116,15 @@ public class AppController implements Initializable {
         sc.init();
         Scene scene = new Scene(sc.root);
         stage.setScene(scene);
+        stage.setOnHiding(statisticaBinding::closedByEventClosed);
         stage.showAndWait();
+    }
+
+    public Stage initializeWindowAndGet(Dimension2D dimension, Modality modality, Parent root) {
+        Stage stage = windowInitializer.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        return stage;
     }
 
     public void onSearchChanged(ObservableValue<? extends String> obs, String oldVal, String newVal) {
@@ -130,7 +136,13 @@ public class AppController implements Initializable {
     }
 
     private void loadPost(Post post) {
-
+        Dimension2D initialWindowDimension = new Dimension2D(500, 527);
+        PostController ac = (PostController) FXLoader.getLoadedController("post", "post");
+        ac.init(post, dataMiner, initialWindowDimension);
+        Stage stage = initializeWindowAndGet(initialWindowDimension, Modality.WINDOW_MODAL, ac.root);
+        ac.setMinSizeByDimension(stage);
+        stage.setResizable(true);
+        stage.showAndWait();
     }
 
     public void setLogProperties(LogProperties properties) {
