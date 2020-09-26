@@ -34,7 +34,7 @@ public class PostController {
         this.postItGrid.prefHeightProperty().bind(this.gridFatherScroll.heightProperty());
     }
 
-    public void setMinSizeByDimension(Stage stage) {
+    public void setMinSizeByDimensionOfStage(Stage stage) {
         stage.widthProperty().addListener(this::gridWidthDimensionListener);
         stage.heightProperty().addListener(this::gridHeightDimensionListener);
     }

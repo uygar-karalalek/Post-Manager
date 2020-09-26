@@ -95,7 +95,7 @@ public class AggiungiController implements Initializable {
     private void addPostToViewAndUpdate(Post post) {
         this.postGridViewer.postOrganizer.add(post);
         this.root.getScene().getWindow().hide();
-        this.postGridViewer.updateLast();
+        this.postGridViewer.updateLastWhenAdded();
     }
 
     private Integer getLastCreatedPostId() {

@@ -2,6 +2,7 @@ package org.uygar.postit.post.viewers.post;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -28,17 +29,17 @@ public class PostGridViewer extends GridPane {
         this.setMinSize(WIDTH, HEIGHT);
         this.setId("postGridViewer");
         this.postOrganizer = postOrganizer;
-        init(post -> true);
+
+        Predicate<Post> alwaysCondition = post -> true;
+        showPostsByCondition(alwaysCondition);
     }
 
-    private void init(Predicate<Post> predicate) {
+    private void showPostsByCondition(Predicate<Post> predicate) {
         this.getChildren().clear();
         int num = 0;
         for (Post element : postOrganizer) {
             if (predicate.test(element)) {
-                Button view = new PostViewer(element).getView();
-                view.addEventHandler(MouseEvent.MOUSE_CLICKED, e -> selected.set(element));
-                view.setPrefSize(this.getMinWidth() / POST_BUTTON_WIDTH_DIVISOR, POST_BUTTON_HEIGHT);
+                Button view = createPostViewByPost(element);
                 this.add(view, num % DEF_COLS, num++ / DEF_COLS);
             }
         }
@@ -46,23 +47,51 @@ public class PostGridViewer extends GridPane {
         colCount = num % DEF_COLS;
     }
 
-    public void updateLast() {
+    public void updateLastWhenAdded() {
         Post post = postOrganizer.getLastPost();
+        Button view = createPostViewByPost(post);
         PostViewer postViewer = new PostViewer(post);
         if (colCount == DEF_COLS) {
             colCount = 0;
             rowCount++;
         }
         postViewer.getView().setPrefSize(this.getMinWidth() / 2.25, 40);
-        this.add(postViewer.getView(), colCount++, rowCount);
+        this.add(view, colCount++, rowCount);
     }
 
     public void filterPostsNameContaining(String letters) {
-        init(post -> post.getName().toLowerCase().contains(letters.toLowerCase()));
+        showPostsByCondition(post -> post.getName().toLowerCase().contains(letters.toLowerCase()));
     }
 
     public void filterPostsByUnionPredicates(Predicate<Post> predicate) {
-        init(predicate);
+        showPostsByCondition(predicate);
+    }
+
+    public Button createPostViewByPost(Post element) {
+        Button view = new PostViewer(element).getView();
+        handleOnPostViewSelected(element, view);
+        view.setPrefSize(this.getMinWidth() / POST_BUTTON_WIDTH_DIVISOR, POST_BUTTON_HEIGHT);
+        return view;
+    }
+
+    private void handleOnPostViewSelected(Post element, Button view) {
+        view.addEventHandler(MouseEvent.MOUSE_CLICKED,
+                mouseEvent -> {
+                    selected.set(element);
+                    view.setDisable(true);
+                });
+    }
+
+    public void nothingSelected() {
+        this.selected.set(null);
+    }
+
+    public void enablePostViewByPost(Post post) {
+        this.getChildren().stream().filter(node -> {
+            if (node instanceof Button)
+                return ((Button) node).getText().equals(post.getName());
+            return false;
+        }).findFirst().ifPresent(postBtn -> postBtn.setDisable(false));
     }
 
 }

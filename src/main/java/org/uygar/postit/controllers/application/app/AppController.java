@@ -25,6 +25,7 @@ import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AppController implements Initializable {
@@ -36,16 +37,18 @@ public class AppController implements Initializable {
     @FXML
     ScrollPane scrollPane;
     @FXML
-    PostGridViewer postGrid;
-    @FXML
     Button addButton, filterButton, statisticaBtn;
     @FXML
     TextField searchField;
 
-    ButtonDisableBinding filterBinding, statisticaBinding;
+    PostGridViewer postGrid;
     DataMiner dataMiner = new DataMiner();
     PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
+
+    ButtonDisableBinding filterBinding, statisticaBinding;
+
     LogProperties properties;
+
     WindowInitializer windowInitializer = new WindowInitializer(this);
 
     @Override
@@ -132,17 +135,24 @@ public class AppController implements Initializable {
     }
 
     public void onSelectedChange(ObservableValue<? extends Post> v, Post oldV, Post newV) {
-        this.loadPost(newV);
+        Optional<Post> newPost = Optional.ofNullable(newV);
+        newPost.ifPresent(this::loadPost);
     }
 
     private void loadPost(Post post) {
         Dimension2D initialWindowDimension = new Dimension2D(500, 527);
         PostController ac = (PostController) FXLoader.getLoadedController("post", "post");
         ac.init(post, dataMiner, initialWindowDimension);
-        Stage stage = initializeWindowAndGet(initialWindowDimension, Modality.WINDOW_MODAL, ac.root);
-        ac.setMinSizeByDimension(stage);
-        stage.setResizable(true);
-        stage.showAndWait();
+
+        Stage postStage = initializeWindowAndGet(initialWindowDimension, Modality.WINDOW_MODAL, ac.root);
+        postStage.setOnHidden(windowEvent -> {
+            this.postGrid.nothingSelected();
+            this.postGrid.enablePostViewByPost(post);
+        });
+
+        ac.setMinSizeByDimensionOfStage(postStage);
+        postStage.setResizable(true);
+        postStage.show();
     }
 
     public void setLogProperties(LogProperties properties) {

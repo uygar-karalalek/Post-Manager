@@ -11,28 +11,28 @@ import java.util.function.Predicate;
 
 public enum Sort {
 
-    DONE("Task finite") {
+    DONE("Finite") {
         @Override
         public void sort(List<PostIt> postItList) {
             postItList.sort(PostIt::compareToDone);
         }
     },
 
-    UNDONE("Task non finite") {
+    UNDONE("Non finite") {
         @Override
         public void sort(List<PostIt> postItList) {
             postItList.sort(PostIt::compareToUndone);
         }
     },
 
-    DATE("Data di creazione") {
+    DATE("Data") {
         @Override
         public void sort(List<PostIt> postItList) {
             postItList.sort(Comparator.comparing(PostIt::getId));
         }
     },
 
-    DATE_AND_DONE("Ordine cronologico e fatti") {
+    DATE_AND_DONE("Data e Finite") {
         @Override
         public void sort(List<PostIt> postItList) {
             postItList.sort(Comparator.comparing(
@@ -40,7 +40,7 @@ public enum Sort {
         }
     },
 
-    DATE_AND_UNDONE("Ordine cronologico e non fatti") {
+    DATE_AND_UNDONE("Data e non finite") {
         @Override
         public void sort(List<PostIt> postItList) {
             Function<PostIt, Boolean> notDone = postIt -> !postIt.isFatto();
