@@ -110,8 +110,7 @@
 }
 
 .button:pressed {
-    -fx-background-color: linear-gradient(cornsilk, coral);
-    -fx-text-fill: black;
+    -fx-background-color: linear-gradient(black, blue);
 }
 
 #iTuoiPost {
@@ -130,6 +129,10 @@
 
 #btnEsci {
     -fx-background-color: linear-gradient(darkred, coral);
+}
+
+#btnEsci:hover {
+    -fx-background-color: linear-gradient(darkred, chocolate);
 }
 
 .text-field {

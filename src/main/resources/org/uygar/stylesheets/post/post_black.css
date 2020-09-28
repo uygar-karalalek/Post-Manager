@@ -42,7 +42,6 @@
 }
 
 .tab-pane > .tab-header-area > .tab-header-background {
-    /* TODO should not be using text-box-border I think? */
     -fx-background-color: linear-gradient(grey, white);
     -fx-border-insets: -10;
 
@@ -96,7 +95,28 @@
 }
 
 #post_it_grid {
-    -fx-background-color: blue;
     -fx-alignment: top-left;
-    -fx-padding: 10;
+    -fx-padding: 20;
+}
+
+#post_it {
+    -fx-alignment: BOTTOM-CENTER;
+}
+
+#post_it:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+#scadenzaText {
+    -fx-font-family: Arial;
+    -fx-font-size: 11pt;
+    -fx-fill: WHITE;
+}
+
+#scadenzaTextWrapper {
+    -fx-background-color: black;
+    -fx-background-radius: 0.6em;
+    -fx-translate-y: 18;
+    -fx-padding: 5 0 5 0;
 }

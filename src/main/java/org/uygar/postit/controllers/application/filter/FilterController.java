@@ -8,14 +8,13 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
+import org.uygar.postit.controllers.application.exception.WindowCoordinates;
 import org.uygar.postit.controllers.application.exception.WrongFieldsException;
 import org.uygar.postit.controllers.application.filter.util.FilterBuilder;
 import org.uygar.postit.controllers.application.filter.util.FilterSerializer;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.io.File;
-
-import static org.uygar.postit.controllers.application.exception.WrongFieldsException.*;
 
 public class FilterController {
 
@@ -76,9 +75,7 @@ public class FilterController {
     public void onFinito() throws WrongFieldsException {
         if (fieldsNotValid())
             throwNotValidException();
-
         filterPostsInPostGridViewer();
-
         FilterSerializer.serialize(getFilterSerializer());
     }
 
@@ -101,7 +98,7 @@ public class FilterController {
     public void onReset() {
         resetFields();
         postGridViewer.filterPostsNameContaining("");
-        fileReset();
+        serializedFilterFileDeleteIfExists();
     }
 
     public void resetFields() {
@@ -117,7 +114,7 @@ public class FilterController {
         finisceField.setText(null);
     }
 
-    private void fileReset() {
+    private void serializedFilterFileDeleteIfExists() {
         File file = new File("filter.ser");
         if (file.exists())
             file.delete();

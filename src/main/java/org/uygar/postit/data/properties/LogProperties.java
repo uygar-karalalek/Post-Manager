@@ -3,14 +3,18 @@ package org.uygar.postit.data.properties;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.Month;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
+import java.util.stream.IntStream;
 
 public class LogProperties extends PostProperties {
 
     public LogProperties() {
         super(Paths.get("src/main/resources/logs.properties"));
+        putAllInitialHoursIfAbsent();
     }
 
     private Map<Integer, Integer> hoursAndFrequencies;
@@ -59,6 +63,14 @@ public class LogProperties extends PostProperties {
 
     public Map<String, Integer> getMonthsAndFrequencies() {
         return monthsAndFrequencies;
+    }
+
+    private void putAllInitialHoursIfAbsent() {
+        boolean missing = this.getProperty("0") == null;
+        if (missing) {
+            IntStream.rangeClosed(0, 23).forEach(hour -> this.putProperty(hour+"", "0"));
+            Arrays.stream(Month.values()).forEach(month -> this.putProperty(month.toString(), "0"));
+        }
     }
 
 }

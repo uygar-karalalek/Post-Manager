@@ -23,7 +23,7 @@
     -fx-background-radius: 5em;
     -fx-background-color: linear-gradient(cadetblue, grey);
     -fx-alignment: CENTER;
-    -fx-text-fill: springgreen;
+    -fx-text-fill: white;
 }
 
 .split-menu-button .arrow-button {

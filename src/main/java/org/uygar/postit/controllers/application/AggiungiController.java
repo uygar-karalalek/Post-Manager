@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
+import org.uygar.postit.controllers.application.exception.WindowCoordinates;
 import org.uygar.postit.controllers.application.exception.WrongFieldsException;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
@@ -17,8 +18,6 @@ import org.uygar.postit.post.viewers.post.PostGridViewer;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
-
-import static org.uygar.postit.controllers.application.exception.WrongFieldsException.*;
 
 public class AggiungiController implements Initializable {
 

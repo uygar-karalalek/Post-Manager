@@ -147,7 +147,7 @@
 #post {
     -fx-background-radius: 5em;
     -fx-border-radius: 5em;
-    -fx-border-width: 2;
+    -fx-border-width: 1;
     -fx-border-color: black;
     -fx-background-color: linear-gradient(white, grey);
     -fx-text-fill: black;
@@ -157,6 +157,7 @@
 
 #post:hover {
     -fx-scale-y: 1.04;
+    -fx-border-width: 1.04 1 1.04 1;
     -fx-background-color: linear-gradient(darkseagreen, white);
     -fx-text-fill: black;
     -fx-font-family: Arial;

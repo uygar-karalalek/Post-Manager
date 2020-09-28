@@ -114,16 +114,4 @@ public class PostIt {
         return compareToDone(postIt) * - 1;
     }
 
-    @Override
-    public String toString() {
-        return "PostIt{" +
-                "id=" + id +
-                ", dataCreazione=" + dataCreazione +
-                ", dataFine=" + dataFine +
-                ", titolo=" + titolo +
-                ", colore=" + colore +
-                ", testo=" + testo +
-                ", fatto=" + fatto +
-                '}';
-    }
 }

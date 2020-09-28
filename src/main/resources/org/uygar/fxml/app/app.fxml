@@ -28,9 +28,9 @@
                <items>
                   <Menu mnemonicParsing="false" text="Style">
                     <items>
-                      <MenuItem mnemonicParsing="false" onAction="#onNormalClicked" text="Normal" />
-                      <MenuItem mnemonicParsing="false" onAction="#onBlackClicked" text="Black" />
-                      <MenuItem mnemonicParsing="false" onAction="#onBlueClicked" text="Blue" />
+                      <MenuItem mnemonicParsing="false" onAction="#onNormalStyleClicked" text="Normal" />
+                      <MenuItem mnemonicParsing="false" onAction="#onBlackStyleClicked" text="Black" />
+                      <MenuItem mnemonicParsing="false" onAction="#onBlueStyleClicked" text="Blue" />
                     </items>
                   </Menu>
                </items>

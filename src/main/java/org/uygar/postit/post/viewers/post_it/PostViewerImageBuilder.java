@@ -7,12 +7,10 @@ import org.uygar.postit.post.properties.Colore;
 public class PostViewerImageBuilder {
 
     public static Image build(Colore colore) {
-        StringBuilder builder = new StringBuilder("org/uygar/images/");
-        builder.append("post_it_");
-        builder.append(colore.toString());
-        builder.append(".png");
-
-        return new Image(builder.toString());
+        String builder = "org/uygar/images/" + "post_it_" +
+                colore.toString() +
+                ".png";
+        return new Image(builder);
     }
 
 }

@@ -18,6 +18,7 @@ import org.uygar.postit.controllers.application.statistica.utility.model.HourFre
 import org.uygar.postit.controllers.application.statistica.utility.model.MonthFrequencyModel;
 import org.uygar.postit.data.properties.LogProperties;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.BiPredicate;
 
@@ -65,7 +66,6 @@ public class StatisticaController {
     LogProperties properties;
 
     public void init() {
-
         updateStatisticalDataForScatterChart();
         updateStatisticalDataForLineChart();
         initDataEditorTableViews();
@@ -165,18 +165,17 @@ public class StatisticaController {
         addStatisticalDataToChart(padiglioneLinee, lineChartStatisticalData);
     }
 
-    public void addStatisticalDataToChart(HBox padiglione, Text[] nodes) {
-        padiglione.getChildren().removeIf(this::removeNodeIfIsStatisticalOrSeparator);
+    public void addStatisticalDataToChart(HBox padiglioneStats, Text[] nodes) {
+        padiglioneStats.getChildren().removeIf(this::removeNodeIfIsStatisticalOrSeparator);
 
-        BiPredicate<Text, Text[]> isLastTextNode = (current, texts) -> current == texts[texts.length - 1];
+        Arrays.stream(nodes).filter(textNode -> {
+            padiglioneStats.getChildren().add(textNode);
+            return textNode != nodes[nodes.length-1];
+        }).forEachOrdered(textNode -> {
+            padiglioneStats.getChildren().add(new Separator(Orientation.VERTICAL));
+            textNode.setWrappingWidth(9 * textNode.getText().length());
+        });
 
-        for (Text data : nodes) {
-            padiglione.getChildren().add(data);
-            if (!isLastTextNode.test(data, nodes)) {
-                padiglione.getChildren().add(new Separator(Orientation.VERTICAL));
-                data.setWrappingWidth(9 * data.getText().length());
-            }
-        }
     }
 
     public void updateGraphs() {

@@ -13,7 +13,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-public class ConverterUtil {
+public class ConvertertUtil {
 
     public static List<Post> convertSQLResponseToPost(Map<String, List<String>> posts, int numOfPosts) {
         Function<Integer, Post> parse = postsNum -> parseFromAbstractPostToObject(posts, postsNum);

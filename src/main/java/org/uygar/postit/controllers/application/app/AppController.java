@@ -1,5 +1,6 @@
 package org.uygar.postit.controllers.application.app;
 
+import javafx.application.Platform;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,9 +16,11 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.application.AggiungiController;
 import org.uygar.postit.controllers.application.FXLoader;
+import org.uygar.postit.controllers.application.WindowDimensions;
 import org.uygar.postit.controllers.application.filter.FilterController;
 import org.uygar.postit.controllers.application.statistica.StatisticaController;
 import org.uygar.postit.controllers.post.PostController;
+import org.uygar.postit.controllers.utils.ButtonDisableBinding;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
@@ -41,15 +44,13 @@ public class AppController implements Initializable {
     @FXML
     TextField searchField;
 
+    ButtonDisableBinding filterDisableBinding, statisticaDisableBinding;
+    LogProperties properties;
+    WindowInitializer windowInitializer = new WindowInitializer(this);
+
     PostGridViewer postGrid;
     DataMiner dataMiner = new DataMiner();
     PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
-
-    ButtonDisableBinding filterBinding, statisticaBinding;
-
-    LogProperties properties;
-
-    WindowInitializer windowInitializer = new WindowInitializer(this);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -61,66 +62,76 @@ public class AppController implements Initializable {
         searchField.requestFocus();
         initPostGrid();
 
-        filterBinding = new ButtonDisableBinding(filterButton);
-        statisticaBinding = new ButtonDisableBinding(statisticaBtn);
+        filterDisableBinding = new ButtonDisableBinding(filterButton);
+        statisticaDisableBinding = new ButtonDisableBinding(statisticaBtn);
 
         this.searchField.textProperty().addListener(this::onSearchChanged);
     }
 
     private void initPostGrid() {
         postGrid = new PostGridViewer(postOrganizer);
-        postGrid.selected.addListener(this::onSelectedChange);
+        postGrid.selected.addListener(this::onPostSelectChanged);
         this.scrollPane.setContent(postGrid);
     }
 
     @FXML
     public void onAddClicked() {
-        Dimension2D dimension = new Dimension2D(366, 285);
         AggiungiController ac = (AggiungiController) FXLoader.getLoadedController("add", "app");
         ac.setPostGridViewer(this.postGrid);
+        ac.root.getStylesheets().setAll(this.rootPane.getStylesheets().get(0), "org/uygar/stylesheets/main/add_" + getCurrentStyleColorFileName());
         windowInitializer.fadeWindowEffect(ac.root, 1);
-        Stage stage = initializeWindowAndGet(dimension, Modality.APPLICATION_MODAL, ac.root);
-        setOnStageHidingAndShow(stage, filterBinding);
+        Stage stage = initializeWindowAndGet(WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, ac.root);
+        setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
     }
 
     @FXML
     public void onFilterClicked() {
-        Dimension2D dimension2D = new Dimension2D(486, 400);
-        filterBinding.disableOpenWindowButton();
+        filterDisableBinding.disableOpenWindowButton();
         FilterController fc = (FilterController) FXLoader.getLoadedController("filter", "app");
         fc.init(this.postGrid);
         windowInitializer.fadeWindowEffect(fc.root, 0.4);
-        Stage stage = initializeWindowAndGet(dimension2D, Modality.WINDOW_MODAL, fc.root);
-        setOnStageHidingAndShow(stage, filterBinding);
+        Stage stage = initializeWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, fc.root);
+        setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
     }
 
-    private void setOnStageHidingAndShow(Stage stage, ButtonDisableBinding disableBinding) {
+    private void setHidingStageEventAndShowAndWait(Stage stage, ButtonDisableBinding disableBinding) {
         stage.setOnHiding(disableBinding::closedByEventClosed);
         stage.showAndWait();
     }
 
     @FXML
-    public void onExitClicked() {
-        System.exit(0);
-    }
-
-    @FXML
-    public void onAbout() {
-
-    }
-
-    @FXML
     public void onStatisticaClicked() {
-        statisticaBinding.disableOpenWindowButton();
+        statisticaDisableBinding.disableOpenWindowButton();
         Stage stage = windowInitializer.getStageWithModality(Modality.WINDOW_MODAL, true);
         StatisticaController sc = (StatisticaController)
                 FXLoader.getLoadedController("statistica", "app");
         sc.setLogProperties(properties);
         sc.init();
+        sc.root.getStylesheets().setAll("org/uygar/stylesheets/main/statistica_" + getCurrentStyleColorFileName());
         Scene scene = new Scene(sc.root);
         stage.setScene(scene);
-        stage.setOnHiding(statisticaBinding::closedByEventClosed);
+        stage.setOnHiding(statisticaDisableBinding::closedByEventClosed);
         stage.showAndWait();
+    }
+
+    private void loadPost(Post post) {
+        PostController postController = (PostController) FXLoader.getLoadedController("post", "post");
+        postController.init(post, dataMiner, WindowDimensions.POST_WINDOW_DIMENSION);
+
+        Stage postStage = initializeWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, postController.root);
+        postStage.setOnHidden(windowEvent -> {
+            this.postGrid.nothingSelected();
+            this.postGrid.enablePostViewByPost(post);
+        });
+
+        postController.setMinSizeByDimensionOfStage(postStage);
+        postStage.setResizable(true);
+        postStage.show();
+    }
+
+    @FXML
+    public void onAbout() {
+
     }
 
     public Stage initializeWindowAndGet(Dimension2D dimension, Modality modality, Parent root) {
@@ -134,41 +145,33 @@ public class AppController implements Initializable {
         this.postGrid.filterPostsNameContaining(newVal);
     }
 
-    public void onSelectedChange(ObservableValue<? extends Post> v, Post oldV, Post newV) {
+    public void onPostSelectChanged(ObservableValue<? extends Post> v, Post oldV, Post newV) {
         Optional<Post> newPost = Optional.ofNullable(newV);
         newPost.ifPresent(this::loadPost);
-    }
-
-    private void loadPost(Post post) {
-        Dimension2D initialWindowDimension = new Dimension2D(500, 527);
-        PostController ac = (PostController) FXLoader.getLoadedController("post", "post");
-        ac.init(post, dataMiner, initialWindowDimension);
-
-        Stage postStage = initializeWindowAndGet(initialWindowDimension, Modality.WINDOW_MODAL, ac.root);
-        postStage.setOnHidden(windowEvent -> {
-            this.postGrid.nothingSelected();
-            this.postGrid.enablePostViewByPost(post);
-        });
-
-        ac.setMinSizeByDimensionOfStage(postStage);
-        postStage.setResizable(true);
-        postStage.show();
     }
 
     public void setLogProperties(LogProperties properties) {
         this.properties = properties;
     }
 
-    public void onBlackClicked() {
+    public void onBlackStyleClicked() {
         this.rootPane.getStylesheets().setAll("org/uygar/stylesheets/main/app_black.css");
     }
 
-    public void onNormalClicked() {
-        this.rootPane.getStylesheets().setAll("org/uygar/stylesheets/main/app_normal.css");
+    public void onNormalStyleClicked() { this.rootPane.getStylesheets().setAll("org/uygar/stylesheets/main/app_normal.css"); }
+
+    public void onBlueStyleClicked() {
+
     }
 
-    public void onBlueClicked() {
+    private String getCurrentStyleColorFileName() {
+        String current = this.rootPane.getStylesheets().get(0);
+        return current.substring(current.lastIndexOf('_') + 1);
+    }
 
+    @FXML
+    public void onExitClicked() {
+        Platform.exit();
     }
 
 }

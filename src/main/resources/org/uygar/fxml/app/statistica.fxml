@@ -12,7 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="872.0" stylesheets="@../../stylesheets/main/statistica_black.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.statistica.StatisticaController">
+<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="578.0" prefWidth="872.0" stylesheets="@../../stylesheets/main/statistica_normal.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.statistica.StatisticaController">
     <tabs>
         <Tab text="Grafico a dispersione">
             <content>
@@ -27,7 +27,7 @@
                                  <HBox.margin>
                                     <Insets right="10.0" />
                                  </HBox.margin></Text>
-                              <Separator fx:id="datiSeparatorDispersione" orientation="VERTICAL" prefHeight="50.0" prefWidth="15.0" />
+                              <Separator fx:id="datiSeparatorDispersione" orientation="VERTICAL" prefHeight="60.0" prefWidth="0.0" />
                                     </children>
                                 </HBox>
                             </items>

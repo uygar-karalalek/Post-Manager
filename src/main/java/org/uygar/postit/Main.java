@@ -42,6 +42,7 @@ public class Main extends Application {
         this.scene = new Scene(Objects.requireNonNull(this.appController).rootPane);
         addTransition();
         this.stage.setScene(scene);
+        this.stage.setOnHiding(event -> Platform.exit());
         this.stage.show();
     }
 

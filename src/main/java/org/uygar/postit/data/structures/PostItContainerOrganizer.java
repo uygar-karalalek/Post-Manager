@@ -2,19 +2,13 @@ package org.uygar.postit.data.structures;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.data.database.DataMiner;
-import org.uygar.postit.data.database.queries.DQL;
-import org.uygar.postit.data.database.queries.DQLQueryBuilder;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
-import org.uygar.postit.post.properties.Colore;
 import org.uygar.postit.post.properties.Sort;
-import org.uygar.postit.post.properties.converters.ConverterUtil;
+import org.uygar.postit.post.properties.converters.ConvertertUtil;
 
-import java.time.LocalDateTime;
 import java.util.*;
-import java.util.function.Consumer;
 
 public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implements PostItContainer {
 
@@ -29,7 +23,7 @@ public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implemen
 
     @Override
     protected List<PostIt> parseFromAbstractSQLObject(Map<String, List<String>> stringMappedObj, int numOfElements) {
-        return ConverterUtil.convertSQLResponseToPostIt(stringMappedObj, numOfElements);
+        return ConvertertUtil.convertSQLResponseToPostIt(stringMappedObj, numOfElements);
     }
 
     @Override
