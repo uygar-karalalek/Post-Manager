@@ -16,6 +16,8 @@ public class PostItGridViewer extends FlowPane {
 
     public PostItGridViewer(Post post, DataMiner miner) {
         postItContainer = new PostItContainerOrganizer(post, miner);
+        this.setHgap(10);
+        this.setVgap(10);
         this.setId("post_it_grid");
         init();
     }

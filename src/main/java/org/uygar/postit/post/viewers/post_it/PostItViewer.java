@@ -14,7 +14,7 @@ public class PostItViewer extends VBox {
     private PostIt postIt;
     private StackPane scadenzaTextWrapper;
     private ImageView postItImage;
-    public static final int SINGLE_POST_IT_SIZE = 250;
+    public static final int SINGLE_POST_IT_SIZE = 260;
 
     public PostItViewer(PostIt postIt) {
         this.postIt = postIt;
