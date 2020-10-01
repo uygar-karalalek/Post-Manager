@@ -32,7 +32,7 @@
 .split-menu-button .label {
     -fx-font-family: "Arial";
     -fx-font-size: 12pt;
-    -fx-background-color: linear-gradient(grey, white);
+    -fx-background-color: linear-gradient(white, grey);
     -fx-alignment: CENTER;
     -fx-text-fill: black;
 }
