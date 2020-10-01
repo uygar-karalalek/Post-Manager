@@ -1,17 +1,21 @@
 package org.uygar.postit.post.properties;
 
+import javafx.scene.paint.Color;
+
 public enum Colore {
 
-    BLU("blue"),
-    ROSSO("red"),
-    GIALLO("yellow"),
-    VERDE("green"),
-    ARANCIONE("orange");
+    BLU("blue", Color.WHITE),
+    ROSSO("red", Color.WHITE),
+    GIALLO("yellow", Color.BLACK),
+    VERDE("green", Color.WHITE),
+    ARANCIONE("orange", Color.WHITE);
 
-    String colorName;
+    public String colorName;
+    public Color postItTextColor;
 
-    Colore(String colorName) {
+    Colore(String colorName, Color postItTextColor) {
         this.colorName = colorName;
+        this.postItTextColor = postItTextColor;
     }
 
     @Override

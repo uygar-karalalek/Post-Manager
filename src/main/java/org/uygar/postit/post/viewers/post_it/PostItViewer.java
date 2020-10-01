@@ -1,5 +1,6 @@
 package org.uygar.postit.post.viewers.post_it;
 
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
@@ -12,17 +13,22 @@ import java.time.LocalDateTime;
 public class PostItViewer extends VBox {
 
     private PostIt postIt;
-    private StackPane scadenzaTextWrapper;
     private ImageView postItImage;
+    private Text taskText = new Text();
+    private Label titleLbl = new Label();
+    private StackPane scadenzaTextWrapper;
     public static final int SINGLE_POST_IT_SIZE = 260;
 
     public PostItViewer(PostIt postIt) {
         this.postIt = postIt;
-        buildImageViewByPostItColor();
-        buildScadenzaLabel();
-        this.getChildren().add(postItImage);
         this.setId("post_it");
-        setOnPostItHover();
+        buildPostItViewer();
+    }
+
+    private void buildPostItViewer() {
+        buildScadenzaLabel();
+        addMouseListeners();
+        buildImageAndPostTextWrapper();
     }
 
     private void buildScadenzaLabel() {
@@ -40,6 +46,29 @@ public class PostItViewer extends VBox {
         this.scadenzaTextWrapper.setId("scadenzaTextWrapper");
     }
 
+    private void buildImageAndPostTextWrapper() {
+        buildTexts();
+        buildImageViewByPostItColor();
+
+        VBox textWrapper = new VBox(titleLbl, taskText);
+        textWrapper.setSpacing(postItImage.getFitWidth()/3);
+        textWrapper.setId("textWrapper");
+        StackPane imageAndTextsWrapper = new StackPane(postItImage, textWrapper);
+        this.getChildren().add(imageAndTextsWrapper);
+    }
+
+    private void buildTexts() {
+        titleLbl.textProperty().bind(postIt.titoloProperty());
+        titleLbl.setId("postItTitle");
+        titleLbl.setTextFill(postIt.getColore().postItTextColor);
+        titleLbl.autosize();
+
+        taskText.textProperty().bind(postIt.testoProperty());
+        taskText.setId("postItText");
+        taskText.setFill(postIt.getColore().postItTextColor);
+        taskText.setWrappingWidth(this.getWidth());
+    }
+
     private void buildImageViewByPostItColor() {
         postItImage = new ImageView(PostViewerImageBuilder.build(postIt.getColore()));
         postItImage.setFitWidth(SINGLE_POST_IT_SIZE);
@@ -50,7 +79,7 @@ public class PostItViewer extends VBox {
         return postIt;
     }
 
-    private void setOnPostItHover() {
+    private void addMouseListeners() {
         this.setOnMouseEntered(this::onPostItHover);
         this.setOnMouseExited(this::onPostItExit);
     }
