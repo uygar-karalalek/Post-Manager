@@ -3,13 +3,13 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
 <TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="529.0" stylesheets="@../../stylesheets/post/post_black.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
    <tabs>
@@ -19,7 +19,7 @@
                <left>
                   <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="480.0" prefHeight="417.0" prefWidth="202.0" stylesheets="@../../stylesheets/post/post_black.css" BorderPane.alignment="TOP_LEFT">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="176.13671875" id="title" fx:id="postTitle"/>
+                        <Label fx:id="postTitle" prefHeight="31.0" prefWidth="173.0" id="title" />
                         <PieChart prefHeight="206.0" prefWidth="200.0">
                            <VBox.margin>
                               <Insets />

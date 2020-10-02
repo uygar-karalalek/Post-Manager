@@ -134,6 +134,12 @@ public class AppController implements Initializable {
 
     }
 
+    @FXML
+    public void onExitClicked() {
+        Platform.exit();
+    }
+
+
     public Stage initializeWindowAndGet(Dimension2D dimension, Modality modality, Parent root) {
         Stage stage = windowInitializer.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality);
         Scene scene = new Scene(root);
@@ -155,23 +161,24 @@ public class AppController implements Initializable {
     }
 
     public void onBlackStyleClicked() {
-        this.rootPane.getStylesheets().setAll("org/uygar/stylesheets/main/app_black.css");
+        setTheme("org/uygar/stylesheets/main/app_black.css");
     }
 
-    public void onNormalStyleClicked() { this.rootPane.getStylesheets().setAll("org/uygar/stylesheets/main/app_normal.css"); }
+    public void onNormalStyleClicked() { setTheme("org/uygar/stylesheets/main/app_normal.css"); }
 
-    public void onBlueStyleClicked() {
+    public void onBlueStyleClicked() {}
 
+    public String getCurrentStyleCssFilePath() {
+        return this.rootPane.getStylesheets().get(0);
     }
 
     private String getCurrentStyleColorFileName() {
-        String current = this.rootPane.getStylesheets().get(0);
+        String current = getCurrentStyleCssFilePath();
         return current.substring(current.lastIndexOf('_') + 1);
     }
 
-    @FXML
-    public void onExitClicked() {
-        Platform.exit();
+    public void setTheme(String cssFilePath) {
+        this.rootPane.getStylesheets().setAll(cssFilePath);
     }
 
 }

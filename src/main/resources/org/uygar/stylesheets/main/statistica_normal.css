@@ -117,11 +117,11 @@
 .chart-legend {
     -fx-translate-y: -10px;
     -fx-translate-x: 40px;
-    -fx-background-color: linear-gradient(grey, black);
+    -fx-background-color: linear-gradient(grey, blanchedalmond);
 }
 
 .chart-legend:hover {
-    -fx-background-color: linear-gradient(grey, darkblue);
+    -fx-background-color: linear-gradient(grey, darkcyan);
 }
 
 .chart-symbol {

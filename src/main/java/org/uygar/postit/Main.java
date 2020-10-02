@@ -12,21 +12,31 @@ import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DQL;
 import org.uygar.postit.data.database.queries.DQLQueryBuilder;
 import org.uygar.postit.data.properties.LogProperties;
+import org.uygar.postit.data.properties.PostProperties;
 import org.uygar.postit.post.properties.Colore;
 import org.uygar.postit.post.viewers.post_it.PostViewerImageBuilder;
 
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.Properties;
 
 public class Main extends Application {
 
     Stage stage;
     Scene scene;
+    PostProperties applicationProperties;
     LogProperties properties;
     AppController appController;
 
     @Override
     public void init() {
+        initLogProperties();
+        applicationProperties = new PostProperties();
+        applicationProperties.loadProperties();
+    }
+
+    private void initLogProperties() {
         this.properties = new LogProperties();
         properties.addHourLog();
         properties.addMonthLog();
@@ -38,6 +48,7 @@ public class Main extends Application {
     public void start(Stage stage) {
         this.stage = new Stage();
         this.appController = (AppController) FXLoader.getLoadedController("app", "app");
+        this.appController.setTheme(applicationProperties.getStringProperty("theme"));
         Objects.requireNonNull(this.appController).setLogProperties(properties);
         this.scene = new Scene(Objects.requireNonNull(this.appController).rootPane);
         addTransition();
@@ -51,6 +62,12 @@ public class Main extends Application {
         transition.setFromValue(0);
         transition.setToValue(1);
         transition.play();
+    }
+
+    @Override
+    public void stop() {
+        applicationProperties.putProperty("theme", appController.getCurrentStyleCssFilePath());
+        applicationProperties.storeProperties();
     }
 
 }

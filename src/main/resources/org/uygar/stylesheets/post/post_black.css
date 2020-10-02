@@ -47,6 +47,10 @@
 
 }
 
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
 #srcLabel {
     -fx-text-fill: mediumaquamarine;
     -fx-font-family: Arial;
@@ -69,11 +73,8 @@
 }
 
 #title {
-    -fx-font-family: Arial;
-    -fx-font-width: bolder;
-    -fx-text-alignment: CENTER;
-    -fx-font-size: 24pt;
-    -fx-fill: linear-gradient(burlywood, cyan);
+    -fx-alignment: CENTER;
+    -fx-text-fill: linear-gradient(burlywood, cyan);
 }
 
 #postActions {
@@ -83,7 +84,7 @@
     -fx-alignment: top-center;
     -fx-spacing: 10;
     -fx-border-width: 1 2 2 0;
-    -fx-border-radius: 0 40 15 0;
+    -fx-border-radius: 0 40 0 15;
     -fx-border-color: black linear-gradient(cadetblue, grey) linear-gradient(grey, cadetblue) blue;
 }
 
@@ -93,6 +94,15 @@
 
 .scroll-pane > .viewport {
     -fx-background: transparent;
+}
+
+.scroll-pane > .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+#taskTextWrapper {
+    -fx-background-color: transparent;
+
 }
 
 #post_it_grid {
@@ -131,5 +141,12 @@
 #postItTitle {
     -fx-font-family: Arial;
     -fx-font-weight: bold;
-    -fx-font-size: 16pt;
+    -fx-font-size: 12pt;
+}
+
+#postItText {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-family: Arial;
+    -fx-font-size: 12px;
 }

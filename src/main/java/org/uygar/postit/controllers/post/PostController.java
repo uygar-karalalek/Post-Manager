@@ -8,10 +8,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.ScrollEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.text.Font;
@@ -33,7 +30,10 @@ public class PostController {
     public ScrollPane gridFatherScroll;
 
     @FXML
-    private Text postTitle;
+    VBox vBoxOperationsContainer;
+
+    @FXML
+    private Label postTitle;
 
     PostItGridViewer postItGrid;
 
@@ -44,11 +44,14 @@ public class PostController {
         this.minDimension = initialWindowDimension;
         initGridPane();
         this.gridFatherScroll.getContent().setOnScroll(this::setOnScroll);
+        this.gridFatherScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        this.gridFatherScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         initPostTitle(fatherPost);
     }
 
     private void initPostTitle(Post fatherPost) {
         postTitle.setText(fatherPost.getName());
+        addDefaultFontToTitleLabel();
     }
 
     private void initGridPane() {
@@ -75,6 +78,15 @@ public class PostController {
     private void setOnScroll(ScrollEvent event) {
         double deltaY = event.getDeltaY() * SCROLL_SPEED;
         gridFatherScroll.setVvalue(gridFatherScroll.getVvalue() - deltaY);
+    }
+
+    private void addDefaultFontToTitleLabel() {
+        double defSize = 30;
+        double lblTextLength = defSize / 1.25 * postTitle.getText().length();
+        double ratioContainerLabel = vBoxOperationsContainer.getPrefWidth() / lblTextLength;
+        ratioContainerLabel = Math.min(1, ratioContainerLabel);
+        Font def = Font.font("Arial", FontWeight.EXTRA_BOLD, defSize * ratioContainerLabel);
+        postTitle.setFont(def);
     }
 
 }
