@@ -9,38 +9,40 @@ import org.uygar.postit.post.properties.Sort;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-public class ConvertertUtil {
+public class ConverterUtil {
 
     public static List<Post> convertSQLResponseToPost(Map<String, List<String>> posts, int numOfPosts) {
-        Function<Integer, Post> parse = postsNum -> parseFromAbstractPostToObject(posts, postsNum);
-        return getRangedIntStream(numOfPosts).filter(postIndex -> parse.apply(postIndex) != null).
-                mapToObj(parse::apply).collect(Collectors.toList());
+        Function<Integer, Optional<Post>> parse = postsNum -> parseFromAbstractPostToObject(posts, postsNum);
+        return getRangedIntStream(numOfPosts).mapToObj(parse::apply).flatMap(Optional::stream)
+                .collect(Collectors.toList());
     }
 
-    public static Post parseFromAbstractPostToObject(Map<String, List<String>> posts, int dataElementIndex) {
+    public static Optional<Post> parseFromAbstractPostToObject(Map<String, List<String>> posts, int dataElementIndex) {
         if (isValidMappedObjectList(posts)) {
             int id = Integer.parseInt(posts.get("id").get(dataElementIndex));
             String name = posts.get("name").get(dataElementIndex);
             LocalDateTime creation = LocalDateTime.parse(posts.get("creationDate").get(dataElementIndex));
             LocalDateTime lastModified = LocalDateTime.parse(posts.get("lastModifiedDate").get(dataElementIndex));
             Sort sort = Sort.valueOf(posts.get("sort").get(dataElementIndex));
-            return new Post(id, name, creation, lastModified, sort);
+            return Optional.of(new Post(id, name, creation, lastModified, sort));
         }
-
-        return null;
+        return Optional.empty();
     }
 
     public static List<PostIt> convertSQLResponseToPostIt(Map<String, List<String>> postIts, int numOfPostIts) {
-        Function<Integer, PostIt> parse = postItNum -> parseFromAbstractPostItToObject(postIts, postItNum);
-        return getRangedIntStream(numOfPostIts).filter(postIndex -> parse.apply(postIndex) != null).
-                mapToObj(parse::apply).collect(Collectors.toList());
+        Function<Integer, Optional<PostIt>> parse = postItNum -> parseFromAbstractPostItToObject(postIts, postItNum);
+        return getRangedIntStream(numOfPostIts).mapToObj(parse::apply)
+                .flatMap(Optional::stream)
+                .collect(Collectors.toList());
     }
 
-    private static PostIt parseFromAbstractPostItToObject(Map<String, List<String>> postIts, int dataElementIndex) {
+    private static Optional<PostIt> parseFromAbstractPostItToObject(Map<String, List<String>> postIts, int dataElementIndex) {
         if (isValidMappedObjectList(postIts)) {
             int id = Integer.parseInt(postIts.get("id").get(dataElementIndex));
             boolean done = Boolean.parseBoolean(postIts.get("done").get(dataElementIndex));
@@ -49,10 +51,9 @@ public class ConvertertUtil {
             LocalDateTime creationDate = LocalDateTime.parse(postIts.get("creationDate").get(dataElementIndex));
             LocalDateTime endDate = LocalDateTime.parse(postIts.get("endDate").get(dataElementIndex));
             Colore colore = Colore.valueOf(postIts.get("colore").get(dataElementIndex));
-            return  new PostIt(id, done, title, text, creationDate, endDate, colore);
+            return  Optional.of(new PostIt(id, done, title, text, creationDate, endDate, colore));
         }
-
-        return null;
+        return Optional.empty();
     }
 
     private static IntStream getRangedIntStream(int limit) {
