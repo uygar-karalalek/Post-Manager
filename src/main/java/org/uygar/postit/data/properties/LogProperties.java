@@ -12,13 +12,27 @@ import java.util.stream.IntStream;
 
 public class LogProperties extends PostProperties {
 
+    private Map<Integer, Integer> hoursAndFrequencies;
+    private Map<String, Integer> monthsAndFrequencies;
+
     public LogProperties() {
         super(Paths.get("src/main/resources/logs.properties"));
         putAllInitialHoursIfAbsent();
     }
 
-    private Map<Integer, Integer> hoursAndFrequencies;
-    private Map<String, Integer> monthsAndFrequencies;
+    private void putAllInitialHoursIfAbsent() {
+        boolean missing = this.getProperty("0") == null;
+        if (missing) {
+            IntStream.rangeClosed(0, 23).forEach(hour -> this.putProperty(hour+"", "0"));
+            Arrays.stream(Month.values()).forEach(month -> this.putProperty(month.toString(), "0"));
+        }
+    }
+
+    private void storeLog(String now) {
+        int val = Integer.parseInt(this.getStringProperty(now));
+        val = val == -1 ? 1 : val;
+        this.putProperty(now, Integer.toString(++val));
+    }
 
     public void addHourLog() {
         String now = Integer.toString(LocalTime.now().getHour());
@@ -29,12 +43,6 @@ public class LogProperties extends PostProperties {
     public void addMonthLog() {
         String now = LocalDate.now().getMonth().name();
         storeLog(now);
-    }
-
-    private void storeLog(String now) {
-        int val = Integer.parseInt(this.getStringProperty(now));
-        val = val == -1 ? 1 : val;
-        this.putProperty(now, Integer.toString(++val));
     }
 
     private void initFrequencies() {
@@ -63,14 +71,6 @@ public class LogProperties extends PostProperties {
 
     public Map<String, Integer> getMonthsAndFrequencies() {
         return monthsAndFrequencies;
-    }
-
-    private void putAllInitialHoursIfAbsent() {
-        boolean missing = this.getProperty("0") == null;
-        if (missing) {
-            IntStream.rangeClosed(0, 23).forEach(hour -> this.putProperty(hour+"", "0"));
-            Arrays.stream(Month.values()).forEach(month -> this.putProperty(month.toString(), "0"));
-        }
     }
 
 }
