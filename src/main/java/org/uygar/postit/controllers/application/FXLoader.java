@@ -3,8 +3,10 @@ package org.uygar.postit.controllers.application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.net.URL;
+import java.util.Enumeration;
 import java.util.Objects;
 
 public class FXLoader {
@@ -24,7 +26,7 @@ public class FXLoader {
 
     @NotNull
     private static URL getUrl(String initPath, String endPath) {
-        System.out.println(initPath + endPath);
+        System.out.println("Loading from: " + initPath + endPath);
         return Objects.requireNonNull(FXLoader.class.getClassLoader().
                 getResource(initPath + endPath));
     }
