@@ -62,8 +62,4 @@
          </children>
       </HBox>
    </children>
-   <stylesheets>
-      <URL value="@../../stylesheets/main/add_normal.css" />
-      <URL value="@../../stylesheets/main/app_normal.css" />
-   </stylesheets>
 </VBox>

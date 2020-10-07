@@ -78,7 +78,8 @@ public class AppController implements Initializable {
     public void onAddClicked() {
         AggiungiController ac = (AggiungiController) FXLoader.getLoadedController("add", "app");
         ac.setPostGridViewer(this.postGrid);
-        ac.root.getStylesheets().setAll(this.rootPane.getStylesheets().get(0), "org/uygar/stylesheets/main/add_" + getCurrentStyleColorFileName());
+        addStylesheetToPaneWithSimpleThemeName("app", "main", ac.root);
+        addStylesheetToPaneWithSimpleThemeName("add", "main", ac.root);
         windowInitializer.fadeWindowEffect(ac.root, 1);
         Stage stage = initializeWindowAndGet(WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, ac.root);
         setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
@@ -89,6 +90,7 @@ public class AppController implements Initializable {
         filterDisableBinding.disableOpenWindowButton();
         FilterController fc = (FilterController) FXLoader.getLoadedController("filter", "app");
         fc.init(this.postGrid);
+        addStylesheetToPaneWithSimpleThemeName("filter", "main", fc.root);
         windowInitializer.fadeWindowEffect(fc.root, 0.4);
         Stage stage = initializeWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, fc.root);
         setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
@@ -107,7 +109,7 @@ public class AppController implements Initializable {
                 FXLoader.getLoadedController("statistica", "app");
         sc.setLogProperties(properties);
         sc.init();
-        sc.root.getStylesheets().setAll("org/uygar/stylesheets/main/statistica_" + getCurrentStyleColorFileName());
+        addStylesheetToPaneWithSimpleThemeName("statistica", "main", sc.root);
         Scene scene = new Scene(sc.root);
         stage.setScene(scene);
         stage.setOnHiding(statisticaDisableBinding::closedByEventClosed);
@@ -123,6 +125,8 @@ public class AppController implements Initializable {
             this.postGrid.nothingSelected();
             this.postGrid.enablePostViewByPost(post);
         });
+
+        addStylesheetToPaneWithSimpleThemeName("post", "post", postController.root);
 
         postController.setMinSizeByDimensionOfStage(postStage);
         postStage.setResizable(true);
@@ -164,12 +168,21 @@ public class AppController implements Initializable {
         setTheme("org/uygar/stylesheets/main/app_black.css");
     }
 
-    public void onNormalStyleClicked() { setTheme("org/uygar/stylesheets/main/app_normal.css"); }
+    public void onNormalStyleClicked() {
+        setTheme("org/uygar/stylesheets/main/app_normal.css");
+    }
 
-    public void onBlueStyleClicked() {}
+    public void onBlueStyleClicked() {
+    }
 
     public String getCurrentStyleCssFilePath() {
         return this.rootPane.getStylesheets().get(0);
+    }
+
+    private void addStylesheetToPaneWithSimpleThemeName(String controllerName, String pkgName, Parent pane) {
+        String stdPath = "org/uygar/stylesheets/" + pkgName + "/";
+        String endPath = controllerName + "_" + getCurrentStyleColorFileName();
+        pane.getStylesheets().add(stdPath + endPath);
     }
 
     private String getCurrentStyleColorFileName() {

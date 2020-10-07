@@ -51,7 +51,7 @@ public class ConverterUtil {
             LocalDateTime creationDate = LocalDateTime.parse(postIts.get("creationDate").get(dataElementIndex));
             LocalDateTime endDate = LocalDateTime.parse(postIts.get("endDate").get(dataElementIndex));
             Colore colore = Colore.valueOf(postIts.get("colore").get(dataElementIndex));
-            return  Optional.of(new PostIt(id, done, title, text, creationDate, endDate, colore));
+            return Optional.of(new PostIt(id, done, title, text, creationDate, endDate, colore));
         }
         return Optional.empty();
     }
