@@ -1,13 +1,22 @@
-.dialog-pane {
-    -fx-background-color: #380202;
+.dialog-pane > .header-panel {
+    -fx-background-color: radial-gradient(center -100px 180px, radius 300px, black 40%, tomato);
 }
 
-#gridPane {
-    -fx-background-color: black;
+.dialog-pane > .header-panel > .label {
+    -fx-font-size: 16pt;
+    -fx-font-weight: bolder;
+}
+
+.dialog-pane > .button-bar > .container > .button:hover {
+    -fx-background-color: radial-gradient(center -20px 180px, radius 100px, grey, blue);
+}
+
+.alert.error.dialog-pane {
+    -fx-background-color: radial-gradient(center -100px 180px, radius 300px, black 40%, tomato);
 }
 
 .label {
-    -fx-text-fill: papayawhip;
+    -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 12;
 }

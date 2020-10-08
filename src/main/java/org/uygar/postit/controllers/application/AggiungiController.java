@@ -6,7 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
-import org.uygar.postit.controllers.application.exception.WindowCoordinates;
+import org.uygar.postit.controllers.application.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.application.exception.WrongFieldsException;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
@@ -63,7 +63,7 @@ public class AggiungiController implements Initializable {
         Post post = new Post(null, name, LocalDateTime.now(), sortingType);
 
         Window currentWindow = this.root.getScene().getWindow();
-        WindowCoordinates coordinates = new WindowCoordinates(currentWindow);
+        WindowCoordinatesContainer coordinates = new WindowCoordinatesContainer(currentWindow);
 
         boolean fieldsNotValid = name.isEmpty() || sortingType == null;
         throwWrongFieldExceptionIf(fieldsNotValid, "Hai sbagliato ad inserire i campi!", coordinates);
@@ -74,9 +74,10 @@ public class AggiungiController implements Initializable {
         addPostToViewAndUpdate(new Post(getLastCreatedPostId(), name));
     }
 
-    public void throwWrongFieldExceptionIf(boolean condition, String message, WindowCoordinates coordinates) throws WrongFieldsException {
+    public void throwWrongFieldExceptionIf(boolean condition, String message,
+                                           WindowCoordinatesContainer errorViewCordinates) throws WrongFieldsException {
         if (condition)
-            throw new WrongFieldsException(message, coordinates);
+            throw new WrongFieldsException(message, errorViewCordinates);
     }
 
     public boolean tryCreateNewPost(Post post) {

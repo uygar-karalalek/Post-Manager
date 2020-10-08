@@ -164,14 +164,15 @@ public class AppController implements Initializable {
         this.properties = properties;
     }
 
+    @FXML
     public void onBlackStyleClicked() {
         setTheme("org/uygar/stylesheets/main/app_black.css");
     }
-
+    @FXML
     public void onNormalStyleClicked() {
         setTheme("org/uygar/stylesheets/main/app_normal.css");
     }
-
+    @FXML
     public void onBlueStyleClicked() {
     }
 

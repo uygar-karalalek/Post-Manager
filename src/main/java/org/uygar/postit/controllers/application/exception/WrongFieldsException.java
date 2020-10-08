@@ -2,20 +2,17 @@ package org.uygar.postit.controllers.application.exception;
 
 import javafx.scene.control.Alert;
 import javafx.scene.layout.GridPane;
+import org.uygar.postit.controllers.application.WindowDimensions;
 
 public class WrongFieldsException extends Exception {
 
-    private WindowCoordinates coordinatesManager;
+    private final WindowCoordinatesContainer coordinatesManager;
 
-    public WrongFieldsException(String message, WindowCoordinates coordinatesManager) {
+    public WrongFieldsException(String message, WindowCoordinatesContainer coordinatesManager) {
         super(message);
         this.coordinatesManager = coordinatesManager;
+        coordinatesManager.centerBasedOnAlertAndFatherWindowDimensions();
         showExceptionMessage();
-    }
-
-    public WrongFieldsException(String message, double x, double y) {
-        super(message);
-        showExceptionMessage(x, y);
     }
 
     private void showExceptionMessage() {
@@ -24,6 +21,9 @@ public class WrongFieldsException extends Exception {
 
     private void showExceptionMessage(double x, double y) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.getDialogPane().setPrefSize(WindowDimensions.ALERT_WINDOW_DIMENSION.getWidth(),
+                WindowDimensions.ALERT_WINDOW_DIMENSION.getHeight());
+        alert.setHeight(WindowDimensions.ALERT_WINDOW_DIMENSION.getHeight());
         initAlert(this.getMessage(), x, y, alert);
         alert.showAndWait();
     }
@@ -36,8 +36,6 @@ public class WrongFieldsException extends Exception {
         alert.setContentText(message);
         alert.setX(x);
         alert.setY(y);
-        alert.getDialogPane().getChildren().stream().filter(node -> node instanceof GridPane)
-                .findFirst().ifPresent(node -> node.setId("gridPane"));;
     }
 
 }

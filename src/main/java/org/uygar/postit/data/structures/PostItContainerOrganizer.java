@@ -6,7 +6,7 @@ import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.properties.Sort;
-import org.uygar.postit.post.properties.converters.ConvertertUtil;
+import org.uygar.postit.post.properties.converters.ConverterUtil;
 
 import java.util.*;
 
@@ -23,7 +23,7 @@ public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implemen
 
     @Override
     protected List<PostIt> parseFromAbstractSQLObject(Map<String, List<String>> stringMappedObj, int numOfElements) {
-        return ConvertertUtil.convertSQLResponseToPostIt(stringMappedObj, numOfElements);
+        return ConverterUtil.convertSQLResponseToPostIt(stringMappedObj, numOfElements);
     }
 
     @Override

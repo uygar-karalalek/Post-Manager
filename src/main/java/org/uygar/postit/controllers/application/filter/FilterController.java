@@ -1,5 +1,7 @@
 package org.uygar.postit.controllers.application.filter;
 
+import com.sun.javafx.binding.BindingHelperObserver;
+import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
@@ -8,7 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
-import org.uygar.postit.controllers.application.exception.WindowCoordinates;
+import org.uygar.postit.controllers.application.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.application.exception.WrongFieldsException;
 import org.uygar.postit.controllers.application.filter.util.FilterBuilder;
 import org.uygar.postit.controllers.application.filter.util.FilterSerializer;
@@ -48,6 +50,10 @@ public class FilterController {
         bindProperties(finisceField.disableProperty(), finisce.selectedProperty().not());
     }
 
+    public void bindProperties(BooleanProperty property1, BooleanBinding property2) {
+        property1.bind(property2);
+    }
+
     private void addCheckListeners() {
         addCheckChangeListenerToCheckBox(inizio, inizioField);
         addCheckChangeListenerToCheckBox(contiene, contieneField);
@@ -58,10 +64,6 @@ public class FilterController {
         FilterSerializer filter = FilterSerializer.deserialize();
         if (filter != null)
             filter.applyFilter(this);
-    }
-
-    public void bindProperties(BooleanProperty property1, BooleanBinding property2) {
-        property1.bind(property2);
     }
 
     public void addCheckChangeListenerToCheckBox(CheckBox box, TextField field) {
@@ -86,12 +88,9 @@ public class FilterController {
 
     private void throwNotValidException() throws WrongFieldsException {
         Window window = root.getScene().getWindow();
-        WindowCoordinates coordinates = new WindowCoordinates(window);
+        WindowCoordinatesContainer coordinates = new WindowCoordinatesContainer(window);
 
-        double windowXDividedBy = coordinates.getWindowXDividedBy(10);
-        double windowYDividedBy = coordinates.getWindowYDividedBy(4);
-
-        throw new WrongFieldsException("Hai sbagliato a compilare i campi!", windowXDividedBy, windowYDividedBy);
+        throw new WrongFieldsException("Hai sbagliato a compilare i campi!", coordinates);
     }
 
     @FXML
