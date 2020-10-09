@@ -110,7 +110,7 @@
 }
 
 .button:pressed {
-    -fx-background-color: linear-gradient(black, blue);
+    -fx-background-color: linear-gradient(black, darkolivegreen);
 }
 
 #iTuoiPost {

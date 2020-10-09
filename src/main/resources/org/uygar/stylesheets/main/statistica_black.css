@@ -4,8 +4,25 @@
 
 /* TEXT */
 
+.text-field-table-cell:hover, .text-field-table-cell:selected {
+    -fx-background-color: linear-gradient(darkslategray, black);
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-font-family: Arial;
+    -fx-alignment: center;
+    -fx-font-size: 12pt;
+    -fx-text-fill: white;
+}
+
 .table-view {
     -fx-background-color: linear-gradient(black, grey);
+}
+
+.table-view .column-header {
+    -fx-background-color: linear-gradient(black, grey);
+    -fx-pref-height: 40;
 }
 
 .table-view .column-header > .label {
@@ -15,13 +32,28 @@
 }
 
 .table-row-cell {
-    -fx-text-fill: black;
+    -fx-background-color: black;
+    -fx-pref-height: 60px;
+    -fx-pref-width: 100px;
     -fx-font-family: Arial;
     -fx-font-size: 14px;
 }
 
+.table-row-cell:focused > .text-field-table-cell {
+    -fx-background-color: linear-gradient(grey, black);
+}
+
 .table-cell {
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 11pt;
+    -fx-border-width: 1;
+    -fx-border-color: white;
     -fx-alignment: CENTER;
+}
+
+.table-cell:editable {
+    -fx-background-color: red;
 }
 
 #titleModificaDati {
@@ -54,7 +86,7 @@
 /* TEXT END */
 
 .separator {
-    -fx-border-color: linear-gradient(darkolivegreen, white);
+    -fx-border-color: linear-gradient(darkorange, white);
 }
 
 #grid {
@@ -67,19 +99,19 @@
 }
 
 #hbox {
-    -fx-background-color: radial-gradient(center 90px -170px, radius 500px, black, black);
+    -fx-background-color: radial-gradient(center 90px -170px, radius 500px, grey, black);
 }
 
 #scatterBox {
-    -fx-background-color: black;
+    -fx-background-color: linear-gradient(black, grey);
 }
 
 #lineBox {
-    -fx-background-color: black;
+    -fx-background-color: linear-gradient(black, grey);
 }
 
 #barraBox {
-    -fx-background-color: black;
+    -fx-background-color: linear-gradient(black, grey);
 }
 
 .tab-pane .tab {

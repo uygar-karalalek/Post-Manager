@@ -33,7 +33,7 @@
             </RadialGradient>
          </textFill>
       </Label>
-      <TextField id="nomePostField" fx:id="nomePostField" alignment="CENTER" prefHeight="37.0" prefWidth="326.0" promptText="nome del post...">
+      <TextField id="nomePostField" fx:id="nomePostField" alignment="CENTER" prefHeight="37.0" prefWidth="326.0" promptText="nome del post (max 18)...">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
