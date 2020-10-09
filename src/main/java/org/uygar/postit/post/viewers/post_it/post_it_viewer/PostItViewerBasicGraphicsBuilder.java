@@ -9,19 +9,20 @@ import javafx.scene.layout.VBox;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostViewerImageBuilder;
 
-public class PostItViewerImageAndTextGraphicBuilder {
+public class PostItViewerBasicGraphicsBuilder {
+
+    private final PostIt postIt;
 
     private static final double POST_IT_SIZE = 260;
     private static final double POST_IT_BORDER = 60;
     private static final Insets TASK_TEXT_INSETS = new Insets(0, 10, 0, 20);
 
-    private final PostIt postIt;
     private ImageView postItImage;
     private StackPane postItImageWrapper;
     private ScrollPane taskTextWrapper;
-    private final Label titleLbl = new Label(), taskText = new Label();
+    private Label titleLbl, taskText;
 
-    public PostItViewerImageAndTextGraphicBuilder(PostIt postIt) {
+    public PostItViewerBasicGraphicsBuilder(PostIt postIt) {
         this.postIt = postIt;
         buildImageAndPostTextWrapper();
     }
@@ -38,6 +39,9 @@ public class PostItViewerImageAndTextGraphicBuilder {
     }
 
     private void buildTexts() {
+        titleLbl = new Label();
+        taskText = new Label();
+
         titleLbl.textProperty().bind(postIt.titoloProperty());
         titleLbl.setId("postItTitle");
         titleLbl.setTextFill(postIt.getColore().postItTextColor);
@@ -54,7 +58,7 @@ public class PostItViewerImageAndTextGraphicBuilder {
     private void initTextScrollWrapper() {
         taskTextWrapper = new ScrollPane(taskText);
         taskTextWrapper.setId("taskTextWrapper");
-        taskTextWrapper.setPrefHeight(POST_IT_SIZE/3);
+        taskTextWrapper.setPrefHeight(POST_IT_SIZE / 3);
         taskTextWrapper.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 

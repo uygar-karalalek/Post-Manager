@@ -1,5 +1,7 @@
 package org.uygar.postit.data.properties;
 
+import org.apache.commons.lang.math.NumberUtils;
+
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -49,12 +51,10 @@ public class LogProperties extends PostProperties {
         hoursAndFrequencies = new ConcurrentHashMap<>();
         monthsAndFrequencies = new ConcurrentHashMap<>();
 
-        Predicate<String> isDigit = s -> Character.isDigit(s.charAt(0));
-
         this.properties.forEach((key, value) -> {
             String stringKey = (String) key;
 
-            if (isDigit.test(stringKey))
+            if (NumberUtils.isNumber(stringKey))
                 hoursAndFrequencies.put(Integer.parseInt(stringKey), Integer.parseInt(value.toString()));
             else
                 monthsAndFrequencies.put(stringKey, Integer.parseInt(value.toString()));

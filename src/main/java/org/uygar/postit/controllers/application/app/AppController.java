@@ -8,12 +8,17 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.input.TransferMode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.uygar.postit.controllers.application.AggiungiController;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.application.WindowDimensions;
@@ -43,6 +48,8 @@ public class AppController implements Initializable {
     Button addButton, filterButton, statisticaBtn;
     @FXML
     TextField searchField;
+    @FXML
+    MenuBar menuBar;
 
     ButtonDisableBinding filterDisableBinding, statisticaDisableBinding;
     LogProperties properties;
@@ -74,12 +81,30 @@ public class AppController implements Initializable {
         this.scrollPane.setContent(postGrid);
     }
 
+    private double onClickedX, onClickedY;
+
+    @FXML
+    public void onMousePressed(MouseEvent event) {
+        onClickedX = event.getX();
+        onClickedY = event.getY();
+    }
+
+    @FXML
+    public void onMouseDragged(MouseEvent event) {
+        Stage mainStage = (Stage) this.rootPane.getScene().getWindow();
+        double xDiff = event.getScreenX() - (mainStage.getX() + onClickedX);
+        double yDiff = event.getScreenY() - (mainStage.getY() + onClickedY);
+
+        mainStage.setX(mainStage.getX() + xDiff);
+        mainStage.setY(mainStage.getY() + yDiff);
+    }
+
     @FXML
     public void onAddClicked() {
         AggiungiController ac = (AggiungiController) FXLoader.getLoadedController("add", "app");
         ac.setPostGridViewer(this.postGrid);
-        addStylesheetToPaneWithSimpleThemeName("app", "main", ac.root);
-        addStylesheetToPaneWithSimpleThemeName("add", "main", ac.root);
+        addStylesheetToPaneWithControllerName("app", "main", ac.root);
+        addStylesheetToPaneWithControllerName("add", "main", ac.root);
         windowInitializer.fadeWindowEffect(ac.root, 1);
         Stage stage = initializeWindowAndGet(WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, ac.root);
         setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
@@ -90,7 +115,7 @@ public class AppController implements Initializable {
         filterDisableBinding.disableOpenWindowButton();
         FilterController fc = (FilterController) FXLoader.getLoadedController("filter", "app");
         fc.init(this.postGrid);
-        addStylesheetToPaneWithSimpleThemeName("filter", "main", fc.root);
+        addStylesheetToPaneWithControllerName("filter", "main", fc.root);
         windowInitializer.fadeWindowEffect(fc.root, 0.4);
         Stage stage = initializeWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, fc.root);
         setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
@@ -109,7 +134,7 @@ public class AppController implements Initializable {
                 FXLoader.getLoadedController("statistica", "app");
         sc.setLogProperties(properties);
         sc.init();
-        addStylesheetToPaneWithSimpleThemeName("statistica", "main", sc.root);
+        addStylesheetToPaneWithControllerName("statistica", "main", sc.root);
         Scene scene = new Scene(sc.root);
         stage.setScene(scene);
         stage.setOnHiding(statisticaDisableBinding::closedByEventClosed);
@@ -126,7 +151,7 @@ public class AppController implements Initializable {
             this.postGrid.enablePostViewByPost(post);
         });
 
-        addStylesheetToPaneWithSimpleThemeName("post", "post", postController.root);
+        addStylesheetToPaneWithControllerName("post", "post", postController.root);
 
         postController.setMinSizeByDimensionOfStage(postStage);
         postStage.setResizable(true);
@@ -142,7 +167,6 @@ public class AppController implements Initializable {
     public void onExitClicked() {
         Platform.exit();
     }
-
 
     public Stage initializeWindowAndGet(Dimension2D dimension, Modality modality, Parent root) {
         Stage stage = windowInitializer.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality);
@@ -168,10 +192,12 @@ public class AppController implements Initializable {
     public void onBlackStyleClicked() {
         setTheme("org/uygar/stylesheets/main/app_black.css");
     }
+
     @FXML
     public void onNormalStyleClicked() {
         setTheme("org/uygar/stylesheets/main/app_normal.css");
     }
+
     @FXML
     public void onBlueStyleClicked() {
     }
@@ -180,7 +206,7 @@ public class AppController implements Initializable {
         return this.rootPane.getStylesheets().get(0);
     }
 
-    private void addStylesheetToPaneWithSimpleThemeName(String controllerName, String pkgName, Parent pane) {
+    private void addStylesheetToPaneWithControllerName(String controllerName, String pkgName, Parent pane) {
         String stdPath = "org/uygar/stylesheets/" + pkgName + "/";
         String endPath = controllerName + "_" + getCurrentStyleColorFileName();
         pane.getStylesheets().add(stdPath + endPath);

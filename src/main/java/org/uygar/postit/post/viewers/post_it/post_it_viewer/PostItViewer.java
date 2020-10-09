@@ -14,13 +14,13 @@ public class PostItViewer extends VBox {
 
     private StackPane scadenzaTextWrapper;
 
-    private final PostItViewerImageAndTextGraphicBuilder graphicBuilder;
+    private final PostItViewerBasicGraphicsBuilder graphicBuilder;
 
     public PostItViewer(PostIt postIt) {
         this.postIt = postIt;
         this.setId("post_it");
         this.graphicBuilder = new
-                PostItViewerImageAndTextGraphicBuilder(postIt);
+                PostItViewerBasicGraphicsBuilder(postIt);
         buildPostItViewer();
     }
 

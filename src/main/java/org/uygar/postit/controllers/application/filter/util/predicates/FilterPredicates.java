@@ -18,9 +18,9 @@ public class FilterPredicates {
     }
 
     private void initPreds() {
-        final PredicateReferencer inizioRef = new PredicateReferencer(filterBuilder, filterBuilder.inizio, filterBuilder.inizioSelected, String::startsWith);
-        final PredicateReferencer contieneRef = new PredicateReferencer(filterBuilder, filterBuilder.contiene, filterBuilder.contieneSelected, String::contains);
-        final PredicateReferencer finisceRef = new PredicateReferencer(filterBuilder, filterBuilder.finisce, filterBuilder.finisceSelected, String::endsWith);
+        PredicateReferencer inizioRef = new PredicateReferencer(filterBuilder, filterBuilder.inizio, filterBuilder.inizioSelected, String::startsWith);
+        PredicateReferencer contieneRef = new PredicateReferencer(filterBuilder, filterBuilder.contiene, filterBuilder.contieneSelected, String::contains);
+        PredicateReferencer finisceRef = new PredicateReferencer(filterBuilder, filterBuilder.finisce, filterBuilder.finisceSelected, String::endsWith);
 
         INIZIO = inizioRef::get;
         CONTIENE = contieneRef::get;

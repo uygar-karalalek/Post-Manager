@@ -4,7 +4,9 @@ import javafx.animation.FadeTransition;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.FXLoader;
@@ -47,6 +49,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         this.stage = new Stage();
+        this.stage.initStyle(StageStyle.UNDECORATED);
         this.appController = (AppController) FXLoader.getLoadedController("app", "app");
         this.appController.setTheme(applicationProperties.getStringProperty("theme"));
         Objects.requireNonNull(this.appController).setLogProperties(properties);

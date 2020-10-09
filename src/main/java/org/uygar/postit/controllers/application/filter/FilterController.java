@@ -1,7 +1,5 @@
 package org.uygar.postit.controllers.application.filter;
 
-import com.sun.javafx.binding.BindingHelperObserver;
-import javafx.beans.binding.Bindings;
 import javafx.beans.binding.BooleanBinding;
 import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
@@ -115,8 +113,7 @@ public class FilterController {
 
     private void serializedFilterFileDeleteIfExists() {
         File file = new File("filter.ser");
-        if (file.exists())
-            file.delete();
+        file.delete();
     }
 
     @FXML

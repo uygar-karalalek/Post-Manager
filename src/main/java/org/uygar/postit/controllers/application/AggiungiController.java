@@ -65,13 +65,17 @@ public class AggiungiController implements Initializable {
         Window currentWindow = this.root.getScene().getWindow();
         WindowCoordinatesContainer coordinates = new WindowCoordinatesContainer(currentWindow);
 
-        boolean fieldsNotValid = name.isEmpty() || sortingType == null;
+        boolean fieldsNotValid = areFieldsValid(name, sortingType);
         throwWrongFieldExceptionIf(fieldsNotValid, "Hai sbagliato ad inserire i campi!", coordinates);
 
         boolean notCreatedCorrectly = !tryCreateNewPost(post);
         throwWrongFieldExceptionIf(notCreatedCorrectly, "Il post esiste già!", coordinates);
 
         addPostToViewAndUpdate(new Post(getLastCreatedPostId(), name));
+    }
+
+    private boolean areFieldsValid(String name, Sort sortingType) {
+        return name.isEmpty() || name.length() > 18 || sortingType == null;
     }
 
     public void throwWrongFieldExceptionIf(boolean condition, String message,

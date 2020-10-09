@@ -12,7 +12,7 @@ import java.util.*;
 
 public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implements PostItContainer {
 
-    private Post fatherPost;
+    private final Post fatherPost;
     public static final String POST_IT_TABLE_NAME = "postit";
 
     public PostItContainerOrganizer(Post fatherPost, DataMiner dataMiner) {
@@ -32,14 +32,14 @@ public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implemen
         sort.sort(list);
     }
 
-    public Sort getSortType() {
-        return this.fatherPost.getSortType();
+    @Override
+    public List<PostIt> getSorted() {
+        sortPostIts();
+        return list;
     }
 
-    public ObservableList<PostIt> getSortedList() {
-        ObservableList<PostIt> listCopy = FXCollections.observableArrayList(list);
-        fatherPost.getSortType().sort(listCopy);
-        return listCopy;
+    public Sort getSortType() {
+        return this.fatherPost.getSortType();
     }
 
 }

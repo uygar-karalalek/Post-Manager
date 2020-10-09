@@ -32,8 +32,6 @@ public class FilterSerializer extends Filter implements Serializable {
             controller.ignoraMaiusc.setSelected(this.ignoraMaiusc);
     }
 
-    public FilterSerializer() {}
-
     private boolean dateNotNull() {
         return data1 != null && data2 != null;
     }
