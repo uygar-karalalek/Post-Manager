@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.app;
+package org.uygar.postit.controllers.application.app.utils;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
@@ -6,8 +6,9 @@ import javafx.scene.Parent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.uygar.postit.controllers.application.app.AppController;
 
-class WindowInitializer {
+public class WindowInitializer {
 
     private final AppController appController;
 
@@ -15,7 +16,7 @@ class WindowInitializer {
         this.appController = appController;
     }
 
-    Stage getStageWithModality(double prefWidth, double prefHeight, Modality modality) {
+    public Stage getStageWithModality(double prefWidth, double prefHeight, Modality modality) {
         Stage stage = getStageWithModality(modality, false);
         stage.setWidth(prefWidth);
         stage.setHeight(prefHeight);
@@ -25,14 +26,14 @@ class WindowInitializer {
         return stage;
     }
 
-    Stage getStageWithModality(Modality modality, boolean resizable) {
+    public Stage getStageWithModality(Modality modality, boolean resizable) {
         Stage stage = new Stage();
         stage.initModality(modality);
         stage.setResizable(resizable);
         return stage;
     }
 
-    void fadeWindowEffect(Parent root, double seconds) {
+    public void fadeWindowEffect(Parent root, double seconds) {
         FadeTransition transition = new FadeTransition(Duration.seconds(seconds), root);
         transition.setInterpolator(Interpolator.EASE_BOTH);
         transition.setFromValue(0);
