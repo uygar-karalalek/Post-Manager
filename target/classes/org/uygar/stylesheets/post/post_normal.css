@@ -1,0 +1,154 @@
+.root {
+    -fx-background-color: linear-gradient(lightsteelblue, cornsilk);
+}
+
+.tab-pane .tab {
+    -fx-background-color: grey;
+}
+
+.button {
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, grey, turquoise);
+    -fx-pref-height: 35;
+    -fx-background-radius: 1em;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 12pt;
+    -fx-pref-width: 150;
+}
+
+.button:hover {
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, deepskyblue, gold);
+}
+
+.tab-pane .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 9pt;
+    -fx-text-alignment: center;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:top {
+    -fx-background-color: linear-gradient(black, grey);
+    -fx-padding: 4 10 4 30;
+    -fx-font-family: Arial;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+    -fx-background-color: linear-gradient(khaki, cornflowerblue);
+    -fx-background-insets: 0 1 1 0, 1 2 0 1, 2 3 0 2;
+}
+
+.tab-pane > .tab-header-area > .headers-region > .tab:disabled:hover {
+    -fx-color: -fx-base;
+}
+
+.tab-pane > .tab-header-area > .tab-header-background {
+    -fx-background-color: linear-gradient(grey, white);
+    -fx-border-insets: -10;
+
+}
+
+.tab-pane:focused > .tab-header-area > .headers-region > .tab:selected .focus-indicator {
+    -fx-border-color: transparent;
+}
+
+#srcLabel {
+    -fx-text-fill: mediumaquamarine;
+    -fx-font-family: Arial;
+    -fx-font-size: 12pt;
+    -fx-font-weight: bold;
+}
+
+#titoloField {
+    -fx-prompt-text-fill: black;
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, green, cadetblue);
+    -fx-background-radius: 5em;
+    -fx-font-family: Arial;
+    -fx-alignment: center;
+    -fx-font-size: 10pt;
+    -fx-text-fill: white;
+    -fx-border-radius: 5em;
+    -fx-border-width: 2px;
+    -fx-border-color: black;
+    -fx-border-insets: 5px;
+}
+
+#title {
+    -fx-alignment: CENTER;
+    -fx-text-fill: linear-gradient(brown, crimson);
+}
+
+#postActions {
+    -fx-padding: 10 10 0 0;
+    -fx-background-color: transparent;
+    -fx-opacity: 0.9;
+    -fx-alignment: top-center;
+    -fx-spacing: 10;
+    -fx-border-width: 2;
+    -fx-border-radius: 0 30 30 15;
+    -fx-border-color: cornflowerblue linear-gradient(cornflowerblue, grey) linear-gradient(grey, cadetblue) grey;
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane > .viewport {
+    -fx-background: transparent;
+}
+
+.scroll-pane > .scroll-bar {
+    -fx-background-color: transparent;
+}
+
+#taskTextWrapper {
+    -fx-background-color: transparent;
+
+}
+
+#post_it_grid {
+    -fx-alignment: top-left;
+    -fx-padding: 20;
+}
+
+#textWrapper {
+    -fx-alignment: TOP-CENTER;
+    -fx-translate-y: 35;
+}
+
+#post_it {
+    -fx-alignment: BOTTOM-CENTER;
+    -fx-spacing: 20;
+}
+
+#post_it:hover {
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+#scadenzaText {
+    -fx-font-family: Arial;
+    -fx-font-size: 11pt;
+    -fx-fill: WHITE;
+}
+
+#scadenzaTextWrapper {
+    -fx-background-color: black;
+    -fx-background-radius: 0.6em;
+    -fx-translate-y: 18;
+    -fx-padding: 5 0 5 0;
+}
+
+#postItTitle {
+    -fx-font-family: Arial;
+    -fx-font-weight: bold;
+    -fx-font-size: 12pt;
+}
+
+#postItText {
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-family: Arial;
+    -fx-font-size: 12px;
+}

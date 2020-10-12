@@ -9,7 +9,8 @@ import org.uygar.postit.controllers.application.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.utils.ButtonDisableBinding;
 
-public class AggiungiLoader extends WindowLoader {
+public class
+AggiungiLoader extends WindowLoader {
 
     public static final int FADE_INIT_TIME_AGGIUNGI = 1;
 

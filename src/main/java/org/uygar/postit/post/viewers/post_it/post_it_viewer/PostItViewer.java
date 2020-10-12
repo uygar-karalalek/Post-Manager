@@ -33,7 +33,7 @@ public class PostItViewer extends VBox {
     private void buildScadenzaLabel() {
         LocalDateTime fine = this.getPostIt().getDataFine();
         String wellFormattedDate = fine.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String wellFormattedHour = fine.getHour() + ":" + fine.getMinute();
+        String wellFormattedHour = fine.format(DateTimeFormatter.ofPattern("hh:mm"));
 
         String scadenza = "Scadenza: " + wellFormattedDate +
                 " alle " + wellFormattedHour;

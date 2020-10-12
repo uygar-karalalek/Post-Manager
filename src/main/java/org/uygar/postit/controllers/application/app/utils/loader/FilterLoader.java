@@ -25,6 +25,7 @@ public class FilterLoader extends WindowLoader {
     private void init() {
         ButtonDisableBinding filterDisableBinding =
                 new ButtonDisableBinding(appController.filterButton);
+        filterDisableBinding.disableOpenWindowButton();
         FilterController filterController = getFilterController();
         Stage stage = getWindow(filterController);
         appController.setHidingStageEventAndShowAndWait(stage, filterDisableBinding);

@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class TableViewColumnsBuilder<T extends FrequencyModel> {
 
-    private TableView<T> tableView;
-    private StatisticaController controller;
+    private final TableView<T> tableView;
+    private final StatisticaController controller;
 
     public TableViewColumnsBuilder(TableView<T> tableView, StatisticaController controller) {
         this.tableView = tableView;
