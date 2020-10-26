@@ -41,7 +41,7 @@ public class DMLQueriesSteps {
 
     @Then("it should insert the data")
     public void it_should_insert_the_data() {
-        Map<String, List<String>> result = dataMiner.getListOfResult();
+        Map<String, List<String>> result = dataMiner.getMappedListOfResult();
 
         Assert.assertTrue(result.get("name").contains("test"));
         Assert.assertNotNull(result);
@@ -63,7 +63,7 @@ public class DMLQueriesSteps {
 
     @Then("it updates the post with name {string}")
     public void it_updates_the_post(String newName) {
-        Map<String, List<String>> result = dataMiner.getListOfResult();
+        Map<String, List<String>> result = dataMiner.getMappedListOfResult();
 
         List<String> names = result.get("name");
 

@@ -4,6 +4,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
@@ -15,9 +16,12 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.uygar.postit.controllers.post.utils.PostStatistics;
+import org.uygar.postit.controllers.post.utils.PostStatisticsViewManager;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
+import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewerBasicGraphicsBuilder;
 
 public class PostController {
 
@@ -35,12 +39,16 @@ public class PostController {
     @FXML
     private Label postTitle;
 
+    @FXML
+    private PieChart pieChart;
+
     PostItGridViewer postItGrid;
 
     private Dimension2D minDimension;
 
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
         this.postItGrid = new PostItGridViewer(fatherPost, miner);
+        PostStatisticsViewManager.buildChart(pieChart, new PostStatistics(postItGrid.getPostItOrganizer()));
         this.minDimension = initialWindowDimension;
         initGridPane();
         this.gridFatherScroll.getContent().setOnScroll(this::setOnScroll);

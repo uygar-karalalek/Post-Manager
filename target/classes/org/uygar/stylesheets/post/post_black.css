@@ -7,7 +7,7 @@
 }
 
 .button {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, darkslategrey, dimgrey);
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, darkslategrey, black);
     -fx-pref-height: 35;
     -fx-background-radius: 1em;
     -fx-text-fill: white;
@@ -17,7 +17,7 @@
 }
 
 .button:hover {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, darkslategrey, chocolate);
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, midnightblue, cornflowerblue);
 }
 
 .tab-pane .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
@@ -58,9 +58,9 @@
     -fx-font-weight: bold;
 }
 
-.text-field {
-    -fx-prompt-text-fill: black;
-    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, grey, cadetblue);
+#titoloField {
+    -fx-prompt-text-fill: grey;
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, darkslategrey, #201818);
     -fx-background-radius: 5em;
     -fx-font-family: Arial;
     -fx-alignment: center;
@@ -84,7 +84,7 @@
     -fx-alignment: top-center;
     -fx-spacing: 10;
     -fx-border-width: 1 2 2 0;
-    -fx-border-radius: 0 40 0 15;
+    -fx-border-radius: 0 40 40 15;
     -fx-border-color: black linear-gradient(cadetblue, grey) linear-gradient(grey, cadetblue) blue;
 }
 
@@ -129,13 +129,19 @@
     -fx-font-family: Arial;
     -fx-font-size: 11pt;
     -fx-fill: WHITE;
+    -fx-font-weight: bold;
 }
 
 #scadenzaTextWrapper {
-    -fx-background-color: black;
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, darkolivegreen, black);
     -fx-background-radius: 0.6em;
     -fx-translate-y: 18;
+    -fx-scale-x: 0.9;
     -fx-padding: 5 0 5 0;
+}
+
+#scadenzaTextWrapper:hover {
+    -fx-background-color: radial-gradient(center 90px 50px, radius 300px, black, wheat);
 }
 
 #postItTitle {
@@ -149,4 +155,30 @@
     -fx-alignment: center;
     -fx-font-family: Arial;
     -fx-font-size: 12px;
+}
+
+#pieChart {
+    -fx-background-color: radial-gradient(center -50px 40px, radius 300px, wheat, darkslategrey);
+    -fx-background-radius: 30;
+}
+
+.chart-pie-label {
+    -fx-padding: 10;
+    -fx-fill: black;
+    -fx-font-family: Arial;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: black;
+    -fx-stroke-width: 2px;
+}
+
+.chart-pie.default-color0 {
+    -fx-background-color: radial-gradient(center 0px 50px, radius 50px, grey, darkblue);
+}
+
+.chart-pie.default-color1 {
+    -fx-background-color: radial-gradient(center 0px 0px, radius 50px, red, darkblue);
 }

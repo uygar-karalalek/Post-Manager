@@ -106,7 +106,7 @@ public class AggiungiController implements Initializable {
         DQLQueryBuilder dql = new DQLQueryBuilder();
         dql.select("MAX(id) as id").from("post");
         dataMiner.executeQuery(dql);
-        String result = dataMiner.getListOfResult().get("id").get(0);
+        String result = dataMiner.getMappedListOfResult().get("id").get(0);
         return Integer.parseInt(result);
     }
 

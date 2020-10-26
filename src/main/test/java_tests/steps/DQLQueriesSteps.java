@@ -37,7 +37,7 @@ public class DQLQueriesSteps {
 
     @Then("it should return the data")
     public void it_should_return_the_data() {
-        Map<String, List<String>> result = dataMiner.getListOfResult();
+        Map<String, List<String>> result = dataMiner.getMappedListOfResult();
 
         Assert.assertNotNull(result);
         Assert.assertFalse(result.isEmpty());

@@ -18,7 +18,7 @@ public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implemen
     public PostItContainerOrganizer(Post fatherPost, DataMiner dataMiner) {
         super(dataMiner);
         this.fatherPost = fatherPost;
-        loadDataFromTable(POST_IT_TABLE_NAME, Optional.of("postId = " + fatherPost.getId()));
+        loadDataFromTable(POST_IT_TABLE_NAME, Optional.of("postId=" + fatherPost.getId()));
     }
 
     @Override

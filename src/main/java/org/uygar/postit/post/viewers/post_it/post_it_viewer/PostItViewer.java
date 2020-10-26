@@ -1,8 +1,12 @@
 package org.uygar.postit.post.viewers.post_it.post_it_viewer;
 
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import org.uygar.postit.data.database.DataMiner;
+import org.uygar.postit.data.database.queries.DMLQueryBuilder;
+import org.uygar.postit.data.database.queries.Query;
 import org.uygar.postit.post.PostIt;
 
 import java.time.LocalDateTime;
@@ -22,6 +26,8 @@ public class PostItViewer extends VBox {
         this.graphicBuilder = new
                 PostItViewerBasicGraphicsBuilder(postIt);
         buildPostItViewer();
+        if (postIt.isFatto())
+            addToPostItDoneImage();
     }
 
     private void buildPostItViewer() {
@@ -59,6 +65,43 @@ public class PostItViewer extends VBox {
 
     private void onPostItExit(MouseEvent event) {
         this.getChildren().remove(0);
+    }
+
+    public StackPane getMainGraphic() {
+        return this.graphicBuilder.getPostItImageWrapper();
+    }
+
+    public void onDoneUndoneClicked(DataMiner miner) {
+        this.postIt.setFatto(!this.postIt.isFatto());
+        if (this.postIt.isFatto())
+            addToPostItDoneImage();
+        else
+            removeFromPostItDoneImage();
+        executeDoneStateWithQuery(miner);
+    }
+
+    private void addToPostItDoneImage() {
+        graphicBuilder.getPostItImageWrapper()
+                .getChildren().add(new ImageView("org/uygar/images/fatto.png"));
+    }
+
+    private void removeFromPostItDoneImage() {
+        graphicBuilder.getPostItImageWrapper()
+                .getChildren()
+                .removeIf(node -> {
+                    if (node instanceof ImageView) {
+                        return ((ImageView) node).getImage().getUrl().endsWith("fatto.png");
+                    }
+                    return false;
+                });
+    }
+
+    private void executeDoneStateWithQuery(DataMiner miner) {
+        Query query = new DMLQueryBuilder()
+                .update("postit")
+                .set("done", Boolean.toString(postIt.isFatto()))
+                .where("id="+postIt.getId());
+        miner.tryExecute(query);
     }
 
 }

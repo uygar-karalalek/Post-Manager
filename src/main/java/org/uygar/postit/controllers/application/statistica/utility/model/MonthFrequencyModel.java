@@ -22,11 +22,6 @@ public class MonthFrequencyModel extends FrequencyModel {
         this.mese = new SimpleStringProperty(entry.getKey());
     }
 
-    public MonthFrequencyModel(String frequenza, String mese) {
-        super(frequenza);
-        this.mese = new SimpleStringProperty(mese);
-    }
-
     public static TableColumn<MonthFrequencyModel, String> getMonthColumn() {
         return getCol("Mese", "mese", false);
     }
@@ -48,14 +43,6 @@ public class MonthFrequencyModel extends FrequencyModel {
 
     public String getMese() {
         return mese.get();
-    }
-
-    public SimpleStringProperty meseProperty() {
-        return mese;
-    }
-
-    public void setMese(String mese) {
-        this.mese.set(mese);
     }
 
 }

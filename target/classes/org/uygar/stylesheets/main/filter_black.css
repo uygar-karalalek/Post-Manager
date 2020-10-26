@@ -5,8 +5,13 @@
 #title {
     -fx-fill: navajowhite;
     -fx-font-family: Arial;
+    -fx-translate-x: 10;
     -fx-font-size: 18pt;
     -fx-text-alignment: RIGHT;
+}
+
+#filterChoices {
+    -fx-text-fill: white;
 }
 
 .check-box > .box {

@@ -1,9 +1,12 @@
 package org.uygar.postit.post.viewers.post_it;
 
+import javafx.collections.ListChangeListener;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
+import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer;
 
 import java.util.List;
@@ -30,14 +33,26 @@ public class PostItGridViewer extends FlowPane {
     }
 
     private void setSortedAndMappedPostItsAsChildren() {
-        getChildren().setAll(
-                getSortedAndMappedPostIts());
+        getChildren().setAll(getSortedAndMappedPostIts());
     }
 
     private List<PostItViewer> getSortedAndMappedPostIts() {
         return postItOrganizer.getSorted()
                 .stream().map(PostItViewer::new)
-                .collect(Collectors.toList());
+                .collect(Collectors.collectingAndThen(Collectors.toList(),
+                        this::addListenersToPostItViewersAndThenReturn));
+    }
+
+    private List<PostItViewer> addListenersToPostItViewersAndThenReturn(List<PostItViewer> postItViewers) {
+        postItViewers.forEach(postItViewer -> postItViewer.getMainGraphic().setOnMouseClicked(mouseEvent -> {
+            if (mouseEvent.getButton() == MouseButton.SECONDARY)
+                postItViewer.onDoneUndoneClicked(postItOrganizer.getDataMiner());
+        }));
+        return postItViewers;
+    }
+
+    public PostItContainerOrganizer getPostItOrganizer() {
+        return postItOrganizer;
     }
 
 }

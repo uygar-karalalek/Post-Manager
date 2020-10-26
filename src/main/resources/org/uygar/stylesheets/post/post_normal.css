@@ -7,7 +7,7 @@
 }
 
 .button {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, grey, turquoise);
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, grey, darkblue);
     -fx-pref-height: 35;
     -fx-background-radius: 1em;
     -fx-text-fill: white;
@@ -17,7 +17,7 @@
 }
 
 .button:hover {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, deepskyblue, gold);
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, dodgerblue, green);
 }
 
 .tab-pane .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
@@ -61,8 +61,8 @@
 }
 
 #titoloField {
-    -fx-prompt-text-fill: black;
-    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, green, cadetblue);
+    -fx-prompt-text-fill: white;
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, blue, cadetblue);
     -fx-background-radius: 5em;
     -fx-font-family: Arial;
     -fx-alignment: center;
@@ -76,17 +76,18 @@
 
 #title {
     -fx-alignment: CENTER;
-    -fx-text-fill: linear-gradient(brown, crimson);
+    -fx-text-fill: linear-gradient(chartreuse, white);
 }
 
 #postActions {
     -fx-padding: 10 10 0 0;
-    -fx-background-color: transparent;
+    -fx-background-color: radial-gradient(center 90px 50px, radius 300px, cornflowerblue, white);
     -fx-opacity: 0.9;
     -fx-alignment: top-center;
     -fx-spacing: 10;
     -fx-border-width: 2;
     -fx-border-radius: 0 30 30 15;
+    -fx-background-radius: 0 30 30 15;
     -fx-border-color: cornflowerblue linear-gradient(cornflowerblue, grey) linear-gradient(grey, cadetblue) grey;
 }
 
@@ -131,13 +132,19 @@
     -fx-font-family: Arial;
     -fx-font-size: 11pt;
     -fx-fill: WHITE;
+    -fx-font-weight: bold;
 }
 
 #scadenzaTextWrapper {
-    -fx-background-color: black;
+    -fx-background-color: radial-gradient(center 90px 50px, radius 400px, black, white);
     -fx-background-radius: 0.6em;
     -fx-translate-y: 18;
+    -fx-scale-x: 0.9;
     -fx-padding: 5 0 5 0;
+}
+
+#scadenzaTextWrapper:hover {
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, grey, darkcyan);
 }
 
 #postItTitle {
@@ -151,4 +158,30 @@
     -fx-alignment: center;
     -fx-font-family: Arial;
     -fx-font-size: 12px;
+}
+
+#pieChart {
+    -fx-background-color: radial-gradient(center -50px 40px, radius 300px, white, darkgrey);
+    -fx-background-radius: 30;
+}
+
+.chart-pie-label {
+    -fx-padding: 10;
+    -fx-fill: black;
+    -fx-font-family: Arial;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+}
+
+.chart-pie-label-line {
+    -fx-stroke: black;
+    -fx-stroke-width: 2px;
+}
+
+.chart-pie.default-color0 {
+    -fx-background-color: radial-gradient(center 0px 50px, radius 50px, grey, darkblue);
+}
+
+.chart-pie.default-color1 {
+    -fx-background-color: radial-gradient(center 0px 0px, radius 50px, red, darkblue);
 }

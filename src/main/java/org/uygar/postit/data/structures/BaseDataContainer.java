@@ -26,21 +26,21 @@ public abstract class BaseDataContainer<T> implements Container, Iterable<T> {
         whereCondition.ifPresent(dql::where);
         dataMiner.executeQuery(dql);
 
-        Map<String, List<String>> sqlObjects = dataMiner.getListOfResult();
-        int numOfPosts = getItemCount(tableName);
+        Map<String, List<String>> sqlObjects = dataMiner.getMappedListOfResult();
+        int numOfItems = getNumOfItems(tableName, whereCondition);
 
-        addAll(parseFromAbstractSQLObject(sqlObjects, numOfPosts));
+        addAll(parseFromAbstractSQLObject(sqlObjects, numOfItems));
     }
 
-    protected int getItemCount(String tableName) {
+    protected int getNumOfItems(String tableName, Optional<String> whereCondition) {
         DQL dql = new DQLQueryBuilder();
         String countAlias = "'id'";
         dql.select("count(id) as " + countAlias).
-                from(tableName)
-                .where("true");
+                from(tableName);
+        whereCondition.ifPresent(dql::where);
 
         dataMiner.executeQuery(dql);
-        return Integer.parseInt(dataMiner.getListOfResult().get("id").get(0));
+        return Integer.parseInt(dataMiner.getMappedListOfResult().get("id").get(0));
     }
 
     public void add(T element) {

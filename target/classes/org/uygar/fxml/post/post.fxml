@@ -17,20 +17,20 @@
          <content>
             <BorderPane prefHeight="629.0" prefWidth="522.0">
                <left>
-                  <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="480.0" prefHeight="417.0" prefWidth="202.0" stylesheets="@../../stylesheets/post/post_normal.css" BorderPane.alignment="TOP_LEFT">
+                  <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="480.0" prefHeight="417.0" prefWidth="202.0" BorderPane.alignment="TOP_LEFT">
                      <children>
                         <Label id="title" fx:id="postTitle" prefHeight="31.0" prefWidth="173.0" />
-                        <PieChart prefHeight="206.0" prefWidth="200.0">
+                        <PieChart fx:id="pieChart" legendVisible="false" prefHeight="206.0" prefWidth="200.0">
                            <VBox.margin>
-                              <Insets />
+                              <Insets bottom="10.0" left="10.0" top="10.0" />
                            </VBox.margin>
                         </PieChart>
                         <Button mnemonicParsing="false" text="Aggiungi" />
                         <Button mnemonicParsing="false" prefWidth="133.0" text="Ordina" />
                         <Button mnemonicParsing="false" prefWidth="133.0" text="Filtra" />
-                        <TextField id="titoloField" prefHeight="40.0" prefWidth="151.0" promptText="cerca tramite titolo...">
+                        <TextField id="titoloField" prefHeight="40.0" prefWidth="0.0" promptText="cerca tramite titolo...">
                            <VBox.margin>
-                              <Insets left="20.0" right="20.0" />
+                              <Insets left="30.0" right="30.0" />
                            </VBox.margin>
                         </TextField>
                      </children>

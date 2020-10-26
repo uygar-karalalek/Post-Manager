@@ -179,7 +179,7 @@
 
 .chart-title {
     -fx-font-size: 24px;
-    -fx-text-fill: mistyrose;
+    -fx-text-fill: #ffe4e1;
     -fx-font-family: "Arial Black";
 }
 
@@ -192,7 +192,7 @@
 .axis:bottom > .axis-label,
 .axis:left > .axis-label {
     -fx-padding: 10px;
-    -fx-text-fill: indianred;
+    -fx-text-fill: #bac512;
     -fx-font-family: Arial;
     -fx-font-size: 18px;
     -fx-font-weight: bold;

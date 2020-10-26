@@ -111,14 +111,14 @@ public class StatisticaController {
     }
 
     public void initOreEFrequenza() {
-        NumberAxis frequenza_ore = getFrequenzaAxis(0, 100, 10, "Frequenza ore");
+        NumberAxis frequenza_ore = getFrequenzaAxis(0, 100, 10, "Frequenza accessi nelle ore");
         NumberAxis oreAxis = getOreAxis();
         scatterChart = new ScatterChart<>(oreAxis, frequenza_ore);
 
         List<XYChart.Data<Number, Number>> dataList = getHourFrequency(properties);
         XYChart.Series<Number, Number> xyData = new XYChart.Series<>();
         xyData.getData().addAll(dataList);
-        xyData.setName("Frequenza in una certa ora");
+        xyData.setName("Frequenza accessi in una certa ora");
 
         ObservableList<XYChart.Series<Number, Number>> data = singletonObservableList(xyData);
 
@@ -127,10 +127,10 @@ public class StatisticaController {
 
     public void initLineChart() {
         CategoryAxis mese = getMeseAxis();
-        NumberAxis frequenzaLine = getFrequenzaAxis(0, 2000, 100, "Frequenza mesi (in decine)");
+        NumberAxis frequenzaLine = getFrequenzaAxis(0, 2000, 100, "Numero accessi nei mesi (in decine)");
 
         lineChart = new LineChart<>(mese, frequenzaLine);
-        lineChart.setTitle("Frequenza nei mesi");
+        lineChart.setTitle("Frequenza accessi nei mesi");
         lineChart.prefHeightProperty().bind(lineBox.heightProperty());
 
         XYChart.Series<String, Number> xyData = getMonthFrequences(getMonthFrequence(properties));
@@ -173,7 +173,8 @@ public class StatisticaController {
             return textNode != nodes[nodes.length-1];
         }).forEachOrdered(textNode -> {
             padiglioneStats.getChildren().add(new Separator(Orientation.VERTICAL));
-            textNode.setWrappingWidth(9 * textNode.getText().length());
+            int wrappingMultiply = 9;
+            textNode.setWrappingWidth(wrappingMultiply * textNode.getText().length());
         });
 
     }

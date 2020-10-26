@@ -40,7 +40,7 @@ public class DataMiner {
         }
     }
 
-    public Map<String, List<String>> getListOfResult() {
+    public Map<String, List<String>> getMappedListOfResult() {
         Map<String, List<String>> result = new HashMap<>();
         if (response == null)
             throw new UnsupportedOperationException("Devi chiamare una query di selezione!");
@@ -61,7 +61,7 @@ public class DataMiner {
         try {
             this.execute(query);
             return true;
-        } catch (SQLException e) {
+        } catch (SQLException ignored) {
         }
         return false;
     }
