@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Rectangle?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="350.0" stylesheets="@../../stylesheets/post/postit_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <center>
+      <StackPane alignment="TOP_CENTER" prefHeight="323.0" prefWidth="350.0" BorderPane.alignment="CENTER">
+         <children>
+            <Rectangle id="postit" fill="#fbff00" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="350.0" />
+            <TextField id="titoloField" prefHeight="46.0" prefWidth="344.0" promptText="Titolo...">
+               <StackPane.margin>
+                  <Insets left="40.0" right="40.0" top="30.0" />
+               </StackPane.margin>
+            </TextField>
+            <TextArea maxHeight="243.0" maxWidth="300.0" prefHeight="243.0" prefWidth="300.0" promptText="Compito da svolgere..." wrapText="true">
+               <StackPane.margin>
+                  <Insets top="120.0" />
+               </StackPane.margin>
+            </TextArea>
+         </children>
+      </StackPane>
+   </center>
+   <top>
+      <HBox id="coloreHbox" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="CENTER">
+         <children>
+            <Label id="coloreLbl" text="Colore">
+               <HBox.margin>
+                  <Insets left="20.0" />
+               </HBox.margin>
+            </Label>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f1ff1f" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#229e68" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ffc41f" height="30.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
+         </children></HBox>
+   </top>
+</BorderPane>

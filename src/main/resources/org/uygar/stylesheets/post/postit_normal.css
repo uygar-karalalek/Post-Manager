@@ -1,0 +1,78 @@
+#titoloField {
+    -fx-background-color: transparent;
+    -fx-font-family: Arial;
+    -fx-font-size: 20pt;
+    -fx-alignment: center;
+    -fx-font-weight: bold;
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: black;
+}
+
+#coloreHbox {
+    -fx-background-color: linear-gradient(to top right, darkgrey, white);
+    -fx-border-color: black;
+    -fx-alignment: center-left;
+    -fx-border-width: 0 0 1 0;
+}
+
+#coloreLbl {
+    -fx-font-size: 20pt;
+    -fx-font-family: Arial;
+    -fx-padding: 5;
+}
+
+.text-area {
+    -fx-background-color: transparent;
+    -fx-font-size: 16pt;
+}
+
+.text-area .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+
+.text-area .scroll-pane .viewport{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .content{
+    -fx-background-color: transparent;
+}
+
+.text-area .scroll-pane .content .text {
+    -fx-text-alignment: center;
+    -fx-font-size: 20;
+}
+
+.scroll-bar {
+    -fx-pref-width: 30;
+    -fx-translate-x: 10;
+    -fx-background-color: linear-gradient(chartreuse, yellow);
+    -fx-background-radius: 2em;
+    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-radius: 2em;
+}
+
+.thumb {
+    -fx-background-color: linear-gradient(lightseagreen, midnightblue, lightslategray);
+    -fx-scale-x: 0.9;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+}
+
+.increment-button .increment-arrow {
+    -fx-background-color: black;
+}
+
+.decrement-button .decrement-arrow {
+    -fx-background-color: darkblue;
+}
+
+#propGrid {
+    -fx-border-color: black;
+    -fx-border-width: 0 0 0 1;
+    -fx-background-color: radial-gradient(center 90px 40px, radius 500px, white, grey);
+}
