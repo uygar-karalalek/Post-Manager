@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="486.0" stylesheets="@../../stylesheets/main/filter_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.filter.FilterController">
+<GridPane fx:id="root" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.filter.FilterController">
     <columnConstraints>
         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="317.0" minWidth="10.0" prefWidth="227.0" />
         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="265.0" />
@@ -74,8 +74,8 @@
         </TextField>
         <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="247.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
             <children>
-                <DatePicker fx:id="data1" editable="false" prefHeight="47.0" prefWidth="177.0" promptText="prima data..." />
-                <DatePicker fx:id="data2" editable="false" prefHeight="40.0" prefWidth="177.0" promptText="seconda data..." />
+                <DatePicker fx:id="data1" editable="false" prefHeight="47.0" prefWidth="177.0" promptText="prima data..." styleClass="traDate" />
+                <DatePicker fx:id="data2" editable="false" prefHeight="40.0" prefWidth="177.0" promptText="seconda data..." styleClass="traDate" />
             </children>
             <GridPane.margin>
                 <Insets bottom="10.0" top="10.0" />

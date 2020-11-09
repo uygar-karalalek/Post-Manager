@@ -7,17 +7,25 @@
 }
 
 .button {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, grey, darkblue);
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, lightslategray, darkblue);
     -fx-pref-height: 35;
     -fx-background-radius: 1em;
     -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
-    -fx-pref-width: 150;
+    -fx-pref-width: 170;
 }
 
 .button:hover {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, dodgerblue, green);
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, goldenrod, darkblue);
+}
+
+#esciBtn {
+    -fx-background-color: linear-gradient(to bottom right, #e65f5f, #e25800);
+}
+
+#esciBtn:hover {
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, #ffb100, #004448);
 }
 
 .tab-pane .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
@@ -62,7 +70,7 @@
 
 #titoloField {
     -fx-prompt-text-fill: white;
-    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, blue, cadetblue);
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #518484, cadetblue);
     -fx-background-radius: 5em;
     -fx-font-family: Arial;
     -fx-alignment: center;
@@ -72,6 +80,7 @@
     -fx-border-width: 2px;
     -fx-border-color: black;
     -fx-border-insets: 5px;
+    -fx-pref-width: 170;
 }
 
 #title {
@@ -124,8 +133,8 @@
 }
 
 #post_it:hover {
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 #scadenzaText {
@@ -157,7 +166,7 @@
     -fx-text-alignment: center;
     -fx-alignment: center;
     -fx-font-family: Arial;
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
 }
 
 #pieChart {

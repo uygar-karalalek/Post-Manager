@@ -4,6 +4,10 @@
 
 /* TEXT */
 
+.text-field-table-cell:hover, .text-field-table-cell:selected {
+    -fx-background-color: linear-gradient(to bottom right, #006c16, #00a57b);
+}
+
 .text-field {
     -fx-background-color: transparent;
     -fx-font-family: Arial;
@@ -12,49 +16,39 @@
     -fx-text-fill: black;
 }
 
-.text-field-table-cell:hover, .text-field-table-cell:selected {
-    -fx-background-color: linear-gradient(chartreuse, grey);
-}
-
 .table-view {
-    -fx-background-color: linear-gradient(white, grey);
+    -fx-background-color: linear-gradient(grey, honeydew);
 }
 
 .table-view .column-header {
-    -fx-background-color: linear-gradient(white, grey);
+    -fx-background-color: linear-gradient(grey, honeydew);
     -fx-pref-height: 40;
 }
 
 .table-view .column-header > .label {
-    -fx-background-color: linear-gradient(white, grey);
+    -fx-background-color: linear-gradient(grey, honeydew);
     -fx-pref-height: 40;
     -fx-font-size: 16pt;
 }
 
 .table-row-cell {
-    -fx-background-color: white;
+    -fx-background-color: radial-gradient(center 70px -10px, radius 200px, #021d58, #075e5e);
     -fx-pref-height: 60px;
     -fx-pref-width: 100px;
     -fx-font-family: Arial;
     -fx-font-size: 14px;
-    -fx-text-fill: black;
 }
 
 .table-row-cell:focused {
-    -fx-background-color: linear-gradient(cornsilk, grey);
-}
-
-.table-row-cell:focused > .text-field-table-cell {
-    -fx-background-color: linear-gradient(cornflowerblue, grey);
-    -fx-text-fill: white;
+    -fx-background-color: linear-gradient(to bottom right, #630020, #a48900);
 }
 
 .table-cell {
-    -fx-text-fill: black;
+    -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 11pt;
-    -fx-border-width: 0.1;
-    -fx-border-color: black;
+    -fx-border-width: 1;
+    -fx-border-color: white;
     -fx-alignment: CENTER;
 }
 
@@ -62,11 +56,11 @@
     -fx-font-family: "Arial";
     -fx-font-size: 30pt;
     -fx-font-weight: bold;
-    -fx-text-fill: radial-gradient(center 110px -10px, radius 240px, greenyellow, white);
+    -fx-text-fill: radial-gradient(center 100px -10px, radius 300px, darkslategray, black);
 }
 
 .label {
-    -fx-text-fill: black;
+    -fx-text-fill: white;
 }
 
 #titoloDati {
@@ -151,6 +145,10 @@
 
 .chart-legend:hover {
     -fx-background-color: linear-gradient(grey, darkcyan);
+}
+
+.chart-legend-item {
+    -fx-text-fill: black;
 }
 
 .chart-symbol {

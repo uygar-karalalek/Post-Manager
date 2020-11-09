@@ -38,6 +38,7 @@
 }
 
 .text-field {
+    -fx-prompt-text-fill: linear-gradient(cornflowerblue, khaki);
     -fx-background-color: linear-gradient(black, grey);
     -fx-text-fill: white;
     -fx-font-family: Arial;
@@ -45,6 +46,38 @@
 }
 
 .text-field:focused {
-    -fx-background-color: linear-gradient(grey, #00ffa0);
+    -fx-prompt-text-fill: #000000;
+    -fx-background-color: linear-gradient(to bottom right, grey, white);
     -fx-text-fill: black;
+}
+
+.traDate {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-color: black;
+}
+
+.traDate > .arrow-button {
+    -fx-background-color: linear-gradient(black, grey);
+    -fx-border-color: black;
+    -fx-background-radius: 0 0.2em 0.4em 0;
+    -fx-border-radius: 0 0.2em 0.4em 0;
+}
+
+.traDate > .arrow-button:hover {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, black, grey);
+}
+
+.traDate > .text-field {
+    -fx-background-color: linear-gradient(black, grey);
+    -fx-background-radius: 0.5em 0 0 0.5em;
+    -fx-border-radius: 0.5em 0 0 0.5em;
+    -fx-border-width: 1;
+    -fx-border-color: black;
+}
+
+.traDate:focused > .text-field, .traDate:focused > .arrow-button {
+    -fx-background-color: linear-gradient(from 0% 0% to 100% 100%, grey, white);
+    -fx-border-width: 1;
+    -fx-border-color: black;
 }

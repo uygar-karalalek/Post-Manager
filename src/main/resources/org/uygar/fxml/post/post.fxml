@@ -11,28 +11,33 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="529.0" stylesheets="@../../stylesheets/post/post_normal.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
+<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@../../stylesheets/post/post_normal.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
    <tabs>
       <Tab text="Post">
          <content>
             <BorderPane prefHeight="629.0" prefWidth="522.0">
                <left>
-                  <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="480.0" prefHeight="417.0" prefWidth="202.0" BorderPane.alignment="TOP_LEFT">
+                  <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
                      <children>
-                        <Label id="title" fx:id="postTitle" prefHeight="31.0" prefWidth="173.0" />
-                        <PieChart fx:id="pieChart" legendVisible="false" prefHeight="206.0" prefWidth="200.0">
+                        <Label id="title" fx:id="postTitle" prefHeight="31.0" prefWidth="208.0" />
+                        <PieChart fx:id="pieChart" legendVisible="false" prefHeight="230.0" prefWidth="262.0">
                            <VBox.margin>
-                              <Insets bottom="10.0" left="10.0" top="10.0" />
+                              <Insets bottom="20.0" left="10.0" top="20.0" />
                            </VBox.margin>
                         </PieChart>
-                        <Button mnemonicParsing="false" text="Aggiungi" />
-                        <Button mnemonicParsing="false" prefWidth="133.0" text="Ordina" />
-                        <Button mnemonicParsing="false" prefWidth="133.0" text="Filtra" />
-                        <TextField id="titoloField" prefHeight="40.0" prefWidth="0.0" promptText="cerca tramite titolo...">
+                        <TextField id="titoloField" maxWidth="-Infinity" prefHeight="40.0" prefWidth="0.0" promptText="cerca tramite titolo...">
                            <VBox.margin>
-                              <Insets left="30.0" right="30.0" />
+                              <Insets bottom="5.0" />
                            </VBox.margin>
                         </TextField>
+                        <Button mnemonicParsing="false" text="Aggiungi" />
+                        <Button mnemonicParsing="false" onMouseClicked="#onOrdina" prefWidth="133.0" text="Ordina" />
+                        <Button mnemonicParsing="false" prefWidth="133.0" text="Filtra" />
+                        <Button id="esciBtn" mnemonicParsing="false" onMouseClicked="#onExit" prefWidth="133.0" text="Esci">
+                           <VBox.margin>
+                              <Insets top="20.0" />
+                           </VBox.margin>
+                        </Button>
                      </children>
                   </VBox>
                </left>
