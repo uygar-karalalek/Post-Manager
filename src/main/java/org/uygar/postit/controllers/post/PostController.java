@@ -99,6 +99,11 @@ public class PostController {
     }
 
     @FXML
+    public void onOrdina() {
+
+    }
+
+    @FXML
     public void onExit() {
         this.root.getScene().getWindow().hide();
     }
