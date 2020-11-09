@@ -75,7 +75,7 @@ public class AggiungiController implements Initializable {
     }
 
     private boolean areFieldsValid(String name, Sort sortingType) {
-        return name.isEmpty() || name.length() > 18 || sortingType == null;
+        return name.isBlank()  || name.trim().length() > 18 || sortingType == null;
     }
 
     public void throwWrongFieldExceptionIf(boolean condition, String message,
@@ -88,7 +88,7 @@ public class AggiungiController implements Initializable {
         DMLQueryBuilder query = new DMLQueryBuilder();
         query.insert().into("post").values(
                 "null", // visto che c'è l'auto increment
-                post.getName(),
+                post.getName().trim(),
                 post.getSortType().toString(),
                 post.getCreationDate().toString(),
                 post.getCreationDate().toString()); // l'ultima modifica è la volta in cui lo crei

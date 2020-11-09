@@ -19,7 +19,7 @@ public class PredicateReferencer {
         this.parameter = transformFieldWithIgnoraMaiusc(name);
     }
 
-    public boolean get(Post post) {
+    public boolean getResult(Post post) {
         if (selected) {
             String postName = transformFieldWithIgnoraMaiusc(post.getName());
             return stringOperation.test(postName, parameter);

@@ -13,7 +13,7 @@ public class PostItViewerBasicGraphicsBuilder {
 
     private final PostIt postIt;
 
-    private static final double POST_IT_SIZE = 260;
+    private static final double POST_IT_SIZE = 300;
     private static final double POST_IT_BORDER = 60;
     private static final Insets TASK_TEXT_INSETS = new Insets(0, 10, 0, 20);
 

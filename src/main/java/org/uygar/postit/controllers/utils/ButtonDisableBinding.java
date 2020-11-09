@@ -7,12 +7,10 @@ import javafx.scene.control.Button;
 
 public class ButtonDisableBinding {
 
-    private Button button;
-    private BooleanProperty disablePropertiy = new SimpleBooleanProperty(false);
+    private final BooleanProperty disablePropertiy = new SimpleBooleanProperty(false);
 
     public ButtonDisableBinding(Button button) {
-        this.button = button;
-        this.button.disableProperty().bind(disablePropertiy);
+        button.disableProperty().bind(disablePropertiy);
     }
 
     public void disableOpenWindowButton() {

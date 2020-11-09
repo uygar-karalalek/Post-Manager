@@ -25,7 +25,7 @@ public class FilterBuilder extends Filter {
     }
 
     public Predicate<Post> unifiedPredicates() {
-        return predicates.unified();
+        return predicates.checkAllConditions();
     }
 
 }

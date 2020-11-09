@@ -93,7 +93,7 @@ public class AppController implements Initializable {
         Stage postStage = initializeWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, postController.root);
         postStage.setOnHidden(windowEvent -> {
             this.postGrid.nothingSelected();
-            this.postGrid.enablePostViewByPost(post);
+            this.postGrid.enablePostButtonWhenFrameClosed(post);
         });
 
         addStylesheetToPaneWithControllerName("post", "post", postController.root);

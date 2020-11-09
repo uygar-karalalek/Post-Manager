@@ -28,6 +28,7 @@ public class Filter implements Serializable {
         }
     }
 
+    // This constructor is used by java IO
     public Filter() {}
 
 }

@@ -71,7 +71,7 @@ public class PostItViewer extends VBox {
         return this.graphicBuilder.getPostItImageWrapper();
     }
 
-    public void onDoneUndoneClicked(DataMiner miner) {
+    public void onDoneUndoneClickedChangeData(DataMiner miner) {
         this.postIt.setFatto(!this.postIt.isFatto());
         if (this.postIt.isFatto())
             addToPostItDoneImage();
@@ -89,9 +89,8 @@ public class PostItViewer extends VBox {
         graphicBuilder.getPostItImageWrapper()
                 .getChildren()
                 .removeIf(node -> {
-                    if (node instanceof ImageView) {
+                    if (node instanceof ImageView)
                         return ((ImageView) node).getImage().getUrl().endsWith("fatto.png");
-                    }
                     return false;
                 });
     }

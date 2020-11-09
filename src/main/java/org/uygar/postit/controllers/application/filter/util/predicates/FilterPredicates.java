@@ -9,7 +9,7 @@ public class FilterPredicates {
 
     FilterBuilder filterBuilder;
 
-    private Predicate<Post> INIZIO, TRA, CONTIENE, FINISCE;
+    private Predicate<Post> INIZIA, TRA, CONTIENE, FINISCE;
 
     public FilterPredicates(FilterBuilder builder) {
         this.filterBuilder = builder;
@@ -18,13 +18,13 @@ public class FilterPredicates {
     }
 
     private void initPreds() {
-        PredicateReferencer inizioRef = new PredicateReferencer(filterBuilder, filterBuilder.inizio, filterBuilder.inizioSelected, String::startsWith);
-        PredicateReferencer contieneRef = new PredicateReferencer(filterBuilder, filterBuilder.contiene, filterBuilder.contieneSelected, String::contains);
-        PredicateReferencer finisceRef = new PredicateReferencer(filterBuilder, filterBuilder.finisce, filterBuilder.finisceSelected, String::endsWith);
+        PredicateReferencer iniziaCon = new PredicateReferencer(filterBuilder, filterBuilder.inizio, filterBuilder.inizioSelected, String::startsWith);
+        PredicateReferencer contiene = new PredicateReferencer(filterBuilder, filterBuilder.contiene, filterBuilder.contieneSelected, String::contains);
+        PredicateReferencer finisceCon = new PredicateReferencer(filterBuilder, filterBuilder.finisce, filterBuilder.finisceSelected, String::endsWith);
 
-        INIZIO = inizioRef::get;
-        CONTIENE = contieneRef::get;
-        FINISCE = finisceRef::get;
+        INIZIA = iniziaCon::getResult;
+        CONTIENE = contiene::getResult;
+        FINISCE = finisceCon::getResult;
         TRA = this::isPostCreationBetweenDates;
     }
 
@@ -41,12 +41,12 @@ public class FilterPredicates {
         return true;
     }
 
-    public Predicate<Post> unified() {
-        return INIZIO.and(TRA).and(CONTIENE).and(FINISCE);
+    public Predicate<Post> checkAllConditions() {
+        return INIZIA.and(TRA).and(CONTIENE).and(FINISCE);
     }
 
     public void givePredicatesAnInitialValue() {
-        INIZIO = TRA = CONTIENE = FINISCE = getTruePostPredicate();
+        INIZIA = TRA = CONTIENE = FINISCE = getTruePostPredicate();
     }
 
     private Predicate<Post> getTruePostPredicate() {

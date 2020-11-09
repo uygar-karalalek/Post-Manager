@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
@@ -25,7 +26,7 @@ import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewerBasicGra
 
 public class PostController {
 
-    private static float SCROLL_SPEED = 0.001f;
+    private static final float SCROLL_SPEED = 0.001f;
 
     @FXML
     public TabPane root;
@@ -47,13 +48,10 @@ public class PostController {
     private Dimension2D minDimension;
 
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
+        this.minDimension = initialWindowDimension;
         this.postItGrid = new PostItGridViewer(fatherPost, miner);
         PostStatisticsViewManager.buildChart(pieChart, new PostStatistics(postItGrid.getPostItOrganizer()));
-        this.minDimension = initialWindowDimension;
         initGridPane();
-        this.gridFatherScroll.getContent().setOnScroll(this::setOnScroll);
-        this.gridFatherScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        this.gridFatherScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         initPostTitle(fatherPost);
     }
 
@@ -66,6 +64,9 @@ public class PostController {
         this.gridFatherScroll.setContent(postItGrid);
         this.postItGrid.prefWidthProperty().bind(this.gridFatherScroll.widthProperty());
         this.postItGrid.prefHeightProperty().bind(this.gridFatherScroll.heightProperty());
+        this.gridFatherScroll.getContent().setOnScroll(this::setOnScroll);
+        this.gridFatherScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        this.gridFatherScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
     public void setMinSizeByDimensionOfStage(Stage stage) {
@@ -95,6 +96,11 @@ public class PostController {
         ratioContainerLabel = Math.min(1, ratioContainerLabel);
         Font def = Font.font("Arial", FontWeight.EXTRA_BOLD, defSize * ratioContainerLabel);
         postTitle.setFont(def);
+    }
+
+    @FXML
+    public void onExit() {
+        this.root.getScene().getWindow().hide();
     }
 
 }

@@ -6,12 +6,13 @@ import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.properties.Sort;
+import org.uygar.postit.post.viewers.post_it.post_button.PostButton;
 
 import java.time.LocalDateTime;
 
 public class PostViewer extends Post {
 
-    private Button view;
+    private PostButton view;
 
     public PostViewer(int id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate, Sort sortType) {
         super(id, name, creationDate, lastModifiedDate, sortType);
@@ -29,12 +30,12 @@ public class PostViewer extends Post {
     }
 
     public void initView() {
-        this.view = new Button(this.getName());
+        this.view = new PostButton(this);
         this.view.setId("post");
         BooleanProperty selected = new SimpleBooleanProperty();
         this.view.setUserData(selected);
     }
 
-    public Button getView() { return view; }
+    public PostButton getView() { return view; }
 
 }

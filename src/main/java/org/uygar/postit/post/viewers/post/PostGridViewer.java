@@ -2,18 +2,20 @@ package org.uygar.postit.post.viewers.post;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
+import org.uygar.postit.post.viewers.post_it.post_button.ButtonOrganizer;
+import org.uygar.postit.post.viewers.post_it.post_button.PostButton;
 
 import java.util.function.Predicate;
 
 public class PostGridViewer extends GridPane {
 
     public PostContainerOrganizer postOrganizer;
+    public ButtonOrganizer buttonOrganizer;
     public ObjectProperty<Post> selected = new SimpleObjectProperty<>();
 
     private static final double POST_BUTTON_WIDTH_DIVISOR = 2.25;
@@ -29,6 +31,7 @@ public class PostGridViewer extends GridPane {
         this.setMinSize(WIDTH, HEIGHT);
         this.setId("postGridViewer");
         this.postOrganizer = postOrganizer;
+        this.buttonOrganizer = new ButtonOrganizer(postOrganizer);
 
         Predicate<Post> alwaysCondition = post -> true;
         showPostsByCondition(alwaysCondition);
@@ -37,24 +40,19 @@ public class PostGridViewer extends GridPane {
     private void showPostsByCondition(Predicate<Post> predicate) {
         this.getChildren().clear();
         int num = 0;
-        for (Post element : postOrganizer) {
-            if (predicate.test(element)) {
-                Button view = createPostViewByPost(element);
-                this.add(view, num % DEF_COLS, num++ / DEF_COLS);
-            }
-        }
+        for (PostButton element : buttonOrganizer)
+            if (predicate.test(element.getPost()))
+                addAndInitPostButton(element, num % DEF_COLS, num++ / DEF_COLS);
         rowCount = num / DEF_COLS;
         colCount = num % DEF_COLS;
     }
 
     public void updateLastWhenAdded() {
-        Post post = postOrganizer.getLastPost();
-        Button view = createPostViewByPost(post);
         if (colCount == DEF_COLS) {
             colCount = 0;
             rowCount++;
         }
-        this.add(view, colCount++, rowCount);
+        addAndInitPostButton(buttonOrganizer.getLastPostView(), colCount++, rowCount);
     }
 
     public void filterPostsNameContaining(String letters) {
@@ -65,17 +63,16 @@ public class PostGridViewer extends GridPane {
         showPostsByCondition(predicate);
     }
 
-    public Button createPostViewByPost(Post element) {
-        Button view = new PostViewer(element).getView();
-        handleOnPostViewSelected(element, view);
+    private void addAndInitPostButton(PostButton view, int col, int row) {
+        handleOnPostViewSelected(view);
         view.setPrefSize(this.getMinWidth() / POST_BUTTON_WIDTH_DIVISOR, POST_BUTTON_HEIGHT);
-        return view;
+        this.add(view, col, row);
     }
 
-    private void handleOnPostViewSelected(Post element, Button view) {
+    private void handleOnPostViewSelected(PostButton view) {
         view.addEventHandler(MouseEvent.MOUSE_CLICKED,
                 mouseEvent -> {
-                    selected.set(element);
+                    selected.set(view.getPost());
                     view.setDisable(true);
                 });
     }
@@ -84,7 +81,7 @@ public class PostGridViewer extends GridPane {
         this.selected.set(null);
     }
 
-    public void enablePostViewByPost(Post post) {
+    public void enablePostButtonWhenFrameClosed(Post post) {
         this.getChildren().stream().filter(node -> {
             if (node instanceof Button)
                 return ((Button) node).getText().equals(post.getName());

@@ -1,11 +1,15 @@
 package org.uygar.postit.data.structures;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.properties.converters.ConverterUtil;
+import org.uygar.postit.post.viewers.post.PostViewer;
 
 import java.util.*;
+import java.util.List;
 
 public class PostContainerOrganizer extends BaseDataContainer<Post> implements PostContainer {
 

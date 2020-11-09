@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 public enum Colore {
 
     BLU("blue", Color.BLACK),
-    ROSSO("red", Color.WHITE),
+    ROSSO("red", Color.web("#dcdee0")),
     GIALLO("yellow", Color.BLACK),
     VERDE("green", Color.WHITE),
     ARANCIONE("orange", Color.WHITE);
