@@ -13,11 +13,19 @@
     -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
-    -fx-pref-width: 150;
+    -fx-pref-width: 170;
 }
 
 .button:hover {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, midnightblue, cornflowerblue);
+    -fx-background-color: radial-gradient(center 90px 50px, radius 200px, midnightblue, cornflowerblue);
+}
+
+#esciBtn {
+    -fx-background-color: linear-gradient(to bottom right, #163653, #230532);
+}
+
+#esciBtn:hover {
+    -fx-background-color: linear-gradient(#005d6e, #004448);
 }
 
 .tab-pane .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
@@ -61,7 +69,7 @@
 #titoloField {
     -fx-prompt-text-fill: grey;
     -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, darkslategrey, #201818);
-    -fx-background-radius: 5em;
+    -fx-background-radius: 5.0em;
     -fx-font-family: Arial;
     -fx-alignment: center;
     -fx-font-size: 10pt;
@@ -70,6 +78,7 @@
     -fx-border-width: 2px;
     -fx-border-color: black;
     -fx-border-insets: 5px;
+    -fx-pref-width: 170;
 }
 
 #title {
@@ -85,7 +94,7 @@
     -fx-spacing: 10;
     -fx-border-width: 1 2 2 0;
     -fx-border-radius: 0 40 40 15;
-    -fx-border-color: black linear-gradient(cadetblue, grey) linear-gradient(grey, cadetblue) blue;
+    -fx-border-color: cadetblue linear-gradient(cadetblue, grey) linear-gradient(grey, cadetblue) blue;
 }
 
 .scroll-pane {
@@ -121,27 +130,26 @@
 }
 
 #post_it:hover {
-    -fx-scale-x: 1.1;
-    -fx-scale-y: 1.1;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
 }
 
 #scadenzaText {
     -fx-font-family: Arial;
-    -fx-font-size: 11pt;
+    -fx-font-size: 12.5pt;
     -fx-fill: WHITE;
     -fx-font-weight: bold;
 }
 
 #scadenzaTextWrapper {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, darkolivegreen, black);
+    -fx-background-color: transparent;
     -fx-background-radius: 0.6em;
     -fx-translate-y: 18;
-    -fx-scale-x: 0.9;
     -fx-padding: 5 0 5 0;
 }
 
 #scadenzaTextWrapper:hover {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 300px, black, wheat);
+    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, grey, darkcyan);
 }
 
 #postItTitle {
@@ -154,7 +162,7 @@
     -fx-text-alignment: center;
     -fx-alignment: center;
     -fx-font-family: Arial;
-    -fx-font-size: 12px;
+    -fx-font-size: 14px;
 }
 
 #pieChart {
@@ -175,10 +183,15 @@
     -fx-stroke-width: 2px;
 }
 
-.chart-pie.default-color0 {
+.negative.chart-pie {
+    -fx-pie-color: blue;
+    -fx-background-color: white;
+}
+
+.default-color0.chart-pie {
     -fx-background-color: radial-gradient(center 0px 50px, radius 50px, grey, darkblue);
 }
 
-.chart-pie.default-color1 {
+.default-color1.chart-pie {
     -fx-background-color: radial-gradient(center 0px 0px, radius 50px, red, darkblue);
 }

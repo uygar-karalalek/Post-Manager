@@ -148,7 +148,6 @@
     -fx-background-color: radial-gradient(center 90px 50px, radius 400px, black, white);
     -fx-background-radius: 0.6em;
     -fx-translate-y: 18;
-    -fx-scale-x: 0.9;
     -fx-padding: 5 0 5 0;
 }
 

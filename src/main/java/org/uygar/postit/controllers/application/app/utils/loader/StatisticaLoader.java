@@ -5,6 +5,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.controllers.application.FXLoader;
+import org.uygar.postit.controllers.application.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.statistica.StatisticaController;
 import org.uygar.postit.controllers.utils.ButtonDisableBinding;
@@ -23,15 +24,12 @@ public class StatisticaLoader extends WindowLoader {
 
     private void init() {
         initDisableBinding();
-        Stage stage = getStageModality();
         StatisticaController statisticaController = getStatisticaController();
         appController.addStylesheetToPaneWithControllerName("statistica", "main", statisticaController.root);
-        initSceneAndShowStage(stage, statisticaController);
+        showStage(getWindow(statisticaController));
     }
 
-    private void initSceneAndShowStage(Stage stage, StatisticaController statisticaController) {
-        Scene scene = new Scene(statisticaController.root);
-        stage.setScene(scene);
+    private void showStage(Stage stage) {
         stage.setOnHiding(statisticaDisableBinding::closedByEventClosed);
         stage.showAndWait();
     }
@@ -44,8 +42,8 @@ public class StatisticaLoader extends WindowLoader {
         return statisticaController;
     }
 
-    private Stage getStageModality() {
-        return appController.windowInitializer.getStageWithModality(Modality.WINDOW_MODAL, true);
+    private Stage getWindow(StatisticaController statisticaController) {
+        return appController.initializeWindowAndGet(WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, statisticaController.root);
     }
 
     private void initDisableBinding() {

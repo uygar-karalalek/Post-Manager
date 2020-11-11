@@ -174,7 +174,7 @@
 }
 
 .chart-plot-background {
-    -fx-background-color: linear-gradient(darkolivegreen, mediumaquamarine, cornflowerblue);
+    -fx-background-color: linear-gradient(darkolivegreen, mediumaquamarine, #6495ed);
 }
 
 .chart-vertical-grid-lines {
@@ -211,7 +211,7 @@
     -fx-stroke: black;
 }
 
-.default-color0.chart-series-line { -fx-stroke: linear-gradient(darkgreen, darkblue); }
+.default-color0.chart-series-line { -fx-stroke: linear-gradient(#b60404, #15439f, #0909cc); }
 
 .default-color0.chart-line-symbol {
     -fx-background-color: coral, black;

@@ -154,6 +154,8 @@
 .text-field {
     -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, white, grey);
     -fx-font-family: Arial;
+    -fx-border-radius: 0.5em;
+    -fx-background-radius: 0.5em;
     -fx-alignment: center;
     -fx-font-size: 12pt;
     -fx-text-fill: black;
@@ -164,17 +166,17 @@
 #post {
     -fx-background-radius: 0.9em;
     -fx-border-radius: 0.9em;
-    -fx-border-color: black;
+    -fx-border-color: #000000;
     -fx-background-color: radial-gradient(center 90px 40px, radius 100px, white, darkgrey);
     -fx-text-fill: black;
-    -fx-border-width: 1 2 3 2;
+    -fx-border-width: 0.3;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
 }
 
 #post:hover {
     -fx-scale-y: 1.04;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, white, skyblue);
+    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, #ffc4c4, #9c9daa);
     -fx-text-fill: black;
     -fx-font-family: Arial;
     -fx-font-size: 12.3pt;
@@ -182,5 +184,6 @@
 
 #post:disabled {
     -fx-opacity: 1;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, honeydew, cornflowerblue);
+    -fx-text-fill: white;
+    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, #51db8d, #9ea3f9);
 }

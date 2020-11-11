@@ -128,7 +128,7 @@
 }
 
 .button:pressed {
-    -fx-background-color: linear-gradient(black, darkolivegreen);
+    -fx-background-color: linear-gradient(#6b392f, grey);
 }
 
 #iTuoiPost {
@@ -161,30 +161,35 @@
     -fx-font-size: 12pt;
     -fx-text-fill: white;
     -fx-border-radius: 5em;
-    -fx-border-width: 4px;
+    -fx-border-width: 2px;
     -fx-border-color: black;
 }
 
 #post {
-    -fx-background-radius: 0.9em;
-    -fx-border-radius: 0.9em;
+    -fx-background-radius: 0.5em;
+    -fx-border-radius: 0.5em;
     -fx-border-color: black;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, darkcyan, darkblue);
+    -fx-background-color: radial-gradient(center 120px 40px, radius 100px, #041441, #184b93);
     -fx-text-fill: ghostwhite;
-    -fx-border-width: 1 2 3 2;
+    -fx-border-width: 0.0;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
 }
 
 #post:hover {
     -fx-scale-y: 1.04;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, wheat, slateblue);
-    -fx-text-fill: black;
+    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, #062b5f, #099875);
+    -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 12.3pt;
+    -fx-border-color: white;
+    -fx-border-width: 1;
 }
 
 #post:disabled {
-    -fx-opacity: 1;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, indianred, grey);
+    -fx-opacity: 0.7;
+    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, #062b5f, #099875);
+    -fx-text-fill: white;
+    -fx-border-width: 1;
+    -fx-border-color: #00ff7b;
 }
