@@ -3,26 +3,20 @@ package org.uygar.postit.controllers.post;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Dimension2D;
-import javafx.geometry.Insets;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.LinearGradient;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.post.utils.PostStatistics;
 import org.uygar.postit.controllers.post.utils.PostStatisticsViewManager;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
-import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewerBasicGraphicsBuilder;
 
 public class PostController {
 
@@ -100,7 +94,7 @@ public class PostController {
 
     @FXML
     public void onOrdina() {
-
+        postItGrid.sortPostIts();
     }
 
     @FXML
