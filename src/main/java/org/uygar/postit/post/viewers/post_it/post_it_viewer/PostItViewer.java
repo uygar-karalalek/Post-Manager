@@ -1,98 +1,39 @@
 package org.uygar.postit.post.viewers.post_it.post_it_viewer;
 
-import javafx.scene.image.ImageView;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
 import org.uygar.postit.data.database.queries.Query;
 import org.uygar.postit.post.PostIt;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.PostItViewerBuilder;
+import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.PostItViewerBasicGraphicsBuilder;
+import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.scadenza.ScadenzaWrapper;
 
 public class PostItViewer extends VBox {
 
     private final PostIt postIt;
 
-    private StackPane scadenzaTextWrapper;
-
+    private final ScadenzaWrapper scadenzaTextWrapper;
     private final PostItViewerBasicGraphicsBuilder graphicBuilder;
+    private final PostItViewerBuilder builder;
+
+    public static final double POST_IT_SIZE = 300;
+    public static final double POST_IT_LABEL_MARGIN = 30;
+    public static final double POST_IT_TRANSPARENT_BORDER = 30;
 
     public PostItViewer(PostIt postIt) {
         this.postIt = postIt;
         this.setId("post_it");
-        this.graphicBuilder = new
-                PostItViewerBasicGraphicsBuilder(postIt);
-        buildPostItViewer();
-        if (postIt.isFatto())
-            addToPostItDoneImage();
-    }
-
-    private void buildPostItViewer() {
-        buildScadenzaLabel();
-        addMouseListeners();
+        scadenzaTextWrapper = new ScadenzaWrapper(postIt);
+        this.graphicBuilder = new PostItViewerBasicGraphicsBuilder(postIt);
         this.getChildren().add(graphicBuilder.getPostItImageWrapper());
+        this.builder = new PostItViewerBuilder(this);
+        this.builder.build();
     }
 
-    private void buildScadenzaLabel() {
-        LocalDateTime fine = this.getPostIt().getDataFine();
-        String wellFormattedDate = fine.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        String wellFormattedHour = fine.format(DateTimeFormatter.ofPattern("hh:mm"));
-
-        String scadenza = "Scadenza: " + wellFormattedDate +
-                " alle " + wellFormattedHour;
-
-        Text text = new Text(scadenza);
-        text.setId("scadenzaText");
-        this.scadenzaTextWrapper = new StackPane(text);
-        this.scadenzaTextWrapper.setId("scadenzaTextWrapper");
-    }
-
-    public PostIt getPostIt() {
-        return postIt;
-    }
-
-    private void addMouseListeners() {
-        this.setOnMouseEntered(this::onPostItHover);
-        this.setOnMouseExited(this::onPostItExit);
-    }
-
-    private void onPostItHover(MouseEvent event) {
-        this.getChildren().add(0, scadenzaTextWrapper);
-    }
-
-    private void onPostItExit(MouseEvent event) {
-        this.getChildren().remove(0);
-    }
-
-    public StackPane getMainGraphic() {
-        return this.graphicBuilder.getPostItImageWrapper();
-    }
-
-    public void onDoneUndoneClickedChangeData(DataMiner miner) {
-        this.postIt.setFatto(!this.postIt.isFatto());
-        if (this.postIt.isFatto())
-            addToPostItDoneImage();
-        else
-            removeFromPostItDoneImage();
+    public void changePostItAspectBasedOnStateAndSaveToDatabase(DataMiner miner) {
+        builder.getInteractionManager().changePostItAspectBasedOnState();
         executeDoneStateWithQuery(miner);
-    }
-
-    private void addToPostItDoneImage() {
-        graphicBuilder.getPostItImageWrapper()
-                .getChildren().add(new ImageView("org/uygar/images/fatto.png"));
-    }
-
-    private void removeFromPostItDoneImage() {
-        graphicBuilder.getPostItImageWrapper()
-                .getChildren()
-                .removeIf(node -> {
-                    if (node instanceof ImageView)
-                        return ((ImageView) node).getImage().getUrl().endsWith("fatto.png");
-                    return false;
-                });
     }
 
     private void executeDoneStateWithQuery(DataMiner miner) {
@@ -101,6 +42,22 @@ public class PostItViewer extends VBox {
                 .set("done", Boolean.toString(postIt.isFatto()))
                 .where("id="+postIt.getId());
         miner.tryExecute(query);
+    }
+
+    public StackPane getMainGraphic() {
+        return this.graphicBuilder.getPostItImageWrapper();
+    }
+
+    public ScadenzaWrapper getScadenzaTextWrapper() {
+        return scadenzaTextWrapper;
+    }
+
+    public PostItViewerBasicGraphicsBuilder getGraphicBuilder() {
+        return graphicBuilder;
+    }
+
+    public PostIt getPostIt() {
+        return postIt;
     }
 
 }

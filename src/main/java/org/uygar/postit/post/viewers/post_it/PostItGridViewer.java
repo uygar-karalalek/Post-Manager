@@ -2,7 +2,6 @@ package org.uygar.postit.post.viewers.post_it;
 
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
-import org.uygar.postit.controllers.post.utils.PostStatistics;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
@@ -14,11 +13,9 @@ import java.util.stream.Collectors;
 public class PostItGridViewer extends FlowPane {
 
     private final PostItContainerOrganizer postItOrganizer;
-    private PostStatistics doneUndoneStatistics;
 
     public PostItGridViewer(Post post, DataMiner miner) {
         this.postItOrganizer = new PostItContainerOrganizer(post, miner);
-        this.doneUndoneStatistics = new PostStatistics(this.postItOrganizer);
         this.setHgap(10);
         this.setVgap(10);
         this.setId("post_it_grid");
@@ -47,7 +44,7 @@ public class PostItGridViewer extends FlowPane {
     private List<PostItViewer> addListenersToPostItViewersAndThenReturn(List<PostItViewer> postItViewers) {
         postItViewers.forEach(postItViewer -> postItViewer.getMainGraphic().setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.SECONDARY) {
-                postItViewer.onDoneUndoneClickedChangeData(postItOrganizer.getDataMiner());
+                postItViewer.changePostItAspectBasedOnStateAndSaveToDatabase(postItOrganizer.getDataMiner());
             }
         }));
         return postItViewers;

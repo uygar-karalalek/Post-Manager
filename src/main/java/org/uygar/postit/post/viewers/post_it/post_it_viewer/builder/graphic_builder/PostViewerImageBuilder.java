@@ -1,4 +1,4 @@
-package org.uygar.postit.post.viewers.post_it;
+package org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder;
 
 import javafx.scene.image.Image;
 import org.uygar.postit.post.PostIt;

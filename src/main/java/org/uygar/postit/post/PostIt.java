@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 public class PostIt {
 
     private IntegerProperty id;
-    private SimpleObjectProperty<LocalDateTime> dataCreazione, dataFine;
+    private SimpleObjectProperty<LocalDateTime> dataCreazione, dataScadenza;
     private SimpleStringProperty titolo;
     private SimpleObjectProperty<Colore> colore;
     private SimpleStringProperty testo;
@@ -21,7 +21,7 @@ public class PostIt {
         this.titolo = new SimpleStringProperty(titolo);
         this.testo = new SimpleStringProperty(testo);
         this.dataCreazione = new SimpleObjectProperty<>(dataCreazione);
-        this.dataFine = new SimpleObjectProperty<>(dataFine);
+        this.dataScadenza = new SimpleObjectProperty<>(dataFine);
         this.colore = new SimpleObjectProperty<>(colore);
     }
 
@@ -75,14 +75,14 @@ public class PostIt {
         this.dataCreazione.set(dataCreazione);
     }
 
-    public LocalDateTime getDataFine() {
-        return dataFine.get();
+    public LocalDateTime getDataScadenza() {
+        return dataScadenza.get();
     }
-    public SimpleObjectProperty<LocalDateTime> dataFineProperty() {
-        return dataFine;
+    public SimpleObjectProperty<LocalDateTime> dataScadenzaProperty() {
+        return dataScadenza;
     }
-    public void setDataFine(LocalDateTime dataFine) {
-        this.dataFine.set(dataFine);
+    public void setDataScadenza(LocalDateTime dataScadenza) {
+        this.dataScadenza.set(dataScadenza);
     }
 
     public Colore getColore() {
@@ -93,6 +93,10 @@ public class PostIt {
     }
     public void setColore(Colore colore) {
         this.colore.set(colore);
+    }
+
+    public boolean isExpired() {
+       return LocalDateTime.now().isAfter(dataScadenza.get());
     }
 
     @Override
