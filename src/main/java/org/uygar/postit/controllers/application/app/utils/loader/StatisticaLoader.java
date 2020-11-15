@@ -1,11 +1,10 @@
 package org.uygar.postit.controllers.application.app.utils.loader;
 
-import javafx.scene.Scene;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.controllers.application.FXLoader;
-import org.uygar.postit.controllers.application.WindowDimensions;
+import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.statistica.StatisticaController;
 import org.uygar.postit.controllers.utils.ButtonDisableBinding;

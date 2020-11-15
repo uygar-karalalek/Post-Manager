@@ -4,7 +4,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.controllers.application.FXLoader;
-import org.uygar.postit.controllers.application.WindowDimensions;
+import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.filter.FilterController;
 import org.uygar.postit.controllers.utils.ButtonDisableBinding;

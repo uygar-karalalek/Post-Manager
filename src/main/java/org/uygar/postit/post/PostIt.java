@@ -99,6 +99,10 @@ public class PostIt {
        return LocalDateTime.now().isAfter(dataScadenza.get());
     }
 
+    public boolean isExpiredAndUndone() {
+        return isExpired() && !isFatto();
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof PostIt)

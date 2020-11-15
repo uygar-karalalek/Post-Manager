@@ -10,7 +10,7 @@ public class PostItMouseInteractionManager {
     private final PostItViewer interactionView;
     private final PostItStateImageActionsRepository postItStateImageManager;
 
-    PostItMouseInteractionManager(PostItViewer viewer) {
+    public PostItMouseInteractionManager(PostItViewer viewer) {
         this.postItStateImageManager = new PostItStateImageActionsRepository(viewer);
         this.interactionView = viewer;
         manage();
@@ -35,13 +35,8 @@ public class PostItMouseInteractionManager {
     }
 
     private void manageInteractions() {
-        addChangeListeners();
-    }
-
-    private void addChangeListeners() {
         interactionView.setOnMouseEntered(changeListeners::addScadenzaTextWrapper);
         interactionView.setOnMouseExited(changeListeners::removeScadenzaTextWrapper);
-
     }
 
     private class ChangeListeners {

@@ -1,8 +1,7 @@
 package org.uygar.postit.controllers.application.exception;
 
-import javafx.scene.control.Alert;
 import javafx.stage.Window;
-import org.uygar.postit.controllers.application.WindowDimensions;
+import org.uygar.postit.controllers.WindowDimensions;
 
 public class WindowCoordinatesContainer {
 

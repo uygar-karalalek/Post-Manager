@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application;
+package org.uygar.postit.controllers;
 
 import javafx.geometry.Dimension2D;
 

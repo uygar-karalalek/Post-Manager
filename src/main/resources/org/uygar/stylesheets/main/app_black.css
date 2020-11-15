@@ -58,7 +58,7 @@
 }
 
 .thumb {
-    -fx-background-color: linear-gradient(#2f3b3b, #525279, lightslategray);
+    -fx-background-color: linear-gradient(#2d2d2d, #5c5b5b, #696b6e);
 }
 
 .increment-button, .decrement-button {
@@ -128,7 +128,7 @@
 }
 
 .button:pressed {
-    -fx-background-color: linear-gradient(#6b392f, grey);
+    -fx-background-color: linear-gradient(#0e0d0d, #939c8e);
 }
 
 #iTuoiPost {
@@ -154,7 +154,7 @@
 }
 
 .text-field {
-    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, grey, blue);
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #484848, #50509f);
     -fx-background-radius: 5em;
     -fx-font-family: Arial;
     -fx-alignment: center;
@@ -169,9 +169,10 @@
     -fx-background-radius: 0.5em;
     -fx-border-radius: 0.5em;
     -fx-border-color: black;
-    -fx-background-color: radial-gradient(center 120px 40px, radius 100px, #041441, #184b93);
+    -fx-background-color: radial-gradient(center 130px 40px, radius 140px, #2d2d2d, #1c1d1d);
     -fx-text-fill: ghostwhite;
-    -fx-border-width: 0.0;
+    -fx-border-width: 0.2;
+    -fx-border-color: white;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
 }

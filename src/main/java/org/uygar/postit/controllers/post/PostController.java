@@ -51,39 +51,39 @@ public class PostController {
 
     private void initPostTitle(Post fatherPost) {
         postTitle.setText(fatherPost.getName());
-        addDefaultFontToTitleLabel();
+        setFontSizeToTitleLabelBasedOnLength();
     }
 
     private void initGridPane() {
         this.gridFatherScroll.setContent(postItGrid);
         this.postItGrid.prefWidthProperty().bind(this.gridFatherScroll.widthProperty());
         this.postItGrid.prefHeightProperty().bind(this.gridFatherScroll.heightProperty());
-        this.gridFatherScroll.getContent().setOnScroll(this::setOnScroll);
+        this.gridFatherScroll.getContent().setOnScroll(this::setOnPostItGridScroll);
         this.gridFatherScroll.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         this.gridFatherScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
     public void setMinSizeByDimensionOfStage(Stage stage) {
-        stage.widthProperty().addListener(this::gridWidthDimensionListener);
-        stage.heightProperty().addListener(this::gridHeightDimensionListener);
+        stage.widthProperty().addListener(this::onWindowWidthChangeResizePostItGrid);
+        stage.heightProperty().addListener(this::onWindowHeightChangeResizePostItGrid);
     }
 
-    private void gridWidthDimensionListener(ObservableValue<? extends Number> obs, Number oldVal, Number newWidth) {
+    private void onWindowWidthChangeResizePostItGrid(ObservableValue<? extends Number> obs, Number oldVal, Number newWidth) {
         if ((double) newWidth < minDimension.getWidth())
             this.root.getScene().getWindow().setWidth(minDimension.getWidth());
     }
 
-    private void gridHeightDimensionListener(ObservableValue<? extends Number> obs, Number oldVal, Number newVal) {
+    private void onWindowHeightChangeResizePostItGrid(ObservableValue<? extends Number> obs, Number oldVal, Number newVal) {
         if ((double) newVal < minDimension.getHeight())
             this.root.getScene().getWindow().setHeight(minDimension.getHeight());
     }
 
-    private void setOnScroll(ScrollEvent event) {
+    private void setOnPostItGridScroll(ScrollEvent event) {
         double deltaY = event.getDeltaY() * SCROLL_SPEED;
         gridFatherScroll.setVvalue(gridFatherScroll.getVvalue() - deltaY);
     }
 
-    private void addDefaultFontToTitleLabel() {
+    private void setFontSizeToTitleLabelBasedOnLength() {
         double defSize = 30;
         double lblTextLength = defSize / 1.25 * postTitle.getText().length();
         double ratioContainerLabel = vBoxOperationsContainer.getPrefWidth() / lblTextLength;

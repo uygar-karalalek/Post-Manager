@@ -5,7 +5,7 @@ import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
 import org.uygar.postit.data.database.queries.Query;
 import org.uygar.postit.post.PostIt;
-import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.PostItViewerBuilder;
+import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.PostItMouseInteractionManager;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.PostItViewerBasicGraphicsBuilder;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.scadenza.ScadenzaWrapper;
 
@@ -15,7 +15,7 @@ public class PostItViewer extends VBox {
 
     private final ScadenzaWrapper scadenzaTextWrapper;
     private final PostItViewerBasicGraphicsBuilder graphicBuilder;
-    private final PostItViewerBuilder builder;
+    private final PostItMouseInteractionManager interactionManager;
 
     public static final double POST_IT_SIZE = 300;
     public static final double POST_IT_LABEL_MARGIN = 30;
@@ -27,12 +27,12 @@ public class PostItViewer extends VBox {
         scadenzaTextWrapper = new ScadenzaWrapper(postIt);
         this.graphicBuilder = new PostItViewerBasicGraphicsBuilder(postIt);
         this.getChildren().add(graphicBuilder.getPostItImageWrapper());
-        this.builder = new PostItViewerBuilder(this);
-        this.builder.build();
+        this.interactionManager = new PostItMouseInteractionManager(this);
+        this.interactionManager.manage();
     }
 
     public void changePostItAspectBasedOnStateAndSaveToDatabase(DataMiner miner) {
-        builder.getInteractionManager().changePostItAspectBasedOnState();
+        this.interactionManager.changePostItAspectBasedOnState();
         executeDoneStateWithQuery(miner);
     }
 

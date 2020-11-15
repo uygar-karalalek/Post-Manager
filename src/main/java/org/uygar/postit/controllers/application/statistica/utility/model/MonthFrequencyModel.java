@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 
 public class MonthFrequencyModel extends FrequencyModel {
 
-    private SimpleStringProperty mese;
+    private final SimpleStringProperty mese;
 
     public MonthFrequencyModel(Map.Entry<String, Integer> entry) {
         super(entry.getValue().toString());

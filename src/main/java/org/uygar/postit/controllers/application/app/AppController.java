@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.application.FXLoader;
-import org.uygar.postit.controllers.application.WindowDimensions;
+import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.utils.WindowInitializer;
 import org.uygar.postit.controllers.application.app.utils.loader.AggiungiLoader;
 import org.uygar.postit.controllers.application.app.utils.loader.FilterLoader;

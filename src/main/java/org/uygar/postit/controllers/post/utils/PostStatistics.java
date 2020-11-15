@@ -51,16 +51,15 @@ public class PostStatistics {
                 .filter(PostIt::isFatto).count();
     }
 
+    private int numOfPostIts() {
+        return postIts.getList().size();
+    }
+
     public DoubleProperty numOfDonePercentageProperty() {
         return numOfDonePercentage;
     }
-
     public DoubleProperty numOfUndonePercentageProperty() {
         return numOfUndonePercentage;
-    }
-
-    private int numOfPostIts() {
-        return postIts.getList().size();
     }
 
 }

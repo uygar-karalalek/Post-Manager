@@ -39,19 +39,19 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        this.stage = new Stage();
+        this.stage = stage;
         this.stage.initStyle(StageStyle.UNDECORATED);
         this.appController = (AppController) FXLoader.getLoadedController("app", "app");
         this.appController.setTheme(applicationProperties.getStringProperty("theme"));
         Objects.requireNonNull(this.appController).setLogProperties(properties);
         this.scene = new Scene(Objects.requireNonNull(this.appController).rootPane);
-        addTransition();
+        addTransitionToApplicationController();
         this.stage.setScene(scene);
         this.stage.setOnHiding(event -> Platform.exit());
         this.stage.show();
     }
 
-    private void addTransition() {
+    private void addTransitionToApplicationController() {
         FadeTransition transition = new FadeTransition(Duration.seconds(1), this.appController.rootPane);
         transition.setFromValue(0);
         transition.setToValue(1);

@@ -1,8 +1,7 @@
 package org.uygar.postit.controllers.application.exception;
 
 import javafx.scene.control.Alert;
-import javafx.scene.layout.GridPane;
-import org.uygar.postit.controllers.application.WindowDimensions;
+import org.uygar.postit.controllers.WindowDimensions;
 
 public class WrongFieldsException extends Exception {
 
