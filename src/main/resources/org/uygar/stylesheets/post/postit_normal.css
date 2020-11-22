@@ -1,3 +1,16 @@
+#postIt {
+    -fx-fill: #dddd04;
+    -fx-arc-height: 2em;
+    -fx-arc-width: 2em;
+}
+
+#postItTitle {
+    -fx-font-family: Arial;
+    -fx-font-size: 14pt;
+    -fx-alignment: CENTER;
+    -fx-font-weight: bold;
+}
+
 #titoloField {
     -fx-background-color: transparent;
     -fx-font-family: Arial;
@@ -8,11 +21,10 @@
     -fx-border-color: black;
 }
 
-#coloreHbox {
-    -fx-background-color: linear-gradient(to top right, darkgrey, white);
-    -fx-border-color: black;
-    -fx-alignment: center-left;
-    -fx-border-width: 0 0 1 0;
+#coloreHBox {
+    -fx-background-color: transparent;
+    -fx-alignment: bottom-left;
+    -fx-spacing: 0;
 }
 
 #coloreLbl {
@@ -72,7 +84,6 @@
 }
 
 #propGrid {
-    -fx-border-color: black;
-    -fx-border-width: 0 0 0 1;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 500px, white, grey);
+    -fx-background-radius: 2em;
+    -fx-background-color: linear-gradient(to bottom right, grey, green);
 }

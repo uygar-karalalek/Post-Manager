@@ -33,7 +33,6 @@ public class StatisticaLoader extends WindowLoader {
         stage.showAndWait();
     }
 
-    @NotNull
     private StatisticaController getStatisticaController() {
         StatisticaController statisticaController = (StatisticaController) FXLoader.getLoadedController("statistica", "app");
         statisticaController.setLogProperties(appController.properties);

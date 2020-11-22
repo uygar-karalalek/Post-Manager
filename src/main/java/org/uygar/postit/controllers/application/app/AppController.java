@@ -19,10 +19,7 @@ import javafx.stage.Stage;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.utils.WindowInitializer;
-import org.uygar.postit.controllers.application.app.utils.loader.AggiungiLoader;
-import org.uygar.postit.controllers.application.app.utils.loader.FilterLoader;
-import org.uygar.postit.controllers.application.app.utils.loader.StatisticaLoader;
-import org.uygar.postit.controllers.application.app.utils.loader.WindowLoader;
+import org.uygar.postit.controllers.application.app.utils.loader.*;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.controllers.utils.ButtonDisableBinding;
 import org.uygar.postit.data.database.DataMiner;
@@ -87,20 +84,8 @@ public class AppController implements Initializable {
     }
 
     private void loadPost(Post post) {
-        PostController postController = (PostController) FXLoader.getLoadedController("post", "post");
-        postController.init(post, dataMiner, WindowDimensions.POST_WINDOW_DIMENSION);
-
-        Stage postStage = initializeWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, postController.root);
-        postStage.setOnHidden(windowEvent -> {
-            this.postGrid.nothingSelected();
-            this.postGrid.enablePostButtonWhenFrameClosed(post);
-        });
-
-        addStylesheetToPaneWithControllerName("post", "post", postController.root);
-
-        postController.setMinSizeByDimensionOfStage(postStage);
-        postStage.setResizable(true);
-        postStage.show();
+        PostLoader loader = new PostLoader(this, post);
+        loader.load();
     }
 
     @FXML

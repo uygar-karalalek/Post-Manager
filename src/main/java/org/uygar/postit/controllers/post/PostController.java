@@ -39,9 +39,12 @@ public class PostController {
 
     PostItGridViewer postItGrid;
 
+    public Post post;
+
     private Dimension2D minDimension;
 
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
+        this.post = fatherPost;
         this.minDimension = initialWindowDimension;
         this.postItGrid = new PostItGridViewer(fatherPost, miner);
         PostStatisticsViewManager.buildChart(pieChart, new PostStatistics(postItGrid.getPostItOrganizer()));
@@ -63,7 +66,7 @@ public class PostController {
         this.gridFatherScroll.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
     }
 
-    public void setMinSizeByDimensionOfStage(Stage stage) {
+    public void setMinSizeListenerByDimensionOfStage(Stage stage) {
         stage.widthProperty().addListener(this::onWindowWidthChangeResizePostItGrid);
         stage.heightProperty().addListener(this::onWindowHeightChangeResizePostItGrid);
     }
