@@ -1,3 +1,4 @@
 *.ser
 *.properties
 *.db
+/target/
