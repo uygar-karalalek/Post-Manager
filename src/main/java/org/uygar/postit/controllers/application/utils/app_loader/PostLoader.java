@@ -1,14 +1,15 @@
-package org.uygar.postit.controllers.application.app.utils.loader;
+package org.uygar.postit.controllers.application.utils.app_loader;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.application.app.AppController;
+import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.post.Post;
 
-public class PostLoader extends WindowLoader {
+public class PostLoader extends WindowLoader<AppController> {
 
     private final PostController postController;
 
@@ -19,13 +20,14 @@ public class PostLoader extends WindowLoader {
     }
 
     private Stage getPostStage(PostController postController) {
-        Stage postStage = appController.initializeWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, postController.root);
+        Stage postStage = controller.windowInitializer
+                .initializeApplicationWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, postController.root);
         postStage.setOnHidden(windowEvent -> {
-            appController.postGrid.nothingSelected();
-            appController.postGrid.enablePostButtonWhenFrameClosed(postController.post);
+            controller.postGrid.nothingSelected();
+            controller.postGrid.enablePostButtonWhenFrameClosed(postController.post);
         });
 
-        appController.addStylesheetToPaneWithControllerName("post", "post", postController.root);
+        controller.addStylesheetToPaneWithControllerName("post", "post", postController.root);
         postController.setMinSizeListenerByDimensionOfStage(postStage);
         postStage.setResizable(true);
 

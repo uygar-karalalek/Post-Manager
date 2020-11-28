@@ -9,44 +9,51 @@
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<TabPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" stylesheets="@../../stylesheets/post/post_normal.css" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
-   <tabs>
-      <Tab text="Post">
-         <content>
-            <BorderPane prefHeight="629.0" prefWidth="522.0">
-               <left>
-                  <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
-                     <children>
-                        <Label id="title" fx:id="postTitle" prefHeight="31.0" prefWidth="208.0" />
-                        <PieChart fx:id="pieChart" legendVisible="false" prefHeight="230.0" prefWidth="262.0">
-                           <VBox.margin>
-                              <Insets bottom="20.0" left="10.0" top="20.0" />
-                           </VBox.margin>
-                        </PieChart>
-                        <TextField id="titoloField" maxWidth="-Infinity" prefHeight="40.0" prefWidth="0.0" promptText="cerca tramite titolo...">
-                           <VBox.margin>
-                              <Insets bottom="5.0" />
-                           </VBox.margin>
-                        </TextField>
-                        <Button mnemonicParsing="false" text="Aggiungi" />
-                        <Button mnemonicParsing="false" onMouseClicked="#onOrdina" prefWidth="133.0" text="Ordina" />
-                        <Button mnemonicParsing="false" prefWidth="133.0" text="Filtra" />
-                        <Button id="esciBtn" mnemonicParsing="false" onMouseClicked="#onExit" prefWidth="133.0" text="Esci">
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </Button>
-                     </children>
-                  </VBox>
-               </left>
-               <center>
-                  <ScrollPane fx:id="gridFatherScroll" minHeight="487.0" minWidth="320.0" prefHeight="487.0" prefWidth="352.0" BorderPane.alignment="TOP_LEFT" />
-               </center>
-            </BorderPane>
-         </content></Tab>
-      <Tab text="Settings" />
-      <Tab text="Statistics" />
-   </tabs>
-</TabPane>
+
+<StackPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
+   <children>
+      <TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Post">
+               <content>
+                  <BorderPane prefHeight="629.0" prefWidth="522.0">
+                     <left>
+                        <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
+                           <children>
+                              <Label id="title" fx:id="postTitle" prefHeight="31.0" prefWidth="208.0" />
+                              <PieChart fx:id="pieChart" legendVisible="false" prefHeight="230.0" prefWidth="262.0">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" top="20.0" />
+                                 </VBox.margin>
+                              </PieChart>
+                              <TextField id="titoloField" maxWidth="-Infinity" prefHeight="40.0" prefWidth="0.0" promptText="cerca tramite titolo...">
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" />
+                                 </VBox.margin>
+                              </TextField>
+                              <Button mnemonicParsing="false" text="Aggiungi" />
+                              <Button mnemonicParsing="false" onMouseClicked="#onOrdina" prefWidth="133.0" text="Ordina" />
+                              <Button mnemonicParsing="false" prefWidth="133.0" text="Filtra" />
+                              <Button id="esciBtn" mnemonicParsing="false" onMouseClicked="#onExit" prefWidth="133.0" text="Esci">
+                                 <VBox.margin>
+                                    <Insets top="20.0" />
+                                 </VBox.margin>
+                              </Button>
+                           </children>
+                        </VBox>
+                     </left>
+                     <center>
+                        <ScrollPane fx:id="gridFatherScroll" minHeight="487.0" minWidth="320.0" prefHeight="487.0" prefWidth="352.0" BorderPane.alignment="TOP_LEFT" />
+                     </center>
+                  </BorderPane>
+               </content>
+            </Tab>
+            <Tab text="Settings" />
+            <Tab text="Statistics" />
+         </tabs>
+      </TabPane>
+   </children>
+</StackPane>

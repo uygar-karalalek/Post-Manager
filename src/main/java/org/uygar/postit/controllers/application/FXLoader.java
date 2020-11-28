@@ -16,6 +16,7 @@ public class FXLoader {
             String initPath = "org/uygar/fxml/";
             String endPath = pkg + "/" + fxml + ".fxml";
             FXMLLoader loader = new FXMLLoader(getUrl(initPath, endPath));
+            System.out.println(getUrl(initPath, endPath).toString());
             loader.load();
             return loader.getController();
         } catch (IOException e) {

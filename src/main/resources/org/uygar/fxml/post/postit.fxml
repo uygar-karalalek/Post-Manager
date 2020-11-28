@@ -15,31 +15,26 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" stylesheets="@../../stylesheets/post/postit_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" stylesheets="@../../stylesheets/post/postit_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.postit.PostItController">
    <center>
       <StackPane alignment="TOP_CENTER" prefHeight="323.0" prefWidth="0.0" BorderPane.alignment="CENTER">
          <children>
             <Rectangle id="postIt" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
-            <TextField id="titoloField" prefHeight="46.0" prefWidth="344.0" promptText="Titolo...">
-               <StackPane.margin>
-                  <Insets left="40.0" right="40.0" top="30.0" />
-               </StackPane.margin>
-            </TextField>
-            <TextArea maxHeight="150.0" maxWidth="250.0" prefHeight="150.0" prefWidth="250.0" promptText="Compito da svolgere..." wrapText="true">
+            <TextArea fx:id="compitoField" maxHeight="150.0" maxWidth="250.0" prefHeight="150.0" prefWidth="250.0" promptText="Compito da svolgere..." wrapText="true">
                <StackPane.margin>
                   <Insets top="120.0" />
                </StackPane.margin>
             </TextArea>
+            <TextField id="titoloField" fx:id="titoloField" prefHeight="46.0" prefWidth="344.0" promptText="Titolo...">
+               <StackPane.margin>
+                  <Insets left="40.0" right="40.0" top="30.0" />
+               </StackPane.margin>
+            </TextField>
          </children>
       </StackPane>
    </center>
    <top>
-      <HBox id="coloreHBox" fx:id="coloreHBox" alignment="BOTTOM_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="BOTTOM_RIGHT">
-         <children>
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="26.0" stroke="BLACK" strokeType="INSIDE" width="30.0" />
-         </children></HBox>
+      <HBox id="coloreHBox" fx:id="coloreHBox" alignment="BOTTOM_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="BOTTOM_RIGHT" />
    </top>
    <left>
       <VBox prefHeight="300.0" prefWidth="185.0" BorderPane.alignment="CENTER">
@@ -61,25 +56,25 @@
                         <Label id="lbl" text="Scadenza:" />
                         <HBox prefHeight="31.0" prefWidth="150.0">
                            <children>
-                              <DatePicker promptText="Data" />
+                              <DatePicker fx:id="dataField" promptText="Data" />
                            </children>
                         </HBox>
                         <HBox prefHeight="32.0" prefWidth="140.0">
                            <children>
-                              <TextField id="orarioField" prefHeight="25.0" prefWidth="64.0" promptText="ora" />
+                              <TextField id="orarioField" fx:id="oraField" prefHeight="25.0" prefWidth="64.0" promptText="ora" />
                               <Label id="duePuntiLbl" text=":" />
-                              <TextField id="orarioField" prefHeight="25.0" prefWidth="64.0" promptText="minuto" />
+                              <TextField id="orarioField" fx:id="minutoField" prefHeight="25.0" prefWidth="64.0" promptText="minuto" />
                            </children>
                         </HBox>
                         <Label id="lbl" text="Priorità: " />
-                        <TextField id="priorityField" prefHeight="25.0" prefWidth="64.0" promptText="1-10" />
+                        <TextField id="priorityField" fx:id="priorityField" prefHeight="25.0" prefWidth="64.0" promptText="1-10" />
                      </children>
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <children>
-                        <Button mnemonicParsing="false" text="Salva" />
-                        <Button mnemonicParsing="false" text="Annulla" />
-                        <Button mnemonicParsing="false" text="Rimuovi" />
+                        <Button fx:id="salvaBtn" mnemonicParsing="false" text="Salva" />
+                        <Button fx:id="annullaBtn" mnemonicParsing="false" text="Annulla" />
+                        <Button fx:id="rimuoviBtn" mnemonicParsing="false" text="Rimuovi" />
                      </children>
                   </HBox>
                </children>

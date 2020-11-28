@@ -3,6 +3,8 @@ package org.uygar.postit.controllers.post;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.geometry.Dimension2D;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -11,11 +13,14 @@ import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.controllers.post.utils.PostStatistics;
 import org.uygar.postit.controllers.post.utils.PostStatisticsViewManager;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.Post;
+import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 
 public class PostController {
@@ -23,7 +28,10 @@ public class PostController {
     private static final float SCROLL_SPEED = 0.001f;
 
     @FXML
-    public TabPane root;
+    public StackPane root;
+
+    @FXML
+    public TabPane rootTabPane;
 
     @FXML
     public ScrollPane gridFatherScroll;
@@ -43,6 +51,8 @@ public class PostController {
 
     private Dimension2D minDimension;
 
+    public WindowInitializer windowInitializer;
+
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
         this.post = fatherPost;
         this.minDimension = initialWindowDimension;
@@ -50,6 +60,12 @@ public class PostController {
         PostStatisticsViewManager.buildChart(pieChart, new PostStatistics(postItGrid.getPostItOrganizer()));
         initGridPane();
         initPostTitle(fatherPost);
+        windowInitializer = new WindowInitializer(root);
+        this.rootTabPane.prefWidthProperty().bind(root.widthProperty());
+        this.rootTabPane.prefHeightProperty().bind(root.heightProperty());
+    }
+
+    public static void openPostItController(PostIt postIt) {
     }
 
     private void initPostTitle(Post fatherPost) {
@@ -73,12 +89,12 @@ public class PostController {
 
     private void onWindowWidthChangeResizePostItGrid(ObservableValue<? extends Number> obs, Number oldVal, Number newWidth) {
         if ((double) newWidth < minDimension.getWidth())
-            this.root.getScene().getWindow().setWidth(minDimension.getWidth());
+            this.rootTabPane.getScene().getWindow().setWidth(minDimension.getWidth());
     }
 
     private void onWindowHeightChangeResizePostItGrid(ObservableValue<? extends Number> obs, Number oldVal, Number newVal) {
         if ((double) newVal < minDimension.getHeight())
-            this.root.getScene().getWindow().setHeight(minDimension.getHeight());
+            this.rootTabPane.getScene().getWindow().setHeight(minDimension.getHeight());
     }
 
     private void setOnPostItGridScroll(ScrollEvent event) {
@@ -102,7 +118,7 @@ public class PostController {
 
     @FXML
     public void onExit() {
-        this.root.getScene().getWindow().hide();
+        this.rootTabPane.getScene().getWindow().hide();
     }
 
 }

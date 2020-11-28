@@ -1,7 +1,12 @@
 package org.uygar.postit.post.viewers.post_it;
 
+import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
@@ -43,9 +48,10 @@ public class PostItGridViewer extends FlowPane {
 
     private List<PostItViewer> addListenersToPostItViewersAndThenReturn(List<PostItViewer> postItViewers) {
         postItViewers.forEach(postItViewer -> postItViewer.getMainGraphic().setOnMouseClicked(mouseEvent -> {
-            if (mouseEvent.getButton() == MouseButton.SECONDARY) {
+            if (mouseEvent.getButton() == MouseButton.PRIMARY)
+                ;//PostController.openPostItController();
+            else if (mouseEvent.getButton() == MouseButton.SECONDARY)
                 postItViewer.changePostItAspectBasedOnStateAndSaveToDatabase(postItOrganizer.getDataMiner());
-            }
         }));
         return postItViewers;
     }

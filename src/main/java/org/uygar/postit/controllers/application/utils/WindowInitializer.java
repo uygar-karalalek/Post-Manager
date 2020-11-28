@@ -1,19 +1,21 @@
-package org.uygar.postit.controllers.application.app.utils;
+package org.uygar.postit.controllers.application.utils;
 
 import javafx.animation.FadeTransition;
 import javafx.animation.Interpolator;
+import javafx.geometry.Dimension2D;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.layout.Pane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import org.uygar.postit.controllers.application.app.AppController;
 
 public class WindowInitializer {
 
-    private final AppController appController;
+    private final Pane rootPane;
 
-    public WindowInitializer(AppController appController) {
-        this.appController = appController;
+    public WindowInitializer(Pane rootPane) {
+        this.rootPane = rootPane;
     }
 
     public Stage getStageWithModality(double prefWidth, double prefHeight, Modality modality) {
@@ -50,7 +52,14 @@ public class WindowInitializer {
     }
 
     public Stage getStage() {
-        return (Stage) appController.rootPane.getScene().getWindow();
+        return (Stage) rootPane.getScene().getWindow();
+    }
+
+    public Stage initializeApplicationWindowAndGet(Dimension2D dimension, Modality modality, Parent root) {
+        Stage stage = this.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality);
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        return stage;
     }
 
 }

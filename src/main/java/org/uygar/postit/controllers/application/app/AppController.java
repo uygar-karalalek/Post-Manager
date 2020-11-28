@@ -16,12 +16,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.uygar.postit.controllers.application.FXLoader;
-import org.uygar.postit.controllers.WindowDimensions;
-import org.uygar.postit.controllers.application.app.utils.WindowInitializer;
-import org.uygar.postit.controllers.application.app.utils.loader.*;
-import org.uygar.postit.controllers.post.PostController;
-import org.uygar.postit.controllers.utils.ButtonDisableBinding;
+import org.uygar.postit.controllers.application.utils.WindowInitializer;
+import org.uygar.postit.controllers.application.utils.app_loader.*;
+import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
+import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
@@ -48,8 +46,8 @@ public class AppController implements Initializable {
     MenuBar menuBar;
 
     public LogProperties properties;
-    public WindowInitializer windowInitializer = new WindowInitializer(this);
-    public WindowLoader statisticaLoader, filterLoader, aggiungiLoader;
+    public WindowInitializer windowInitializer;
+    public WindowLoader<AppController> statisticaLoader, filterLoader, aggiungiLoader;
 
     public PostGridViewer postGrid;
     public DataMiner dataMiner = new DataMiner();
@@ -63,7 +61,7 @@ public class AppController implements Initializable {
     private void init() {
         initAndRequestFocusToSearchField();
         initPostGrid();
-
+        windowInitializer = new WindowInitializer(rootPane);
         this.searchField.textProperty().addListener(this::onSearchChanged);
     }
 
@@ -144,13 +142,6 @@ public class AppController implements Initializable {
         stage.showAndWait();
     }
 
-    public Stage initializeWindowAndGet(Dimension2D dimension, Modality modality, Parent root) {
-        Stage stage = windowInitializer.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality);
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        return stage;
-    }
-
     @FXML
     public void onBlackStyleClicked() {
         setTheme("org/uygar/stylesheets/main/app_black.css");
@@ -187,6 +178,5 @@ public class AppController implements Initializable {
     public void setLogProperties(LogProperties properties) {
         this.properties = properties;
     }
-
 
 }

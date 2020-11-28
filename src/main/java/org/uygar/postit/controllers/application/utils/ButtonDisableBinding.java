@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.utils;
+package org.uygar.postit.controllers.application.utils;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;

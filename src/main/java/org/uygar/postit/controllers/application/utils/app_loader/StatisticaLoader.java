@@ -1,15 +1,15 @@
-package org.uygar.postit.controllers.application.app.utils.loader;
+package org.uygar.postit.controllers.application.utils.app_loader;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.statistica.StatisticaController;
-import org.uygar.postit.controllers.utils.ButtonDisableBinding;
+import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
+import org.uygar.postit.controllers.loader.WindowLoader;
 
-public class StatisticaLoader extends WindowLoader {
+public class StatisticaLoader extends WindowLoader<AppController> {
 
    private ButtonDisableBinding statisticaDisableBinding;
 
@@ -24,7 +24,7 @@ public class StatisticaLoader extends WindowLoader {
     private void init() {
         initDisableBinding();
         StatisticaController statisticaController = getStatisticaController();
-        appController.addStylesheetToPaneWithControllerName("statistica", "main", statisticaController.root);
+        controller.addStylesheetToPaneWithControllerName("statistica", "main", statisticaController.root);
         showStage(getWindow(statisticaController));
     }
 
@@ -35,17 +35,18 @@ public class StatisticaLoader extends WindowLoader {
 
     private StatisticaController getStatisticaController() {
         StatisticaController statisticaController = (StatisticaController) FXLoader.getLoadedController("statistica", "app");
-        statisticaController.setLogProperties(appController.properties);
+        statisticaController.setLogProperties(controller.properties);
         statisticaController.init();
         return statisticaController;
     }
 
     private Stage getWindow(StatisticaController statisticaController) {
-        return appController.initializeWindowAndGet(WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, statisticaController.root);
+        return controller.windowInitializer
+                .initializeApplicationWindowAndGet(WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, statisticaController.root);
     }
 
     private void initDisableBinding() {
-        statisticaDisableBinding = new ButtonDisableBinding(appController.statisticaBtn);
+        statisticaDisableBinding = new ButtonDisableBinding(controller.statisticaBtn);
         statisticaDisableBinding.disableOpenWindowButton();
     }
 

@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.app.utils.loader;
+package org.uygar.postit.controllers.application.utils.app_loader;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -7,9 +7,10 @@ import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.filter.FilterController;
-import org.uygar.postit.controllers.utils.ButtonDisableBinding;
+import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
+import org.uygar.postit.controllers.loader.WindowLoader;
 
-public class FilterLoader extends WindowLoader {
+public class FilterLoader extends WindowLoader<AppController> {
 
     public static final double FADE_INIT_TIME_FILTER = 0.4;
 
@@ -24,28 +25,29 @@ public class FilterLoader extends WindowLoader {
 
     private void init() {
         ButtonDisableBinding filterDisableBinding =
-                new ButtonDisableBinding(appController.filterButton);
+                new ButtonDisableBinding(controller.filterButton);
         filterDisableBinding.disableOpenWindowButton();
         FilterController filterController = getFilterController();
         Stage stage = getWindow(filterController);
-        appController.setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
+        controller.setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
     }
 
     @NotNull
     private FilterController getFilterController() {
         FilterController filterController = (FilterController) FXLoader.getLoadedController("filter", "app");
-        filterController.init(appController.postGrid);
-        appController.addStylesheetToPaneWithControllerName("filter", "main", filterController.root);
+        filterController.init(controller.postGrid);
+        controller.addStylesheetToPaneWithControllerName("filter", "main", filterController.root);
         initFilterFade(filterController);
         return filterController;
     }
 
     private Stage getWindow(FilterController filterController) {
-        return appController.initializeWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, filterController.root);
+        return controller.windowInitializer.
+                initializeApplicationWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, filterController.root);
     }
 
     private void initFilterFade(FilterController filterController) {
-        appController.windowInitializer.fadeWindowEffect(filterController.root, FADE_INIT_TIME_FILTER);
+        controller.windowInitializer.fadeWindowEffect(filterController.root, FADE_INIT_TIME_FILTER);
     }
 
 }

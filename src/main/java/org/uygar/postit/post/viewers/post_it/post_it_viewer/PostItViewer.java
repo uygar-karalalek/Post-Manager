@@ -1,6 +1,8 @@
 package org.uygar.postit.post.viewers.post_it.post_it_viewer;
 
 import javafx.scene.layout.*;
+import org.uygar.postit.controllers.application.FXLoader;
+import org.uygar.postit.controllers.post.postit.PostItController;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DMLQueryBuilder;
 import org.uygar.postit.data.database.queries.Query;

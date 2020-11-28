@@ -9,5 +9,6 @@ public class WindowDimensions {
     public static final Dimension2D POST_WINDOW_DIMENSION = new Dimension2D(600, 740);
     public static final Dimension2D ALERT_WINDOW_DIMENSION = new Dimension2D(400, 200);
     public static final Dimension2D STATISTICA_WINDOW_DIMENSION = new Dimension2D(900, 580);
+    public static final Dimension2D POST_IT_WINDOW_DIMENSION = new Dimension2D(500, 350);
 
 }
