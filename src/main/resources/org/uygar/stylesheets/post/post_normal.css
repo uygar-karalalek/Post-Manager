@@ -114,7 +114,6 @@
 
 #taskTextWrapper {
     -fx-background-color: transparent;
-
 }
 
 #post_it_grid {
@@ -166,6 +165,12 @@
     -fx-alignment: center;
     -fx-font-family: Arial;
     -fx-font-size: 14px;
+}
+
+#priorityText {
+    -fx-border-insets: -10;
+    -fx-font-size: 12px;
+    -fx-font-family: "Arial Rounded MT Bold";
 }
 
 #pieChart {

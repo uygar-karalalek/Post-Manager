@@ -3,7 +3,7 @@ package org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_bui
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import org.uygar.postit.post.PostIt;
-import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.task_text.TitleAndTaskTextWrapper;
+import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.task_text.BasicPostItTextWrapper;
 
 import static org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer.*;
 
@@ -22,7 +22,7 @@ public class PostItViewerBasicGraphicsBuilder {
     private void buildImageAndPostTextWrapper() {
         buildImageViewByPostItColor();
         postItImageWrapper = new StackPane(postItImage,
-                new TitleAndTaskTextWrapper(postIt));
+                new BasicPostItTextWrapper(postIt));
     }
 
     private void buildImageViewByPostItColor() {
