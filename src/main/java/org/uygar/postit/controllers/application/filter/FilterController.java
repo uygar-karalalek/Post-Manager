@@ -103,6 +103,7 @@ public class FilterController {
         tra.setSelected(false);
         contiene.setSelected(false);
         finisce.setSelected(false);
+        ignoraMaiusc.setSelected(true);
 
         inizioField.setText(null);
         data1.setValue(null);
