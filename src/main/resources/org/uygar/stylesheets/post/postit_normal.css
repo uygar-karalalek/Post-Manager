@@ -86,4 +86,41 @@
 #propGrid {
     -fx-background-radius: 2em;
     -fx-background-color: linear-gradient(to bottom right, grey, green);
+    -fx-padding: 10;
+}
+
+#scadenzaBox {
+    -fx-spacing: 10;
+}
+
+#duePuntiLbl {
+    -fx-font-size: 12pt;
+    -fx-padding: 1;
+}
+
+#orarioField {
+    -fx-background-color: transparent;
+    -fx-font-family: Arial;
+    -fx-alignment: center;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 0.4 0;
+}
+
+#lbl {
+    -fx-font-family: Arial;
+    -fx-font-size: 12px;
+}
+
+#priorityField {
+    -fx-background-color: transparent;
+    -fx-font-family: Arial;
+    -fx-alignment: center;
+    -fx-border-color: black;
+    -fx-border-width: 0 0 0.4 0;
+    -fx-border-insets: 0 125 0 0;
+    -fx-translate-y: -10;
+}
+
+#orarioField:focused, #priorityField:focused {
+    -fx-border-color: #21f301;
 }

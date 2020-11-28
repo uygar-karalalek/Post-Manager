@@ -46,13 +46,14 @@ public class ConverterUtil {
         if (isValidMappedObjectList(postIts)) {
             System.out.println(postIts);
             int id = Integer.parseInt(postIts.get("id").get(dataElementIndex));
+            int priority = Integer.parseInt(postIts.get("priority").get(dataElementIndex));
             boolean done = Boolean.parseBoolean(postIts.get("done").get(dataElementIndex));
             String title = postIts.get("title").get(dataElementIndex);
             String text = postIts.get("text").get(dataElementIndex);
             LocalDateTime creationDate = LocalDateTime.parse(postIts.get("creationDate").get(dataElementIndex));
             LocalDateTime endDate = LocalDateTime.parse(postIts.get("endDate").get(dataElementIndex));
             Colore colore = Colore.valueOf(postIts.get("colore").get(dataElementIndex));
-            return Optional.of(new PostIt(id, done, title, text, creationDate, endDate, colore));
+            return Optional.of(new PostIt(id, done, title, text, creationDate, endDate, colore, priority));
         }
         return Optional.empty();
     }

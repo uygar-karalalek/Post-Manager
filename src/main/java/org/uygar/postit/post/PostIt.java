@@ -8,15 +8,16 @@ import java.time.LocalDateTime;
 
 public class PostIt {
 
-    private IntegerProperty id;
+    private IntegerProperty id, priority;
     private SimpleObjectProperty<LocalDateTime> dataCreazione, dataScadenza;
     private SimpleStringProperty titolo;
     private SimpleObjectProperty<Colore> colore;
     private SimpleStringProperty testo;
     private SimpleBooleanProperty fatto;
 
-    public PostIt(int id, boolean fatto, String titolo, String testo, LocalDateTime dataCreazione, LocalDateTime dataFine, Colore colore) {
+    public PostIt(int id, boolean fatto, String titolo, String testo, LocalDateTime dataCreazione, LocalDateTime dataFine, Colore colore, int priority) {
         this.id = new SimpleIntegerProperty(id);
+        this.priority = new SimpleIntegerProperty(priority);
         this.fatto = new SimpleBooleanProperty(fatto);
         this.titolo = new SimpleStringProperty(titolo);
         this.testo = new SimpleStringProperty(testo);
@@ -33,6 +34,16 @@ public class PostIt {
     }
     public void setId(int id) {
         this.id.set(id);
+    }
+
+    public int getPriority() {
+        return priority.get();
+    }
+    public IntegerProperty priorityProperty() {
+        return priority;
+    }
+    public void setPriority(int priority) {
+        this.priority.set(priority);
     }
 
     public boolean isFatto() {
@@ -98,7 +109,6 @@ public class PostIt {
     public boolean isExpired() {
        return LocalDateTime.now().isAfter(dataScadenza.get());
     }
-
     public boolean isExpiredAndUndone() {
         return isExpired() && !isFatto();
     }
