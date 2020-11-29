@@ -36,14 +36,14 @@ public class FilterLoader extends WindowLoader<AppController> {
     private FilterController getFilterController() {
         FilterController filterController = (FilterController) FXLoader.getLoadedController("filter", "app");
         filterController.init(controller.postGrid);
-        controller.addStylesheetToPaneWithControllerName("filter", "main", filterController.root);
+        controller.bindStyleSheetWithControllerName("filter", "main", filterController.root);
         initFilterFade(filterController);
         return filterController;
     }
 
     private Stage getWindow(FilterController filterController) {
         return controller.windowInitializer.
-                initializeApplicationWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, filterController.root);
+                initializeApplicationWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, filterController.root, false);
     }
 
     private void initFilterFade(FilterController filterController) {

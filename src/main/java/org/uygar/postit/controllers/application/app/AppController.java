@@ -1,7 +1,12 @@
 package org.uygar.postit.controllers.application.app;
 
 import javafx.application.Platform;
+import javafx.beans.InvalidationListener;
+import javafx.beans.binding.Bindings;
+import javafx.beans.binding.StringExpression;
+import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Dimension2D;
@@ -27,6 +32,7 @@ import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -160,10 +166,14 @@ public class AppController implements Initializable {
         return this.rootPane.getStylesheets().get(0);
     }
 
-    public void addStylesheetToPaneWithControllerName(String controllerName, String pkgName, Parent pane) {
+    public void bindStyleSheetWithControllerName(String controllerName, String pkgName, Parent pane) {
         String stdPath = "org/uygar/stylesheets/" + pkgName + "/";
         String endPath = controllerName + "_" + getCurrentStyleColorFileName();
-        pane.getStylesheets().add(stdPath + endPath);
+        pane.getStylesheets().setAll(stdPath + endPath);
+        this.rootPane.getProperties().addListener((InvalidationListener) change -> {
+            String updatedPath = controllerName + "_" + getCurrentStyleColorFileName();
+            pane.getStylesheets().setAll(stdPath + updatedPath);
+        });
     }
 
     private String getCurrentStyleColorFileName() {
@@ -173,6 +183,7 @@ public class AppController implements Initializable {
 
     public void setTheme(String cssFilePath) {
         this.rootPane.getStylesheets().setAll(cssFilePath);
+        this.rootPane.getProperties().put("style", cssFilePath);
     }
 
     public void setLogProperties(LogProperties properties) {

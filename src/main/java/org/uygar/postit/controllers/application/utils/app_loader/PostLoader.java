@@ -21,13 +21,13 @@ public class PostLoader extends WindowLoader<AppController> {
 
     private Stage getPostStage(PostController postController) {
         Stage postStage = controller.windowInitializer
-                .initializeApplicationWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, postController.root);
+                .initializeApplicationWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, postController.root, true);
         postStage.setOnHidden(windowEvent -> {
             controller.postGrid.nothingSelected();
             controller.postGrid.enablePostButtonWhenFrameClosed(postController.post);
         });
 
-        controller.addStylesheetToPaneWithControllerName("post", "post", postController.root);
+        controller.bindStyleSheetWithControllerName("post", "post", postController.root);
         postController.setMinSizeListenerByDimensionOfStage(postStage);
         postStage.setResizable(true);
 

@@ -9,8 +9,7 @@ import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.loader.WindowLoader;
 
-public class
-AggiungiLoader extends WindowLoader<AppController> {
+public class AggiungiLoader extends WindowLoader<AppController> {
 
     public static final int FADE_INIT_TIME_AGGIUNGI = 1;
 
@@ -31,7 +30,7 @@ AggiungiLoader extends WindowLoader<AppController> {
 
     private void initAndShowStage(AggiungiController aggiungiController) {
         Stage stage = controller.windowInitializer
-                .initializeApplicationWindowAndGet(WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, aggiungiController.root);
+                .initializeApplicationWindowAndGet(WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, aggiungiController.root, false);
         controller.setHidingStageEventAndShowAndWait(stage, null);
     }
 
@@ -44,8 +43,8 @@ AggiungiLoader extends WindowLoader<AppController> {
     }
 
     private void addMainStyles(AggiungiController aggiungiController) {
-        controller.addStylesheetToPaneWithControllerName("app", "main", aggiungiController.root);
-        controller.addStylesheetToPaneWithControllerName("add", "main", aggiungiController.root);
+        controller.bindStyleSheetWithControllerName("app", "main", aggiungiController.root);
+        controller.bindStyleSheetWithControllerName("add", "main", aggiungiController.root);
     }
 
 }

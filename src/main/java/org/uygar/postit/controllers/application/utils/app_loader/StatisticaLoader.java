@@ -24,7 +24,7 @@ public class StatisticaLoader extends WindowLoader<AppController> {
     private void init() {
         initDisableBinding();
         StatisticaController statisticaController = getStatisticaController();
-        controller.addStylesheetToPaneWithControllerName("statistica", "main", statisticaController.root);
+        controller.bindStyleSheetWithControllerName("statistica", "main", statisticaController.root);
         showStage(getWindow(statisticaController));
     }
 
@@ -42,7 +42,7 @@ public class StatisticaLoader extends WindowLoader<AppController> {
 
     private Stage getWindow(StatisticaController statisticaController) {
         return controller.windowInitializer
-                .initializeApplicationWindowAndGet(WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, statisticaController.root);
+                .initializeApplicationWindowAndGet(WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, statisticaController.root, true);
     }
 
     private void initDisableBinding() {
