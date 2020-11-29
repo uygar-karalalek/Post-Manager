@@ -18,13 +18,12 @@ public class WindowInitializer {
         this.rootPane = rootPane;
     }
 
-    public Stage getStageWithModality(double prefWidth, double prefHeight, Modality modality) {
-        Stage stage = getStageWithModality(modality, false);
+    public Stage getStageWithModality(double prefWidth, double prefHeight, Modality modality, boolean resizable) {
+        Stage stage = getStageWithModality(modality, resizable);
         stage.setWidth(prefWidth);
         stage.setHeight(prefHeight);
         setStageX(prefWidth, stage);
         setStageY(prefHeight, stage);
-        stage.setResizable(false);
         return stage;
     }
 
@@ -55,8 +54,8 @@ public class WindowInitializer {
         return (Stage) rootPane.getScene().getWindow();
     }
 
-    public Stage initializeApplicationWindowAndGet(Dimension2D dimension, Modality modality, Parent root) {
-        Stage stage = this.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality);
+    public Stage initializeApplicationWindowAndGet(Dimension2D dimension, Modality modality, Parent root, boolean resizable) {
+        Stage stage = this.getStageWithModality(dimension.getWidth(), dimension.getHeight(), modality, resizable);
         Scene scene = new Scene(root);
         stage.setScene(scene);
         return stage;
