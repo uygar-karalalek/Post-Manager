@@ -165,10 +165,10 @@
     -fx-alignment: center;
     -fx-font-family: Arial;
     -fx-font-size: 14px;
+    -fx-translate-x: 10;
 }
 
 #priorityText {
-    -fx-border-insets: -10;
     -fx-font-size: 12px;
     -fx-font-family: "Arial Rounded MT Bold";
 }

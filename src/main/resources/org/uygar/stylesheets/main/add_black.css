@@ -1,5 +1,25 @@
 #root {
     -fx-background-color: linear-gradient(grey, black);
+    -fx-border-color: linear-gradient(cornflowerblue, grey);
+    -fx-border-width: 2;
+}
+
+#title {
+    -fx-font-size: 30;
+    -fx-font-weight: bolder;
+}
+
+.button {
+    -fx-background-color: linear-gradient(black, grey);
+    -fx-pref-height: 35;
+    -fx-background-radius: 0.5em;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 12pt;
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(#0e0d0d, #939c8e);
 }
 
 #okBtn {
@@ -17,11 +37,11 @@
     -fx-background-radius: 5em;
 }
 
-.split-menu-button .label {
+.split-menu-button > .label {
     -fx-font-family: "Arial";
     -fx-font-size: 12pt;
     -fx-background-radius: 5em;
-    -fx-background-color: linear-gradient(cadetblue, grey);
+    -fx-background-color: linear-gradient(#4d798b, #638636);
     -fx-alignment: CENTER;
     -fx-text-fill: white;
 }
@@ -62,6 +82,9 @@
 #nomePostField {
     -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, black, grey);
     -fx-background-radius: 5em;
+    -fx-border-width: 1.3;
+    -fx-border-radius: 5em;
+    -fx-border-color: #999595;
     -fx-font-family: Arial;
     -fx-alignment: center;
     -fx-font-size: 12pt;

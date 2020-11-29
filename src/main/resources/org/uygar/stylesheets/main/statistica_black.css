@@ -207,5 +207,8 @@
 }
 
 .default-color0.chart-line-symbol {
-    -fx-background-color: coral, black;
+    -fx-background-color: black, white;
 }
+
+.default-color0.chart-series-line {
+    -fx-stroke: linear-gradient(#e20000, #000000, #011a45, #770505); }
