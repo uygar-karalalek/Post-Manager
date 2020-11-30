@@ -61,7 +61,7 @@ public class LogProperties extends PostProperties {
         });
     }
 
-    public void updateFrequencies() {
+    public void calculateLogStatistics() {
         initFrequencies();
     }
 

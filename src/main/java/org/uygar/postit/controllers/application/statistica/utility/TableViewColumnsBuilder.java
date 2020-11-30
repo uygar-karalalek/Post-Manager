@@ -50,7 +50,7 @@ public class TableViewColumnsBuilder<T extends FrequencyModel> {
             controller.getLogProperties().putProperty(keyAndValue.getKey(), newValue);
             controller.getLogProperties().storeProperties();
             tableView.getItems().get(edit.getTablePosition().getRow()).setFrequenza(newValue);
-            controller.getLogProperties().updateFrequencies();
+            controller.getLogProperties().calculateLogStatistics();
             controller.updateGraphs();
         }
 

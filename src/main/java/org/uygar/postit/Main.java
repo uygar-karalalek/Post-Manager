@@ -31,10 +31,10 @@ public class Main extends Application {
 
     private void initLogProperties() {
         this.properties = new LogProperties();
-        properties.addHourLog();
-        properties.addMonthLog();
-        properties.storeProperties();
-        this.properties.updateFrequencies();
+        this.properties.addHourLog();
+        this.properties.addMonthLog();
+        this.properties.storeProperties();
+        this.properties.calculateLogStatistics();
     }
 
     @Override
