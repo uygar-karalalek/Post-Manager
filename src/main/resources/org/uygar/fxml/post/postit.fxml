@@ -15,11 +15,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane id="root" fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" stylesheets="@../../stylesheets/post/postit_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.postit.PostItController">
+<BorderPane id="root" fx:id="postIt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" stylesheets="@../../stylesheets/post/postit_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.postit.PostItController">
    <center>
       <StackPane alignment="TOP_CENTER" prefHeight="323.0" prefWidth="0.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle id="postIt" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
+            <Rectangle id="postIt" fx:id="postItRectangle" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
             <TextArea fx:id="compitoField" maxHeight="150.0" maxWidth="250.0" prefHeight="150.0" prefWidth="250.0" promptText="Compito da svolgere..." wrapText="true">
                <StackPane.margin>
                   <Insets top="120.0" />
