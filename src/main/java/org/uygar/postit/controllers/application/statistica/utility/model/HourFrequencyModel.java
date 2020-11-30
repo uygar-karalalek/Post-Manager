@@ -20,11 +20,6 @@ public class HourFrequencyModel extends FrequencyModel {
         this.ora = new SimpleStringProperty(entry.getKey().toString()+":00");
     }
 
-    public HourFrequencyModel(String ora, String frequenza) {
-        super(frequenza);
-        this.ora = new SimpleStringProperty(ora);
-    }
-
     public static TableColumn<HourFrequencyModel, String> getHourColumn() {
         return getCol("Ora", "ora", false);
     }

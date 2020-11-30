@@ -17,7 +17,7 @@ public class ButtonDisableBinding {
         this.disablePropertiy.set(this.disablePropertiy.not().get());
     }
 
-    public void closedByEventClosed(Event event) {
+    public void enableButton(Event event) {
         this.disablePropertiy.set(false);
     }
 

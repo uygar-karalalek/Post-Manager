@@ -1,8 +1,10 @@
 package org.uygar.postit.controllers.post.utils.loader;
 
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.loader.WindowLoader;
@@ -13,6 +15,7 @@ import org.uygar.postit.post.PostIt;
 public class PostItLoader extends WindowLoader<PostController, PostItController> {
 
     public PostItLoader(PostIt postIt) {
+        super(ControllerType.POST);
         loadingController = (PostItController) FXLoader.getLoadedController("postit", "post");
         loadingController.init(postIt);
     }
@@ -25,10 +28,10 @@ public class PostItLoader extends WindowLoader<PostController, PostItController>
     }
 
     private Stage getPostItStage() {
-        Stage postItStage = controller.windowInitializer.
-                initializeApplicationWindowAndGet(WindowDimensions.POST_IT_WINDOW_DIMENSION,
-                        Modality.APPLICATION_MODAL, loadingController.root, true);
+        Stage postItStage = windowInitializer.initializeApplicationWindowAndGet(WindowDimensions.POST_IT_WINDOW_DIMENSION,
+                        Modality.APPLICATION_MODAL, loadingController.postIt, true);
         postItStage.initStyle(StageStyle.TRANSPARENT);
+        postItStage.getScene().setFill(Color.TRANSPARENT);
         return postItStage;
     }
 

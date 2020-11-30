@@ -3,48 +3,44 @@ package org.uygar.postit.controllers.application.utils.app_loader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.jetbrains.annotations.NotNull;
-import org.uygar.postit.controllers.application.AggiungiController;
+import org.uygar.postit.controllers.ControllerType;
+import org.uygar.postit.controllers.application.add.AggiungiController;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.loader.WindowLoader;
 
-public class AggiungiLoader extends WindowLoader<AppController> {
+public class AggiungiLoader extends WindowLoader<AppController, AggiungiController> {
 
     public static final int FADE_INIT_TIME_AGGIUNGI = 1;
 
     public AggiungiLoader(AppController controller) {
-        super(controller);
+        super(controller, ControllerType.APPLICATION);
     }
 
     @Override
     public void load() {
-        init();
+        initAggiungiController();
+        addMainStyles();
+        initAndShowStage();
     }
 
-    private void init() {
-        AggiungiController aggiungiController = getPostController();
-        addMainStyles(aggiungiController);
-        initAndShowStage(aggiungiController);
-    }
-
-    private void initAndShowStage(AggiungiController aggiungiController) {
-        Stage stage = controller.windowInitializer
-                .initializeApplicationWindowAndGet(WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, aggiungiController.root, false);
+    private void initAndShowStage() {
+        Stage stage = windowInitializer.initializeApplicationWindowAndGet
+                (WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, loadingController.add, false);
         controller.setHidingStageEventAndShowAndWait(stage, null);
     }
 
     @NotNull
-    private AggiungiController getPostController() {
-        AggiungiController aggiungiController = (AggiungiController) FXLoader.getLoadedController("add", "app");
-        aggiungiController.setPostGridViewer(controller.postGrid);
-        controller.windowInitializer.fadeWindowEffect(aggiungiController.root, FADE_INIT_TIME_AGGIUNGI);
-        return aggiungiController;
+    private void initAggiungiController() {
+        this.loadingController = (AggiungiController) FXLoader.getLoadedController("add", "app");
+        loadingController.setPostGridViewer(controller.postGrid);
+        windowInitializer.fadeWindowEffect(loadingController.add, FADE_INIT_TIME_AGGIUNGI);
     }
 
-    private void addMainStyles(AggiungiController aggiungiController) {
-        controller.bindStyleSheetWithControllerName("app", "main", aggiungiController.root);
-        controller.bindStyleSheetWithControllerName("add", "main", aggiungiController.root);
+    private void addMainStyles() {
+        controller.bindStyleSheetWithControllerName("app", "main", loadingController.add);
+        controller.bindStyleSheetWithControllerName("add", "main", loadingController.add);
     }
 
 }

@@ -2,6 +2,7 @@ package org.uygar.postit.controllers.application.utils.app_loader;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
@@ -9,12 +10,12 @@ import org.uygar.postit.controllers.application.statistica.StatisticaController;
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
 import org.uygar.postit.controllers.loader.WindowLoader;
 
-public class StatisticaLoader extends WindowLoader<AppController> {
+public class StatisticaLoader extends WindowLoader<AppController, StatisticaController> {
 
    private ButtonDisableBinding statisticaDisableBinding;
 
     public StatisticaLoader(AppController controller) {
-        super(controller);
+        super(controller, ControllerType.APPLICATION);
     }
 
     public void load() {
@@ -23,26 +24,25 @@ public class StatisticaLoader extends WindowLoader<AppController> {
 
     private void init() {
         initDisableBinding();
-        StatisticaController statisticaController = getStatisticaController();
-        controller.bindStyleSheetWithControllerName("statistica", "main", statisticaController.root);
-        showStage(getWindow(statisticaController));
+        initStatisticaController();
+        controller.bindStyleSheetWithControllerName("statistica", "main", loadingController.statistica);
+        showStage(getWindow());
     }
 
     private void showStage(Stage stage) {
-        stage.setOnHiding(statisticaDisableBinding::closedByEventClosed);
+        stage.setOnHiding(statisticaDisableBinding::enableButton);
         stage.showAndWait();
     }
 
-    private StatisticaController getStatisticaController() {
-        StatisticaController statisticaController = (StatisticaController) FXLoader.getLoadedController("statistica", "app");
-        statisticaController.setLogProperties(controller.properties);
-        statisticaController.init();
-        return statisticaController;
+    private void initStatisticaController() {
+        this.loadingController = (StatisticaController) FXLoader.getLoadedController("statistica", "app");
+        this.loadingController.setLogProperties(controller.properties);
+        this.loadingController.init();
     }
 
-    private Stage getWindow(StatisticaController statisticaController) {
-        return controller.windowInitializer
-                .initializeApplicationWindowAndGet(WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, statisticaController.root, true);
+    private Stage getWindow() {
+        return windowInitializer.initializeApplicationWindowAndGet
+                (WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, loadingController.statistica, true);
     }
 
     private void initDisableBinding() {

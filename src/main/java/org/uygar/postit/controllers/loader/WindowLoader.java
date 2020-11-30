@@ -1,11 +1,30 @@
 package org.uygar.postit.controllers.loader;
 
-public abstract class WindowLoader<T> implements Loader<T> {
+import javafx.stage.Stage;
+import org.uygar.postit.controllers.ControllerType;
+import org.uygar.postit.controllers.application.utils.WindowInitializer;
 
-    protected T controller;
+public abstract class WindowLoader<BASE, LOADING> implements Loader<BASE> {
 
-    public WindowLoader(T controller) {
+    protected BASE controller;
+    protected LOADING loadingController;
+    protected Stage stage;
+    protected WindowInitializer windowInitializer;
+
+    public WindowLoader(BASE controller, ControllerType parentController) {
+        this(parentController);
         this.controller = controller;
+    }
+
+    public WindowLoader(ControllerType parentController) {
+        this.stage = findStageByControllerType(parentController);
+        this.windowInitializer = new WindowInitializer(this.stage);
+    }
+
+    protected Stage findStageByControllerType(ControllerType controllerType) {
+        return (Stage) Stage.getWindows().stream().filter(window ->
+                window.getScene().getRoot().getId().equals(controllerType.controllerName))
+                .findFirst().orElseThrow();
     }
 
 }

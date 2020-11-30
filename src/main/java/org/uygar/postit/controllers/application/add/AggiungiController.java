@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application;
+package org.uygar.postit.controllers.application.add;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
+import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.application.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.application.exception.WrongFieldsException;
 import org.uygar.postit.data.database.DataMiner;
@@ -19,10 +20,10 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-public class AggiungiController implements Initializable {
+public class AggiungiController extends BaseController implements Initializable {
 
     @FXML
-    public VBox root;
+    public VBox add;
 
     @FXML
     TextField nomePostField;
@@ -62,7 +63,7 @@ public class AggiungiController implements Initializable {
 
         Post post = new Post(null, name, LocalDateTime.now(), sortingType);
 
-        Window currentWindow = this.root.getScene().getWindow();
+        Window currentWindow = this.add.getScene().getWindow();
         WindowCoordinatesContainer coordinates = new WindowCoordinatesContainer(currentWindow);
 
         boolean fieldsNotValid = areFieldsValid(name, sortingType);
@@ -98,7 +99,7 @@ public class AggiungiController implements Initializable {
 
     private void addPostToViewAndUpdate(Post post) {
         this.postGridViewer.postOrganizer.add(post);
-        this.root.getScene().getWindow().hide();
+        this.add.getScene().getWindow().hide();
         this.postGridViewer.updateLastWhenAdded();
     }
 
@@ -112,7 +113,7 @@ public class AggiungiController implements Initializable {
 
     @FXML
     public void onAnnulla() {
-        root.getScene().getWindow().hide();
+        add.getScene().getWindow().hide();
     }
 
     public void setPostGridViewer(PostGridViewer postGridViewer) {

@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import org.jetbrains.annotations.NotNull;
+import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.application.statistica.utility.TableViewColumnsBuilder;
 import org.uygar.postit.controllers.application.statistica.utility.grafico.Statistica;
 import org.uygar.postit.controllers.application.statistica.utility.grafico.StatisticaGrafico;
@@ -25,10 +26,10 @@ import java.util.function.BiPredicate;
 import static javafx.collections.FXCollections.*;
 import static org.uygar.postit.controllers.application.statistica.utility.StatisticaUtils.*;
 
-public class StatisticaController {
+public class StatisticaController extends BaseController {
 
     @FXML
-    public TabPane root;
+    public TabPane statistica;
 
     @FXML
     HBox tableContainer;

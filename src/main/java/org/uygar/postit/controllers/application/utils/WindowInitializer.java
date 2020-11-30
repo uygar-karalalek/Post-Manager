@@ -12,10 +12,10 @@ import javafx.util.Duration;
 
 public class WindowInitializer {
 
-    private final Pane rootPane;
+    private final Stage rootStage;
 
-    public WindowInitializer(Pane rootPane) {
-        this.rootPane = rootPane;
+    public WindowInitializer(Stage rootStage) {
+        this.rootStage = rootStage;
     }
 
     public Stage getStageWithModality(double prefWidth, double prefHeight, Modality modality, boolean resizable) {
@@ -43,15 +43,11 @@ public class WindowInitializer {
     }
 
     void setStageX(double prefWidth, Stage stage) {
-        stage.setX((getStage().getWidth() / 2 - prefWidth / 2) + getStage().getX());
+        stage.setX((this.rootStage.getWidth() / 2 - prefWidth / 2) + this.rootStage.getX());
     }
 
     void setStageY(double prefHeight, Stage stage) {
-        stage.setY((getStage().getHeight() / 2 - prefHeight / 2) + getStage().getY());
-    }
-
-    public Stage getStage() {
-        return (Stage) rootPane.getScene().getWindow();
+        stage.setY((this.rootStage.getHeight() / 2 - prefHeight / 2) + this.rootStage.getY());
     }
 
     public Stage initializeApplicationWindowAndGet(Dimension2D dimension, Modality modality, Parent root, boolean resizable) {

@@ -2,16 +2,9 @@ package org.uygar.postit.controllers.application.app;
 
 import javafx.application.Platform;
 import javafx.beans.InvalidationListener;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.StringExpression;
-import javafx.beans.property.ReadOnlyStringProperty;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.MapChangeListener;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.geometry.Dimension2D;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
@@ -19,27 +12,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
+import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.controllers.application.utils.app_loader.*;
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
-import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
-import java.net.URL;
-import java.util.Map;
 import java.util.Optional;
-import java.util.ResourceBundle;
 
-public class AppController implements Initializable {
+public class AppController extends BaseController {
 
     @FXML
-    public BorderPane rootPane;
+    public BorderPane application;
     @FXML
     Text title;
     @FXML
@@ -52,22 +41,17 @@ public class AppController implements Initializable {
     MenuBar menuBar;
 
     public LogProperties properties;
-    public WindowInitializer windowInitializer;
-    public WindowLoader<AppController> statisticaLoader, filterLoader, aggiungiLoader;
+    public StatisticaLoader statisticaLoader;
+    public FilterLoader filterLoader;
+    public AggiungiLoader aggiungiLoader;
 
     public PostGridViewer postGrid;
     public DataMiner dataMiner = new DataMiner();
     public PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        init();
-    }
-
-    private void init() {
+    public void init() {
         initAndRequestFocusToSearchField();
         initPostGrid();
-        windowInitializer = new WindowInitializer(rootPane);
         this.searchField.textProperty().addListener(this::onSearchChanged);
     }
 
@@ -120,7 +104,7 @@ public class AppController implements Initializable {
 
     @FXML
     public void onMouseDragged(MouseEvent event) {
-        Stage mainStage = (Stage) this.rootPane.getScene().getWindow();
+        Stage mainStage = (Stage) this.application.getScene().getWindow();
         double xDiff = event.getScreenX() - (mainStage.getX() + onClickedX);
         double yDiff = event.getScreenY() - (mainStage.getY() + onClickedY);
 
@@ -144,7 +128,7 @@ public class AppController implements Initializable {
 
     public void setHidingStageEventAndShowAndWait(Stage stage, ButtonDisableBinding disableBinding) {
         if (disableBinding != null)
-            stage.setOnHiding(disableBinding::closedByEventClosed);
+            stage.setOnHiding(disableBinding::enableButton);
         stage.showAndWait();
     }
 
@@ -163,14 +147,14 @@ public class AppController implements Initializable {
     }
 
     public String getCurrentStyleCssFilePath() {
-        return this.rootPane.getStylesheets().get(0);
+        return this.application.getStylesheets().get(0);
     }
 
     public void bindStyleSheetWithControllerName(String controllerName, String pkgName, Parent pane) {
         String stdPath = "org/uygar/stylesheets/" + pkgName + "/";
         String endPath = controllerName + "_" + getCurrentStyleColorFileName();
         pane.getStylesheets().setAll(stdPath + endPath);
-        this.rootPane.getProperties().addListener((InvalidationListener) change -> {
+        this.application.getProperties().addListener((InvalidationListener) change -> {
             String updatedPath = controllerName + "_" + getCurrentStyleColorFileName();
             pane.getStylesheets().setAll(stdPath + updatedPath);
         });
@@ -182,8 +166,8 @@ public class AppController implements Initializable {
     }
 
     public void setTheme(String cssFilePath) {
-        this.rootPane.getStylesheets().setAll(cssFilePath);
-        this.rootPane.getProperties().put("style", cssFilePath);
+        this.application.getStylesheets().setAll(cssFilePath);
+        this.application.getProperties().put("style", cssFilePath);
     }
 
     public void setLogProperties(LogProperties properties) {

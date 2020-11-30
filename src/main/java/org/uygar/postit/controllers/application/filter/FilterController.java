@@ -8,6 +8,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Window;
+import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.application.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.application.exception.WrongFieldsException;
 import org.uygar.postit.controllers.application.filter.util.FilterBuilder;
@@ -16,10 +17,10 @@ import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.io.File;
 
-public class FilterController {
+public class FilterController extends BaseController {
 
     @FXML
-    public GridPane root;
+    public GridPane filter;
 
     @FXML
     public CheckBox inizio, tra, contiene, finisce, ignoraMaiusc;
@@ -85,7 +86,7 @@ public class FilterController {
     }
 
     private void throwNotValidException() throws WrongFieldsException {
-        Window window = root.getScene().getWindow();
+        Window window = filter.getScene().getWindow();
         WindowCoordinatesContainer coordinates = new WindowCoordinatesContainer(window);
 
         throw new WrongFieldsException("Hai sbagliato a compilare i campi!", coordinates);
@@ -119,7 +120,7 @@ public class FilterController {
 
     @FXML
     public void onAnnulla() {
-        this.root.getScene().getWindow().hide();
+        this.filter.getScene().getWindow().hide();
     }
 
     public boolean fieldsNotValid() {
