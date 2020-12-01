@@ -5,7 +5,6 @@
 #postIt {
     -fx-arc-height: 2em;
     -fx-arc-width: 2em;
-    -fx-border-color: #81e5ff;
 }
 
 #postItTitle {
