@@ -4,7 +4,7 @@ import javafx.stage.Stage;
 import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.application.utils.WindowInitializer;
 
-public abstract class WindowLoader<BASE, LOADING> implements Loader<BASE> {
+public abstract class WindowLoader<BASE, LOADING> implements Loader {
 
     protected BASE controller;
     protected LOADING loadingController;

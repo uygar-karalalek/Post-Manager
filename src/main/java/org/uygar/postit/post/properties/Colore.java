@@ -5,10 +5,10 @@ import javafx.scene.paint.Color;
 public enum Colore {
 
     BLU(Color.web("#81e5ff"),"blue", Color.BLACK),
-    ROSSO(Color.RED, "red", Color.web("#dcdee0")),
-    GIALLO(Color.YELLOW,"yellow", Color.BLACK),
-    VERDE(Color.GREEN,"green", Color.WHITE),
-    ARANCIONE(Color.ORANGE, "orange", Color.WHITE);
+    ROSSO(Color.web("#f56891"), "red", Color.web("#dcdee0")),
+    GIALLO(Color.web("#f6d56a"),"yellow", Color.BLACK),
+    VERDE(Color.web("#68f58b"),"green", Color.WHITE),
+    ARANCIONE(Color.web("#c4882d"), "orange", Color.WHITE);
 
     public Color postItColor;
     public String colorName;

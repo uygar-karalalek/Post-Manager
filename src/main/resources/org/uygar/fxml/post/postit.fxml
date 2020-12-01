@@ -72,9 +72,9 @@
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
                      <children>
-                        <Button fx:id="salvaBtn" mnemonicParsing="false" text="Salva" />
-                        <Button fx:id="annullaBtn" mnemonicParsing="false" text="Annulla" />
-                        <Button fx:id="rimuoviBtn" mnemonicParsing="false" text="Rimuovi" />
+                        <Button fx:id="salvaBtn" mnemonicParsing="false" onAction="#onSalva" text="Salva" />
+                        <Button fx:id="annullaBtn" mnemonicParsing="false" onAction="#onAnnulla" text="Annulla" />
+                        <Button fx:id="rimuoviBtn" mnemonicParsing="false" onAction="#onRimuovi" text="Rimuovi" />
                      </children>
                   </HBox>
                </children>
