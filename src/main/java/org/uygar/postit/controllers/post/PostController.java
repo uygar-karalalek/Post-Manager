@@ -51,6 +51,9 @@ public class PostController extends BaseController {
     private Dimension2D minDimension;
 
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
+        // Identify a post pane in Stage windows
+        post.setUserData(fatherPost);
+
         this.loadingPost = fatherPost;
         this.minDimension = initialWindowDimension;
         this.postItGrid = new PostItGridViewer(fatherPost, miner);
@@ -61,8 +64,8 @@ public class PostController extends BaseController {
         this.rootTabPane.prefHeightProperty().bind(post.heightProperty());
     }
 
-    public static void openPostItController(PostIt postIt) {
-        PostItLoader loader = new PostItLoader(postIt);
+    public static void openPostItController(PostIt postIt, Post fatherPost) {
+        PostItLoader loader = new PostItLoader(postIt, fatherPost);
         loader.load();
     }
 

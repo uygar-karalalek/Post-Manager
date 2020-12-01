@@ -2,10 +2,24 @@
     -fx-background-color: linear-gradient(grey, white);
 }
 
-#title {
+.button {
+    -fx-background-color: linear-gradient(white, grey);
+    -fx-pref-height: 35;
+    -fx-background-radius: 0.5em;
     -fx-font-family: Arial;
-    -fx-font-size: 24px;
-    -fx-text-fill: radial-gradient(center 20px -20px, radius 30px, grey, black);
+    -fx-font-size: 12pt;
+}
+
+.button:pressed {
+    -fx-background-color: linear-gradient(cornsilk, cornflowerblue);
+    -fx-text-fill: black;
+}
+
+#title {
+    -fx-text-alignment: center;
+    -fx-font-family: Arial;
+    -fx-font-size: 30;
+    -fx-font-weight: bolder;
 }
 
 #sortLbl {
@@ -70,6 +84,8 @@
 #nomePostField {
     -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, grey, white);
     -fx-font-family: Arial;
+    -fx-border-width: 0.5;
+    -fx-border-color: black;
     -fx-alignment: center;
     -fx-font-size: 12pt;
     -fx-prompt-text-fill: grey;

@@ -10,12 +10,14 @@ import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.controllers.post.postit.PostItController;
+import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
 
 public class PostItLoader extends WindowLoader<PostController, PostItController> {
 
-    public PostItLoader(PostIt postIt) {
-        super(ControllerType.POST);
+    public PostItLoader(PostIt postIt, Post fatherPost) {
+        initPostStageWithFatherPost(fatherPost);
+        setWindowInitializerByStage(this.stage);
         loadingController = (PostItController) FXLoader.getLoadedController("postit", "post");
         loadingController.init(postIt);
     }
@@ -33,6 +35,15 @@ public class PostItLoader extends WindowLoader<PostController, PostItController>
         postItStage.initStyle(StageStyle.TRANSPARENT);
         postItStage.getScene().setFill(Color.TRANSPARENT);
         return postItStage;
+    }
+
+    private void initPostStageWithFatherPost(Post fatherPost) {
+        Stage.getWindows().forEach(window -> {
+            Object userData = window.getScene().getRoot().getUserData();
+            if (userData instanceof Post)
+                if (fatherPost.equals(userData))
+                    stage = (Stage) window;
+        });
     }
 
 }

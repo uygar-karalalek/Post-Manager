@@ -49,7 +49,7 @@ public class PostItGridViewer extends FlowPane {
     private List<PostItViewer> addListenersToPostItViewersAndThenReturn(List<PostItViewer> postItViewers) {
         postItViewers.forEach(postItViewer -> postItViewer.getMainGraphic().setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.PRIMARY)
-                PostController.openPostItController(postItViewer.getPostIt());
+                PostController.openPostItController(postItViewer.getPostIt(), postItOrganizer.getFatherPost());
             else if (mouseEvent.getButton() == MouseButton.SECONDARY)
                 postItViewer.changePostItAspectBasedOnStateAndSaveToDatabase(postItOrganizer.getDataMiner());
         }));

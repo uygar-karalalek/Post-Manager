@@ -34,7 +34,7 @@
 
 .scroll-pane > .viewport {
     -fx-background-radius: 2em;
-    -fx-background-color: radial-gradient(center 450px 180px, radius 500px, grey, whitesmoke);
+    -fx-background-color: radial-gradient(center 450px 180px, radius 500px, #acacac, whitesmoke);
 }
 
 .scroll-pane > .corner {
@@ -164,26 +164,28 @@
 }
 
 #post {
-    -fx-background-radius: 0.9em;
-    -fx-border-radius: 0.9em;
-    -fx-border-color: #000000;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, white, darkgrey);
-    -fx-text-fill: black;
-    -fx-border-width: 0.3;
+    -fx-background-radius: 0.4em;
+    -fx-border-radius: 0.4em;
+     -fx-background-color: radial-gradient(center 130px 0px, radius 250px, #9a9a9a, #d1d8d8);
+    -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
+    -fx-border-width: 0.4;
+    -fx-border-color: black;
 }
 
 #post:hover {
     -fx-scale-y: 1.04;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, #ffc4c4, #9c9daa);
-    -fx-text-fill: black;
+    -fx-background-color: radial-gradient(center 120px 40px, radius 200px, #90968f, #8680ec);
+    -fx-text-fill: white;
     -fx-font-family: Arial;
     -fx-font-size: 12.3pt;
+    -fx-border-color: white;
+    -fx-border-width: 1;
 }
 
 #post:disabled {
     -fx-opacity: 1;
     -fx-text-fill: white;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, #51db8d, #9ea3f9);
+    -fx-background-color: radial-gradient(center 130px 0px, radius 250px, #db9696, #e2e1e1);
 }
