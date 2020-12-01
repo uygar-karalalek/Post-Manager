@@ -11,6 +11,9 @@ public abstract class WindowLoader<BASE, LOADING> implements Loader<BASE> {
     protected Stage stage;
     protected WindowInitializer windowInitializer;
 
+    public WindowLoader() {
+    }
+
     public WindowLoader(BASE controller, ControllerType parentController) {
         this(parentController);
         this.controller = controller;
@@ -18,13 +21,17 @@ public abstract class WindowLoader<BASE, LOADING> implements Loader<BASE> {
 
     public WindowLoader(ControllerType parentController) {
         this.stage = findStageByControllerType(parentController);
-        this.windowInitializer = new WindowInitializer(this.stage);
+        setWindowInitializerByStage(this.stage);
     }
 
     protected Stage findStageByControllerType(ControllerType controllerType) {
         return (Stage) Stage.getWindows().stream().filter(window ->
                 window.getScene().getRoot().getId().equals(controllerType.controllerName))
                 .findFirst().orElseThrow();
+    }
+
+    protected void setWindowInitializerByStage(Stage stage) {
+        this.windowInitializer = new WindowInitializer(stage);
     }
 
 }

@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane fx:id="filter" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="486.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.filter.FilterController">
+    <columnConstraints>
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="317.0" minWidth="10.0" prefWidth="227.0" />
+        <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="286.0" minWidth="10.0" prefWidth="265.0" />
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="66.0" minHeight="10.0" prefHeight="66.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="51.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+    </rowConstraints>
+    <children>
+        <CheckBox id="filterChoices" fx:id="ignoraMaiusc" mnemonicParsing="false" selected="true" text="Ignora maiuscole" textFill="WHITE" GridPane.rowIndex="5">
+            <font>
+                <Font name="Arial" size="15.0" />
+            </font>
+        </CheckBox>
+        <CheckBox id="filterChoices" fx:id="inizio" alignment="CENTER" contentDisplay="TOP" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" text="Inizia con" textFill="WHITE" GridPane.rowIndex="1">
+            <font>
+                <Font name="Arial" size="15.0" />
+            </font>
+        </CheckBox>
+        <CheckBox id="filterChoices" fx:id="finisce" mnemonicParsing="false" text="Finisce con" textFill="WHITE" GridPane.rowIndex="4">
+            <font>
+                <Font name="Arial" size="15.0" />
+            </font>
+        </CheckBox>
+        <CheckBox id="filterChoices" fx:id="contiene" mnemonicParsing="false" text="Contiene" textFill="WHITE" GridPane.rowIndex="3">
+            <font>
+                <Font name="Arial" size="15.0" />
+            </font>
+        </CheckBox>
+        <CheckBox id="filterChoices" fx:id="tra" mnemonicParsing="false" text="Tra Date" textFill="WHITE" GridPane.rowIndex="2">
+            <font>
+                <Font name="Arial" size="15.0" />
+            </font>
+        </CheckBox>
+        <HBox alignment="CENTER_LEFT" prefHeight="57.0" prefWidth="226.0" spacing="10.0" GridPane.rowIndex="6">
+            <children>
+                <Button fx:id="finitoBtn" mnemonicParsing="false" onAction="#onFinito" prefHeight="25.0" prefWidth="80.0" text="Filtra" />
+                <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#onReset" prefHeight="25.0" prefWidth="80.0" text="Reset" />
+                <Button fx:id="annullaBtn" mnemonicParsing="false" onAction="#onAnnulla" prefHeight="25.0" prefWidth="80.0" text="Chiudi" />
+            </children>
+        </HBox>
+        <Text id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="FILTRA I POST" wrappingWidth="215.13671875">
+            <GridPane.margin>
+                <Insets top="10.0" />
+            </GridPane.margin>
+        </Text>
+        <TextField fx:id="inizioField" prefHeight="25.0" prefWidth="69.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <GridPane.margin>
+                <Insets right="70.0" />
+            </GridPane.margin>
+        </TextField>
+        <VBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="247.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <children>
+                <DatePicker fx:id="data1" editable="false" prefHeight="47.0" prefWidth="177.0" promptText="prima data..." styleClass="traDate" />
+                <DatePicker fx:id="data2" editable="false" prefHeight="40.0" prefWidth="177.0" promptText="seconda data..." styleClass="traDate" />
+            </children>
+            <GridPane.margin>
+                <Insets bottom="10.0" top="10.0" />
+            </GridPane.margin>
+        </VBox>
+        <TextField fx:id="contieneField" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <GridPane.margin>
+                <Insets right="70.0" />
+            </GridPane.margin>
+        </TextField>
+        <TextField fx:id="finisceField" prefHeight="25.0" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <GridPane.margin>
+                <Insets right="70.0" />
+            </GridPane.margin>
+        </TextField>
+        <ImageView fitHeight="62.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../../images/filter.png" />
+            </image>
+        </ImageView>
+    </children>
+    <padding>
+        <Insets left="20.0" right="10.0" top="10.0" />
+    </padding>
+</GridPane>

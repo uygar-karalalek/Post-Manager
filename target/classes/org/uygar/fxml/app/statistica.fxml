@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<TabPane fx:id="statistica" minHeight="-Infinity" minWidth="-Infinity" prefHeight="580" prefWidth="900" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.statistica.StatisticaController">
+    <tabs>
+        <Tab text="Grafico a dispersione">
+            <content>
+                <SplitPane prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                        <SplitPane fx:id="dispersionePane" dividerPositions="0.8360655737704918" orientation="VERTICAL" prefHeight="150.0" prefWidth="160.0">
+                            <items>
+                                <VBox fx:id="scatterBox" prefHeight="541.0" prefWidth="1147.0" />
+                                <HBox id="hbox" fx:id="padiglioneDispersione" alignment="CENTER_LEFT" maxHeight="60.0" prefHeight="16.0" prefWidth="1147.0">
+                                    <children>
+                                        <Text id="titoloDati" fx:id="datiTitleDispersione" strokeType="OUTSIDE" strokeWidth="0.0" text="Dati" wrappingWidth="80.0">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin></Text>
+                              <Separator fx:id="datiSeparatorDispersione" orientation="VERTICAL" prefHeight="60.0" prefWidth="0.0" />
+                                    </children>
+                                </HBox>
+                            </items>
+                        </SplitPane>
+                    </items>
+                </SplitPane>
+            </content>
+        </Tab>
+        <Tab text="Grafico a linee">
+            <content>
+                <SplitPane fx:id="lineePane" dividerPositions="0.9083" orientation="VERTICAL" prefHeight="160.0" prefWidth="200.0">
+                    <items>
+                        <VBox fx:id="lineBox" prefHeight="496.0" prefWidth="935.0" />
+                        <HBox id="hbox" fx:id="padiglioneLinee" alignment="CENTER_LEFT" maxHeight="60.0" prefHeight="56.0" prefWidth="1028.0">
+                            <children>
+                                <Text id="titoloDati" fx:id="datiTitleLinee" strokeType="OUTSIDE" strokeWidth="0.0" text="Dati" wrappingWidth="81.0">
+                           <HBox.margin>
+                              <Insets right="10.0" top="-0.0" />
+                           </HBox.margin></Text>
+                        <Separator fx:id="datiSeparatorLinee" orientation="VERTICAL" prefHeight="87.0" prefWidth="0.0" />
+                            </children>
+                        </HBox>
+                    </items>
+                </SplitPane>
+            </content>
+        </Tab>
+        <Tab text="Tabella dei valori">
+            <content>
+                <VBox fx:id="valoriPane" alignment="TOP_CENTER" prefHeight="548.0" prefWidth="1016.0">
+                    <children>
+                        <Label id="titleModificaDati" alignment="CENTER" prefHeight="104.0" prefWidth="286.0" text="Modifica Dati" textAlignment="CENTER">
+                            <font>
+                                <Font name="Bookman Old Style" size="36.0" />
+                            </font>
+                        </Label>
+                        <HBox fx:id="tableContainer" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="515.0" prefWidth="1028.0" spacing="30.0">
+                     <children>
+                        <TableView fx:id="tabellaOre" prefHeight="347.0" prefWidth="400.0">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin></TableView>
+                        <TableView fx:id="tabellaMesi" prefHeight="347.0" prefWidth="400.0">
+                           <HBox.margin>
+                              <Insets right="10.0" />
+                           </HBox.margin></TableView>
+                     </children>
+                        </HBox>
+                    </children>
+                </VBox>
+            </content>
+        </Tab>
+    </tabs>
+</TabPane>

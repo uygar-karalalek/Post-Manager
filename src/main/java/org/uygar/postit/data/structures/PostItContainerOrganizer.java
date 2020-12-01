@@ -42,4 +42,8 @@ public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implemen
         return this.fatherPost.getSortType();
     }
 
+    public Post getFatherPost() {
+        return fatherPost;
+    }
+
 }

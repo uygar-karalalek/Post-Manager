@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.RadialGradient?>
+<?import javafx.scene.paint.Stop?>
+<?import javafx.scene.text.Font?>
+
+<VBox id="root" fx:id="root" alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="275.0" prefWidth="366.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.AggiungiController">
+   <padding>
+      <Insets left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <children>
+      <Label id="title" alignment="CENTER" contentDisplay="TOP" opacity="0.65" prefHeight="1.0" prefWidth="322.0" text="AGGIUNGI " textAlignment="CENTER">
+         <font>
+            <Font name="Arial" size="24.0" />
+         </font>
+         <VBox.margin>
+            <Insets bottom="20.0" top="-20.0" />
+         </VBox.margin>
+         <textFill>
+            <RadialGradient centerX="0.5611111111111111" centerY="0.3619047619047619" focusAngle="-50.19" focusDistance="-0.5116279069767442" radius="0.16279069767441862">
+               <stops>
+                  <Stop color="#140505" />
+                  <Stop color="WHITE" offset="1.0" />
+               </stops>
+            </RadialGradient>
+         </textFill>
+      </Label>
+      <TextField id="nomePostField" fx:id="nomePostField" alignment="CENTER" prefHeight="37.0" prefWidth="326.0" promptText="nome del post (max 18)...">
+         <font>
+            <Font name="Arial" size="14.0" />
+         </font>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </TextField>
+      <VBox alignment="CENTER" prefHeight="68.0" prefWidth="326.0" spacing="10.0">
+         <children>
+            <Label id="sortLbl" text="Ordinamento" textFill="#ff1f1f">
+               <font>
+                  <Font name="Arial" size="19.0" />
+               </font>
+            </Label>
+            <SplitMenuButton fx:id="sortType" mnemonicParsing="false" popupSide="RIGHT" prefHeight="27.0" prefWidth="158.0">
+            </SplitMenuButton>
+         </children>
+         <VBox.margin>
+            <Insets bottom="20.0" top="10.0" />
+         </VBox.margin>
+      </VBox>
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="200.0" spacing="20.0">
+         <children>
+            <Button id="okBtn" fx:id="btnOk" mnemonicParsing="false" onMouseClicked="#onOk" prefHeight="32.0" prefWidth="69.0" text="OK" />
+            <Button id="annullaBtn" fx:id="btnAnnulla" mnemonicParsing="false" onMouseClicked="#onAnnulla" text="Annulla" />
+         </children>
+      </HBox>
+   </children>
+</VBox>
