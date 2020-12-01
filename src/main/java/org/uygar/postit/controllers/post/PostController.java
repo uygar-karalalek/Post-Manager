@@ -28,19 +28,14 @@ public class PostController extends BaseController {
 
     @FXML
     public StackPane post;
-
     @FXML
     public TabPane rootTabPane;
-
     @FXML
     public ScrollPane gridFatherScroll;
-
     @FXML
     VBox vBoxOperationsContainer;
-
     @FXML
     private Label postTitle;
-
     @FXML
     private PieChart pieChart;
 

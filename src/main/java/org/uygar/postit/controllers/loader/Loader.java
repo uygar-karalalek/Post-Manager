@@ -1,6 +1,6 @@
 package org.uygar.postit.controllers.loader;
 
-public interface Loader<T> {
+public interface Loader {
 
     void load();
 

@@ -38,17 +38,16 @@ public class PostStatistics {
 
     private double numOfPostItsDonePercentage() {
         int numOfPostIts = Math.max(numOfPostIts(), 1);
-        return getNumOfDonePostIts() * 1.0 / numOfPostIts;
+        return getNumOfDonePostIts() / numOfPostIts;
     }
 
     private double numOfPostItsUnDonePercentage() {
-        System.out.println("num: " + (1.0-numOfPostItsDonePercentage()));
         return 1.0 - numOfPostItsDonePercentage();
     }
 
-    private Long getNumOfDonePostIts() {
+    private Double getNumOfDonePostIts() {
         return postIts.getList().stream()
-                .filter(PostIt::isFatto).count();
+                .filter(PostIt::isFatto).count() * 1.0;
     }
 
     private int numOfPostIts() {

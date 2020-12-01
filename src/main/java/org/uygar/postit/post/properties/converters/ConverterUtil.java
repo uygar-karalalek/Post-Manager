@@ -44,7 +44,6 @@ public class ConverterUtil {
 
     private static Optional<PostIt> parseFromAbstractPostItToObject(Map<String, List<String>> postIts, int dataElementIndex) {
         if (isValidMappedObjectList(postIts)) {
-            System.out.println(postIts);
             int id = Integer.parseInt(postIts.get("id").get(dataElementIndex));
             int priority = Integer.parseInt(postIts.get("priority").get(dataElementIndex));
             boolean done = Boolean.parseBoolean(postIts.get("done").get(dataElementIndex));

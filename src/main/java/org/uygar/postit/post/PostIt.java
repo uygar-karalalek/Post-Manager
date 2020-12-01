@@ -5,10 +5,14 @@ import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.post.properties.Colore;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Vector;
 
 public class PostIt {
 
-    private IntegerProperty id, priority;
+    // DB Order: id, priority, colore, postid, creationdate, text
+
+    private IntegerProperty id, postFatherId, priority;
     private SimpleObjectProperty<LocalDateTime> dataCreazione, dataScadenza;
     private SimpleStringProperty titolo;
     private SimpleObjectProperty<Colore> colore;
@@ -34,6 +38,16 @@ public class PostIt {
     }
     public void setId(int id) {
         this.id.set(id);
+    }
+
+    public int getPostFatherId() {
+        return postFatherId.get();
+    }
+    public IntegerProperty postFatherIdProperty() {
+        return postFatherId;
+    }
+    public void setPostFatherId(int postFatherId) {
+        this.postFatherId.set(postFatherId);
     }
 
     public int getPriority() {
@@ -130,6 +144,28 @@ public class PostIt {
 
     public int compareToUndone(@NotNull PostIt postIt) {
         return compareToDone(postIt) * - 1;
+    }
+
+    // DB Order: id, priority, colore, postid, creationdate, text
+
+    public void setBaseValuesFrom(PostIt postIt) {
+        this.setId(postIt.getId());
+        this.setTitolo(postIt.getTitolo());
+        this.setPriority(postIt.getPriority());
+        this.setColore(postIt.getColore());
+        this.setTesto(postIt.getTesto());
+    }
+
+    public String[] values() {
+        Vector<String> properties = new Vector<>();
+        properties.add(Integer.toString(this.id.get()));
+        properties.add(Integer.toString(this.priority.get()));
+        properties.add(this.colore.get().toString().toUpperCase());
+        properties.add(Integer.toString(this.postFatherId.get()));
+        properties.add(this.dataCreazione.get().toString());
+        properties.add(this.testo.get());
+
+        return properties.toArray(new String[0]);
     }
 
 }
