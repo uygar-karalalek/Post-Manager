@@ -14,7 +14,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.BaseController;
-import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.controllers.application.utils.app_loader.*;
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
 import org.uygar.postit.data.database.DataMiner;
@@ -62,11 +61,11 @@ public class AppController extends BaseController {
 
     private void initPostGrid() {
         postGrid = new PostGridViewer(postOrganizer);
-        postGrid.selected.addListener(this::onPostSelectChanged);
+        postGrid.selected.addListener(this::onSelectedPostChange);
         this.scrollPane.setContent(postGrid);
     }
 
-    public void onPostSelectChanged(ObservableValue<? extends Post> v, Post oldV, Post newV) {
+    public void onSelectedPostChange(ObservableValue<? extends Post> v, Post oldV, Post newV) {
         Optional<Post> newPost = Optional.ofNullable(newV);
         newPost.ifPresent(this::loadPost);
     }

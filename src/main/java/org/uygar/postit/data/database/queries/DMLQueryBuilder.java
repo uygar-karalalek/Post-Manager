@@ -40,7 +40,7 @@ public class DMLQueryBuilder implements DML {
     public void convertValues(String[] values) {
         for (int i = 0; i < values.length; i++)
             if (!values[i].equals("null"))
-                values[i] = "'" + values[i] + "'";
+                values[i] = "\"" + values[i] + "\"";
     }
 
     @Override

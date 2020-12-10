@@ -34,7 +34,10 @@
       </StackPane>
    </center>
    <top>
-      <HBox id="coloreHBox" fx:id="coloreHBox" alignment="BOTTOM_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="BOTTOM_RIGHT" />
+      <HBox id="coloreHBox" fx:id="coloreHBox" alignment="BOTTOM_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="BOTTOM_RIGHT">
+         <BorderPane.margin>
+            <Insets right="16.0" />
+         </BorderPane.margin></HBox>
    </top>
    <left>
       <VBox prefHeight="300.0" prefWidth="185.0" BorderPane.alignment="CENTER">
@@ -74,7 +77,7 @@
                      <children>
                         <Button fx:id="salvaBtn" mnemonicParsing="false" onAction="#onSalva" text="Salva" />
                         <Button fx:id="annullaBtn" mnemonicParsing="false" onAction="#onAnnulla" text="Annulla" />
-                        <Button fx:id="rimuoviBtn" mnemonicParsing="false" onAction="#onRimuovi" text="Rimuovi" />
+                        <Button fx:id="rimuoviBtn" disable="true" mnemonicParsing="false" onAction="#onRimuovi" text="Rimuovi" />
                      </children>
                   </HBox>
                </children>

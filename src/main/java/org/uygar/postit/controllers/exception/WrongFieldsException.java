@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.exception;
+package org.uygar.postit.controllers.exception;
 
 import javafx.scene.control.Alert;
 import org.uygar.postit.controllers.WindowDimensions;
@@ -35,6 +35,12 @@ public class WrongFieldsException extends Exception {
         alert.setContentText(message);
         alert.setX(x);
         alert.setY(y);
+    }
+
+    public static void throwWrongFieldExceptionIf(boolean condition, String message,
+                                           WindowCoordinatesContainer errorViewCordinates) throws WrongFieldsException {
+        if (condition)
+            throw new WrongFieldsException(message, errorViewCordinates);
     }
 
 }

@@ -19,6 +19,18 @@ public class PostIt {
     private SimpleStringProperty testo;
     private SimpleBooleanProperty fatto;
 
+    public PostIt(int id, int fatherId, boolean fatto, String titolo, String testo, LocalDateTime dataCreazione, LocalDateTime dataFine, Colore colore, int priority) {
+        this.id = new SimpleIntegerProperty(id);
+        this.postFatherId = new SimpleIntegerProperty(fatherId);
+        this.priority = new SimpleIntegerProperty(priority);
+        this.fatto = new SimpleBooleanProperty(fatto);
+        this.titolo = new SimpleStringProperty(titolo);
+        this.testo = new SimpleStringProperty(testo);
+        this.dataCreazione = new SimpleObjectProperty<>(dataCreazione);
+        this.dataScadenza = new SimpleObjectProperty<>(dataFine);
+        this.colore = new SimpleObjectProperty<>(colore);
+    }
+
     public PostIt(int id, boolean fatto, String titolo, String testo, LocalDateTime dataCreazione, LocalDateTime dataFine, Colore colore, int priority) {
         this.id = new SimpleIntegerProperty(id);
         this.priority = new SimpleIntegerProperty(priority);
@@ -146,26 +158,14 @@ public class PostIt {
         return compareToDone(postIt) * - 1;
     }
 
-    // DB Order: id, priority, colore, postid, creationdate, text
-
-    public void setBaseValuesFrom(PostIt postIt) {
-        this.setId(postIt.getId());
-        this.setTitolo(postIt.getTitolo());
-        this.setPriority(postIt.getPriority());
-        this.setColore(postIt.getColore());
-        this.setTesto(postIt.getTesto());
+    public static PostIt empty() {
+        return new PostIt(-1, -1,false, "", "",
+                LocalDateTime.now(), LocalDateTime.now(), Colore.GIALLO, -1);
     }
 
-    public String[] values() {
-        Vector<String> properties = new Vector<>();
-        properties.add(Integer.toString(this.id.get()));
-        properties.add(Integer.toString(this.priority.get()));
-        properties.add(this.colore.get().toString().toUpperCase());
-        properties.add(Integer.toString(this.postFatherId.get()));
-        properties.add(this.dataCreazione.get().toString());
-        properties.add(this.testo.get());
-
-        return properties.toArray(new String[0]);
+    public static PostIt emptyWithId(int id) {
+        return new PostIt(id, -1,false, "", "",
+                LocalDateTime.now(), LocalDateTime.now(), Colore.GIALLO, -1);
     }
 
 }

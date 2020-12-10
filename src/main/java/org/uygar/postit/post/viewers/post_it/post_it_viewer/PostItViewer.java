@@ -1,11 +1,8 @@
 package org.uygar.postit.post.viewers.post_it.post_it_viewer;
 
 import javafx.scene.layout.*;
-import org.uygar.postit.controllers.application.FXLoader;
-import org.uygar.postit.controllers.post.postit.PostItController;
 import org.uygar.postit.data.database.DataMiner;
-import org.uygar.postit.data.database.queries.DMLQueryBuilder;
-import org.uygar.postit.data.database.queries.Query;
+import org.uygar.postit.data.query_utils.QueryUtils;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.PostItMouseInteractionManager;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.PostItViewerBasicGraphicsBuilder;
@@ -26,7 +23,7 @@ public class PostItViewer extends VBox {
     public PostItViewer(PostIt postIt) {
         this.postIt = postIt;
         this.setId("post_it");
-        scadenzaTextWrapper = new ScadenzaWrapper(postIt);
+        this.scadenzaTextWrapper = new ScadenzaWrapper(postIt);
         this.graphicBuilder = new PostItViewerBasicGraphicsBuilder(postIt);
         this.getChildren().add(graphicBuilder.getPostItImageWrapper());
         this.interactionManager = new PostItMouseInteractionManager(this);
@@ -35,15 +32,7 @@ public class PostItViewer extends VBox {
 
     public void changePostItAspectBasedOnStateAndSaveToDatabase(DataMiner miner) {
         this.interactionManager.changePostItAspectBasedOnState();
-        executeDoneStateWithQuery(miner);
-    }
-
-    private void executeDoneStateWithQuery(DataMiner miner) {
-        Query query = new DMLQueryBuilder()
-                .update("postit")
-                .set("done", Boolean.toString(postIt.isFatto()))
-                .where("id="+postIt.getId());
-        miner.tryExecute(query);
+        QueryUtils.setDoneStateOfPostItInDatabase(miner, postIt);
     }
 
     public StackPane getMainGraphic() {

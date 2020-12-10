@@ -21,7 +21,6 @@ import org.uygar.postit.data.properties.LogProperties;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.BiPredicate;
 
 import static javafx.collections.FXCollections.*;
 import static org.uygar.postit.controllers.application.statistica.utility.StatisticaUtils.*;
@@ -30,22 +29,16 @@ public class StatisticaController extends BaseController {
 
     @FXML
     public TabPane statistica;
-
     @FXML
     HBox tableContainer;
-
     @FXML
     HBox padiglioneDispersione, padiglioneLinee;
-
     @FXML
     VBox scatterBox, lineBox, valoriPane;
-
     @FXML
     SplitPane dispersionePane, lineePane;
-
     @FXML
     TableView<HourFrequencyModel> tabellaOre;
-
     @FXML
     TableView<MonthFrequencyModel> tabellaMesi;
 
@@ -116,7 +109,7 @@ public class StatisticaController extends BaseController {
         NumberAxis oreAxis = getOreAxis();
         scatterChart = new ScatterChart<>(oreAxis, frequenza_ore);
 
-        List<XYChart.Data<Number, Number>> dataList = getHourFrequency(properties);
+        List<XYChart.Data<Number, Number>> dataList = getHourFrequencyChartData(properties);
         XYChart.Series<Number, Number> xyData = new XYChart.Series<>();
         xyData.getData().addAll(dataList);
         xyData.setName("Frequenza accessi in una certa ora");
@@ -134,7 +127,7 @@ public class StatisticaController extends BaseController {
         lineChart.setTitle("Frequenza accessi nei mesi");
         lineChart.prefHeightProperty().bind(lineBox.heightProperty());
 
-        XYChart.Series<String, Number> xyData = getMonthFrequences(getMonthFrequence(properties));
+        XYChart.Series<String, Number> xyData = getMonthFrequences(getMonthFrequenceChartData(properties));
         ObservableList<XYChart.Series<String, Number>> data = singletonObservableList(xyData);
 
         lineChart.setData(data);
@@ -154,7 +147,7 @@ public class StatisticaController extends BaseController {
 
         scatterChartStatisticalData = scatterChartStatistics.getDataAsTextNodes();
 
-        addStatisticalDataToChart(padiglioneDispersione, scatterChartStatisticalData);
+        setStatisticalDataOfChart(padiglioneDispersione, scatterChartStatisticalData);
     }
 
     public void updateStatisticalDataForLineChart() {
@@ -163,31 +156,32 @@ public class StatisticaController extends BaseController {
 
         lineChartStatisticalData = lineChartStatistics.getDataAsTextNodes();
 
-        addStatisticalDataToChart(padiglioneLinee, lineChartStatisticalData);
+        setStatisticalDataOfChart(padiglioneLinee, lineChartStatisticalData);
     }
 
-    public void addStatisticalDataToChart(HBox padiglioneStats, Text[] nodes) {
-        padiglioneStats.getChildren().removeIf(this::removeNodeIfIsStatisticalOrSeparator);
+    public void setStatisticalDataOfChart(HBox padiglioneStats, Text[] nodes) {
+        padiglioneStats.getChildren().removeIf(this::nodeIsStatisticalDataOrSeparator);
 
-        Arrays.stream(nodes).filter(textNode -> {
+        Arrays.stream(nodes).forEachOrdered(textNode -> {
             padiglioneStats.getChildren().add(textNode);
-            return textNode != nodes[nodes.length-1];
-        }).forEachOrdered(textNode -> {
-            padiglioneStats.getChildren().add(new Separator(Orientation.VERTICAL));
-            int wrappingMultiply = 9;
-            textNode.setWrappingWidth(wrappingMultiply * textNode.getText().length());
+            boolean isLastNode = textNode != nodes[nodes.length-1];
+            if (isLastNode) {
+                padiglioneStats.getChildren().add(new Separator(Orientation.VERTICAL));
+                int wrappingMultiply = 9;
+                textNode.setWrappingWidth(wrappingMultiply * textNode.getText().length());
+            }
         });
 
     }
 
     public void updateGraphs() {
-        lineChart.getData().get(0).getData().setAll(getMonthFrequence(properties));
-        scatterChart.getData().get(0).getData().setAll(getHourFrequency(properties));
+        lineChart.getData().get(0).getData().setAll(getMonthFrequenceChartData(properties));
+        scatterChart.getData().get(0).getData().setAll(getHourFrequencyChartData(properties));
         updateStatisticalDataForLineChart();
         updateStatisticalDataForScatterChart();
     }
 
-    public boolean removeNodeIfIsStatisticalOrSeparator(Node node) {
+    public boolean nodeIsStatisticalDataOrSeparator(Node node) {
         boolean nodeIsTheTitle = node == datiTitleDispersione || node == datiTitleLinee;
         boolean nodeIsTheTitleSeparator = node == datiSeparatorDispersione || node == datiSeparatorLinee;
 

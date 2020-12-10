@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.exception;
+package org.uygar.postit.controllers.exception;
 
 import javafx.stage.Window;
 import org.uygar.postit.controllers.WindowDimensions;

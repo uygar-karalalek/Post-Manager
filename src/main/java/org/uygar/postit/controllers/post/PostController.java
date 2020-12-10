@@ -18,6 +18,7 @@ import org.uygar.postit.controllers.post.utils.PostStatistics;
 import org.uygar.postit.controllers.post.utils.PostStatisticsViewManager;
 import org.uygar.postit.controllers.post.utils.loader.PostItLoader;
 import org.uygar.postit.data.database.DataMiner;
+import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
@@ -39,7 +40,7 @@ public class PostController extends BaseController {
     @FXML
     private PieChart pieChart;
 
-    PostItGridViewer postItGrid;
+    public PostItGridViewer postItGrid;
 
     public Post loadingPost;
 
@@ -59,8 +60,8 @@ public class PostController extends BaseController {
         this.rootTabPane.prefHeightProperty().bind(post.heightProperty());
     }
 
-    public static void openPostItController(PostIt postIt, Post fatherPost) {
-        PostItLoader loader = new PostItLoader(postIt, fatherPost);
+    public static void openPostItController(PostIt postIt, PostItGridViewer postItGrid) {
+        PostItLoader loader = new PostItLoader(postIt, postItGrid);
         loader.load();
     }
 
@@ -105,6 +106,11 @@ public class PostController extends BaseController {
         ratioContainerLabel = Math.min(1, ratioContainerLabel);
         Font def = Font.font("Arial", FontWeight.EXTRA_BOLD, defSize * ratioContainerLabel);
         postTitle.setFont(def);
+    }
+
+    @FXML
+    public void onAggiungi() {
+        openPostItController(null, this.postItGrid);
     }
 
     @FXML

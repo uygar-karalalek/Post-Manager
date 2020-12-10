@@ -127,3 +127,8 @@
 #orarioField:focused, #priorityField:focused {
     -fx-border-color: #21f301;
 }
+
+.color:hover {
+    -fx-stroke-width: 1px;
+    -fx-stroke: white;
+}

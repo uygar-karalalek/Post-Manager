@@ -20,9 +20,4 @@ public enum Colore {
         this.postItTextColor = postItTextColor;
     }
 
-    @Override
-    public String toString() {
-        return colorName;
-    }
-
 }

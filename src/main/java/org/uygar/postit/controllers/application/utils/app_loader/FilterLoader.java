@@ -22,18 +22,17 @@ public class FilterLoader extends WindowLoader<AppController, FilterController> 
     @Override
     public void load() {
         ButtonDisableBinding filterDisableBinding =
-                new ButtonDisableBinding(controller.filterButton);
+                new ButtonDisableBinding(baseController.filterButton);
         filterDisableBinding.disableOpenWindowButton();
         initFilterController();
         Stage stage = getWindow();
-        controller.setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
+        baseController.setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
     }
 
-    @NotNull
     private void initFilterController() {
         this.loadingController = (FilterController) FXLoader.getLoadedController("filter", "app");
-        this.loadingController.init(controller.postGrid);
-        controller.bindStyleSheetWithControllerName("filter", "main", loadingController.filter);
+        this.loadingController.init(baseController.postGrid);
+        baseController.bindStyleSheetWithControllerName("filter", "main", loadingController.filter);
         initFilterFade();
     }
 

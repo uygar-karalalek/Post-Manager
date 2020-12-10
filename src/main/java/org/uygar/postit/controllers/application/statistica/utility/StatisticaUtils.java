@@ -11,7 +11,6 @@ import java.util.*;
 
 public class StatisticaUtils {
 
-    @NotNull
     public static NumberAxis getOreAxis() {
         NumberAxis oreScatter = new NumberAxis();
         oreScatter.setLabel("Ore");
@@ -32,7 +31,6 @@ public class StatisticaUtils {
         return frequenza;
     }
 
-    @NotNull
     public static CategoryAxis getMeseAxis() {
         CategoryAxis axis = new CategoryAxis();
         axis.setLabel("Mesi");
@@ -41,8 +39,7 @@ public class StatisticaUtils {
         return axis;
     }
 
-    @NotNull
-    public static List<XYChart.Data<Number, Number>> getHourFrequency(LogProperties properties) {
+    public static List<XYChart.Data<Number, Number>> getHourFrequencyChartData(LogProperties properties) {
         List<XYChart.Data<Number, Number>> dataList = new ArrayList<>();
 
         properties.getHoursAndFrequencies().forEach((hour, frequency) -> {
@@ -53,8 +50,7 @@ public class StatisticaUtils {
         return dataList;
     }
 
-    @NotNull
-    public static List<XYChart.Data<String, Number>> getMonthFrequence(LogProperties properties) {
+    public static List<XYChart.Data<String, Number>> getMonthFrequenceChartData(LogProperties properties) {
         List<XYChart.Data<String, Number>> dataList = new ArrayList<>();
         for (Month month : Month.values()) {
             String nTimes = properties.getStringProperty(month.name());

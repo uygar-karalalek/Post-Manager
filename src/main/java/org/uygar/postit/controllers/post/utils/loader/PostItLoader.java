@@ -9,16 +9,21 @@ import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.controllers.post.postit.PostItController;
+import org.uygar.postit.data.structures.PostItContainer;
+import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
+import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
+
+import java.util.Optional;
 
 public class PostItLoader extends WindowLoader<PostController, PostItController> {
 
-    public PostItLoader(PostIt postIt, Post fatherPost) {
-        initLoadingStageBasedOnFatherPost(fatherPost);
+    public PostItLoader(PostIt postIt, PostItGridViewer postItGrid) {
+        initLoadingStageBasedOnFatherPost(postItGrid.getPostItOrganizer().getFatherPost());
         setWindowInitializerByStage(this.stage);
         loadingController = (PostItController) FXLoader.getLoadedController("postit", "post");
-        loadingController.init(postIt);
+        loadingController.init(Optional.ofNullable(postIt), postItGrid);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package org.uygar.postit.post.viewers.post_it;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
@@ -10,7 +11,9 @@ import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
+import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer;
+import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.PostItViewerBasicGraphicsBuilder;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -47,13 +50,34 @@ public class PostItGridViewer extends FlowPane {
     }
 
     private List<PostItViewer> addListenersToPostItViewersAndThenReturn(List<PostItViewer> postItViewers) {
-        postItViewers.forEach(postItViewer -> postItViewer.getMainGraphic().setOnMouseClicked(mouseEvent -> {
+        postItViewers.forEach(this::addListenertoPostItViewer);
+        return postItViewers;
+    }
+
+    public void addListenertoPostItViewer(PostItViewer postItViewer) {
+        postItViewer.getMainGraphic().setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.PRIMARY)
-                PostController.openPostItController(postItViewer.getPostIt(), postItOrganizer.getFatherPost());
+                PostController.openPostItController(postItViewer.getPostIt(), this);
             else if (mouseEvent.getButton() == MouseButton.SECONDARY)
                 postItViewer.changePostItAspectBasedOnStateAndSaveToDatabase(postItOrganizer.getDataMiner());
-        }));
-        return postItViewers;
+        });
+    }
+
+    public void add(PostIt postIt) {
+        PostItViewer postItViewer = new PostItViewer(postIt);
+        this.postItOrganizer.add(postIt);
+        this.addListenertoPostItViewer(postItViewer);
+        this.getChildren().add(postItViewer);
+    }
+
+    public void remove(PostIt postIt) {
+        this.postItOrganizer.remove(postIt);
+        this.getChildren().removeIf(node -> {
+            if (node instanceof PostItViewer)
+                return (((PostItViewer) node).getPostIt().equals(postIt));
+            return false;
+        });
+        sortPostIts();
     }
 
     public PostItContainerOrganizer getPostItOrganizer() {

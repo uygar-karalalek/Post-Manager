@@ -34,7 +34,7 @@ public class TableViewColumnsBuilder<T extends FrequencyModel> {
 
     private void initTableColumnAndHandleOnEdit(TableColumn<T, ?> tableColumn) throws Exception {
         if (tableView == null)
-            throw new Exception("YOU MUST TO ADD THE COLUMN TO THE TABLEVIEW!");
+            throw new Exception("YOU MUST TO ADD NON-NULL COLUMN TO THE TABLEVIEW!");
 
         double numOfCols = tableView.getColumns().size();
         tableColumn.prefWidthProperty().bind(tableView.widthProperty().divide(numOfCols));

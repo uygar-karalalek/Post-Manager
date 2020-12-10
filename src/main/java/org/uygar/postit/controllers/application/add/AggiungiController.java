@@ -7,11 +7,9 @@ import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.stage.Window;
 import org.uygar.postit.controllers.BaseController;
-import org.uygar.postit.controllers.application.exception.WindowCoordinatesContainer;
-import org.uygar.postit.controllers.application.exception.WrongFieldsException;
+import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
+import org.uygar.postit.controllers.exception.WrongFieldsException;
 import org.uygar.postit.data.database.DataMiner;
-import org.uygar.postit.data.database.queries.DMLQueryBuilder;
-import org.uygar.postit.data.database.queries.DQLQueryBuilder;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.properties.Sort;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
@@ -19,6 +17,9 @@ import org.uygar.postit.post.viewers.post.PostGridViewer;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+
+import static org.uygar.postit.controllers.exception.WrongFieldsException.*;
+import static org.uygar.postit.data.query_utils.QueryUtils.*;
 
 public class AggiungiController extends BaseController implements Initializable {
 
@@ -69,46 +70,20 @@ public class AggiungiController extends BaseController implements Initializable 
         boolean fieldsNotValid = areFieldsValid(name, sortingType);
         throwWrongFieldExceptionIf(fieldsNotValid, "Hai sbagliato ad inserire i campi!", coordinates);
 
-        boolean notCreatedCorrectly = !tryCreateNewPost(post);
+        boolean notCreatedCorrectly = !(tryCreateNewPost(dataMiner, post));
         throwWrongFieldExceptionIf(notCreatedCorrectly, "Il post esiste già!", coordinates);
 
-        addPostToViewAndUpdate(new Post(getLastCreatedPostId(), name));
+        addPostToViewAndUpdate(new Post(getLastCreatedPostId(dataMiner), name));
     }
 
     private boolean areFieldsValid(String name, Sort sortingType) {
         return name.isBlank()  || name.trim().length() > 18 || sortingType == null;
     }
 
-    public void throwWrongFieldExceptionIf(boolean condition, String message,
-                                           WindowCoordinatesContainer errorViewCordinates) throws WrongFieldsException {
-        if (condition)
-            throw new WrongFieldsException(message, errorViewCordinates);
-    }
-
-    public boolean tryCreateNewPost(Post post) {
-        DMLQueryBuilder query = new DMLQueryBuilder();
-        query.insert().into("post").values(
-                "null", // visto che c'è l'auto increment
-                post.getName().trim(),
-                post.getSortType().toString(),
-                post.getCreationDate().toString(),
-                post.getCreationDate().toString()); // l'ultima modifica è la volta in cui lo crei
-
-        return dataMiner.tryExecute(query);
-    }
-
     private void addPostToViewAndUpdate(Post post) {
         this.postGridViewer.postOrganizer.add(post);
         this.add.getScene().getWindow().hide();
         this.postGridViewer.updateLastWhenAdded();
-    }
-
-    private Integer getLastCreatedPostId() {
-        DQLQueryBuilder dql = new DQLQueryBuilder();
-        dql.select("MAX(id) as id").from("post");
-        dataMiner.executeQuery(dql);
-        String result = dataMiner.getMappedListOfResult().get("id").get(0);
-        return Integer.parseInt(result);
     }
 
     @FXML

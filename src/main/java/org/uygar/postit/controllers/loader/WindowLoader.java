@@ -6,8 +6,9 @@ import org.uygar.postit.controllers.application.utils.WindowInitializer;
 
 public abstract class WindowLoader<BASE, LOADING> implements Loader {
 
-    protected BASE controller;
+    protected BASE baseController;
     protected LOADING loadingController;
+
     protected Stage stage;
     protected WindowInitializer windowInitializer;
 
@@ -16,7 +17,7 @@ public abstract class WindowLoader<BASE, LOADING> implements Loader {
 
     public WindowLoader(BASE controller, ControllerType parentController) {
         this(parentController);
-        this.controller = controller;
+        this.baseController = controller;
     }
 
     public WindowLoader(ControllerType parentController) {

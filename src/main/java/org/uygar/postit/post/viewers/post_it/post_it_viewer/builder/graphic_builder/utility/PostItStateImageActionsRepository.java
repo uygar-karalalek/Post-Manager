@@ -38,8 +38,8 @@ public class PostItStateImageActionsRepository {
 
     public void onPostItDeadlineChange(ObservableValue<? extends LocalDateTime> obs,
                                        LocalDateTime oldVal, LocalDateTime newVal) {
-        if (isPostItExpiredAndUndone())
-            addToPostItExpiredImage();
+        if (isPostItExpiredAndUndone()) addToPostItExpiredImage();
+        else removeFromPostItImageWithEndPath("expired.png");
     }
 
     public boolean isPostItExpiredAndUndone() {

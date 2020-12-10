@@ -1,17 +1,21 @@
 package org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.task_text;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import org.uygar.postit.post.PostIt;
+import org.uygar.postit.post.properties.Colore;
+import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.PostViewerImageBuilder;
 
 import static org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer.*;
 
 public class BasicPostItTextWrapper extends VBox {
 
     private final PostIt postIt;
+    private Label title, taskText, priority;
     public static final double CONTENT_SPACING = POST_IT_SIZE / 4;
 
     private static final Insets TASK_TEXT_INSETS = new Insets(0, 10, 0, 20);
@@ -22,9 +26,9 @@ public class BasicPostItTextWrapper extends VBox {
     }
 
     private void buildTexts() {
-        Label title = new Label();
-        Label taskText = new Label();
-        Label priority = new Label();
+        title = new Label();
+        taskText = new Label();
+        priority = new Label();
 
         title.textProperty().bind(postIt.titoloProperty());
         title.setId("postItTitle");
@@ -56,6 +60,16 @@ public class BasicPostItTextWrapper extends VBox {
         this.setSpacing(CONTENT_SPACING);
         this.setId("textWrapper");
         VBox.setMargin(taskTextWrapper, TASK_TEXT_INSETS);
+    }
+
+    public Label getTitleLabel() {
+        return title;
+    }
+    public Label getTaskTextLabel() {
+        return taskText;
+    }
+    public Label getPriorityLabel() {
+        return priority;
     }
 
 }
