@@ -16,6 +16,7 @@ import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.PostItViewerBasicGraphicsBuilder;
 
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 public class PostItGridViewer extends FlowPane {
@@ -78,6 +79,12 @@ public class PostItGridViewer extends FlowPane {
             return false;
         });
         sortPostIts();
+    }
+
+    public void filter(Predicate<PostIt> postItPredicate) {
+        Predicate<Node> doNotPassesTest = node -> !postItPredicate.test(((PostItViewer) node).getPostIt());
+        this.getChildren()
+                .removeIf(doNotPassesTest);
     }
 
     public PostItContainerOrganizer getPostItOrganizer() {

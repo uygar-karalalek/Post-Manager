@@ -1,7 +1,6 @@
 package org.uygar.postit.controllers.post.postit;
 
 import org.uygar.postit.post.PostIt;
-import org.uygar.postit.post.properties.Colore;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -26,8 +25,8 @@ public class PostItUtils {
         try {
             returned = getPostItFromControllerWhenCreating(postItController);
             if (returned.isPresent()) {
-                returned.get().setId(postItController.loadedPostit.getId());
-                returned.get().setDataCreazione(postItController.loadedPostit.getDataCreazione());
+                returned.get().setId(postItController.loadedPostIt.getId());
+                returned.get().setDataCreazione(postItController.loadedPostIt.getDataCreazione());
             }
         } catch (Exception e) {
             returned = Optional.empty();
@@ -48,7 +47,7 @@ public class PostItUtils {
                     LocalTime.of(parseInt(postItController.oraField.getText()),
                             parseInt(postItController.minutoField.getText()))));
 
-            postIt.setColore(postItController.rectangleColor.get());
+            postIt.setColore(postItController.postItEditorManager.rectangleColor.get());
             postIt.setPriority(parseInt(postItController.priorityField.getText()));
             return Optional.of(postIt);
         } catch (Exception e) {

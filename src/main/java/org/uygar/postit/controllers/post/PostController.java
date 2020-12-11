@@ -7,6 +7,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -22,6 +23,8 @@ import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
+
+import java.util.Locale;
 
 public class PostController extends BaseController {
 
@@ -39,17 +42,18 @@ public class PostController extends BaseController {
     private Label postTitle;
     @FXML
     private PieChart pieChart;
+    @FXML
+    private TextField srcBar;
 
     public PostItGridViewer postItGrid;
-
     public Post loadingPost;
-
     private Dimension2D minDimension;
 
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
         // Identify a post pane in Stage windows
         post.setUserData(fatherPost);
 
+        this.srcBar.textProperty().addListener(this::onSearchTextChangeDoFilter);
         this.loadingPost = fatherPost;
         this.minDimension = initialWindowDimension;
         this.postItGrid = new PostItGridViewer(fatherPost, miner);
@@ -58,6 +62,11 @@ public class PostController extends BaseController {
         initPostTitle(fatherPost);
         this.rootTabPane.prefWidthProperty().bind(post.widthProperty());
         this.rootTabPane.prefHeightProperty().bind(post.heightProperty());
+    }
+
+    public void onSearchTextChangeDoFilter(ObservableValue<? extends String> obs, String oldVal, String newVal) {
+        postItGrid.sortPostIts();
+        postItGrid.filter(postIt -> postIt.getTitolo().toLowerCase(Locale.ROOT).contains(newVal.toLowerCase()));
     }
 
     public static void openPostItController(PostIt postIt, PostItGridViewer postItGrid) {
@@ -115,6 +124,7 @@ public class PostController extends BaseController {
 
     @FXML
     public void onOrdina() {
+        rootTabPane.getSelectionModel().selectNext();
         postItGrid.sortPostIts();
     }
 

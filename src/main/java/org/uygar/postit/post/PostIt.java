@@ -32,14 +32,7 @@ public class PostIt {
     }
 
     public PostIt(int id, boolean fatto, String titolo, String testo, LocalDateTime dataCreazione, LocalDateTime dataFine, Colore colore, int priority) {
-        this.id = new SimpleIntegerProperty(id);
-        this.priority = new SimpleIntegerProperty(priority);
-        this.fatto = new SimpleBooleanProperty(fatto);
-        this.titolo = new SimpleStringProperty(titolo);
-        this.testo = new SimpleStringProperty(testo);
-        this.dataCreazione = new SimpleObjectProperty<>(dataCreazione);
-        this.dataScadenza = new SimpleObjectProperty<>(dataFine);
-        this.colore = new SimpleObjectProperty<>(colore);
+        this(id, -1, fatto, titolo, testo, dataCreazione, dataFine, colore, priority);
     }
 
     public int getId() {
@@ -159,12 +152,12 @@ public class PostIt {
     }
 
     public static PostIt empty() {
-        return new PostIt(-1, -1,false, "", "",
+        return new PostIt(-1, false, "", "",
                 LocalDateTime.now(), LocalDateTime.now(), Colore.GIALLO, -1);
     }
 
     public static PostIt emptyWithId(int id) {
-        return new PostIt(id, -1,false, "", "",
+        return new PostIt(id, false, "", "",
                 LocalDateTime.now(), LocalDateTime.now(), Colore.GIALLO, -1);
     }
 
