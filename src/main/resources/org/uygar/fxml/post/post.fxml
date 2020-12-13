@@ -8,17 +8,17 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-<StackPane fx:id="post" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
+<VBox fx:id="post" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../stylesheets/post/post_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
    <children>
-      <TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
          <tabs>
             <Tab text="Post">
                <content>
-                  <BorderPane prefHeight="629.0" prefWidth="522.0">
+                  <BorderPane prefHeight="629.0">
                      <left>
                         <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
                            <children>
@@ -50,9 +50,26 @@
                   </BorderPane>
                </content>
             </Tab>
-            <Tab text="Settings" />
+            <Tab text="Settings">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="665.0" prefWidth="600.0">
+                     <children>
+                        <TitledPane text="Post Settings">
+                           <content>
+                              <VBox>
+                                 <children>
+                                    <Label prefHeight="17.0" prefWidth="113.0" text="Nome del post" />
+                                    <TextField prefHeight="25.0" prefWidth="239.0" />
+                                 </children>
+                              </VBox>
+                           </content>
+                        </TitledPane>
+                     </children>
+                  </VBox>
+               </content>
+            </Tab>
             <Tab text="Statistics" />
          </tabs>
       </TabPane>
    </children>
-</StackPane>
+</VBox>

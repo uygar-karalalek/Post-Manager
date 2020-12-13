@@ -34,14 +34,6 @@ public class WindowInitializer {
         return stage;
     }
 
-    public void fadeWindowEffect(Parent root, double seconds) {
-        FadeTransition transition = new FadeTransition(Duration.seconds(seconds), root);
-        transition.setInterpolator(Interpolator.EASE_BOTH);
-        transition.setFromValue(0);
-        transition.setToValue(1);
-        transition.play();
-    }
-
     void setStageX(double prefWidth, Stage stage) {
         stage.setX((this.rootStage.getWidth() / 2 - prefWidth / 2) + this.rootStage.getX());
     }
@@ -55,6 +47,14 @@ public class WindowInitializer {
         Scene scene = new Scene(root);
         stage.setScene(scene);
         return stage;
+    }
+
+    public static void fadeWindowEffect(Parent root, double seconds) {
+        FadeTransition transition = new FadeTransition(Duration.seconds(seconds), root);
+        transition.setInterpolator(Interpolator.EASE_BOTH);
+        transition.setFromValue(0);
+        transition.setToValue(1);
+        transition.play();
     }
 
 }

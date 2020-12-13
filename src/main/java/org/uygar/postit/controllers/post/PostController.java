@@ -31,7 +31,7 @@ public class PostController extends BaseController {
     private static final float SCROLL_SPEED = 0.001f;
 
     @FXML
-    public StackPane post;
+    public VBox post;
     @FXML
     public TabPane rootTabPane;
     @FXML

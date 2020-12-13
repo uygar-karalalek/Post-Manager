@@ -9,6 +9,8 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.FXLoader;
+import org.uygar.postit.controllers.application.utils.WindowInitializer;
+import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.properties.PostProperties;
 
@@ -16,11 +18,11 @@ import java.util.Objects;
 
 public class Main extends Application {
 
-    Stage stage;
-    Scene scene;
-    PostProperties applicationProperties;
-    LogProperties properties;
-    AppController appController;
+    private Stage stage;
+    private Scene scene;
+    private LogProperties properties;
+    private AppController appController;
+    private PostProperties applicationProperties;
 
     @Override
     public void init() {
@@ -47,17 +49,10 @@ public class Main extends Application {
         this.appController.setTheme(applicationProperties.getStringProperty("theme"));
         this.appController.setLogProperties(properties);
         this.scene = new Scene(Objects.requireNonNull(this.appController).application);
-        addTransitionToApplicationController();
         this.stage.setScene(scene);
+        WindowInitializer.fadeWindowEffect(this.appController.application, 1);
         this.stage.setOnHiding(event -> Platform.exit());
         this.stage.show();
-    }
-
-    private void addTransitionToApplicationController() {
-        FadeTransition transition = new FadeTransition(Duration.seconds(1), this.appController.application);
-        transition.setFromValue(0);
-        transition.setToValue(1);
-        transition.play();
     }
 
     @Override

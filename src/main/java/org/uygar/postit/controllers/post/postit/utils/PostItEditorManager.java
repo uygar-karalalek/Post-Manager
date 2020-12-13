@@ -12,7 +12,7 @@ import static org.uygar.postit.data.query_utils.QueryUtils.tryModifyPostItOnDB;
 
 public class PostItEditorManager {
 
-    public static final int RECTANGLE_COLOR_CHOICE_SIZE = 20;
+    private static final int RECTANGLE_COLOR_CHOICE_SIZE = 20;
 
     private final PostItController postItController;
     public SimpleObjectProperty<Colore> rectangleColor = new SimpleObjectProperty<>();

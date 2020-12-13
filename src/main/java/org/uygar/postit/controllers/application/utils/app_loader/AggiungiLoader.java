@@ -8,6 +8,7 @@ import org.uygar.postit.controllers.application.add.AggiungiController;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
+import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.controllers.loader.WindowLoader;
 
 public class AggiungiLoader extends WindowLoader<AppController, AggiungiController> {
@@ -35,7 +36,7 @@ public class AggiungiLoader extends WindowLoader<AppController, AggiungiControll
     private void initAggiungiController() {
         this.loadingController = (AggiungiController) FXLoader.getLoadedController("add", "app");
         loadingController.setPostGridViewer(baseController.postGrid);
-        windowInitializer.fadeWindowEffect(loadingController.add, FADE_INIT_TIME_AGGIUNGI);
+        WindowInitializer.fadeWindowEffect(loadingController.add, FADE_INIT_TIME_AGGIUNGI);
     }
 
     private void addMainStyles() {

@@ -156,9 +156,4 @@ public class PostIt {
                 LocalDateTime.now(), LocalDateTime.now(), Colore.GIALLO, -1);
     }
 
-    public static PostIt emptyWithId(int id) {
-        return new PostIt(id, false, "", "",
-                LocalDateTime.now(), LocalDateTime.now(), Colore.GIALLO, -1);
-    }
-
 }

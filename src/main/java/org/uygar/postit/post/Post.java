@@ -18,7 +18,7 @@ public class Post {
     private SimpleObjectProperty<Sort> sortType;
 
     public Post(Integer id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate, Sort sortType) {
-        this.id = new SimpleIntegerProperty(id);
+        this.id = new SimpleIntegerProperty(id == null ? -1 : id);
         this.name = new SimpleStringProperty(name);
         this.creationDate = new SimpleObjectProperty<>(creationDate);
         this.lastModifiedDate = new SimpleObjectProperty<>(lastModifiedDate);

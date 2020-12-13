@@ -9,6 +9,7 @@ import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.filter.FilterController;
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
+import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.controllers.loader.WindowLoader;
 
 public class FilterLoader extends WindowLoader<AppController, FilterController> {
@@ -42,7 +43,7 @@ public class FilterLoader extends WindowLoader<AppController, FilterController> 
     }
 
     private void initFilterFade() {
-        windowInitializer.fadeWindowEffect(loadingController.filter, FADE_INIT_TIME_FILTER);
+        WindowInitializer.fadeWindowEffect(loadingController.filter, FADE_INIT_TIME_FILTER);
     }
 
 }
