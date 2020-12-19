@@ -6,7 +6,7 @@
     -fx-background-color: grey;
 }
 
-.button {
+#btn, #esciBtn {
     -fx-background-color: radial-gradient(center 30px 0px, radius 200px, lightslategray, darkblue);
     -fx-pref-height: 35;
     -fx-background-radius: 1em;
@@ -16,7 +16,7 @@
     -fx-pref-width: 170;
 }
 
-.button:hover {
+#btn:hover {
     -fx-background-color: radial-gradient(center 90px 50px, radius 100px, goldenrod, darkblue);
 }
 
@@ -197,4 +197,94 @@
 
 .chart-pie.default-color1 {
     -fx-background-color: radial-gradient(center 0px 0px, radius 50px, red, darkblue);
+}
+
+.titled-pane {
+    -fx-text-fill: white;
+}
+
+.titled-pane:focused {
+    -fx-text-fill: white;
+}
+
+.titled-pane > .title {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-background-color: linear-gradient(#7272cd, #3e6484);
+    -fx-background-insets: 0, 1, 2;
+    -fx-pref-height: 30;
+    -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */
+}
+
+.titled-pane > .title > .text {
+    -fx-translate-y: -4;
+}
+
+.titled-pane > .title > .arrow-button {
+    -fx-background-color: null;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+    -fx-padding: 0.0em 0.25em 0.0em 0.0em; /* 0 3 0 0 */
+}
+
+.titled-pane > .title > .arrow-button .arrow {
+    -fx-background-color: white;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-translate-x: -3;
+    -fx-padding: 0.25em 0.3125em 0.25em 0.3125em; /* 3 3.75 3 3.75 */
+    -fx-shape: "M 0 0 h 7 l -3.5 4 z";
+}
+
+.titled-pane:focused > .title > .arrow-button .arrow {
+    -fx-background-color: linear-gradient(#5acf66, cornflowerblue);
+}
+
+.setLabel {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-weight: bold;
+    -fx-font-size: 12px;
+}
+
+.text-field {
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #4759af, #7ec6c6);
+    -fx-border-radius: 2em;
+    -fx-background-radius: 2em;
+}
+
+.choice-box {
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #4759af, #7ec6c6);
+    -fx-background-radius: 2em;
+    -fx-border-radius: 2em;
+}
+
+.setBtn {
+    -fx-background-radius: 1em;
+    -fx-text-fill: white;
+    -fx-font-family: Arial;
+    -fx-font-size: 12px;
+    -fx-pref-height: 10px;
+    -fx-pref-width: 100px;
+}
+
+#setResetBtn {
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #4197a7, #282893);
+}
+
+s#setResetBtn:hover {
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #5974d4, #921313);
+}
+
+#setSalvaBtn {
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #beae55, darkblue);
+}
+
+#setSalvaBtn:hover {
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #6ec148, #00008b);
+}
+
+#setRimuoviBtn {
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #b9424d, #c61a43);
+}
+
+#setRimuoviBtn:hover {
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #c9727c, #bd405f);
 }

@@ -1,6 +1,5 @@
 package org.uygar.postit.controllers.post.postit;
 
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -15,7 +14,6 @@ import org.uygar.postit.controllers.exception.WrongFieldsException;
 import org.uygar.postit.controllers.post.postit.utils.PostItEditorManager;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.PostIt;
-import org.uygar.postit.post.properties.Colore;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 
 import java.util.Optional;
@@ -78,7 +76,7 @@ public class PostItController extends BaseController {
 
     @FXML
     public void onRimuovi() {
-        tryRemovePostItWithIdFromDB(miner, loadedPostIt.getId());
+        tryRemovePostItFromDB(miner, loadedPostIt);
         postItGrid.remove(loadedPostIt);
         postItEditorManager.closePostItEditor();
     }

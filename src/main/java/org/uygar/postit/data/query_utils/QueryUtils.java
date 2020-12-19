@@ -13,9 +13,9 @@ import java.util.Optional;
 
 public class QueryUtils {
 
-    public static boolean tryRemovePostItWithIdFromDB(DataMiner miner, int id) {
+    public static boolean tryRemovePostItFromDB(DataMiner miner, PostIt postIt) {
         Query query = new DMLQueryBuilder().delete().from("postit")
-                .where().field("id").equalsTo(Integer.toString(id));
+                .where().field("creationDate").equalsTo(postIt.getDataCreazione().toString());
         return miner.tryExecute(query);
     }
 
@@ -27,7 +27,7 @@ public class QueryUtils {
                             "text", postIt.getTesto(),
                             "title", postIt.getTitolo(),
                             "endDate", postIt.getDataScadenza().toString())
-                    .where().field("id").equalsTo(Integer.toString(postIt.getId()));
+                    .where().field("creationdate").equalsTo(postIt.getDataCreazione().toString());
             return miner.tryExecute(query);
         } catch (Exception e) {
             return false;
@@ -44,15 +44,13 @@ public class QueryUtils {
                             Integer.toString(postIt.getPriority()),
                             postIt.getColore().toString(),
                             Integer.toString(postIt.getPostFatherId()),
-                            LocalDateTime.now().toString(),
+                            postIt.getDataCreazione().toString(),
                             postIt.getTesto(),
                             postIt.getDataScadenza().toString(),
                             postIt.getTitolo(),
                             Boolean.toString(postIt.isFatto()));
-            System.out.println(query.getQuery());
             return miner.tryExecute(query);
         } catch (Exception e) {
-            System.out.println(e);
             return false;
         }
 

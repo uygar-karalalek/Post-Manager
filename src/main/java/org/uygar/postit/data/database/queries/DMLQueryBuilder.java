@@ -51,7 +51,7 @@ public class DMLQueryBuilder implements DML {
 
     @Override
     public DML set(String col, String value) {
-        this.query += " SET " + col + " = '" + value + "'";
+        this.query += " SET " + col + " = \"" + value + "\"";
         return this;
     }
 
@@ -59,9 +59,9 @@ public class DMLQueryBuilder implements DML {
     public DML set(String... cols_vals) {
         if (cols_vals.length % 2 != 0)
             throw new IllegalArgumentException("l'input dev'essere della forma colonna - valore!");
-        this.query += " SET " + cols_vals[0] + " = '" + cols_vals[1] + "'";
+        this.query += " SET " + cols_vals[0] + " = \"" + cols_vals[1] + "\"";
         for (int i = 2; i < cols_vals.length; i += 2)
-            this.query += ", " + cols_vals[i] + " = '" + cols_vals[i + 1] + "'";
+            this.query += ", " + cols_vals[i] + " = \"" + cols_vals[i + 1] + "\"";
         return this;
     }
 
@@ -97,19 +97,19 @@ public class DMLQueryBuilder implements DML {
 
     @Override
     public DML like(String value) {
-        this.query += " LIKE '" + value + "'";
+        this.query += " LIKE \"" + value + "\"";
         return this;
     }
 
     @Override
     public DML equalsTo(String value) {
-        this.query += " = '" + value + "'";
+        this.query += " = \"" + value + "\"";
         return this;
     }
 
     @Override
     public DML is(String operator, String value) {
-        this.query += " " + operator + " '" + value + "'";
+        this.query += " " + operator + " \"" + value + "\"";
         return this;
     }
 

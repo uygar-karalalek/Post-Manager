@@ -14,8 +14,6 @@ import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.properties.PostProperties;
 
-import java.util.Objects;
-
 public class Main extends Application {
 
     private Stage stage;
@@ -43,14 +41,18 @@ public class Main extends Application {
     public void start(Stage stage) {
         this.stage = stage;
         this.stage.initStyle(StageStyle.UNDECORATED);
+
         this.appController = (AppController) FXLoader.getLoadedController("app", "app");
         this.appController.setStage(this.stage);
         this.appController.init();
         this.appController.setTheme(applicationProperties.getStringProperty("theme"));
         this.appController.setLogProperties(properties);
-        this.scene = new Scene(Objects.requireNonNull(this.appController).application);
+
+        this.scene = new Scene(this.appController.application);
         this.stage.setScene(scene);
+
         WindowInitializer.fadeWindowEffect(this.appController.application, 1);
+
         this.stage.setOnHiding(event -> Platform.exit());
         this.stage.show();
     }
