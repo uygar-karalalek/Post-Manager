@@ -17,15 +17,15 @@
 }
 
 #btn:hover {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, goldenrod, darkblue);
+    -fx-background-color: linear-gradient(#13425f, #0a1a27, #13425f);
 }
 
 #esciBtn {
-    -fx-background-color: linear-gradient(to bottom right, #e65f5f, #e25800);
+    -fx-background-color: linear-gradient(#669cd4, #0f786f);
 }
 
 #esciBtn:hover {
-    -fx-background-color: radial-gradient(center 90px 50px, radius 100px, #ffb100, #004448);
+    -fx-background-color: linear-gradient(#695252, #510a2c, #695252);
 }
 
 .tab-pane .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
@@ -199,8 +199,20 @@
     -fx-background-color: radial-gradient(center 0px 0px, radius 50px, red, darkblue);
 }
 
+/* SETTINGS */
+
+#settingsGrid {
+    -fx-background-color: linear-gradient(#b7b7de, #6e98b9);
+    -fx-border-width: 0;
+}
+
 .titled-pane {
     -fx-text-fill: white;
+}
+
+.titled-pane > *.content {
+    -fx-border-color: transparent;
+    -fx-background-color: transparent;
 }
 
 .titled-pane:focused {

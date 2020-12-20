@@ -34,17 +34,18 @@ public class PostGridViewer extends GridPane {
         this.buttonOrganizer = new ButtonOrganizer(postOrganizer);
         this.postOrganizer.getPostList().addListener(this::onPostListChanged);
 
-        Predicate<Post> alwaysCondition = post -> true;
-        showPostsByCondition(alwaysCondition);
+        Predicate<Post> always = post -> true;
+        showPostsByCondition(always);
     }
 
     private void showPostsByCondition(Predicate<Post> predicate) {
         this.getChildren().clear();
         int postItNumber = 0;
         for (PostButton element : buttonOrganizer) {
-            if (predicate.test(element.getPost()))
+            if (predicate.test(element.getPost())) {
                 addAndInitPostButton(element, getColCount(postItNumber), getRowCount(postItNumber));
-            postItNumber++;
+                postItNumber++;
+            }
         }
     }
 
@@ -58,7 +59,7 @@ public class PostGridViewer extends GridPane {
     }
 
     public void updateLastWhenAdded() {
-        int postIndex = postOrganizer.getPostList().size() - 1;
+        int postIndex = this.getChildren().size() - 1;
         int col = getColCount(postIndex);
         int row = getRowCount(postIndex);
 

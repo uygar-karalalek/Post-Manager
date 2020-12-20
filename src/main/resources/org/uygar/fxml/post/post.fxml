@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="post" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../stylesheets/post/post_black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
+<VBox fx:id="post" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../stylesheets/post/post_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
    <children>
       <TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -76,9 +76,9 @@
                                 </rowConstraints>
                                  <children>
                                     <Label prefHeight="17.0" styleClass="setLabel" text="Nome del post" />
-                                    <TextField fx:id="nomePostField" prefHeight="25.0" prefWidth="323.0" text="Ciao come va" GridPane.columnIndex="1">
+                                    <TextField fx:id="nomePostField" prefHeight="25.0" prefWidth="194.0" text="Ciao come va" GridPane.columnIndex="1">
                                        <GridPane.margin>
-                                          <Insets right="280.0" />
+                                          <Insets right="300.0" />
                                        </GridPane.margin>
                                     </TextField>
                                     <Label styleClass="setLabel" text="Tipo ordinamento" GridPane.rowIndex="1" />
@@ -88,7 +88,7 @@
                                     <Button id="setResetBtn" fx:id="postResetButton" mnemonicParsing="false" onMouseClicked="#onResetPostSettings" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Label styleClass="setLabel" text="Elimina post" GridPane.rowIndex="4" />
                                     <Button id="setRimuoviBtn" fx:id="postRemoveButton" mnemonicParsing="false" onMouseClicked="#onRemovePost" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Rimuovi" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <SplitMenuButton id="tipoOrdinamentoField" fx:id="tipoOrdinamentoField" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <SplitMenuButton id="tipoOrdinamentoField" fx:id="tipoOrdinamentoField" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" prefWidth="147.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </content>
