@@ -14,27 +14,27 @@ public class PostLoader extends WindowLoader<AppController, PostController> {
 
     public PostLoader(AppController controller, Post post) {
         super(controller, ControllerType.APPLICATION);
-        this.loadingController = (PostController) FXLoader.getLoadedController("post", "post");
-        this.loadingController.init(post, controller.dataMiner, WindowDimensions.POST_WINDOW_DIMENSION);
+        this.childController = (PostController) FXLoader.getLoadedController("post", "post");
+        this.childController.init(post, controller.dataMiner, WindowDimensions.POST_WINDOW_DIMENSION);
     }
 
     @Override
     public void load() {
         Stage postStage = getPostStage();
-        this.loadingController.setStage(postStage);
+        this.childController.setStage(postStage);
         postStage.show();
     }
 
     private Stage getPostStage() {
         Stage postStage = windowInitializer
-                .initializeApplicationWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, loadingController.post, true);
+                .initializeApplicationWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, childController.post, true);
         postStage.setOnHidden(windowEvent -> {
-            baseController.postGrid.nothingSelected();
-            baseController.postGrid.enablePostButtonWhenFrameClosed(loadingController.loadedPost);
+            parentController.postGrid.nothingSelected();
+            parentController.postGrid.enablePostButtonWhenFrameClosed(childController.loadedPost);
         });
 
-        baseController.bindStyleSheetWithControllerName("post", "post", loadingController.post);
-        loadingController.postTabManager.setMinSizeListenerByDimensionOfStage(postStage);
+        parentController.bindStyleSheetWithControllerName("post", "post", childController.post);
+        childController.postTabManager.setMinSizeListenerByDimensionOfStage(postStage);
         postStage.setResizable(true);
 
         return postStage;

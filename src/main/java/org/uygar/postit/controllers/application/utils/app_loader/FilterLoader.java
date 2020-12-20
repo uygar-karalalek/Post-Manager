@@ -2,7 +2,6 @@ package org.uygar.postit.controllers.application.utils.app_loader;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
@@ -23,27 +22,27 @@ public class FilterLoader extends WindowLoader<AppController, FilterController> 
     @Override
     public void load() {
         ButtonDisableBinding filterDisableBinding =
-                new ButtonDisableBinding(baseController.filterButton);
+                new ButtonDisableBinding(parentController.filterButton);
         filterDisableBinding.disableOpenWindowButton();
         initFilterController();
         Stage stage = getWindow();
-        baseController.setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
+        parentController.setHidingStageEventAndShowAndWait(stage, filterDisableBinding);
     }
 
     private void initFilterController() {
-        this.loadingController = (FilterController) FXLoader.getLoadedController("filter", "app");
-        this.loadingController.init(baseController.postGrid);
-        baseController.bindStyleSheetWithControllerName("filter", "main", loadingController.filter);
+        this.childController = (FilterController) FXLoader.getLoadedController("filter", "app");
+        this.childController.init(parentController.postGrid);
+        parentController.bindStyleSheetWithControllerName("filter", "main", childController.filter);
         initFilterFade();
     }
 
     private Stage getWindow() {
         return windowInitializer.
-                initializeApplicationWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, loadingController.filter, false);
+                initializeApplicationWindowAndGet(WindowDimensions.FILTER_WINDOW_DIMENSION, Modality.WINDOW_MODAL, childController.filter, false);
     }
 
     private void initFilterFade() {
-        WindowInitializer.fadeWindowEffect(loadingController.filter, FADE_INIT_TIME_FILTER);
+        WindowInitializer.fadeWindowEffect(childController.filter, FADE_INIT_TIME_FILTER);
     }
 
 }

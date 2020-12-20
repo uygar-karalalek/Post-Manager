@@ -28,20 +28,20 @@ public class AggiungiLoader extends WindowLoader<AppController, AggiungiControll
 
     private void initAndShowStage() {
         Stage stage = windowInitializer.initializeApplicationWindowAndGet
-                (WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, loadingController.add, false);
-        baseController.setHidingStageEventAndShowAndWait(stage, null);
+                (WindowDimensions.ADD_WINDOW_DIMENSION, Modality.APPLICATION_MODAL, childController.add, false);
+        parentController.setHidingStageEventAndShowAndWait(stage, null);
     }
 
     @NotNull
     private void initAggiungiController() {
-        this.loadingController = (AggiungiController) FXLoader.getLoadedController("add", "app");
-        loadingController.setPostGridViewer(baseController.postGrid);
-        WindowInitializer.fadeWindowEffect(loadingController.add, FADE_INIT_TIME_AGGIUNGI);
+        this.childController = (AggiungiController) FXLoader.getLoadedController("add", "app");
+        childController.setPostGridViewer(parentController.postGrid);
+        WindowInitializer.fadeWindowEffect(childController.add, FADE_INIT_TIME_AGGIUNGI);
     }
 
     private void addMainStyles() {
-        baseController.bindStyleSheetWithControllerName("app", "main", loadingController.add);
-        baseController.bindStyleSheetWithControllerName("add", "main", loadingController.add);
+        parentController.bindStyleSheetWithControllerName("app", "main", childController.add);
+        parentController.bindStyleSheetWithControllerName("add", "main", childController.add);
     }
 
 }

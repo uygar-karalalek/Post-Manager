@@ -25,7 +25,7 @@ public class StatisticaLoader extends WindowLoader<AppController, StatisticaCont
     private void init() {
         initDisableBinding();
         initStatisticaController();
-        baseController.bindStyleSheetWithControllerName("statistica", "main", loadingController.statistica);
+        parentController.bindStyleSheetWithControllerName("statistica", "main", childController.statistica);
         showStage(getWindow());
     }
 
@@ -35,18 +35,18 @@ public class StatisticaLoader extends WindowLoader<AppController, StatisticaCont
     }
 
     private void initStatisticaController() {
-        this.loadingController = (StatisticaController) FXLoader.getLoadedController("statistica", "app");
-        this.loadingController.setLogProperties(baseController.properties);
-        this.loadingController.init();
+        this.childController = (StatisticaController) FXLoader.getLoadedController("statistica", "app");
+        this.childController.setLogProperties(parentController.properties);
+        this.childController.init();
     }
 
     private Stage getWindow() {
         return windowInitializer.initializeApplicationWindowAndGet
-                (WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, loadingController.statistica, true);
+                (WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, childController.statistica, true);
     }
 
     private void initDisableBinding() {
-        statisticaDisableBinding = new ButtonDisableBinding(baseController.statisticaBtn);
+        statisticaDisableBinding = new ButtonDisableBinding(parentController.statisticaBtn);
         statisticaDisableBinding.disableOpenWindowButton();
     }
 
