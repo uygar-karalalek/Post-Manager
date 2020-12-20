@@ -6,12 +6,11 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import org.uygar.postit.controllers.BaseController;
-import org.uygar.postit.controllers.post.utils.controller_manager.PostControllerViewManager;
+import org.uygar.postit.controllers.post.utils.controller_manager.PostTabManager;
 import org.uygar.postit.controllers.post.utils.loader.PostItLoader;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
-import org.uygar.postit.post.properties.Sort;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 
 public class PostController extends BaseController {
@@ -34,7 +33,7 @@ public class PostController extends BaseController {
     @FXML
     public TextField nomePostField;
     @FXML
-    public ChoiceBox<Sort> tipoOrdinamentoField;
+    public SplitMenuButton tipoOrdinamentoField;
     @FXML
     public Button postResetButton, postSaveButton, postRemoveButton;
     @FXML
@@ -48,18 +47,19 @@ public class PostController extends BaseController {
     public Post loadingPost;
     public Dimension2D minDimension;
     public PostItGridViewer postItGrid;
-    public PostControllerViewManager postControllerManager;
+    public PostTabManager postTabManager;
 
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
         post.setUserData(fatherPost);   // Identify a post pane in Stage windows
+
         dataMiner = miner;
         loadingPost = fatherPost;
         minDimension = initialWindowDimension;
-        postControllerManager = new PostControllerViewManager(this);
+        postTabManager = new PostTabManager(this);
 
-        postControllerManager.initPostControllerTab();
-        postControllerManager.initSettingsControllerTab();
-        postControllerManager.initStatisticsControllerTab();
+        postTabManager.initPostControllerTab();
+        postTabManager.initSettingsControllerTab();
+        postTabManager.initStatisticsControllerTab();
     }
 
     public static void openPostItController(PostIt postIt, PostItGridViewer postItGrid) {
@@ -81,6 +81,22 @@ public class PostController extends BaseController {
     @FXML
     public void onExit() {
         this.rootTabPane.getScene().getWindow().hide();
+    }
+
+    @FXML
+    public void onSavePostSettings() {
+        postTabManager.postTabInitializer.changePostBasedOnSettings();
+        rootTabPane.getSelectionModel().selectPrevious();
+    }
+
+    @FXML
+    public void onResetPostSettings() {
+        postTabManager.postSettingsInitializer.setInitialFields();
+    }
+
+    @FXML
+    public void onRemovePost() {
+
     }
 
 }

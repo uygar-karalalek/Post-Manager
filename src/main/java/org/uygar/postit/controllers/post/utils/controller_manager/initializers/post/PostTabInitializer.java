@@ -8,9 +8,11 @@ import javafx.scene.text.FontWeight;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.controllers.post.utils.PostStatistics;
 import org.uygar.postit.controllers.post.utils.PostStatisticsViewManager;
-import org.uygar.postit.controllers.post.utils.controller_manager.PostControllerViewManager;
 import org.uygar.postit.controllers.post.utils.controller_manager.PostControllerWrapper;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.TabInitializer;
+import org.uygar.postit.data.database.DataMiner;
+import org.uygar.postit.data.query_utils.QueryUtils;
+import org.uygar.postit.post.properties.Sort;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 
 import java.util.Locale;
@@ -55,17 +57,35 @@ public class PostTabInitializer extends PostControllerWrapper implements TabInit
     }
 
     private void initPostTitle() {
-        postController.postTitle.setText(postController.loadingPost.getName());
-        setFontSizeToTitleLabelBasedOnLength();
+        postController.postTitle.textProperty().bind(postController.loadingPost.nameProperty());
+        changeFontSizeOfPostTitleLabelBasedOnLength();
     }
 
-    private void setFontSizeToTitleLabelBasedOnLength() {
+    private void changeFontSizeOfPostTitleLabelBasedOnLength() {
         double defSize = 30;
         double lblTextLength = defSize / 1.25 * postController.postTitle.getText().length();
         double ratioContainerLabel = postController.vBoxOperationsContainer.getPrefWidth() / lblTextLength;
         ratioContainerLabel = Math.min(1, ratioContainerLabel);
         Font def = Font.font("Arial", FontWeight.EXTRA_BOLD, defSize * ratioContainerLabel);
         postController.postTitle.setFont(def);
+    }
+
+    public void changePostBasedOnSettings() {
+        updatePostName();
+        updatePostSortType();
+    }
+
+    private void updatePostName() {
+        postController.loadingPost.setName(postController.nomePostField.getText());
+        changeFontSizeOfPostTitleLabelBasedOnLength();
+        QueryUtils.updatePostName(postController.dataMiner, postController.nomePostField.getText(),
+                postController.loadingPost.getId());
+    }
+
+    private void updatePostSortType() {
+        Sort sortType = Sort.getSortBasedOnName(postController.tipoOrdinamentoField.getText());
+        postController.loadingPost.setSortType(sortType);
+        QueryUtils.updatePostSortType(postController.dataMiner, sortType, postController.loadingPost.getId());
     }
 
 }

@@ -3,10 +3,10 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TextField?>
@@ -76,19 +76,19 @@
                                 </rowConstraints>
                                  <children>
                                     <Label prefHeight="17.0" styleClass="setLabel" text="Nome del post" />
-                                    <TextField fx:id="nomePostField" prefHeight="25.0" prefWidth="323.0" GridPane.columnIndex="1">
+                                    <TextField fx:id="nomePostField" prefHeight="25.0" prefWidth="323.0" text="Ciao come va" GridPane.columnIndex="1">
                                        <GridPane.margin>
-                                          <Insets right="100.0" />
+                                          <Insets right="280.0" />
                                        </GridPane.margin>
                                     </TextField>
                                     <Label styleClass="setLabel" text="Tipo ordinamento" GridPane.rowIndex="1" />
-                                    <ChoiceBox fx:id="tipoOrdinamentoField" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <Label styleClass="setLabel" text="Salva post" GridPane.rowIndex="3" />
-                                    <Button id="setSalvaBtn" fx:id="postSaveButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label styleClass="setLabel" text="Annulla modifica" GridPane.rowIndex="2" />
-                                    <Button id="setResetBtn" fx:id="postResetButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label styleClass="setLabel" text="Salva post" GridPane.rowIndex="2" />
+                                    <Button id="setSalvaBtn" fx:id="postSaveButton" mnemonicParsing="false" onMouseClicked="#onSavePostSettings" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <Label styleClass="setLabel" text="Annulla modifica" GridPane.rowIndex="3" />
+                                    <Button id="setResetBtn" fx:id="postResetButton" mnemonicParsing="false" onMouseClicked="#onResetPostSettings" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Label styleClass="setLabel" text="Elimina post" GridPane.rowIndex="4" />
-                                    <Button id="setRimuoviBtn" fx:id="postRemoveButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Rimuovi" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Button id="setRimuoviBtn" fx:id="postRemoveButton" mnemonicParsing="false" onMouseClicked="#onRemovePost" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Rimuovi" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <SplitMenuButton id="tipoOrdinamentoField" fx:id="tipoOrdinamentoField" mnemonicParsing="false" popupSide="RIGHT" prefHeight="2.0" prefWidth="170.0" text="Ciao" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </content>
@@ -111,16 +111,16 @@
                                     <Label prefHeight="17.0" styleClass="setLabel" text="Iniza con" />
                                     <TextField fx:id="postIniziaField" prefHeight="25.0" prefWidth="323.0" GridPane.columnIndex="1">
                                        <GridPane.margin>
-                                          <Insets right="100.0" />
+                                          <Insets right="280.0" />
                                        </GridPane.margin>
                                     </TextField>
                                     <Label styleClass="setLabel" text="Tra le date" GridPane.rowIndex="1" />
                                     <Label styleClass="setLabel" text="Salva modifica" GridPane.rowIndex="3" />
                                     <Button id="setSalvaBtn" fx:id="filterSaveButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                    <Label styleClass="setLabel" text="Annulla modifica" GridPane.rowIndex="2" />
-                                    <Button id="setResetBtn" fx:id="filterResetButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                    <Label styleClass="setLabel" text="Filtra" GridPane.rowIndex="4" />
-                                    <Button id="setRimuoviBtn" fx:id="filterButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Filtra" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label styleClass="setLabel" text="Annulla modifica" GridPane.rowIndex="4" />
+                                    <Button id="setResetBtn" fx:id="filterResetButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Label styleClass="setLabel" text="Filtra" GridPane.rowIndex="2" />
+                                    <Button id="setRimuoviBtn" fx:id="filterButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Filtra" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
                                           <DatePicker fx:id="postTraField1" />

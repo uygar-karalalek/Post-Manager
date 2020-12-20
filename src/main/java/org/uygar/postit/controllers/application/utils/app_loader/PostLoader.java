@@ -34,7 +34,7 @@ public class PostLoader extends WindowLoader<AppController, PostController> {
         });
 
         baseController.bindStyleSheetWithControllerName("post", "post", loadingController.post);
-        loadingController.postControllerManager.setMinSizeListenerByDimensionOfStage(postStage);
+        loadingController.postTabManager.setMinSizeListenerByDimensionOfStage(postStage);
         postStage.setResizable(true);
 
         return postStage;

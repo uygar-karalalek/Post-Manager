@@ -247,13 +247,57 @@
 .text-field {
     -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #4759af, #7ec6c6);
     -fx-border-radius: 2em;
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
     -fx-background-radius: 2em;
+    -fx-alignment: center;
 }
 
-.choice-box {
+
+.split-menu-button {
+    -fx-background-color: transparent;
+}
+
+.split-menu-button .label {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 13px;
     -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #4759af, #7ec6c6);
-    -fx-background-radius: 2em;
-    -fx-border-radius: 2em;
+    -fx-alignment: center;
+    -fx-text-fill: white;
+    -fx-background-radius: 1em 0 0 1em;
+    -fx-border-radius: 1em;
+}
+
+.split-menu-button .arrow-button {
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #4759af, #7ec6c6);
+    -fx-pref-width: 30px;
+    -fx-pref-height: 30px;
+    -fx-background-radius: 0 1em 1em 0;
+}
+
+.split-menu-button .arrow-button:hover {
+    -fx-background-color: grey;
+}
+
+.split-menu-button .arrow {
+    -fx-background-color: black;
+}
+
+.split-menu-button .menu-item {
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #4759af, #7ec6c6);
+}
+
+.split-menu-button .menu-item:hover {
+    -fx-background-color: linear-gradient(black, grey);
+}
+
+.split-menu-button .menu-item .label {
+    -fx-font-family: "Arial Rounded MT Bold";
+    -fx-font-size: 12px;
+    -fx-text-fill: beige;
+    -fx-font-weight: bold;
+    -fx-background-color: transparent;
 }
 
 .setBtn {
@@ -269,8 +313,8 @@
     -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #4197a7, #282893);
 }
 
-s#setResetBtn:hover {
-    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #5974d4, #921313);
+#setResetBtn:hover {
+    -fx-background-color: radial-gradient(center 30px 10px, radius 80px, #1e14b7, #33b3af);
 }
 
 #setSalvaBtn {
@@ -278,7 +322,7 @@ s#setResetBtn:hover {
 }
 
 #setSalvaBtn:hover {
-    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #6ec148, #00008b);
+    -fx-background-color: radial-gradient(center 30px 10px, radius 80px, #0fb3f3, #c8ff78);
 }
 
 #setRimuoviBtn {

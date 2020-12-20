@@ -19,21 +19,25 @@ import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 
 import java.util.Locale;
 
-public class PostControllerViewManager extends PostControllerWrapper implements PostControllerManager {
+public class PostTabManager extends PostControllerWrapper implements PostControllerManager {
 
-    public PostControllerViewManager(PostController postController) {
+    public PostTabInitializer postTabInitializer;
+    public PostSettingsInitializer postSettingsInitializer;
+    // TODO : PostStatisticsInitializer
+
+    public PostTabManager(PostController postController) {
         super(postController);
     }
 
     @Override
     public void initPostControllerTab() {
-        PostTabInitializer postTabInitializer = new PostTabInitializer(postController);
-        postTabInitializer.initializeTab();
+        this.postTabInitializer = new PostTabInitializer(postController);
+        this.postTabInitializer.initializeTab();
     }
 
     @Override
     public void initSettingsControllerTab() {
-        PostSettingsInitializer postSettingsInitializer = new PostSettingsInitializer(postController);
+        postSettingsInitializer = new PostSettingsInitializer(postController);
         postSettingsInitializer.initializeTab();
     }
 

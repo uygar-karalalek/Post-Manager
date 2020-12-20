@@ -8,7 +8,7 @@ public class PostButton extends Button {
     private final Post post;
 
     public PostButton(Post post) {
-        super(post.getName());
+        this.textProperty().bind(post.nameProperty());
         this.post = post;
     }
 

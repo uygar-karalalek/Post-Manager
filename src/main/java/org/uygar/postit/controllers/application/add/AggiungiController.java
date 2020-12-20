@@ -60,7 +60,7 @@ public class AggiungiController extends BaseController implements Initializable 
     @FXML
     public void onOk() throws WrongFieldsException {
         String name = nomePostField.getText();
-        Sort sortingType = Sort.getSortFromName(this.sortType.getText());
+        Sort sortingType = Sort.getSortBasedOnName(this.sortType.getText());
 
         Post post = new Post(null, name, LocalDateTime.now(), sortingType);
 

@@ -7,11 +7,19 @@ import org.uygar.postit.data.database.queries.Query;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.controllers.post.postit.PostItUtils;
+import org.uygar.postit.post.properties.Sort;
 
 import java.time.LocalDateTime;
+import java.util.Locale;
 import java.util.Optional;
 
 public class QueryUtils {
+
+    // POST-IT
+
+    /**
+     * Order: id, priority, colore, postid, creationdate, text, endDate, title, done
+     */
 
     public static boolean tryRemovePostItFromDB(DataMiner miner, PostIt postIt) {
         Query query = new DMLQueryBuilder().delete().from("postit")
@@ -35,7 +43,6 @@ public class QueryUtils {
     }
 
     public static boolean tryCreateNewPostItOnDB(DataMiner miner, PostIt postIt) {
-        // DB Order: id, priority, colore, postid, creationdate, text, endDate, title, done
         try {
             Query query = new DMLQueryBuilder()
                     .insert()
@@ -55,6 +62,20 @@ public class QueryUtils {
         }
 
     }
+
+    public static void setDoneStateOfPostItInDatabase(DataMiner miner, PostIt postIt) {
+        Query query = new DMLQueryBuilder()
+                .update("postit")
+                .set("done", Boolean.toString(postIt.isFatto()))
+                .where("id=" + postIt.getId());
+        miner.tryExecute(query);
+    }
+
+    // POST
+
+    /**
+     * Order: id, creationDate, name, sort, lastModifiedDate
+     */
 
     public static boolean tryCreateNewPost(DataMiner miner, Post post) {
         DMLQueryBuilder query = new DMLQueryBuilder();
@@ -76,11 +97,19 @@ public class QueryUtils {
         return Integer.parseInt(result);
     }
 
-    public static void setDoneStateOfPostItInDatabase(DataMiner miner, PostIt postIt) {
+    public static void updatePostName(DataMiner miner, String value, int id) {
+        updatePostField(miner, "name", value, id);
+    }
+
+    public static void updatePostSortType(DataMiner miner, Sort sort, int id) {
+        updatePostField(miner, "sort", sort.toString(), id);
+    }
+
+    public static void updatePostField(DataMiner miner, String field, Object value, int id) {
         Query query = new DMLQueryBuilder()
-                .update("postit")
-                .set("done", Boolean.toString(postIt.isFatto()))
-                .where("id=" + postIt.getId());
+                .update("post")
+                .set(field, value.toString())
+                .where("id=" + id);
         miner.tryExecute(query);
     }
 

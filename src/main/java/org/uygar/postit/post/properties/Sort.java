@@ -60,7 +60,7 @@ public enum Sort {
 
     public abstract void sort(List<PostIt> postItList);
 
-    public static Sort getSortFromName(String name) {
+    public static Sort getSortBasedOnName(String name) {
         for (Sort element : values())
             if (element.name.equals(name))
                 return element;
