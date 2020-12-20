@@ -14,16 +14,6 @@ public class PostViewer extends Post {
 
     private PostButton view;
 
-    public PostViewer(int id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate, Sort sortType) {
-        super(id, name, creationDate, lastModifiedDate, sortType);
-        initView();
-    }
-
-    public PostViewer(int id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate) {
-        super(id, name, creationDate, lastModifiedDate, Sort.UNDONE);
-        initView();
-    }
-
     public PostViewer(Post post) {
         super(post.getId(), post.getName(), post.getCreationDate(), post.getLastModifiedDate(), post.getSortType());
         initView();

@@ -310,19 +310,19 @@
 }
 
 #setResetBtn {
-    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #4197a7, #282893);
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #476ae1, #5757c6);
 }
 
 #setResetBtn:hover {
-    -fx-background-color: radial-gradient(center 30px 10px, radius 80px, #1e14b7, #33b3af);
+    -fx-background-color: radial-gradient(center 30px 10px, radius 80px, #9996ba, #313754);
 }
 
 #setSalvaBtn {
-    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #beae55, darkblue);
+    -fx-background-color: radial-gradient(center 30px 0px, radius 200px, #31c996, #0b2344);
 }
 
 #setSalvaBtn:hover {
-    -fx-background-color: radial-gradient(center 30px 10px, radius 80px, #0fb3f3, #c8ff78);
+    -fx-background-color: radial-gradient(center 30px 10px, radius 80px, #50a345, #c8ff78);
 }
 
 #setRimuoviBtn {

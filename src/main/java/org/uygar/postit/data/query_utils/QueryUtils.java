@@ -77,6 +77,12 @@ public class QueryUtils {
      * Order: id, creationDate, name, sort, lastModifiedDate
      */
 
+    public static boolean tryRemovePostFromDB(DataMiner miner, Post post) {
+        Query query = new DMLQueryBuilder().delete().from("post")
+                .where().field("id").equalsTo(Integer.toString(post.getId()));
+        return miner.tryExecute(query);
+    }
+
     public static boolean tryCreateNewPost(DataMiner miner, Post post) {
         DMLQueryBuilder query = new DMLQueryBuilder();
         query.insert().into("post").values(

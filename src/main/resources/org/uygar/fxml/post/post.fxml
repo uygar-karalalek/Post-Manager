@@ -18,7 +18,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="post" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../stylesheets/post/post_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
+<VBox fx:id="post" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../stylesheets/post/post_black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
    <children>
       <TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -62,7 +62,7 @@
                      <children>
                         <TitledPane text="Post Settings">
                            <content>
-                              <GridPane hgap="10.0" vgap="10.0">
+                              <GridPane id="settingsGrid" hgap="10.0" vgap="10.0">
                                 <columnConstraints>
                                   <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="117.0" />
                                   <ColumnConstraints hgrow="SOMETIMES" maxWidth="465.0" minWidth="10.0" prefWidth="463.0" />
@@ -88,14 +88,14 @@
                                     <Button id="setResetBtn" fx:id="postResetButton" mnemonicParsing="false" onMouseClicked="#onResetPostSettings" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <Label styleClass="setLabel" text="Elimina post" GridPane.rowIndex="4" />
                                     <Button id="setRimuoviBtn" fx:id="postRemoveButton" mnemonicParsing="false" onMouseClicked="#onRemovePost" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Rimuovi" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                    <SplitMenuButton id="tipoOrdinamentoField" fx:id="tipoOrdinamentoField" mnemonicParsing="false" popupSide="RIGHT" prefHeight="2.0" prefWidth="170.0" text="Ciao" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <SplitMenuButton id="tipoOrdinamentoField" fx:id="tipoOrdinamentoField" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" prefWidth="178.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                               </GridPane>
                            </content>
                         </TitledPane>
                         <TitledPane text="Filter">
                            <content>
-                              <GridPane hgap="10.0" vgap="10.0">
+                              <GridPane id="settingsGrid" hgap="10.0" vgap="10.0">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="285.0" minWidth="10.0" prefWidth="117.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="465.0" minWidth="10.0" prefWidth="463.0" />

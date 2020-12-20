@@ -9,6 +9,7 @@ import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.post.utils.controller_manager.PostTabManager;
 import org.uygar.postit.controllers.post.utils.loader.PostItLoader;
 import org.uygar.postit.data.database.DataMiner;
+import org.uygar.postit.data.query_utils.QueryUtils;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
@@ -44,16 +45,16 @@ public class PostController extends BaseController {
     public Button filterResetButton, filterSaveButton, filterButton;
 
     public DataMiner dataMiner;
-    public Post loadingPost;
+    public Post loadedPost;
     public Dimension2D minDimension;
     public PostItGridViewer postItGrid;
     public PostTabManager postTabManager;
 
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
         post.setUserData(fatherPost);   // Identify a post pane in Stage windows
-
         dataMiner = miner;
-        loadingPost = fatherPost;
+        loadedPost = fatherPost;
+        System.out.println("LOADING: " + loadedPost);
         minDimension = initialWindowDimension;
         postTabManager = new PostTabManager(this);
 
@@ -80,7 +81,7 @@ public class PostController extends BaseController {
 
     @FXML
     public void onExit() {
-        this.rootTabPane.getScene().getWindow().hide();
+        exitFromPost();
     }
 
     @FXML
@@ -96,7 +97,13 @@ public class PostController extends BaseController {
 
     @FXML
     public void onRemovePost() {
+        exitFromPost();
+        loadedPost.setDeleted(true);
+        QueryUtils.tryRemovePostFromDB(dataMiner, loadedPost);
+    }
 
+    private void exitFromPost() {
+        this.rootTabPane.getScene().getWindow().hide();
     }
 
 }

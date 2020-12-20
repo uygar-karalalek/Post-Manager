@@ -30,7 +30,7 @@ public class PostLoader extends WindowLoader<AppController, PostController> {
                 .initializeApplicationWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, loadingController.post, true);
         postStage.setOnHidden(windowEvent -> {
             baseController.postGrid.nothingSelected();
-            baseController.postGrid.enablePostButtonWhenFrameClosed(loadingController.loadingPost);
+            baseController.postGrid.enablePostButtonWhenFrameClosed(loadingController.loadedPost);
         });
 
         baseController.bindStyleSheetWithControllerName("post", "post", loadingController.post);

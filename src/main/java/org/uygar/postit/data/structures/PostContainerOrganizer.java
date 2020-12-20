@@ -29,9 +29,4 @@ public class PostContainerOrganizer extends BaseDataContainer<Post> implements P
         return list;
     }
 
-    public Post getLastPost() {
-        return list.stream().max
-                (Comparator.comparing(Post::getId)).orElse(null);
-    }
-
 }

@@ -2,6 +2,8 @@ package org.uygar.postit.post.viewers.post;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.ListChangeListener;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -25,13 +27,12 @@ public class PostGridViewer extends GridPane {
     private static final int POST_BUTTON_HEIGHT = 40;
     private static final int DEF_COLS = 2;
 
-    private int rowCount, colCount;
-
     public PostGridViewer(PostContainerOrganizer postOrganizer) {
         this.setMinSize(WIDTH, HEIGHT);
         this.setId("postGridViewer");
         this.postOrganizer = postOrganizer;
         this.buttonOrganizer = new ButtonOrganizer(postOrganizer);
+        this.postOrganizer.getPostList().addListener(this::onPostListChanged);
 
         Predicate<Post> alwaysCondition = post -> true;
         showPostsByCondition(alwaysCondition);
@@ -39,20 +40,41 @@ public class PostGridViewer extends GridPane {
 
     private void showPostsByCondition(Predicate<Post> predicate) {
         this.getChildren().clear();
-        int num = 0;
-        for (PostButton element : buttonOrganizer)
+        int postItNumber = 0;
+        for (PostButton element : buttonOrganizer) {
             if (predicate.test(element.getPost()))
-                addAndInitPostButton(element, num % DEF_COLS, num++ / DEF_COLS);
-        rowCount = num / DEF_COLS;
-        colCount = num % DEF_COLS;
+                addAndInitPostButton(element, getColCount(postItNumber), getRowCount(postItNumber));
+            postItNumber++;
+        }
+    }
+
+    public void onPostListChanged(ListChangeListener.Change<? extends Post> change) {
+        while (change.next()) {
+            if (change.wasAdded())
+                updateLastWhenAdded();
+            else if (change.wasRemoved())
+                change.getRemoved().forEach(this::updateWhenRemoved);
+        }
     }
 
     public void updateLastWhenAdded() {
-        if (colCount == DEF_COLS) {
-            colCount = 0;
-            rowCount++;
-        }
-        addAndInitPostButton(buttonOrganizer.getLastPostView(), colCount++, rowCount);
+        int postIndex = postOrganizer.getPostList().size() - 1;
+        int col = getColCount(postIndex);
+        int row = getRowCount(postIndex);
+
+        addAndInitPostButton(buttonOrganizer.getLastPostView(), col, row);
+    }
+
+    public void updateWhenRemoved(Post post) {
+        int removedIndex = findPostIndexInViewList(post);
+        this.getChildren().remove(removedIndex);
+        onPostRemovedChangeButtonConstraints(removedIndex);
+    }
+
+    private void onPostRemovedChangeButtonConstraints(int postIndex) {
+        if (postIndex == this.getChildren().size()) return;
+        GridPane.setConstraints(this.getChildren().get(postIndex), getColCount(postIndex), getRowCount(postIndex));
+        onPostRemovedChangeButtonConstraints(++postIndex);
     }
 
     public void filterPostsNameContaining(String letters) {
@@ -81,12 +103,32 @@ public class PostGridViewer extends GridPane {
         this.selected.set(null);
     }
 
+    public int findPostIndexInViewList(Post post) {
+        for (int i = 0; i < this.getChildren().size(); i++) {
+            Node current = this.getChildren().get(i);
+            if (current instanceof PostButton) {
+                PostButton postButton = (PostButton) current;
+                if (postButton.getPost().equals(post))
+                    return i;
+            }
+        }
+        return -1;
+    }
+
     public void enablePostButtonWhenFrameClosed(Post post) {
         this.getChildren().stream().filter(node -> {
             if (node instanceof Button)
                 return ((Button) node).getText().equals(post.getName());
             return false;
         }).findFirst().ifPresent(postBtn -> postBtn.setDisable(false));
+    }
+
+    private int getColCount(int postIndex) {
+        return postIndex % DEF_COLS;
+    }
+
+    private int getRowCount(int postIndex) {
+        return postIndex / DEF_COLS;
     }
 
 }

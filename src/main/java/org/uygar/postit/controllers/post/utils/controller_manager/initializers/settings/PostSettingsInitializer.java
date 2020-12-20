@@ -33,8 +33,8 @@ public class PostSettingsInitializer extends PostControllerWrapper implements Ta
     }
 
     public void setInitialFields() {
-        postController.nomePostField.setText(postController.loadingPost.getName());
-        postController.tipoOrdinamentoField.setText(postController.loadingPost.getSortType().getName());
+        postController.nomePostField.setText(postController.loadedPost.getName());
+        postController.tipoOrdinamentoField.setText(postController.loadedPost.getSortType().getName());
     }
 
 }

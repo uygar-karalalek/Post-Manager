@@ -1,7 +1,6 @@
 package org.uygar.postit.post;
 
 import javafx.beans.property.*;
-import javafx.collections.ObservableList;
 import org.uygar.postit.post.properties.Sort;
 
 import java.time.LocalDateTime;
@@ -16,6 +15,7 @@ public class Post {
     private SimpleStringProperty name;
     private SimpleObjectProperty<LocalDateTime> creationDate, lastModifiedDate;
     private SimpleObjectProperty<Sort> sortType;
+    private SimpleBooleanProperty deleted;
 
     public Post(Integer id, String name, LocalDateTime creationDate, LocalDateTime lastModifiedDate, Sort sortType) {
         this.id = new SimpleIntegerProperty(id == null ? -1 : id);
@@ -23,6 +23,7 @@ public class Post {
         this.creationDate = new SimpleObjectProperty<>(creationDate);
         this.lastModifiedDate = new SimpleObjectProperty<>(lastModifiedDate);
         this.sortType = new SimpleObjectProperty<>(sortType);
+        this.deleted = new SimpleBooleanProperty(false);
     }
 
     public Post(Integer id, String name, LocalDateTime creationAndLastModified, Sort sortType) {
@@ -90,6 +91,23 @@ public class Post {
     }
     public void setCreationDate(LocalDateTime creationDate) {
         this.creationDate.set(creationDate);
+    }
+
+    public boolean isDeleted() {
+        return deleted.get();
+    }
+    public SimpleBooleanProperty deletedProperty() {
+        return deleted;
+    }
+    public void setDeleted(boolean deleted) {
+        this.deleted.set(deleted);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Post)
+            return this.getId() == ((Post) obj).getId();
+        return false;
     }
 
 }

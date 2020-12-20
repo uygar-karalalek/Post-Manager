@@ -3,10 +3,8 @@ package org.uygar.postit.post.viewers.post_it.post_button;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.scene.control.Button;
 import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
-import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostViewer;
 
@@ -15,21 +13,22 @@ import java.util.Iterator;
 public class ButtonOrganizer implements Iterable<PostButton> {
 
     ObservableList<PostButton> views = FXCollections.observableArrayList();
+    PostContainerOrganizer posts;
 
     public ButtonOrganizer(PostContainerOrganizer organizer) {
-        init(organizer.getPostList());
+        this.posts = organizer;
+        init();
     }
 
-    private void init(ObservableList<Post> posts) {
-        posts.forEach(post -> views.add(getPostViewByPost(post)));
-        posts.addListener(this::onChanged);
+    private void init() {
+        posts.getPostList().addListener(this::onChanged);
+        posts.forEach(this::addPostToButtonOrganizer);
     }
 
     public void onChanged(ListChangeListener.Change<? extends Post> change) {
         while (change.next()) {
             if (change.wasAdded())
-                change.getAddedSubList()
-                        .forEach(post -> views.add(getPostViewByPost(post)));
+                change.getAddedSubList().forEach(this::addPostToButtonOrganizer);
             else if (change.wasRemoved())
                 views.removeIf(postButton ->
                         change.getRemoved().stream()
@@ -37,12 +36,21 @@ public class ButtonOrganizer implements Iterable<PostButton> {
         }
     }
 
-    public PostButton getLastPostView() {
-        return views.get(views.size()-1);
+    public void addPostToButtonOrganizer(Post post) {
+        PostViewer postView = new PostViewer(post);
+        views.add(postView.getView());
+        addDeleteChangeListener(postView);
     }
 
-    public PostButton getPostViewByPost(Post element) {
-        return new PostViewer(element).getView();
+    private void addDeleteChangeListener(PostViewer postViewer) {
+        postViewer.deletedProperty().addListener((obs, oldVal, newVal) -> {
+            if (postViewer.isDeleted())
+                posts.getPostList().removeIf(postViewer::equals);
+        });
+    }
+
+    public PostButton getLastPostView() {
+        return views.get(views.size()-1);
     }
 
     @NotNull

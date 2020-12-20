@@ -10,7 +10,6 @@ import org.uygar.postit.controllers.post.utils.PostStatistics;
 import org.uygar.postit.controllers.post.utils.PostStatisticsViewManager;
 import org.uygar.postit.controllers.post.utils.controller_manager.PostControllerWrapper;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.TabInitializer;
-import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.query_utils.QueryUtils;
 import org.uygar.postit.post.properties.Sort;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
@@ -27,7 +26,7 @@ public class PostTabInitializer extends PostControllerWrapper implements TabInit
     @Override
     public void initializeTab() {
         postController.srcBar.textProperty().addListener(this::onSearchTextChangeDoFilter);
-        postController.postItGrid = new PostItGridViewer(postController.loadingPost, postController.dataMiner);
+        postController.postItGrid = new PostItGridViewer(postController.loadedPost, postController.dataMiner);
         postController.rootTabPane.prefWidthProperty().bind(postController.post.widthProperty());
         postController.rootTabPane.prefHeightProperty().bind(postController.post.heightProperty());
 
@@ -57,7 +56,7 @@ public class PostTabInitializer extends PostControllerWrapper implements TabInit
     }
 
     private void initPostTitle() {
-        postController.postTitle.textProperty().bind(postController.loadingPost.nameProperty());
+        postController.postTitle.textProperty().bind(postController.loadedPost.nameProperty());
         changeFontSizeOfPostTitleLabelBasedOnLength();
     }
 
@@ -76,16 +75,16 @@ public class PostTabInitializer extends PostControllerWrapper implements TabInit
     }
 
     private void updatePostName() {
-        postController.loadingPost.setName(postController.nomePostField.getText());
+        postController.loadedPost.setName(postController.nomePostField.getText());
         changeFontSizeOfPostTitleLabelBasedOnLength();
         QueryUtils.updatePostName(postController.dataMiner, postController.nomePostField.getText(),
-                postController.loadingPost.getId());
+                postController.loadedPost.getId());
     }
 
     private void updatePostSortType() {
         Sort sortType = Sort.getSortBasedOnName(postController.tipoOrdinamentoField.getText());
-        postController.loadingPost.setSortType(sortType);
-        QueryUtils.updatePostSortType(postController.dataMiner, sortType, postController.loadingPost.getId());
+        postController.loadedPost.setSortType(sortType);
+        QueryUtils.updatePostSortType(postController.dataMiner, sortType, postController.loadedPost.getId());
     }
 
 }

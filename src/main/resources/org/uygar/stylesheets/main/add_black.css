@@ -41,7 +41,7 @@
     -fx-font-family: "Arial";
     -fx-font-size: 12pt;
     -fx-background-radius: 5em;
-    -fx-background-color: linear-gradient(#4d798b, #638636);
+    -fx-background-color: linear-gradient(#398baa, #062c4f);
     -fx-alignment: CENTER;
     -fx-text-fill: white;
 }
@@ -64,11 +64,11 @@
 }
 
 .split-menu-button .menu-item {
-    -fx-background-color: radial-gradient(center 35px 15px, radius 30px, chocolate, black);
+    -fx-background-color: radial-gradient(center 35px 15px, radius 30px, #262822, #23303f);
 }
 
 .split-menu-button .menu-item:hover {
-    -fx-background-color: linear-gradient(#ff8100, grey);
+    -fx-background-color: linear-gradient(black, grey);
 }
 
 .split-menu-button .menu-item .label {

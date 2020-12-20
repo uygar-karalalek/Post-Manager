@@ -83,7 +83,6 @@ public class AggiungiController extends BaseController implements Initializable 
     private void addPostToViewAndUpdate(Post post) {
         this.postGridViewer.postOrganizer.add(post);
         this.add.getScene().getWindow().hide();
-        this.postGridViewer.updateLastWhenAdded();
     }
 
     @FXML
