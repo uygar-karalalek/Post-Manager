@@ -17,6 +17,7 @@ public class StatisticaUtils {
         oreScatter.setLowerBound(-1);
         oreScatter.setUpperBound(24);
         oreScatter.setTickUnit(1);
+        oreScatter.setMinorTickVisible(false);
         oreScatter.setAutoRanging(false);
         return oreScatter;
     }

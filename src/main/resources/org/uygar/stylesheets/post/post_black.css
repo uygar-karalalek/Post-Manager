@@ -268,6 +268,8 @@
     -fx-font-size: 12px;
     -fx-background-radius: 2em;
     -fx-alignment: center;
+    -fx-max-width: 180;
+    -fx-pref-width: 180;
 }
 
 .split-menu-button {
@@ -282,6 +284,7 @@
     -fx-text-fill: white;
     -fx-background-radius: 1em 0 0 1em;
     -fx-border-radius: 1em;
+    -fx-pref-width: 180px;
 }
 
 .split-menu-button .arrow-button {
@@ -350,6 +353,38 @@
 
 /*  DATE PICKER  */
 
+.traDate {
+    -fx-background-color: transparent;
+    -fx-border-width: 0;
+    -fx-border-color: black;
+    -fx-pref-width: 170px;
+}
+
+.traDate > .arrow-button {
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #4759af, #7ec6c6);
+    -fx-border-color: black;
+    -fx-background-radius: 0 1em 1em 0;
+    -fx-border-radius: 0 1em 1em 0;
+}
+
+.traDate > .arrow-button:hover {
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #a8a524, #237543);
+}
+
+.traDate > .text-field {
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #4759af, #7ec6c6);
+    -fx-background-radius: 1em 0 0 1em;
+    -fx-border-radius: 1em 0 0 1em;
+    -fx-border-width: 0.6;
+    -fx-border-color: black;
+}
+
+.traDate:focused > .text-field, .traDate:focused > .arrow-button {
+    -fx-background-color: linear-gradient(from 10% 10% to 100% 100%, #16428d, #9ad336);
+    -fx-border-width: 1;
+    -fx-text-fill: white;
+    -fx-border-color: white;
+}
 
 .date-picker > .arrow-button > .arrow {
     -fx-shape: "M0,0v9h9V0H0z M2,8H1V7h1V8z M2,6H1V5h1V6z M2,4H1V3h1V4z M4,8H3V7h1V8z M4,6H3V5h1V6z M4,4H3V3h1V4z M6,8H5V7h1V8z M6,6H5 V5h1V6z M6,4H5V3h1V4z M8,8H7V7h1V8z M8,6H7V5h1V6z M8,4H7V3h1V4z";

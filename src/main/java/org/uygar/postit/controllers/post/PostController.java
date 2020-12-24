@@ -39,7 +39,7 @@ public class PostController extends BaseController {
     @FXML
     public Button postResetButton, postSaveButton, postRemoveButton;
     @FXML
-    public TextField postIniziaField;
+    public TextField postItTitleField, postItPriorityField;
     @FXML
     public DatePicker postTraField1, postTraField2;
     @FXML
