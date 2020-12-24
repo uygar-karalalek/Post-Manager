@@ -59,7 +59,7 @@ public class PostGridViewer extends GridPane {
     }
 
     public void updateLastWhenAdded() {
-        int postIndex = this.getChildren().size() - 1;
+        int postIndex = this.getChildren().size();
         int col = getColCount(postIndex);
         int row = getRowCount(postIndex);
 

@@ -139,18 +139,6 @@ public class PostIt {
         return false;
     }
 
-    public int compareToDone(@NotNull PostIt postIt) {
-        if (isFatto() && !postIt.isFatto())
-            return 1;
-        if (!isFatto() && postIt.isFatto())
-            return -1;
-        return 0;
-    }
-
-    public int compareToUndone(@NotNull PostIt postIt) {
-        return compareToDone(postIt) * - 1;
-    }
-
     public static PostIt empty() {
         return new PostIt(-1, false, "", "",
                 LocalDateTime.now(), LocalDateTime.now(), Colore.GIALLO, -1);

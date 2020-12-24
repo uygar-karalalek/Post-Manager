@@ -41,7 +41,7 @@
                               </TextField>
                               <Button id="btn" mnemonicParsing="false" onMouseClicked="#onAggiungi" text="Aggiungi" />
                               <Button id="btn" mnemonicParsing="false" onMouseClicked="#onOrdina" prefWidth="133.0" text="Ordina" />
-                              <Button id="btn" mnemonicParsing="false" prefWidth="133.0" text="Impostazioni" />
+                              <Button id="btn" mnemonicParsing="false" onMouseClicked="#onSettings" prefWidth="133.0" text="Impostazioni" />
                               <Button id="esciBtn" mnemonicParsing="false" onMouseClicked="#onExit" prefWidth="133.0" text="Esci">
                                  <VBox.margin>
                                     <Insets top="20.0" />

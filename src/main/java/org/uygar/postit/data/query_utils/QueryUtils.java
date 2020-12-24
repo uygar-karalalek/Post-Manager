@@ -36,6 +36,7 @@ public class QueryUtils {
                             "title", postIt.getTitolo(),
                             "endDate", postIt.getDataScadenza().toString())
                     .where().field("creationdate").equalsTo(postIt.getDataCreazione().toString());
+            System.out.println(query);
             return miner.tryExecute(query);
         } catch (Exception e) {
             return false;
@@ -103,20 +104,20 @@ public class QueryUtils {
         return Integer.parseInt(result);
     }
 
-    public static void updatePostName(DataMiner miner, String value, int id) {
-        updatePostField(miner, "name", value, id);
+    public static boolean updatePostName(DataMiner miner, String value, int id) {
+        return updatePostField(miner, "name", value, id);
     }
 
     public static void updatePostSortType(DataMiner miner, Sort sort, int id) {
         updatePostField(miner, "sort", sort.toString(), id);
     }
 
-    public static void updatePostField(DataMiner miner, String field, Object value, int id) {
+    public static boolean updatePostField(DataMiner miner, String field, Object value, int id) {
         Query query = new DMLQueryBuilder()
                 .update("post")
                 .set(field, value.toString())
                 .where("id=" + id);
-        miner.tryExecute(query);
+        return miner.tryExecute(query);
     }
 
 }

@@ -6,6 +6,7 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import org.uygar.postit.controllers.BaseController;
+import org.uygar.postit.controllers.exception.WrongFieldsException;
 import org.uygar.postit.controllers.post.utils.controller_manager.PostTabManager;
 import org.uygar.postit.controllers.post.utils.loader.PostItLoader;
 import org.uygar.postit.data.database.DataMiner;
@@ -52,12 +53,11 @@ public class PostController extends BaseController {
 
     public void init(Post fatherPost, DataMiner miner, Dimension2D initialWindowDimension) {
         post.setUserData(fatherPost);   // Identify a post pane in Stage windows
+
         dataMiner = miner;
         loadedPost = fatherPost;
-        System.out.println("LOADING: " + loadedPost);
         minDimension = initialWindowDimension;
         postTabManager = new PostTabManager(this);
-
         postTabManager.initPostControllerTab();
         postTabManager.initSettingsControllerTab();
         postTabManager.initStatisticsControllerTab();
@@ -75,8 +75,12 @@ public class PostController extends BaseController {
 
     @FXML
     public void onOrdina() {
-        rootTabPane.getSelectionModel().selectNext();
         postItGrid.sortPostIts();
+    }
+
+    @FXML
+    public void onSettings() {
+        rootTabPane.getSelectionModel().selectNext();
     }
 
     @FXML
@@ -85,7 +89,7 @@ public class PostController extends BaseController {
     }
 
     @FXML
-    public void onSavePostSettings() {
+    public void onSavePostSettings() throws WrongFieldsException {
         postTabManager.postTabInitializer.changePostBasedOnSettings();
         rootTabPane.getSelectionModel().selectPrevious();
     }

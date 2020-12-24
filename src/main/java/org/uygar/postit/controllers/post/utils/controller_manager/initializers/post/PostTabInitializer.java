@@ -5,6 +5,8 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.input.ScrollEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
+import org.uygar.postit.controllers.exception.WrongFieldsException;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.controllers.post.utils.PostStatistics;
 import org.uygar.postit.controllers.post.utils.PostStatisticsViewManager;
@@ -69,19 +71,40 @@ public class PostTabInitializer extends PostControllerWrapper implements TabInit
         postController.postTitle.setFont(def);
     }
 
-    public void changePostBasedOnSettings() {
-        updatePostName();
-        updatePostSortType();
+    public void changePostBasedOnSettings() throws WrongFieldsException {
+        if (nameMoreThan18Chars()) {
+            throw new WrongFieldsException("Il nome deve avere al massimo 18 caratteri!",
+                    new WindowCoordinatesContainer(postController.getStage()));
+        }
+        else if (nameAlreadyExists()) {
+            throw new WrongFieldsException("Il post esiste già",
+                    new WindowCoordinatesContainer(postController.getStage()));
+        }
+        else {
+            updateViewPostName();
+            updateViewPostSortType();
+        }
     }
 
-    private void updatePostName() {
-        postController.loadedPost.setName(postController.nomePostField.getText());
-        changeFontSizeOfPostTitleLabelBasedOnLength();
-        QueryUtils.updatePostName(postController.dataMiner, postController.nomePostField.getText(),
+    private boolean nameAlreadyExists() {
+        return !updatePostNameFromDB();
+    }
+
+    private boolean nameMoreThan18Chars() {
+        return postController.nomePostField.getText().length() > 18;
+    }
+
+    private boolean updatePostNameFromDB() {
+        return QueryUtils.updatePostName(postController.dataMiner, postController.nomePostField.getText(),
                 postController.loadedPost.getId());
     }
 
-    private void updatePostSortType() {
+    private void updateViewPostName() {
+        postController.loadedPost.setName(postController.nomePostField.getText());
+        changeFontSizeOfPostTitleLabelBasedOnLength();
+    }
+
+    private void updateViewPostSortType() {
         Sort sortType = Sort.getSortBasedOnName(postController.tipoOrdinamentoField.getText());
         postController.loadedPost.setSortType(sortType);
         QueryUtils.updatePostSortType(postController.dataMiner, sortType, postController.loadedPost.getId());

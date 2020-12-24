@@ -73,8 +73,8 @@ public class DQLQueryBuilder implements DQL {
     @Override
     public String toString() {
         return "DQLQuery{" +
-                "query: '" + query + '\'' +
-                '}';
+                "query: '" + query + "'" +
+                "}";
     }
 
 }

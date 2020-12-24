@@ -3,52 +3,66 @@ package org.uygar.postit.post.properties;
 import org.uygar.postit.post.PostIt;
 
 import java.util.Comparator;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.function.Function;
-import java.util.function.Predicate;
 
 public enum Sort {
 
-    DONE("Finite") {
+    DONE("Finito") {
         @Override
         public void sort(List<PostIt> postItList) {
-            postItList.sort(PostIt::compareToDone);
+            postItList.sort(BY_DONE);
         }
     },
 
-    UNDONE("Non finite") {
+    PRIORITY("Priorità") {
         @Override
         public void sort(List<PostIt> postItList) {
-            postItList.sort(PostIt::compareToUndone);
+            postItList.sort(BY_PRIORITY);
         }
     },
 
-    DATE("Data") {
+    UNDONE("Non finito") {
         @Override
         public void sort(List<PostIt> postItList) {
-            postItList.sort(Comparator.comparing(PostIt::getId));
+            postItList.sort(BY_DONE.reversed());
         }
     },
 
-    DATE_AND_DONE("Data e Finite") {
+    DATE("Cronologico") {
         @Override
         public void sort(List<PostIt> postItList) {
-            postItList.sort(Comparator.comparing(
-                    PostIt::isFatto).thenComparing(PostIt::getId));
+            postItList.sort(BY_ID);
         }
     },
 
-    DATE_AND_UNDONE("Data e non finite") {
+    DATE_AND_UNDONE("Non finito e data") {
         @Override
         public void sort(List<PostIt> postItList) {
-            Function<PostIt, Boolean> notDone = postIt -> !postIt.isFatto();
-            postItList.sort(Comparator.comparing(PostIt::getDataCreazione).thenComparing(notDone));
+            postItList.sort(BY_DONE.reversed().thenComparing(BY_DATE));
+        }
+    },
+
+    PRIORITY_AND_UNDONE("Non finito e Priorità") {
+        @Override
+        public void sort(List<PostIt> postItList) {
+            postItList.sort(BY_DONE.reversed().thenComparing(BY_PRIORITY));
+        }
+    },
+
+    DATE_AND_DONE("Finito e Cronologico") {
+        @Override
+        public void sort(List<PostIt> postItList) {
+            postItList.sort(BY_DONE.thenComparing(BY_ID));
         }
     };
 
     String name;
+
+    static Comparator<PostIt> BY_DONE = Comparator.comparing(postIt -> !postIt.isFatto());
+    static Comparator<PostIt> BY_ID = Comparator.comparing(PostIt::getId).reversed();
+    static Comparator<PostIt> BY_DATE = Comparator.comparing(PostIt::getDataCreazione);
+    static Comparator<PostIt> BY_PRIORITY = Comparator.comparing(PostIt::getPriority).reversed();
 
     Sort(String name) {
         this.name = name;

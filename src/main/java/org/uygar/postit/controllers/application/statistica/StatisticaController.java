@@ -72,6 +72,7 @@ public class StatisticaController extends BaseController {
 
     public void initDataEditorTableViews() {
         tableContainer.prefHeightProperty().bind(valoriPane.heightProperty().divide(1.3));
+        tableContainer.setMaxWidth(1300);
 
         initTableView(tabellaOre,
                 HourFrequencyModel.Data.getHourFrequencyData(properties),
@@ -105,7 +106,7 @@ public class StatisticaController extends BaseController {
     }
 
     public void initOreEFrequenza() {
-        NumberAxis frequenza_ore = getFrequenzaAxis(0, 100, 10, "Frequenza accessi nelle ore");
+        NumberAxis frequenza_ore = getFrequenzaAxis(0, 200, 10, "Frequenza accessi nelle ore");
         NumberAxis oreAxis = getOreAxis();
         scatterChart = new ScatterChart<>(oreAxis, frequenza_ore);
 
