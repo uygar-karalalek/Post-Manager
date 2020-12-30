@@ -11,8 +11,8 @@ import javafx.stage.Window;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.exception.WrongFieldsException;
-import org.uygar.postit.controllers.application.filter.util.FilterBuilder;
-import org.uygar.postit.controllers.application.filter.util.FilterSerializer;
+import org.uygar.postit.controllers.filter.FilterUnitContainer;
+import org.uygar.postit.controllers.filter.post.PostFilter;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.io.File;
@@ -31,9 +31,11 @@ public class FilterController extends BaseController {
     @FXML
     public DatePicker data1, data2;
 
+    PostFilter postFilter;
     PostGridViewer postGridViewer;
 
     public void init(PostGridViewer postGridViewer) {
+        this.postFilter = new PostFilter(this, new FilterUnitContainer<>());
         this.postGridViewer = postGridViewer;
         resetFields();
         bindProperties();
@@ -60,9 +62,13 @@ public class FilterController extends BaseController {
     }
 
     private void deserializeFilter() {
-        FilterSerializer filter = FilterSerializer.deserialize();
-        if (filter != null)
-            filter.applyFilter(this);
+        PostFilter deserialized = (PostFilter) postFilter.deserialize();
+        System.out.println(deserialized);
+        if (deserialized != null) {
+            deserialized.setFilterController(this);
+            deserialized.applyFilterToController();
+        }
+        postFilter = deserialized == null ? postFilter : deserialized;
     }
 
     public void addCheckChangeListenerToCheckBox(CheckBox box, TextField field) {
@@ -77,12 +83,12 @@ public class FilterController extends BaseController {
         if (fieldsNotValid())
             throwNotValidException();
         filterPostsInPostGridViewer();
-        FilterSerializer.serialize(getFilterSerializer());
+        postFilter.serialize();
     }
 
     private void filterPostsInPostGridViewer() {
-        FilterBuilder builder = getFilterBuilder();
-        postGridViewer.filterPostsByUnionPredicates(builder.unifiedPredicates());
+        postFilter.buildFilterSettingUnits();
+        postGridViewer.filterPostsByUnionPredicates(postFilter.getResult());
     }
 
     private void throwNotValidException() throws WrongFieldsException {
@@ -132,26 +138,6 @@ public class FilterController extends BaseController {
         if (tra.isSelected())
             valid = data1.getValue() != null && data2.getValue() != null;
         return valid;
-    }
-
-    public FilterBuilder getFilterBuilder() {
-        return new FilterBuilder(
-                inizioField.getText(),
-                contieneField.getText(),
-                finisceField.getText(),
-                data1.getValue(),
-                data2.getValue(),
-                ignoraMaiusc.isSelected(),
-                inizio.isSelected(),
-                tra.isSelected(),
-                contiene.isSelected(),
-                finisce.isSelected());
-    }
-
-    public FilterSerializer getFilterSerializer() {
-        return new FilterSerializer(inizioField.getText(), contieneField.getText(),
-                finisceField.getText(), ignoraMaiusc.isSelected(),
-                data1.getValue(), data2.getValue());
     }
 
 }

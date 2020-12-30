@@ -116,11 +116,11 @@
                                     </TextField>
                                     <Label styleClass="setLabel" text="Tra le date" GridPane.rowIndex="2" />
                                     <Label styleClass="setLabel" text="Salva modifica" GridPane.rowIndex="4" />
-                                    <Button id="setSalvaBtn" fx:id="filterSaveButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                    <Button id="setSalvaBtn" fx:id="filterSaveButton" mnemonicParsing="false" onMouseClicked="#onSaveFilter" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                     <Label styleClass="setLabel" text="Annulla modifica" GridPane.rowIndex="5" />
-                                    <Button id="setResetBtn" fx:id="filterResetButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Button id="setResetBtn" fx:id="filterResetButton" mnemonicParsing="false" onMouseClicked="#onFilterReset" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                     <Label styleClass="setLabel" text="Filtra" GridPane.rowIndex="3" />
-                                    <Button id="setRimuoviBtn" fx:id="filterButton" mnemonicParsing="false" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Filtra" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                    <Button id="setRimuoviBtn" fx:id="filterButton" mnemonicParsing="false" onMouseClicked="#onFilter" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Filtra" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                     <VBox alignment="CENTER_LEFT" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                                        <children>
                                           <DatePicker fx:id="postTraField1" editable="false" styleClass="traDate">

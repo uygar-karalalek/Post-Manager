@@ -1,0 +1,150 @@
+package org.uygar.postit.controllers.filter.post;
+
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
+import org.jetbrains.annotations.NotNull;
+import org.uygar.postit.controllers.application.filter.FilterController;
+import org.uygar.postit.controllers.filter.Filter;
+import org.uygar.postit.controllers.filter.FilterUnitContainer;
+import org.uygar.postit.controllers.filter.GeneralFilter;
+import org.uygar.postit.controllers.filter.unit.DateFilterUnit;
+import org.uygar.postit.controllers.filter.unit.StringFilterUnit;
+import org.uygar.postit.post.Post;
+
+import java.io.*;
+import java.time.LocalDate;
+import java.util.function.BiPredicate;
+import java.util.function.Function;
+import java.util.function.Predicate;
+
+public class PostFilter extends GeneralFilter<FilterController, Post> implements Serializable {
+
+    public static final long serialVersionUID = 100L;
+
+    Boolean inizioEnabled, isIgnoreCase, finisceEnabled, contieneEnabled, datesEnabled;
+
+    String contieneText, inizioText, finisceText;
+
+    LocalDate date1, date2;
+
+    public PostFilter(FilterController controller, FilterUnitContainer<Post> unitContainer) {
+        super(controller, unitContainer);
+        setTextOfUnits();
+    }
+
+    // FOR OBJECT SERIALIZATION
+    public PostFilter() {
+    }
+
+    private void setTextOfUnits() {
+        inizioEnabled = isSelected(getFilterController().inizio);
+        isIgnoreCase = getFilterController().ignoraMaiusc.isSelected();
+        finisceEnabled = isSelected(getFilterController().finisce);
+        contieneEnabled = isSelected(getFilterController().contiene);
+        datesEnabled = isSelected(getFilterController().tra);
+
+        contieneText = getFilterController().contieneField.getText();
+        inizioText = getFilterController().inizioField.getText();
+        finisceText = getFilterController().finisceField.getText();
+
+        date1 = getFilterController().data1.getValue();
+        date2 = getFilterController().data2.getValue();
+
+        if (date1 != null && date2 != null && date1.isAfter(date2)) {
+            LocalDate temp = date1;
+            date1 = date2;
+            date2 = temp;
+        }
+    }
+
+    @Override
+    public void buildFilterSettingUnits() {
+        setTextOfUnits();
+        StringFilterUnit inizio = new StringFilterUnit(inizioText, String::startsWith, isIgnoreCase, inizioEnabled);
+        StringFilterUnit contiene = new StringFilterUnit(contieneText, String::contains, isIgnoreCase, contieneEnabled);
+        StringFilterUnit finisce = new StringFilterUnit(finisceText, String::endsWith, isIgnoreCase, finisceEnabled);
+        DateFilterUnit tra = new DateFilterUnit(datesEnabled, date1, date2);
+
+        addStringFilterUnit(inizio);
+        addStringFilterUnit(finisce);
+        addStringFilterUnit(contiene);
+        addDateFilterUnit(tra);
+    }
+
+    @Override
+    public void applyFilterToController() {
+        if (inizioEnabled)
+            applyToField(getFilterController().inizioField, inizioText, getFilterController().inizio);
+        if (contieneEnabled)
+            applyToField(getFilterController().contieneField, contieneText, getFilterController().contiene);
+        if (finisceEnabled)
+            applyToField(getFilterController().finisceField, finisceText, getFilterController().finisce);
+        if (datesEnabled)
+            applyToDatePicker(getFilterController().data1, getFilterController().data2, date1, date2, getFilterController().tra);
+        if (isIgnoreCase != null)
+            getFilterController().ignoraMaiusc.setSelected(isIgnoreCase);
+    }
+
+    @Override
+    public void addStringFilterUnit(StringFilterUnit stringFilterUnit) {
+        super.addStringFilterUnit(stringFilterUnit);
+
+        if (stringFilterUnit.isEnabled()) {
+            Function<Post, String> postName = post -> stringFilterUnit.isIgnoreCase() ?
+                    post.getName().toLowerCase() : post.getName();
+            Predicate<Post> postCondition = post -> stringFilterUnit.getCondition()
+                    .test(postName.apply(post), stringFilterUnit.getInputBasedOnIgnoreCase());
+
+            getUnitContainer().addUnit(postCondition);
+        }
+    }
+
+    @Override
+    public void addDateFilterUnit(DateFilterUnit dateFilterUnit) {
+        super.addDateFilterUnit(dateFilterUnit);
+
+        if (dateFilterUnit.isEnabled()) {
+            BiPredicate<Post, LocalDate> isEqual = (post, date) -> post.getCreationDate().toLocalDate().isEqual(date);
+            BiPredicate<Post, LocalDate> isAfter = (post, date) -> post.getCreationDate().toLocalDate().isAfter(date);
+            BiPredicate<Post, LocalDate> isBefore = (post, date) -> post.getCreationDate().toLocalDate().isBefore(date);
+
+            getUnitContainer().addUnit(post -> {
+                boolean postCreationDateIsEqualOrAfterFirstDate =
+                        isAfter.test(post, dateFilterUnit.getDate1()) || isEqual.test(post, dateFilterUnit.getDate1());
+
+                boolean postCreationDateIsBeforeOrEqualSecondDate =
+                        isBefore.test(post, dateFilterUnit.getDate2()) || isEqual.test(post, dateFilterUnit.getDate2());
+
+                return postCreationDateIsEqualOrAfterFirstDate && postCreationDateIsBeforeOrEqualSecondDate;
+            });
+        }
+    }
+
+    @Override
+    public void serialize() {
+        File file = new File("filter.ser");
+        if (file.exists())
+            file.delete();
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
+            oos.writeObject(this);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public Filter<Post> deserialize() {
+        File file = new File("filter.ser");
+        if (!file.exists())
+            return null;
+        PostFilter filterObject = null;
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {
+            filterObject = (PostFilter) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return filterObject;
+    }
+
+}
