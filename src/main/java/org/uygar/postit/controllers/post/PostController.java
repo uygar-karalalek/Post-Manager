@@ -8,9 +8,10 @@ import javafx.scene.layout.*;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.exception.WrongFieldsException;
+import org.uygar.postit.controllers.filter.FilterUnitContainer;
+import org.uygar.postit.controllers.filter.post.PostFilter;
+import org.uygar.postit.controllers.filter.postit.PostItFilter;
 import org.uygar.postit.controllers.post.utils.controller_manager.PostTabManager;
-import org.uygar.postit.controllers.post.utils.filter.PostItFilterBuilder;
-import org.uygar.postit.controllers.post.utils.filter.PostItFilterSerializer;
 import org.uygar.postit.controllers.post.utils.loader.PostItLoader;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.query_utils.QueryUtils;
@@ -19,7 +20,6 @@ import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 
 import java.io.File;
-import java.util.OptionalInt;
 
 public class PostController extends BaseController {
 
@@ -45,15 +45,16 @@ public class PostController extends BaseController {
     @FXML
     public Button postResetButton, postSaveButton, postRemoveButton;
     @FXML
-    public TextField postItTitleField, postItPriorityField;
+    public TextField postItTitleContains, postItPriorityField, postItTitleBegins;
     @FXML
     public DatePicker postTraField1, postTraField2;
     @FXML
     public Button filterResetButton, filterSaveButton, filterButton;
 
-    public DataMiner dataMiner;
     public Post loadedPost;
+    public DataMiner dataMiner;
     public Dimension2D minDimension;
+    public PostItFilter postItFilter;
     public PostItGridViewer postItGrid;
     public PostTabManager postTabManager;
 
@@ -68,13 +69,17 @@ public class PostController extends BaseController {
         postTabManager.initSettingsControllerTab();
         postTabManager.initStatisticsControllerTab();
 
+        postItFilter = new PostItFilter(this, new FilterUnitContainer<>());
         deserializePostItFilter();
     }
 
     private void deserializePostItFilter() {
-        PostItFilterSerializer filter = PostItFilterSerializer.deserialize();
-        if (filter != null)
-            filter.applyFilter(this);
+        PostItFilter deserialized = (PostItFilter) postItFilter.deserialize();
+        if (deserialized != null) {
+            deserialized.setFilterController(this);
+            deserialized.applyFilterToController();
+        }
+        postItFilter = deserialized == null ? postItFilter : deserialized;
     }
 
     public static void openPostItController(PostIt postIt, PostItGridViewer postItGrid) {
@@ -99,10 +104,6 @@ public class PostController extends BaseController {
 
     @FXML
     public void onExit() {
-        PostItFilterSerializer.serialize(new PostItFilterSerializer(this.postItTitleField.getText(),
-                this.postItPriorityField.getText(),
-                this.postTraField1.getValue(), this.postTraField2.getValue()));
-
         exitFromPost();
     }
 
@@ -126,34 +127,41 @@ public class PostController extends BaseController {
 
     @FXML
     public void onFilter() throws WrongFieldsException {
-       // if (fieldsAreValid())
-       //     postItGrid.filter(getPostItFilterBuilder().unifiedPredicates());
-       // else throw new WrongFieldsException("Devi inserire le date in modo corretto!",
-        //        new WindowCoordinatesContainer(this.post.getScene().getWindow()));
+        if (fieldsAreValid()) {
+            postItFilter.reset();
+            postItFilter.buildFilterSettingUnits();
+            postItGrid.filter(postItFilter.getResult());
+            rootTabPane.getSelectionModel().selectPrevious();
+            postItFilter.serialize();
+        }
+       else throw new WrongFieldsException("Devi inserire le date in modo corretto!",
+               new WindowCoordinatesContainer(this.post.getScene().getWindow()));
     }
 
     @FXML
     public void onSaveFilter() {
-        //PostItFilterSerializer.serialize(getPostItFilterSerializer());
+        postItFilter.buildFilterSettingUnits();
+        postItFilter.serialize();
     }
 
     @FXML
     public void onFilterReset() {
-        /*resetFields();
+        resetFields();
         postItGrid.filter(postIt -> true);
-        deleteSerializedFileIfExists();
-    */}
-
-    private void deleteSerializedFileIfExists() {
-      /*  File file = new File("postit_filter.ser");
-        file.delete();
-    */}
+        serializedFilterFileDeleteIfExists();
+    }
 
     private void resetFields() {
-        this.postItTitleField.setText("");
+        this.postItTitleContains.setText("");
         this.postItPriorityField.setText("");
+        this.postItTitleBegins.setText("");
         this.postTraField1.setValue(null);
         this.postTraField2.setValue(null);
+    }
+
+    private void serializedFilterFileDeleteIfExists() {
+        File file = new File("postit_filter.ser");
+        file.delete();
     }
 
     private void exitFromPost() {
@@ -161,22 +169,10 @@ public class PostController extends BaseController {
     }
 
     public boolean fieldsAreValid() {
-        System.out.println(this.postTraField1.getValue() + " - " + this.postTraField2.getValue());
         boolean firstCondition = this.postTraField1.getValue() == null && this.postTraField2.getValue() == null;
         boolean secondCondition = this.postTraField1.getValue() != null && this.postTraField1.getValue() != null;
 
         return firstCondition || secondCondition;
-    }
-
-    public PostItFilterBuilder getPostItFilterBuilder() {
-        return new PostItFilterBuilder(this.postItTitleField.getText(), this.postItPriorityField.getText(),
-                this.postTraField1.getValue(), this.postTraField2.getValue());
-    }
-
-    public PostItFilterSerializer getPostItFilterSerializer() {
-        return new PostItFilterSerializer(this.postItTitleField.getText(),
-                this.postItPriorityField.getText(),
-                this.postTraField1.getValue(), this.postTraField2.getValue());
     }
 
 }

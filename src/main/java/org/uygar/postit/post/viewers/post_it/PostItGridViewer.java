@@ -32,7 +32,7 @@ public class PostItGridViewer extends FlowPane {
     }
 
     public void init() {
-        setSortedAndMappedPostItsAsChildren();
+        sortPostIts();
     }
 
     public void sortPostIts() {
@@ -82,6 +82,7 @@ public class PostItGridViewer extends FlowPane {
     }
 
     public void filter(Predicate<PostIt> postItPredicate) {
+        sortPostIts();
         Predicate<Node> doNotPassesTest = node -> !postItPredicate.test(((PostItViewer) node).getPostIt());
         this.getChildren()
                 .removeIf(doNotPassesTest);

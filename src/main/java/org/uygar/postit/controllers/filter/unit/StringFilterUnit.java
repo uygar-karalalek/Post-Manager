@@ -9,11 +9,18 @@ public class StringFilterUnit extends FilterUnit {
     private final boolean ignoreCase;
     private final BiPredicate<String, String> condition;
 
-    public StringFilterUnit(String input, BiPredicate<String, String> condition, boolean ignoreCase, boolean disabled) {
-        super(disabled);
+    public StringFilterUnit(String input, BiPredicate<String, String> condition, boolean ignoreCase, boolean enabled) {
+        super(enabled);
         this.input = input;
         this.condition = condition;
         this.ignoreCase = ignoreCase;
+    }
+
+    public StringFilterUnit(String input, BiPredicate<String, String> condition, boolean ignoreCase) {
+        super(true);
+        this.input = input;
+        this.ignoreCase = ignoreCase;
+        this.condition = condition;
     }
 
     public String getInputBasedOnIgnoreCase() {

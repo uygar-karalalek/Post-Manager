@@ -264,8 +264,8 @@
     -fx-font-size: 12px;
     -fx-background-radius: 2em;
     -fx-alignment: center;
-    -fx-max-width: 180;
-    -fx-pref-width: 180;
+    -fx-max-width: 200;
+    -fx-pref-width: 200;
 }
 
 
@@ -354,7 +354,7 @@
     -fx-background-color: transparent;
     -fx-border-width: 0;
     -fx-border-color: black;
-    -fx-pref-width: 170px;
+    -fx-pref-width: 200px;
 }
 
 .traDate > .arrow-button {

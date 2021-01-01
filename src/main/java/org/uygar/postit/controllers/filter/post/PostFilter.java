@@ -14,13 +14,14 @@ import org.uygar.postit.post.Post;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
 public class PostFilter extends GeneralFilter<FilterController, Post> implements Serializable {
 
-    public static final long serialVersionUID = 100L;
+    public static final long serialVersionUID = 111L;
 
     Boolean inizioEnabled, isIgnoreCase, finisceEnabled, contieneEnabled, datesEnabled;
 
@@ -34,8 +35,7 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
     }
 
     // FOR OBJECT SERIALIZATION
-    public PostFilter() {
-    }
+    public PostFilter() {}
 
     private void setTextOfUnits() {
         inizioEnabled = isSelected(getFilterController().inizio);
@@ -44,9 +44,9 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
         contieneEnabled = isSelected(getFilterController().contiene);
         datesEnabled = isSelected(getFilterController().tra);
 
-        contieneText = getFilterController().contieneField.getText();
-        inizioText = getFilterController().inizioField.getText();
-        finisceText = getFilterController().finisceField.getText();
+        contieneText = getFilterController().contieneField.getText().trim();
+        inizioText = getFilterController().inizioField.getText().trim();
+        finisceText = getFilterController().finisceField.getText().trim();
 
         date1 = getFilterController().data1.getValue();
         date2 = getFilterController().data2.getValue();
@@ -75,13 +75,13 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
     @Override
     public void applyFilterToController() {
         if (inizioEnabled)
-            applyToField(getFilterController().inizioField, inizioText, getFilterController().inizio);
+            applyToField(getFilterController().inizioField, inizioText, Optional.of(getFilterController().inizio));
         if (contieneEnabled)
-            applyToField(getFilterController().contieneField, contieneText, getFilterController().contiene);
+            applyToField(getFilterController().contieneField, contieneText, Optional.of(getFilterController().contiene));
         if (finisceEnabled)
-            applyToField(getFilterController().finisceField, finisceText, getFilterController().finisce);
+            applyToField(getFilterController().finisceField, finisceText, Optional.of(getFilterController().finisce));
         if (datesEnabled)
-            applyToDatePicker(getFilterController().data1, getFilterController().data2, date1, date2, getFilterController().tra);
+            applyToDatePicker(getFilterController().data1, getFilterController().data2, date1, date2, Optional.of(getFilterController().tra));
         if (isIgnoreCase != null)
             getFilterController().ignoraMaiusc.setSelected(isIgnoreCase);
     }
@@ -109,15 +109,7 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
             BiPredicate<Post, LocalDate> isAfter = (post, date) -> post.getCreationDate().toLocalDate().isAfter(date);
             BiPredicate<Post, LocalDate> isBefore = (post, date) -> post.getCreationDate().toLocalDate().isBefore(date);
 
-            getUnitContainer().addUnit(post -> {
-                boolean postCreationDateIsEqualOrAfterFirstDate =
-                        isAfter.test(post, dateFilterUnit.getDate1()) || isEqual.test(post, dateFilterUnit.getDate1());
-
-                boolean postCreationDateIsBeforeOrEqualSecondDate =
-                        isBefore.test(post, dateFilterUnit.getDate2()) || isEqual.test(post, dateFilterUnit.getDate2());
-
-                return postCreationDateIsEqualOrAfterFirstDate && postCreationDateIsBeforeOrEqualSecondDate;
-            });
+            getUnitContainer().addUnit(getDateFilterCondition(isEqual, isAfter, isBefore, dateFilterUnit));
         }
     }
 

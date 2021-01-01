@@ -39,8 +39,7 @@ public class PostTabInitializer extends PostControllerWrapper implements TabInit
     }
 
     public void onSearchTextChangeDoFilter(ObservableValue<? extends String> obs, String oldVal, String newVal) {
-        postController.postItGrid.sortPostIts();
-        postController.postItGrid.filter(postIt -> postIt.getTitolo().toLowerCase(Locale.ROOT).contains(newVal.toLowerCase()));
+        postController.postItGrid.filter(postIt -> postIt.getTitolo().toLowerCase().contains(newVal.toLowerCase()));
     }
 
     private void initGridPane() {

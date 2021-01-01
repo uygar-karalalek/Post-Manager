@@ -7,6 +7,12 @@ public class DateFilterUnit extends FilterUnit {
     private final LocalDate date1;
     private final LocalDate date2;
 
+    public DateFilterUnit(LocalDate date1, LocalDate date2) {
+        super(true);
+        this.date1 = date1;
+        this.date2 = date2;
+    }
+
     public DateFilterUnit(boolean enabled, LocalDate date1, LocalDate date2) {
         super(enabled);
         this.date1 = date1;
@@ -19,6 +25,11 @@ public class DateFilterUnit extends FilterUnit {
 
     public LocalDate getDate2() {
         return date2;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return super.isEnabled() && date1 != null && date2 != null;
     }
 
 }

@@ -11,12 +11,14 @@ import org.uygar.postit.post.Post;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.Optional;
+import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
 public abstract class GeneralFilter<FILTER_TYPE extends BaseController, FILTER_UNIT> implements Filter<FILTER_UNIT> {
 
     private FILTER_TYPE filterController;
-    private final FilterUnitContainer<FILTER_UNIT> unitContainer;
+    private FilterUnitContainer<FILTER_UNIT> unitContainer;
 
     public GeneralFilter(FILTER_TYPE controller, FilterUnitContainer<FILTER_UNIT> unitContainer) {
         this.filterController = controller;
@@ -58,6 +60,19 @@ public abstract class GeneralFilter<FILTER_TYPE extends BaseController, FILTER_U
         }
     }
 
+    public Predicate<FILTER_UNIT> getDateFilterCondition(BiPredicate<FILTER_UNIT, LocalDate> isEqual, BiPredicate<FILTER_UNIT,
+            LocalDate> isAfter, BiPredicate<FILTER_UNIT, LocalDate> isBefore, DateFilterUnit dateFilterUnit) {
+        return unit -> {
+            boolean dateIsEqualOrAfterFirstDate =
+                    isAfter.test(unit, dateFilterUnit.getDate1()) || isEqual.test(unit, dateFilterUnit.getDate1());
+
+            boolean dateIsBeforeOrEqualSecondDate =
+                    isBefore.test(unit, dateFilterUnit.getDate2()) || isEqual.test(unit, dateFilterUnit.getDate2());
+
+            return dateIsEqualOrAfterFirstDate && dateIsBeforeOrEqualSecondDate;
+        };
+    }
+
     @NotNull
     private Predicate<FILTER_UNIT> alwaysTrue() {
         return alwaysTrue -> true;
@@ -67,16 +82,20 @@ public abstract class GeneralFilter<FILTER_TYPE extends BaseController, FILTER_U
         return checkBox.isSelected();
     }
 
-    protected void applyToField(TextField field, String text, CheckBox relatedBox) {
-        relatedBox.setSelected(true);
+    protected void applyToField(TextField field, String text, Optional<CheckBox> relatedBox) {
+        relatedBox.ifPresent(checkBox -> checkBox.setSelected(true));
         field.setText(text);
     }
 
     protected void applyToDatePicker(DatePicker picker1, DatePicker picker2,
-                                     LocalDate value1, LocalDate value2, CheckBox relatedBox) {
+                                     LocalDate value1, LocalDate value2, Optional<CheckBox> relatedBox) {
         picker1.setValue(value1);
         picker2.setValue(value2);
-        relatedBox.setSelected(true);
+        relatedBox.ifPresent(checkBox -> checkBox.setSelected(true));
+    }
+
+    public void reset() {
+        this.unitContainer = new FilterUnitContainer<>();
     }
 
 }

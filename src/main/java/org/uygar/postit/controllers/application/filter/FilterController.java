@@ -63,7 +63,6 @@ public class FilterController extends BaseController {
 
     private void deserializeFilter() {
         PostFilter deserialized = (PostFilter) postFilter.deserialize();
-        System.out.println(deserialized);
         if (deserialized != null) {
             deserialized.setFilterController(this);
             deserialized.applyFilterToController();
@@ -83,6 +82,7 @@ public class FilterController extends BaseController {
         if (fieldsNotValid())
             throwNotValidException();
         filterPostsInPostGridViewer();
+        postFilter.reset();
         postFilter.serialize();
     }
 
@@ -118,11 +118,11 @@ public class FilterController extends BaseController {
         contieneField.setText(null);
         finisceField.setText(null);
     }
-
     private void serializedFilterFileDeleteIfExists() {
         File file = new File("filter.ser");
         file.delete();
     }
+
 
     @FXML
     public void onAnnulla() {
