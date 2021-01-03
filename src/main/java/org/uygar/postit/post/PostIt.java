@@ -128,8 +128,8 @@ public class PostIt {
     public boolean isExpired() {
        return LocalDateTime.now().isAfter(dataScadenza.get());
     }
-    public boolean isExpiredAndUndone() {
-        return isExpired() && !isFatto();
+    public boolean isUndone() {
+        return !isFatto();
     }
 
     @Override

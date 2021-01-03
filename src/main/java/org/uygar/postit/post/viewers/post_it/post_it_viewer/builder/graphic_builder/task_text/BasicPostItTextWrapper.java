@@ -59,6 +59,7 @@ public class BasicPostItTextWrapper extends VBox {
         this.getChildren().addAll(title, taskTextWrapper, priority);
         this.setSpacing(CONTENT_SPACING);
         this.setId("textWrapper");
+        this.setTranslateY(20);
         VBox.setMargin(taskTextWrapper, TASK_TEXT_INSETS);
     }
 

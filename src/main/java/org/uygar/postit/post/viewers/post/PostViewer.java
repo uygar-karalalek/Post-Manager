@@ -2,13 +2,8 @@ package org.uygar.postit.post.viewers.post;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
-import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
 import org.uygar.postit.post.Post;
-import org.uygar.postit.post.properties.Sort;
-import org.uygar.postit.post.viewers.post_it.post_button.PostButton;
-
-import java.time.LocalDateTime;
+import org.uygar.postit.post.viewers.post.post_button.PostButton;
 
 public class PostViewer extends Post {
 

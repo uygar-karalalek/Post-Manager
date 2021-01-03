@@ -13,9 +13,8 @@ import java.time.format.DateTimeFormatter;
 
 import static org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer.*;
 
-public class ScadenzaWrapper extends StackPane {
+public class ScadenzaWrapper extends Text {
 
-    private Text text;
     private final PostIt postIt;
 
     public ScadenzaWrapper(PostIt postIt) {
@@ -24,12 +23,10 @@ public class ScadenzaWrapper extends StackPane {
     }
 
     private void initialize() {
-        text = new Text();
-        text.textProperty().bindBidirectional(postIt.dataScadenzaProperty(), getConverter());
-        text.setId("scadenzaText");
-        this.getChildren().add(text);
-        this.setId("scadenzaTextWrapper");
-        this.setMaxWidth(POST_IT_SIZE - POST_IT_TRANSPARENT_BORDER);
+        this.textProperty().bindBidirectional(postIt.dataScadenzaProperty(), getConverter());
+        this.setId("scadenzaText");
+        this.setUnderline(true);
+        this.setTranslateY(-(POST_IT_SIZE/1.45));
     }
 
     private StringConverter<LocalDateTime> getConverter() {
@@ -38,7 +35,7 @@ public class ScadenzaWrapper extends StackPane {
             public String toString(LocalDateTime fine) {
                 String wellFormattedDate = fine.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 String wellFormattedHour = fine.format(DateTimeFormatter.ofPattern("HH:mm"));
-                return "Scadenza: " + wellFormattedDate + " alle " + wellFormattedHour;
+                return "Entro: "+wellFormattedDate + " alle " + wellFormattedHour;
             }
 
             @Override
@@ -46,11 +43,6 @@ public class ScadenzaWrapper extends StackPane {
                 return LocalDateTime.parse(stringDate);
             }
         };
-    }
-
-
-    public Text getText() {
-        return text;
     }
 
 }

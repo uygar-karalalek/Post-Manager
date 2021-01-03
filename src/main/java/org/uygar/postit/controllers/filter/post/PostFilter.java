@@ -44,9 +44,9 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
         contieneEnabled = isSelected(getFilterController().contiene);
         datesEnabled = isSelected(getFilterController().tra);
 
-        contieneText = getFilterController().contieneField.getText().trim();
-        inizioText = getFilterController().inizioField.getText().trim();
-        finisceText = getFilterController().finisceField.getText().trim();
+        contieneText = trimmedTextOfField(getFilterController().contieneField);
+        inizioText = trimmedTextOfField(getFilterController().inizioField);
+        finisceText = trimmedTextOfField(getFilterController().finisceField);
 
         date1 = getFilterController().data1.getValue();
         date2 = getFilterController().data2.getValue();
@@ -56,6 +56,10 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
             date1 = date2;
             date2 = temp;
         }
+    }
+
+    public String trimmedTextOfField(TextField textField) {
+        return textField.getText() != null ? textField.getText() : "";
     }
 
     @Override

@@ -1,8 +1,9 @@
 package org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder;
 
 import javafx.beans.value.ObservableValue;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.properties.Colore;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.task_text.BasicPostItTextWrapper;
@@ -13,7 +14,7 @@ public class PostItViewerBasicGraphicsBuilder {
 
     private final PostIt postIt;
 
-    private ImageView postItImage;
+    private Rectangle postItRectangle;
     private StackPane postItImageWrapper;
     private final BasicPostItTextWrapper basicPostItTextWrapper;
 
@@ -26,13 +27,15 @@ public class PostItViewerBasicGraphicsBuilder {
 
     private void buildImageAndPostTextWrapper() {
         buildImageViewByPostItColor();
-        postItImageWrapper = new StackPane(postItImage, basicPostItTextWrapper);
+        postItImageWrapper = new StackPane(postItRectangle, basicPostItTextWrapper);
     }
 
     private void buildImageViewByPostItColor() {
-        postItImage = new ImageView(PostViewerImageBuilder.build(postIt.getColore()));
-        postItImage.setFitWidth(POST_IT_SIZE);
-        postItImage.setFitHeight(POST_IT_SIZE);
+        postItRectangle = new Rectangle(POST_IT_SIZE, POST_IT_SIZE, postIt.getColore().postItColor);
+        postItRectangle.setArcHeight(POST_IT_HEIGHT_RADIUS);
+        postItRectangle.setArcWidth(POST_IT_WIDTH_RADIUS);
+        postItRectangle.setStrokeWidth(2);
+        postItRectangle.setStroke(Color.GRAY);
     }
 
     public StackPane getPostItImageWrapper() {
@@ -40,10 +43,14 @@ public class PostItViewerBasicGraphicsBuilder {
     }
 
     public void changeBasicGraphicsOnPostItColorChange(ObservableValue<? extends Colore> obs, Colore oldVal, Colore newVal) {
-        postItImage.setImage(PostViewerImageBuilder.build(newVal));
+        postItRectangle.setFill(newVal.postItColor);
         basicPostItTextWrapper.getTitleLabel().setTextFill(newVal.postItTextColor);
         basicPostItTextWrapper.getTaskTextLabel().setTextFill(newVal.postItTextColor);
         basicPostItTextWrapper.getPriorityLabel().setTextFill(newVal.postItTextColor);
+    }
+
+    public Rectangle getPostItRectangle() {
+        return postItRectangle;
     }
 
 }
