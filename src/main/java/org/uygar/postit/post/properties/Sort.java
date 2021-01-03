@@ -61,7 +61,7 @@ public enum Sort {
 
     static Comparator<PostIt> BY_DONE = Comparator.comparing(postIt -> !postIt.isFatto());
     static Comparator<PostIt> BY_ID = Comparator.comparing(PostIt::getId).reversed();
-    static Comparator<PostIt> BY_DATE = Comparator.comparing(PostIt::getDataCreazione);
+    static Comparator<PostIt> BY_DATE = Comparator.comparing(PostIt::getDataCreazione).reversed();
     static Comparator<PostIt> BY_PRIORITY = Comparator.comparing(PostIt::getPriority).reversed();
 
     Sort(String name) {

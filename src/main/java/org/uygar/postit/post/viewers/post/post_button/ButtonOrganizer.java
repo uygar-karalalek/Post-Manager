@@ -1,4 +1,4 @@
-package org.uygar.postit.post.viewers.post_it.post_button;
+package org.uygar.postit.post.viewers.post.post_button;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;

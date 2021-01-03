@@ -9,8 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
-import org.uygar.postit.post.viewers.post_it.post_button.ButtonOrganizer;
-import org.uygar.postit.post.viewers.post_it.post_button.PostButton;
+import org.uygar.postit.post.viewers.post.post_button.ButtonOrganizer;
+import org.uygar.postit.post.viewers.post.post_button.PostButton;
 
 import java.util.function.Predicate;
 
