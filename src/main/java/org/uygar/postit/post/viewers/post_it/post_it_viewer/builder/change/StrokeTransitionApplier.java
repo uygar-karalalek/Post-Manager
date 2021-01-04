@@ -20,8 +20,8 @@ public class StrokeTransitionApplier extends PostItViewEffectApplier {
     }
 
     private void applyStroke(boolean reversed) {
-        Color from = reversed ? Color.BLACK : Color.DIMGRAY;
-        Color to = reversed ? Color.DIMGRAY : Color.BLACK;
+        Color from = reversed ? Color.THISTLE : Color.DIMGRAY;
+        Color to = reversed ? Color.DIMGRAY : Color.THISTLE;
 
         StrokeTransition strokeTransition = new StrokeTransition(Duration.millis(500),
                 getInteractionView().getPostItRectangle());

@@ -13,17 +13,18 @@ public class ChangeListeners {
     private final FillTransitionApplier fillTransitionApplier;
     private final ScaleTransitionApplier scaleTransitionApplier;
     private final StrokeTransitionApplier strokeTransitionApplier;
+    private final RectangleFillTransitionApplier rectangleFillTransitionApplier;
 
     public ChangeListeners(PostItMouseInteractionManager postItMouseInteractionManager) {
         this.fillTransitionApplier = new FillTransitionApplier(postItMouseInteractionManager);
         this.scaleTransitionApplier = new ScaleTransitionApplier(postItMouseInteractionManager);
         this.strokeTransitionApplier = new StrokeTransitionApplier(postItMouseInteractionManager);
+        this.rectangleFillTransitionApplier = new RectangleFillTransitionApplier(postItMouseInteractionManager);
     }
 
     public void fillScadenzaTextWrapper(MouseEvent event) {
         fillTransitionApplier.applyFillTransition();
     }
-
     public void deFillScadenzaTextWrapper(MouseEvent event) {
         fillTransitionApplier.applyReversedFillTransition();
     }
@@ -31,7 +32,6 @@ public class ChangeListeners {
     public void scalePostItRectangleToHigherValue(MouseEvent event) {
         scaleTransitionApplier.applyScaleHigherTransition();
     }
-
     public void scalePostItRectangleToNormalValue(MouseEvent event) {
         scaleTransitionApplier.applyScaleNormalTransition();
     }
@@ -39,9 +39,15 @@ public class ChangeListeners {
     public void changeStrokePostItRectangle(MouseEvent event) {
         strokeTransitionApplier.applyStroke();
     }
-
     public void changeStrokePostItRectangleToNormal(MouseEvent event) {
         strokeTransitionApplier.deApplyStroke();
+    }
+
+    public void changeFillPostItRectangleToDarker(MouseEvent event) {
+        rectangleFillTransitionApplier.addRectangleDarkerFillTransition();
+    }
+    public void changeFillPostItRectangleToBrighter(MouseEvent event) {
+        rectangleFillTransitionApplier.addRectangleBrighterFillTransition();
     }
 
 }

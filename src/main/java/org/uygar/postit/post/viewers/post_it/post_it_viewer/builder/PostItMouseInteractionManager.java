@@ -39,10 +39,12 @@ public class PostItMouseInteractionManager {
         interactionView.addEventHandler(MouseEvent.MOUSE_ENTERED, changeListeners::fillScadenzaTextWrapper);
         interactionView.addEventHandler(MouseEvent.MOUSE_ENTERED, changeListeners::scalePostItRectangleToHigherValue);
         interactionView.addEventHandler(MouseEvent.MOUSE_ENTERED, changeListeners::changeStrokePostItRectangle);
+        interactionView.addEventHandler(MouseEvent.MOUSE_ENTERED, changeListeners::changeFillPostItRectangleToBrighter);
 
         interactionView.addEventHandler(MouseEvent.MOUSE_EXITED, changeListeners::deFillScadenzaTextWrapper);
         interactionView.addEventHandler(MouseEvent.MOUSE_EXITED, changeListeners::scalePostItRectangleToNormalValue);
         interactionView.addEventHandler(MouseEvent.MOUSE_EXITED, changeListeners::changeStrokePostItRectangleToNormal);
+        interactionView.addEventHandler(MouseEvent.MOUSE_EXITED, changeListeners::changeFillPostItRectangleToDarker);
     }
 
     public PostItViewer getInteractionView() {
