@@ -8,7 +8,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.VBox;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.properties.Colore;
-import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.PostViewerImageBuilder;
 
 import static org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer.*;
 
