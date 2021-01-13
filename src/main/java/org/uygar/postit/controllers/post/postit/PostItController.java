@@ -36,7 +36,7 @@ public class PostItController extends BaseController {
     @FXML
     public Button annullaBtn, salvaBtn, rimuoviBtn;
     @FXML
-    public HBox coloreHBox;
+    public HBox coloriTopHBox;
 
     public final DataMiner miner = new DataMiner();
     public PostItEditorManager postItEditorManager;

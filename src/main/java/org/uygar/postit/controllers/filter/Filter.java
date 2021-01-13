@@ -1,6 +1,7 @@
 package org.uygar.postit.controllers.filter;
 
 import org.uygar.postit.controllers.filter.unit.DateFilterUnit;
+import org.uygar.postit.controllers.filter.unit.IntFilterUnit;
 import org.uygar.postit.controllers.filter.unit.StringFilterUnit;
 
 import java.io.Serializable;
@@ -13,6 +14,7 @@ public interface Filter<T> {
     void applyFilterToController();
     void addDateFilterUnit(DateFilterUnit dateFilterUnit);
     void addStringFilterUnit(StringFilterUnit filterUnit);
+    void addIntFilterUnit(IntFilterUnit filterUnit);
 
     void serialize();
     Filter<T> deserialize();

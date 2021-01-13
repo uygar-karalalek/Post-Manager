@@ -82,7 +82,7 @@ public class FilterController extends BaseController {
         if (fieldsNotValid())
             throwNotValidException();
         filterPostsInPostGridViewer();
-        postFilter.reset();
+        postFilter.resetUnitContainer();
         postFilter.serialize();
     }
 

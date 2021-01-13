@@ -5,11 +5,11 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import org.apache.commons.lang.StringUtils;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.exception.WrongFieldsException;
 import org.uygar.postit.controllers.filter.FilterUnitContainer;
-import org.uygar.postit.controllers.filter.post.PostFilter;
 import org.uygar.postit.controllers.filter.postit.PostItFilter;
 import org.uygar.postit.controllers.post.utils.controller_manager.PostTabManager;
 import org.uygar.postit.controllers.post.utils.loader.PostItLoader;
@@ -127,15 +127,16 @@ public class PostController extends BaseController {
 
     @FXML
     public void onFilter() throws WrongFieldsException {
-        if (fieldsAreValid()) {
-            postItFilter.reset();
+        if (fieldsAreNotValid())
+            throw new WrongFieldsException("Devi inserire le date in modo corretto!",
+                    new WindowCoordinatesContainer(this.post.getScene().getWindow()));
+        else {
+            postItFilter.resetUnitContainer();
             postItFilter.buildFilterSettingUnits();
             postItGrid.filter(postItFilter.getResult());
             rootTabPane.getSelectionModel().selectPrevious();
             postItFilter.serialize();
         }
-       else throw new WrongFieldsException("Devi inserire le date in modo corretto!",
-               new WindowCoordinatesContainer(this.post.getScene().getWindow()));
     }
 
     @FXML
@@ -168,11 +169,22 @@ public class PostController extends BaseController {
         this.rootTabPane.getScene().getWindow().hide();
     }
 
-    public boolean fieldsAreValid() {
-        boolean firstCondition = this.postTraField1.getValue() == null && this.postTraField2.getValue() == null;
-        boolean secondCondition = this.postTraField1.getValue() != null && this.postTraField1.getValue() != null;
+    public boolean fieldsAreNotValid() {
+        boolean firstCondition = this.postTraField1.getValue() != null && this.postTraField2.getValue() == null;
+        boolean secondCondition = this.postTraField1.getValue() == null && this.postTraField2.getValue() != null;
 
-        return firstCondition || secondCondition;
+        boolean thirdCondition = isNotBlank(this.postItPriorityField.getText()) &&
+                isNotNumeric(this.postItPriorityField.getText());
+
+        return firstCondition || secondCondition || thirdCondition;
+    }
+
+    public boolean isNotBlank(String string) {
+        return !string.isBlank();
+    }
+
+    private boolean isNotNumeric(String number) {
+        return !StringUtils.isNumeric(number);
     }
 
 }
