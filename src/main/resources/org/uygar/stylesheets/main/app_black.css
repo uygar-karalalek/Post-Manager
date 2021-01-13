@@ -168,28 +168,24 @@
 #post {
     -fx-background-radius: 0.5em;
     -fx-border-radius: 0.5em;
-    -fx-background-color: radial-gradient(center 130px 40px, radius 140px, #2d2d2d, #1c1d1d);
-    -fx-text-fill: ghostwhite;
-    -fx-border-width: 0.2;
-    -fx-border-color: white;
+    -fx-background-color: radial-gradient(center 130px 40px, radius 140px, #2d2d2d, #2c2d2d);
+    -fx-text-fill: #f8f8ff;
+    -fx-border-width: 1;
+    -fx-border-color: #a39d9d;
     -fx-font-family: Arial;
     -fx-font-size: 12pt;
+    -fx-pref-height: 40;
 }
 
 #post:hover {
-    -fx-scale-y: 1.04;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 120px, #062b5f, #099875);
+    -fx-background-color: radial-gradient(center 90px 40px, radius 120px, #363a44, #161918);
     -fx-text-fill: white;
     -fx-font-family: Arial;
-    -fx-font-size: 12.3pt;
-    -fx-border-color: white;
-    -fx-border-width: 1;
 }
 
 #post:disabled {
     -fx-opacity: 0.7;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 100px, #062b5f, #099875);
-    -fx-text-fill: white;
-    -fx-border-width: 1;
-    -fx-border-color: #00ff7b;
+    -fx-background-color: radial-gradient(center 90px 40px, radius 120px, #363a44, #161918);
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
 }

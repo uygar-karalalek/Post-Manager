@@ -131,7 +131,6 @@
     -fx-color: -fx-base;
 }
 .tab-pane > .tab-header-area > .tab-header-background {
-    /* TODO should not be using text-box-border I think? */
     -fx-background-color: linear-gradient(grey, white);
 }
 
