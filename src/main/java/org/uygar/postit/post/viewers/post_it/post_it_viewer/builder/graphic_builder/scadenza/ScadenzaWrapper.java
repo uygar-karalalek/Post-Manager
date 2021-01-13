@@ -19,6 +19,7 @@ public class ScadenzaWrapper extends Text {
 
     public ScadenzaWrapper(PostIt postIt) {
         this.postIt = postIt;
+        this.setDisable(true); // So it does not interfer with mouse click
         initialize();
     }
 

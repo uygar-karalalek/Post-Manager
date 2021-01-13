@@ -117,6 +117,10 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
         }
     }
 
+    protected boolean isSelected(CheckBox checkBox) {
+        return checkBox.isSelected();
+    }
+
     @Override
     public void serialize() {
         File file = new File("filter.ser");

@@ -26,9 +26,12 @@
                <content>
                   <BorderPane prefHeight="629.0">
                      <left>
-                        <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
+                        <VBox id="postActions" fx:id="vBoxOperationsContainer" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="643.0" prefWidth="250.0" BorderPane.alignment="TOP_LEFT">
                            <children>
-                              <Label id="title" fx:id="postTitle" prefHeight="31.0" prefWidth="208.0" />
+                              <Label id="title" fx:id="postTitle" prefHeight="31.0" prefWidth="270.0">
+                                 <VBox.margin>
+                                    <Insets />
+                                 </VBox.margin></Label>
                               <PieChart fx:id="pieChart" legendVisible="false" prefHeight="230.0" prefWidth="262.0">
                                  <VBox.margin>
                                     <Insets bottom="20.0" left="10.0" top="20.0" />
@@ -41,6 +44,7 @@
                               </TextField>
                               <Button id="btn" mnemonicParsing="false" onMouseClicked="#onAggiungi" text="Aggiungi" />
                               <Button id="btn" mnemonicParsing="false" onMouseClicked="#onOrdina" prefWidth="133.0" text="Ordina" />
+                              <Button id="btn" mnemonicParsing="false" onMouseClicked="#onFilter" text="Filtra" />
                               <Button id="btn" mnemonicParsing="false" onMouseClicked="#onSettings" prefWidth="133.0" text="Impostazioni" />
                               <Button id="esciBtn" mnemonicParsing="false" onMouseClicked="#onExit" prefWidth="133.0" text="Esci">
                                  <VBox.margin>
@@ -58,7 +62,7 @@
             </Tab>
             <Tab text="Settings">
                <content>
-                  <VBox alignment="TOP_CENTER" prefHeight="665.0" prefWidth="600.0">
+                  <VBox id="settingsTabBox" alignment="TOP_CENTER" prefHeight="665.0" prefWidth="600.0">
                      <children>
                         <TitledPane text="Post Settings">
                            <content>
@@ -115,7 +119,7 @@
                                  </rowConstraints>
                                  <children>
                                     <Label prefHeight="17.0" styleClass="setLabel" text="Contiene" />
-                                    <TextField fx:id="postItTitleContains" prefHeight="25.0" prefWidth="323.0" GridPane.columnIndex="1">
+                                    <TextField fx:id="postItTitleContains" prefHeight="25.0" prefWidth="323.0" promptText="cosa contiene?" GridPane.columnIndex="1">
                                        <GridPane.margin>
                                           <Insets />
                                        </GridPane.margin>
@@ -129,13 +133,13 @@
                                        </children>
                                     </HBox>
                                     <Label prefHeight="17.0" styleClass="setLabel" text="Inizia" GridPane.rowIndex="1" />
-                                    <TextField fx:id="postItTitleBegins" prefHeight="25.0" prefWidth="323.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="postItTitleBegins" prefHeight="25.0" prefWidth="323.0" promptText="con cosa inizia?" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                     <Label prefHeight="17.0" styleClass="setLabel" text="Priority" GridPane.rowIndex="2" />
-                                    <TextField fx:id="postItPriorityField" prefHeight="25.0" prefWidth="184.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                    <TextField fx:id="postItPriorityField" prefHeight="25.0" prefWidth="184.0" promptText="quale priorità?" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                     <VBox alignment="CENTER_LEFT" prefWidth="194.0" spacing="5.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                                        <children>
-                                          <DatePicker fx:id="postTraField2" editable="false" styleClass="traDate" />
-                                          <DatePicker fx:id="postTraField1" editable="false" styleClass="traDate" />
+                                          <DatePicker fx:id="postTraField2" editable="false" promptText="prima data" styleClass="traDate" />
+                                          <DatePicker fx:id="postTraField1" editable="false" promptText="seconda data" styleClass="traDate" />
                                        </children>
                                     </VBox>
                                     <Label prefHeight="15.0" prefWidth="59.0" styleClass="setLabel" text="Date" GridPane.rowIndex="3" />

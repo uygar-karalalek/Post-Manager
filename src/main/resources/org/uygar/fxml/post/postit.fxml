@@ -7,24 +7,31 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.shape.Rectangle?>
 
-<BorderPane id="root" fx:id="postIt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="500.0" stylesheets="@../../stylesheets/post/postit_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.postit.PostItController">
+<BorderPane id="root" fx:id="postIt" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="350.0" prefWidth="485.0" stylesheets="@../../stylesheets/post/postit_normal.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.postit.PostItController">
    <center>
-      <StackPane alignment="TOP_CENTER" prefHeight="323.0" prefWidth="0.0" BorderPane.alignment="CENTER">
+      <StackPane alignment="TOP_CENTER" prefHeight="300.0" prefWidth="300.0" BorderPane.alignment="CENTER">
          <children>
-            <Rectangle id="postIt" fx:id="postItRectangle" height="300.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="300.0" />
+            <Rectangle id="postIt" fx:id="postItRectangle" fill="#dadada" height="300.0" stroke="BLACK" strokeType="INSIDE" width="300.0" />
             <TextArea fx:id="compitoField" maxHeight="150.0" maxWidth="250.0" prefHeight="150.0" prefWidth="250.0" promptText="Compito da svolgere..." wrapText="true">
                <StackPane.margin>
-                  <Insets top="120.0" />
+                  <Insets top="100.0" />
                </StackPane.margin>
             </TextArea>
+            <HBox alignment="CENTER" maxHeight="35.0" maxWidth="150.0" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Button id="saveBtn" fx:id="salvaBtn" mnemonicParsing="false" onAction="#onSalva" prefHeight="23.0" prefWidth="20.0" />
+                  <Button id="annullaBtn" fx:id="annullaBtn" mnemonicParsing="false" onAction="#onAnnulla" prefHeight="37.0" prefWidth="20.0" />
+                  <Button id="removeBtn" fx:id="rimuoviBtn" disable="true" mnemonicParsing="false" onAction="#onRimuovi" prefWidth="20.0" />
+               </children>
+               <StackPane.margin>
+                  <Insets top="255.0" />
+               </StackPane.margin>
+            </HBox>
             <TextField id="titoloField" fx:id="titoloField" prefHeight="46.0" prefWidth="344.0" promptText="Titolo...">
                <StackPane.margin>
                   <Insets left="40.0" right="40.0" top="30.0" />
@@ -34,61 +41,67 @@
       </StackPane>
    </center>
    <top>
-      <HBox id="coloreHBox" fx:id="coloreHBox" alignment="BOTTOM_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="200.0" spacing="20.0" BorderPane.alignment="BOTTOM_RIGHT">
+      <HBox id="coloreHBox" fx:id="coloriTopHBox" alignment="BOTTOM_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="50.0" prefWidth="493.0" spacing="20.0" BorderPane.alignment="BOTTOM_RIGHT">
          <BorderPane.margin>
-            <Insets right="16.0" />
+            <Insets right="5.0" />
          </BorderPane.margin></HBox>
    </top>
    <left>
-      <VBox prefHeight="300.0" prefWidth="185.0" BorderPane.alignment="CENTER">
+      <VBox alignment="TOP_RIGHT" prefHeight="300.0" prefWidth="185.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
-            <GridPane id="propGrid" prefHeight="300.0" prefWidth="244.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="134.0" minHeight="10.0" prefHeight="77.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="226.0" minHeight="10.0" prefHeight="211.0" vgrow="SOMETIMES" />
-                  <RowConstraints maxHeight="214.0" minHeight="10.0" prefHeight="59.0" vgrow="SOMETIMES" />
-               </rowConstraints>
+            <VBox alignment="TOP_CENTER" maxHeight="115.0" maxWidth="200.0" prefHeight="115.0" prefWidth="127.0" spacing="10.0" styleClass="property-class">
                <children>
-                  <Label id="postItTitle" alignment="CENTER" prefHeight="17.0" prefWidth="148.0" text="POSTIT" GridPane.columnSpan="2" />
-                  <VBox id="scadenzaBox" prefHeight="184.0" prefWidth="165.0" GridPane.columnSpan="2" GridPane.rowIndex="1">
+                  <Label alignment="CENTER" prefHeight="19.0" prefWidth="173.0" styleClass="propTitle" text="Scadenza" />
+                  <DatePicker id="scadenza" fx:id="dataField" editable="false" maxWidth="96.0" prefHeight="26.0" prefWidth="96.0" promptText="Data" />
+                  <HBox alignment="CENTER">
                      <children>
-                        <Label id="lbl" text="Scadenza:" />
-                        <HBox prefHeight="31.0" prefWidth="150.0">
-                           <children>
-                              <DatePicker id="scadenza" fx:id="dataField" editable="false" prefHeight="26.0" prefWidth="136.0" promptText="Data" />
-                           </children>
-                        </HBox>
-                        <HBox prefHeight="32.0" prefWidth="140.0">
-                           <children>
-                              <TextField id="orarioField" fx:id="oraField" prefHeight="25.0" prefWidth="55.0" promptText="ora" />
-                              <Label id="duePuntiLbl" text=":" />
-                              <TextField id="orarioField" fx:id="minutoField" prefHeight="25.0" prefWidth="55.0" promptText="minuto" />
-                           </children>
-                        </HBox>
-                        <Label id="lbl" alignment="CENTER" prefHeight="15.0" prefWidth="64.0" text="Priorità: " textAlignment="CENTER" />
-                        <TextField id="priorityField" fx:id="priorityField" prefHeight="25.0" prefWidth="69.0" promptText="1-10">
-                           <VBox.margin>
-                              <Insets right="105.0" />
-                           </VBox.margin></TextField>
+                        <Label styleClass="lbl" text="h" />
+                        <TextField id="orarioField" fx:id="oraField" prefHeight="25.0" prefWidth="200.0" promptText="ora" styleClass="scadenzaField">
+                           <HBox.margin>
+                              <Insets left="10.0" />
+                           </HBox.margin>
+                        </TextField>
                      </children>
-                  </VBox>
-                  <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                  </HBox>
+                  <HBox alignment="CENTER">
                      <children>
-                        <Button id="saveBtn" fx:id="salvaBtn" mnemonicParsing="false" onAction="#onSalva" prefHeight="23.0" prefWidth="20.0" />
-                        <Button id="annullaBtn" fx:id="annullaBtn" mnemonicParsing="false" onAction="#onAnnulla" prefHeight="37.0" prefWidth="20.0" />
-                        <Button id="removeBtn" fx:id="rimuoviBtn" disable="true" mnemonicParsing="false" onAction="#onRimuovi" prefWidth="20.0" />
+                        <Label styleClass="lbl" text="m">
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </Label>
+                        <TextField id="orarioField" fx:id="minutoField" prefHeight="25.0" prefWidth="200.0" promptText="min." styleClass="scadenzaField">
+                           <HBox.margin>
+                              <Insets left="10.0" right="2.0" />
+                           </HBox.margin>
+                        </TextField>
                      </children>
                   </HBox>
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets left="70.0" />
                </VBox.margin>
-            </GridPane>
+            </VBox>
+            <VBox id="scadenzaBox" maxHeight="50.0" prefHeight="184.0" prefWidth="165.0" styleClass="property-class">
+               <children>
+                  <Label alignment="CENTER" prefHeight="19.0" prefWidth="200.0" styleClass="propTitle" text="Priorità" />
+                  <TextField id="priorityField" fx:id="priorityField" prefHeight="25.0" prefWidth="56.0" promptText="1-10">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                  </TextField>
+               </children>
+               <VBox.margin>
+                  <Insets left="90.0" />
+               </VBox.margin>
+            </VBox>
          </children>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <padding>
+            <Insets top="5.0" />
+         </padding>
       </VBox>
    </left>
 </BorderPane>

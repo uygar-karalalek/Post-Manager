@@ -36,15 +36,15 @@ public class PostItMouseInteractionManager {
     }
 
     private void manageInteractions() {
-        interactionView.addEventHandler(MouseEvent.MOUSE_ENTERED, changeListeners::fillScadenzaTextWrapper);
-        interactionView.addEventHandler(MouseEvent.MOUSE_ENTERED, changeListeners::scalePostItRectangleToHigherValue);
-        interactionView.addEventHandler(MouseEvent.MOUSE_ENTERED, changeListeners::changeStrokePostItRectangle);
-        interactionView.addEventHandler(MouseEvent.MOUSE_ENTERED, changeListeners::changeFillPostItRectangleToBrighter);
+        interactionView.addEventFilter(MouseEvent.MOUSE_ENTERED, changeListeners::fillScadenzaTextWrapper);
+        interactionView.addEventFilter(MouseEvent.MOUSE_ENTERED, changeListeners::scalePostItRectangleToHigherValue);
+        interactionView.addEventFilter(MouseEvent.MOUSE_ENTERED, changeListeners::changeStrokePostItRectangle);
+        interactionView.addEventFilter(MouseEvent.MOUSE_ENTERED, changeListeners::changeFillPostItRectangleToBrighter);
 
-        interactionView.addEventHandler(MouseEvent.MOUSE_EXITED, changeListeners::deFillScadenzaTextWrapper);
-        interactionView.addEventHandler(MouseEvent.MOUSE_EXITED, changeListeners::scalePostItRectangleToNormalValue);
-        interactionView.addEventHandler(MouseEvent.MOUSE_EXITED, changeListeners::changeStrokePostItRectangleToNormal);
-        interactionView.addEventHandler(MouseEvent.MOUSE_EXITED, changeListeners::changeFillPostItRectangleToDarker);
+        interactionView.addEventFilter(MouseEvent.MOUSE_EXITED, changeListeners::deFillScadenzaTextWrapper);
+        interactionView.addEventFilter(MouseEvent.MOUSE_EXITED, changeListeners::scalePostItRectangleToNormalValue);
+        interactionView.addEventFilter(MouseEvent.MOUSE_EXITED, changeListeners::changeStrokePostItRectangleToNormal);
+        interactionView.addEventFilter(MouseEvent.MOUSE_EXITED, changeListeners::changeFillPostItRectangleToDarker);
     }
 
     public PostItViewer getInteractionView() {

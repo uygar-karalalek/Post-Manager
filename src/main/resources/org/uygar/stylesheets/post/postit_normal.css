@@ -30,6 +30,16 @@
     -fx-spacing: 0;
 }
 
+#colorsContainer {
+    -fx-orientation: RIGHT TO LEFT;
+    -fx-alignment: BOTTOM_RIGHT;
+    -fx-spacing: 0;
+}
+
+#colorRectangleVBoxWrapper {
+    -fx-alignment: BOTTOM_LEFT;
+}
+
 #coloreLbl {
     -fx-font-size: 20pt;
     -fx-font-family: "Bookman Old Style";
@@ -87,19 +97,14 @@
     -fx-background-color: darkblue;
 }
 
-#propGrid {
-    -fx-background-color: linear-gradient(to bottom right, grey, #cfeacf);
-    -fx-background-radius: 0.4em;
+.property-class {
+    -fx-background-color: linear-gradient(to bottom right, #c7e8d5, #cdcdf7);
+    -fx-background-radius: 1em 0 0 2em;
     -fx-padding: 10;
 }
 
 #scadenzaBox {
     -fx-spacing: 10;
-}
-
-#duePuntiLbl {
-    -fx-font-size: 12pt;
-    -fx-padding: 1;
 }
 
 #orarioField {
@@ -108,12 +113,18 @@
     -fx-alignment: center;
     -fx-prompt-text-fill: #676565;
     -fx-border-color: black;
-    -fx-border-width: 0 0 0.7 0;
+    -fx-border-width: 0 0 0.1 0;
+    -fx-max-width: 50;
 }
 
-#lbl {
+.lbl {
+    -fx-font-size: 10px;
+    -fx-font-family: "Arial Rounded MT Bold";
+}
+
+.propTitle {
     -fx-font-family: "Bookman Old Style";
-    -fx-font-size: 12px;
+    -fx-font-size: 12pt;
 }
 
 #priorityField {
@@ -131,18 +142,22 @@
     -fx-border-color: #bb0909;
 }
 
-.color:hover {
+.color {
     -fx-stroke-width: 1px;
-    -fx-stroke: white;
+    -fx-stroke: black;
+}
+
+.color:hover {
+    -fx-stroke-width: 1.4;
 }
 
 #scadenza {
     -fx-background-color: transparent;
     -fx-border-width: 0 0 1 0;
+    -fx-font-size: 11px;
 }
 
 #scadenza:hover, #scadenza:focused {
-    -fx-border-color: red;
     -fx-background-radius: 0;
 }
 
@@ -154,7 +169,8 @@
 
 #scadenza > .text-field {
     -fx-background-color: transparent;
-    -fx-prompt-text-fill: black;
+    -fx-prompt-text-fill: grey;
+    -fx-alignment: center-right;
     -fx-border-width: 0 0 1 0;
     -fx-border-color: black;
 }

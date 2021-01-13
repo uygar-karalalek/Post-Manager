@@ -88,13 +88,13 @@
 
 #postActions {
     -fx-padding: 10 10 0 0;
-    -fx-background-color: transparent;
     -fx-opacity: 0.9;
     -fx-alignment: top-center;
     -fx-spacing: 10;
     -fx-border-width: 1 2 2 0;
     -fx-border-radius: 0 40 40 15;
     -fx-border-color: cadetblue linear-gradient(cadetblue, grey) linear-gradient(grey, cadetblue) blue;
+    -fx-background-color: transparent;
 }
 
 .scroll-pane {
@@ -189,8 +189,12 @@
 
 /* SETTINGS */
 
+#settingsTabBox {
+    -fx-background-color: linear-gradient(grey, black);
+}
+
 #settingsGrid {
-    -fx-background-color: linear-gradient(#0f0f3d, #3e6484);
+    -fx-background-color: radial-gradient(center 0px 0px, radius 1000px, #060b2c, #200b5a);
     -fx-border-width: 0;
 }
 
@@ -209,7 +213,7 @@
 
 .titled-pane > .title {
     -fx-font-family: "Arial Rounded MT Bold";
-    -fx-background-color: linear-gradient(#0f0f3d, #3e6484);
+    -fx-background-color: linear-gradient(to bottom right, #240854, transparent);
     -fx-background-insets: 0, 1, 2;
     -fx-pref-height: 30;
     -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */

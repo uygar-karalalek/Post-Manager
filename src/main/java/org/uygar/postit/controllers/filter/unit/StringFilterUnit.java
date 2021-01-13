@@ -17,10 +17,11 @@ public class StringFilterUnit extends FilterUnit {
     }
 
     public StringFilterUnit(String input, BiPredicate<String, String> condition, boolean ignoreCase) {
-        super(true);
-        this.input = input;
-        this.ignoreCase = ignoreCase;
-        this.condition = condition;
+        this(input, condition, ignoreCase, true);
+    }
+
+    public StringFilterUnit(String input, BiPredicate<String, String> condition) {
+        this(input, condition, true, true);
     }
 
     public String getInputBasedOnIgnoreCase() {

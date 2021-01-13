@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.filter.unit.DateFilterUnit;
+import org.uygar.postit.controllers.filter.unit.FilterUnit;
+import org.uygar.postit.controllers.filter.unit.IntFilterUnit;
 import org.uygar.postit.controllers.filter.unit.StringFilterUnit;
 import org.uygar.postit.post.Post;
 
@@ -48,16 +50,22 @@ public abstract class GeneralFilter<FILTER_TYPE extends BaseController, FILTER_U
 
     @Override
     public void addStringFilterUnit(StringFilterUnit stringFilterUnit) {
-        if (stringFilterUnit.isDisabled()) {
-            getUnitContainer().addUnit(alwaysTrue());
-        }
+        addTrueStatementToTheContainerIfUnitDisabled(stringFilterUnit);
     }
 
     @Override
     public void addDateFilterUnit(DateFilterUnit dateFilterUnit) {
-        if (dateFilterUnit.isDisabled()) {
+        addTrueStatementToTheContainerIfUnitDisabled(dateFilterUnit);
+    }
+
+    @Override
+    public void addIntFilterUnit(IntFilterUnit intFilterUnit) {
+        addTrueStatementToTheContainerIfUnitDisabled(intFilterUnit);
+    }
+
+    public void addTrueStatementToTheContainerIfUnitDisabled(FilterUnit unit) {
+        if (unit.isDisabled())
             getUnitContainer().addUnit(alwaysTrue());
-        }
     }
 
     public Predicate<FILTER_UNIT> getDateFilterCondition(BiPredicate<FILTER_UNIT, LocalDate> isEqual, BiPredicate<FILTER_UNIT,
@@ -78,10 +86,6 @@ public abstract class GeneralFilter<FILTER_TYPE extends BaseController, FILTER_U
         return alwaysTrue -> true;
     }
 
-    protected boolean isSelected(CheckBox checkBox) {
-        return checkBox.isSelected();
-    }
-
     protected void applyToField(TextField field, String text, Optional<CheckBox> relatedBox) {
         relatedBox.ifPresent(checkBox -> checkBox.setSelected(true));
         field.setText(text);
@@ -94,7 +98,7 @@ public abstract class GeneralFilter<FILTER_TYPE extends BaseController, FILTER_U
         relatedBox.ifPresent(checkBox -> checkBox.setSelected(true));
     }
 
-    public void reset() {
+    public void resetUnitContainer() {
         this.unitContainer = new FilterUnitContainer<>();
     }
 
