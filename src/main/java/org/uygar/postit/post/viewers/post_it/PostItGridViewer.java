@@ -1,19 +1,16 @@
 package org.uygar.postit.post.viewers.post_it;
 
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer;
-import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.graphic_builder.PostItViewerBasicGraphicsBuilder;
 
 import java.util.List;
 import java.util.function.Predicate;
@@ -21,12 +18,16 @@ import java.util.stream.Collectors;
 
 public class PostItGridViewer extends FlowPane {
 
+    public static final int PADDING = 20;
+    public static final int H_GAP = 30;
+    public static final int V_GAP = 20;
     private final PostItContainerOrganizer postItOrganizer;
 
     public PostItGridViewer(Post post, DataMiner miner) {
         this.postItOrganizer = new PostItContainerOrganizer(post, miner);
-        this.setHgap(30);
-        this.setVgap(20);
+        this.setHgap(H_GAP);
+        this.setVgap(V_GAP);
+        this.setPadding(new Insets(PADDING));
         this.setId("post_it_grid");
         init();
     }
