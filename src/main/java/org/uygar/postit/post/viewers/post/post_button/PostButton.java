@@ -1,23 +1,29 @@
 package org.uygar.postit.post.viewers.post.post_button;
 
-import javafx.animation.*;
 import javafx.scene.control.Button;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.effect.Bloom;
+import javafx.scene.effect.Glow;
 import javafx.scene.shape.Circle;
-import javafx.util.Duration;
+import javafx.scene.shape.Rectangle;
+import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.post.Post;
 
 public class PostButton extends Button {
 
     private final Post post;
-    private final Circle stateCircle;
-    public static final int CIRCLE_RADIUS = 10;
+    private Rectangle stateRectangle;
+    public static final int RECTANGLE_WIDTH = 5;
+    public static final int RECTANGLE_HEIGHT = 20;
 
     public PostButton(Post post) {
         this.post = post;
         this.textProperty().bind(post.nameProperty());
-        this.stateCircle = new Circle(CIRCLE_RADIUS);
+        initRectangle();
         setFX();
+    }
+
+    private void initRectangle() {
+        this.stateRectangle = new Rectangle(RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
     }
 
     public Post getPost() {
@@ -25,8 +31,8 @@ public class PostButton extends Button {
     }
 
     private void setFX() {
-        stateCircle.setId("stateCircle");
-        this.setGraphic(stateCircle);
+        stateRectangle.setId("stateCircle");
+        this.setGraphic(stateRectangle);
     }
 
 }

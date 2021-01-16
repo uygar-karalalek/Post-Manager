@@ -187,25 +187,21 @@
 }
 
 #post:hover > #stateCircle {
-    -fx-fill: #5858bc;
+    -fx-fill: #82cabe;
 }
 
 #post:disabled {
     -fx-opacity: 0.7;
-    -fx-background-color: radial-gradient(center 90px 40px, radius 120px, #363a44, #161918);
-    -fx-text-fill: #f19191;
-    -fx-font-weight: bold;
+    /*-fx-background-color: radial-gradient(center 90px 40px, radius 120px, #363a44, #161918);*/
+    -fx-background-color: radial-gradient(center 90px 40px, radius 120px, #525254, #000000);
 }
 
 #post:disabled > #stateCircle {
-    -fx-stroke: #e02e2e;
-    -fx-fill: #f8bf6c;
-    -fx-stroke-width: 5px;
+    -fx-fill: #ff5a00;
 }
 
 #stateCircle {
-    -fx-stroke: #2b3954;
-    -fx-stroke-width: 2px;
-    -fx-fill: #585881;
-    -fx-stroke-type: inside;
+    -fx-fill: #a4a4a4;
+    -fx-arc-width: 2pt;
+    -fx-arc-height: 2pt;
 }
