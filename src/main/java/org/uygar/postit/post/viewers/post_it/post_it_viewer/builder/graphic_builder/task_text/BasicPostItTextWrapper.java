@@ -25,28 +25,36 @@ public class BasicPostItTextWrapper extends VBox {
     }
 
     private void buildTexts() {
-        title = new Label();
-        taskText = new Label();
-        priority = new Label();
+        initTitleText();
+        initTaskText();
+        initPriorityText();
+        buildTitleTaskAndPriorityTextWrapper(title, taskText, priority);
+    }
 
+    private void initTitleText() {
+        title = new Label();
         title.textProperty().bind(postIt.titoloProperty());
         title.setId("postItTitle");
         title.setTextFill(postIt.getColore().postItTextColor);
         title.autosize();
+    }
 
+    private void initTaskText() {
+        taskText = new Label();
         taskText.setWrapText(true);
         taskText.setId("postItText");
         taskText.textProperty().bind(postIt.testoProperty());
         taskText.setTextFill(postIt.getColore().postItTextColor);
         taskText.setPrefWidth(POST_IT_SIZE - POST_IT_TRANSPARENT_BORDER - POST_IT_LABEL_MARGIN);
+    }
 
+    private void initPriorityText() {
+        priority = new Label();
         priority.setId("priorityText");
         priority.setTextFill(postIt.getColore().postItTextColor);
         priority.setTranslateY(priority.getTranslateY() - CONTENT_SPACING);
         priority.textProperty().bind(new SimpleStringProperty("Priorità: ")
                 .concat(postIt.priorityProperty().asString()));
-
-        buildTitleTaskAndPriorityTextWrapper(title, taskText, priority);
     }
 
     private void buildTitleTaskAndPriorityTextWrapper(Label title, Label task, Label priority) {

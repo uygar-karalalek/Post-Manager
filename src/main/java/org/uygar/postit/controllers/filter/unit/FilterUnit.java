@@ -1,6 +1,6 @@
 package org.uygar.postit.controllers.filter.unit;
 
-public class FilterUnit {
+public abstract class FilterUnit {
 
     private final boolean enabled;
 

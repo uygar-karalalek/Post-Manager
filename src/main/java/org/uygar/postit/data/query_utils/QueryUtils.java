@@ -36,7 +36,6 @@ public class QueryUtils {
                             "title", postIt.getTitolo(),
                             "endDate", postIt.getDataScadenza().toString())
                     .where().field("creationdate").equalsTo(postIt.getDataCreazione().toString());
-            System.out.println(query);
             return miner.tryExecute(query);
         } catch (Exception e) {
             return false;

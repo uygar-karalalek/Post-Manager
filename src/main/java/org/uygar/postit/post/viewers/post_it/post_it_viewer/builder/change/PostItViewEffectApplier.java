@@ -2,6 +2,7 @@ package org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.change;
 
 import javafx.animation.Transition;
 import javafx.scene.paint.Color;
+import javafx.stage.Stage;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.builder.PostItMouseInteractionManager;
 
@@ -13,7 +14,6 @@ public class PostItViewEffectApplier {
     public PostItViewEffectApplier(PostItMouseInteractionManager postItMouseInteractionManager) {
         this.postItMouseInteractionManager = postItMouseInteractionManager;
         this.fillUtils = new FillUtils();
-
     }
 
     public PostItMouseInteractionManager getPostItMouseInteractionManager() {
@@ -23,6 +23,8 @@ public class PostItViewEffectApplier {
     protected PostItViewer getInteractionView() {
         return getPostItMouseInteractionManager().getInteractionView();
     }
+
+    protected Stage getPostItEditorStage() { return (Stage) getInteractionView().getScene().getWindow(); }
 
     public FillUtils getFillUtils() {
         return fillUtils;

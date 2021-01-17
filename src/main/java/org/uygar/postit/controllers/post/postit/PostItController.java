@@ -11,7 +11,7 @@ import javafx.scene.shape.Rectangle;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.exception.WrongFieldsException;
-import org.uygar.postit.controllers.post.postit.utils.PostItEditorManager;
+import org.uygar.postit.controllers.post.postit.editor_manager.PostItEditorManager;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;

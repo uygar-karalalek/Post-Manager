@@ -12,8 +12,8 @@ public class PostButton extends Button {
 
     private final Post post;
     private Rectangle stateRectangle;
-    public static final int RECTANGLE_WIDTH = 5;
-    public static final int RECTANGLE_HEIGHT = 20;
+    public static final int RECTANGLE_WIDTH = 10;
+    public static final int RECTANGLE_HEIGHT = 5;
 
     public PostButton(Post post) {
         this.post = post;
