@@ -1,38 +1,41 @@
 package org.uygar.postit.post.viewers.post.post_button;
 
+import javafx.animation.TranslateTransition;
 import javafx.scene.control.Button;
-import javafx.scene.effect.Bloom;
-import javafx.scene.effect.Glow;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import org.jetbrains.annotations.NotNull;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.LineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.PathElement;
+import javafx.util.Duration;
 import org.uygar.postit.post.Post;
 
 public class PostButton extends Button {
 
     private final Post post;
-    private Rectangle stateRectangle;
-    public static final int RECTANGLE_WIDTH = 10;
-    public static final int RECTANGLE_HEIGHT = 5;
+    private Path stateShape;
 
     public PostButton(Post post) {
         this.post = post;
+        initShape();
         this.textProperty().bind(post.nameProperty());
-        initRectangle();
-        setFX();
     }
 
-    private void initRectangle() {
-        this.stateRectangle = new Rectangle(RECTANGLE_WIDTH, RECTANGLE_HEIGHT);
+    private void initShape() {
+        this.stateShape = new Path();
+
+        this.stateShape.getElements().addAll(
+                new MoveTo(0,0),
+                new LineTo(14, 7.5),
+                new LineTo(0, 15)
+        );
+
+        stateShape.setId("stateShape");
+        this.setGraphic(stateShape);
     }
 
     public Post getPost() {
         return post;
-    }
-
-    private void setFX() {
-        stateRectangle.setId("stateCircle");
-        this.setGraphic(stateRectangle);
     }
 
 }

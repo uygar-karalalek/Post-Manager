@@ -166,7 +166,7 @@
 }
 
 #post {
-    -fx-graphic-text-gap: 20;
+    -fx-graphic-text-gap: 18;
     -fx-background-radius: 0.5em;
     -fx-alignment: CENTER_LEFT;
     -fx-border-radius: 0.5em;
@@ -186,21 +186,22 @@
     -fx-font-family: Arial;
 }
 
-#post:hover > #stateCircle {
+#post:hover > #stateShape {
     -fx-fill: #82cabe;
 }
 
 #post:disabled {
     -fx-opacity: 0.7;
-    /*-fx-background-color: radial-gradient(center 90px 40px, radius 120px, #363a44, #161918);*/
     -fx-background-color: radial-gradient(center 90px 40px, radius 120px, #525254, #000000);
 }
 
-#post:disabled > #stateCircle {
+#post:disabled > #stateShape {
     -fx-fill: #ff5a00;
+    -fx-stroke: white;
+    -fx-stroke-width: 2;
 }
 
-#stateCircle {
+#stateShape {
     -fx-fill: #a4a4a4;
     -fx-arc-width: 2pt;
     -fx-arc-height: 2pt;
