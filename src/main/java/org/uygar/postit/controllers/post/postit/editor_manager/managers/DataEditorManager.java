@@ -13,7 +13,12 @@ public class DataEditorManager extends EditorManager {
         super(manager);
     }
 
-    public void loadValuesIfModifying() {
+    @Override
+    public void initialize() {
+        loadValuesIfModifying();
+    }
+
+    private void loadValuesIfModifying() {
         if (getManager().getPostItController().modifying) {
             PostIt loadedPostIt = getManager().getPostItController().loadedPostIt;
 

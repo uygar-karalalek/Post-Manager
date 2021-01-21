@@ -187,7 +187,9 @@
 }
 
 #post:hover > #stateShape {
-    -fx-fill: #82cabe;
+    -fx-fill: #29a708;
+    -fx-stroke: #c9c9c9;
+    -fx-stroke-width: 2;
 }
 
 #post:disabled {

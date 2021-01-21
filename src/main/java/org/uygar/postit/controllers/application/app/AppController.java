@@ -104,11 +104,11 @@ public class AppController extends BaseController {
     @FXML
     public void onMouseDragged(MouseEvent event) {
         Stage mainStage = (Stage) this.application.getScene().getWindow();
-        double xDiff = event.getScreenX() - (mainStage.getX() + onClickedX);
-        double yDiff = event.getScreenY() - (mainStage.getY() + onClickedY);
+        double xDiff = event.getScreenX() - onClickedX;
+        double yDiff = event.getScreenY() - onClickedY;
 
-        mainStage.setX(mainStage.getX() + xDiff);
-        mainStage.setY(mainStage.getY() + yDiff);
+        mainStage.setX(xDiff);
+        mainStage.setY(yDiff);
     }
 
     @FXML

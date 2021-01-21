@@ -14,4 +14,6 @@ abstract class EditorManager {
         return manager;
     }
 
+    public abstract void initialize();
+
 }

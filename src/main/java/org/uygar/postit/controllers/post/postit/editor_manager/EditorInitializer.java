@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import org.uygar.postit.controllers.post.postit.editor_manager.managers.DataEditorManager;
 import org.uygar.postit.controllers.post.postit.editor_manager.managers.EditorColorChangeManager;
+import org.uygar.postit.controllers.post.postit.editor_manager.managers.EditorDragManager;
 import org.uygar.postit.controllers.post.postit.editor_manager.managers.FocusManager;
 import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.properties.Colore;
@@ -15,20 +16,22 @@ import org.uygar.postit.post.properties.Colore;
 public class EditorInitializer {
 
     private final EditorColorChangeManager colorChangeManager;
+    private final EditorDragManager editorDragManager;
     private final DataEditorManager dataManager;
     private final FocusManager focusManager;
 
     public EditorInitializer(PostItEditorManager manager) {
         this.colorChangeManager = new EditorColorChangeManager(manager);
+        this.editorDragManager = new EditorDragManager(manager);
         this.dataManager = new DataEditorManager(manager);
         this.focusManager = new FocusManager(manager);
     }
 
     public void initialize() {
-        colorChangeManager.initializeRectangleColor();
-        colorChangeManager.addPosItColorChoicesAsRectangles();
-        dataManager.loadValuesIfModifying();
-        focusManager.requestTaskTextFocus();
+        this.colorChangeManager.initialize();
+        this.editorDragManager.initialize();
+        this.dataManager.initialize();
+        this.focusManager.initialize();
     }
 
     public EditorColorChangeManager getColorChangeManager() {

@@ -17,6 +17,12 @@ public class EditorColorChangeManager extends EditorManager {
         super(manager);
     }
 
+    @Override
+    public void initialize() {
+        initializeRectangleColor();
+        addPosItColorChoicesAsRectangles();
+    }
+
     public void initializeRectangleColor() {
         getManager().rectangleColor.addListener(this::onPostItColorChange);
         getManager().rectangleColor.set(DEFAULT_EDITOR_COLOR);

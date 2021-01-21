@@ -47,7 +47,7 @@
          </BorderPane.margin></HBox>
    </top>
    <left>
-      <VBox alignment="TOP_RIGHT" prefHeight="300.0" prefWidth="185.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
+      <VBox fx:id="propertyBox" alignment="TOP_RIGHT" prefHeight="300.0" prefWidth="185.0" spacing="10.0" BorderPane.alignment="CENTER_RIGHT">
          <children>
             <VBox alignment="TOP_CENTER" maxHeight="115.0" maxWidth="200.0" prefHeight="115.0" prefWidth="127.0" spacing="10.0" styleClass="property-class">
                <children>
