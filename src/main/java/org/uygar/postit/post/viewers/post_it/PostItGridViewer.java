@@ -1,6 +1,5 @@
 package org.uygar.postit.post.viewers.post_it;
 
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.input.MouseButton;
@@ -36,17 +35,26 @@ public class PostItGridViewer extends FlowPane {
         sortPostIts();
     }
 
+    public void sortFilteredPostIts() {
+        List<PostIt> mappedPostIts = mappedPostItsFromChildren();
+        getChildren().setAll(getSortedAndMappedPostIts(mappedPostIts));
+    }
+
+    private List<PostIt> mappedPostItsFromChildren() {
+        return getChildren().stream().map(node -> ((PostItViewer) node).getPostIt()).collect(Collectors.toList());
+    }
+
     public void sortPostIts() {
         setSortedAndMappedPostItsAsChildren();
     }
 
     private void setSortedAndMappedPostItsAsChildren() {
-        getChildren().setAll(getSortedAndMappedPostIts());
+        getChildren().setAll(getSortedAndMappedPostIts(postItOrganizer.getSorted()));
     }
 
-    private List<PostItViewer> getSortedAndMappedPostIts() {
-        return postItOrganizer.getSorted()
-                .stream().map(PostItViewer::new)
+    private List<PostItViewer> getSortedAndMappedPostIts(List<PostIt> postIts) {
+        this.postItOrganizer.getSortType().sort(postIts);
+        return postIts.stream().map(PostItViewer::new)
                 .collect(Collectors.collectingAndThen(Collectors.toList(),
                         this::addListenersToPostItViewersAndThenReturn));
     }

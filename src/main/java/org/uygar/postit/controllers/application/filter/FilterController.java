@@ -1,7 +1,5 @@
 package org.uygar.postit.controllers.application.filter;
 
-import javafx.beans.binding.BooleanBinding;
-import javafx.beans.property.BooleanProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
@@ -38,27 +36,26 @@ public class FilterController extends BaseController {
         this.postFilter = new PostFilter(this, new FilterUnitContainer<>());
         this.postGridViewer = postGridViewer;
         resetFields();
-        bindProperties();
-        addCheckListeners();
+        bindAndInitTextFieldWithCheckBox();
         deserializeFilter();
     }
 
-    private void bindProperties() {
-        bindProperties(inizioField.disableProperty(), inizio.selectedProperty().not());
-        bindProperties(data1.disableProperty(), tra.selectedProperty().not());
-        bindProperties(data2.disableProperty(), tra.selectedProperty().not());
-        bindProperties(contieneField.disableProperty(), contiene.selectedProperty().not());
-        bindProperties(finisceField.disableProperty(), finisce.selectedProperty().not());
+    private void bindAndInitTextFieldWithCheckBox() {
+        inizioField.setDisable(!inizio.isSelected());
+        data1.setDisable(!tra.isSelected());
+        data2.setDisable(!tra.isSelected());
+        contieneField.setDisable(!contiene.isSelected());
+        finisceField.setDisable(!finisce.isSelected());
+
+        bindTextFieldWithCheckBox(inizioField, inizio);
+        bindTextFieldWithCheckBox(data1.getEditor(), tra);
+        bindTextFieldWithCheckBox(data2.getEditor(), tra);
+        bindTextFieldWithCheckBox(contieneField, contiene);
+        bindTextFieldWithCheckBox(finisceField, finisce);
     }
 
-    public void bindProperties(BooleanProperty property1, BooleanBinding property2) {
-        property1.bind(property2);
-    }
-
-    private void addCheckListeners() {
-        addCheckChangeListenerToCheckBox(inizio, inizioField);
-        addCheckChangeListenerToCheckBox(contiene, contieneField);
-        addCheckChangeListenerToCheckBox(finisce, finisceField);
+    public void bindTextFieldWithCheckBox(TextField field, CheckBox box) {
+        box.selectedProperty().addListener((observableValue, oldVal, newVal) -> field.setDisable(oldVal));
     }
 
     private void deserializeFilter() {
@@ -68,13 +65,6 @@ public class FilterController extends BaseController {
             deserialized.applyFilterToController();
         }
         postFilter = deserialized == null ? postFilter : deserialized;
-    }
-
-    public void addCheckChangeListenerToCheckBox(CheckBox box, TextField field) {
-        box.selectedProperty().addListener((observableValue, oldVal, newVal) -> {
-            if (newVal) field.setText("");
-            else field.setText(null);
-        });
     }
 
     @FXML

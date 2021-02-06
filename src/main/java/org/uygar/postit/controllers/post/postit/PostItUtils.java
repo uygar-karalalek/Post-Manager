@@ -48,7 +48,7 @@ public class PostItUtils {
                             parseInt(postItController.minutoField.getText()))));
 
             postIt.setColore(postItController.postItEditorManager.rectangleColor.get());
-            postIt.setPriority(parseInt(postItController.priorityField.getText()));
+            postIt.setPriority(postItController.prioritySpinner.getValue());
             return Optional.of(postIt);
         } catch (Exception e) {
             return Optional.empty();

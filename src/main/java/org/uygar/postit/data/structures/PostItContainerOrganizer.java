@@ -28,7 +28,7 @@ public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implemen
 
     @Override
     public void sortPostIts() {
-        Sort sort = fatherPost.getSortType();
+        Sort sort = getSortType();
         sort.sort(list);
     }
 
@@ -36,6 +36,10 @@ public class PostItContainerOrganizer extends BaseDataContainer<PostIt> implemen
     public List<PostIt> getSorted() {
         sortPostIts();
         return list;
+    }
+
+    public Sort getSortType() {
+        return fatherPost.getSortType();
     }
 
     public Post getFatherPost() {

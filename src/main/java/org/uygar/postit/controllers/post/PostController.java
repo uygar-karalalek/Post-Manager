@@ -94,7 +94,7 @@ public class PostController extends BaseController {
 
     @FXML
     public void onOrdina() {
-        postItGrid.sortPostIts();
+        postItGrid.sortFilteredPostIts();
     }
 
     @FXML

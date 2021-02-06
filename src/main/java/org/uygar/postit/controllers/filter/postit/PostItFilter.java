@@ -74,11 +74,11 @@ public class PostItFilter extends GeneralFilter<PostController, PostIt> implemen
     @Override
     public void applyFilterToController() {
         if (notEmpty(inizioText))
-            applyToField(getFilterController().postItTitleBegins, inizioText, Optional.empty());
+            applyToField(getFilterController().postItTitleBegins, inizioText);
         if (notEmpty(contieneText))
-            applyToField(getFilterController().postItTitleContains, contieneText, Optional.empty());
+            applyToField(getFilterController().postItTitleContains, contieneText);
         if (date1 != null && date2 != null)
-            applyToDatePicker(getFilterController().postTraField1, getFilterController().postTraField2, date1, date2, Optional.empty());
+            applyToDatePicker(getFilterController().postTraField1, getFilterController().postTraField2, date1, date2);
     }
 
     private boolean notEmpty(String string) {

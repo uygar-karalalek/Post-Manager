@@ -127,19 +127,52 @@
     -fx-font-size: 12pt;
 }
 
-#priorityField {
-    -fx-background-color: transparent;
+#prioritySpinner {
+    -fx-background-color: linear-gradient(cornsilk, cornflowerblue);
     -fx-font-family: "Bookman Old Style";
     -fx-alignment: center;
-    -fx-prompt-text-fill: #676565;
-    -fx-border-color: black;
-    -fx-border-width: 0 0 0.7 0;
+    -fx-border-color: #888888;
+    -fx-border-width: 1;
+    -fx-border-radius: 4;
     -fx-translate-y: -10;
 }
 
-#orarioField:focused, #priorityField:focused {
+#prioritySpinner > .text-field {
+    -fx-background-color: transparent;
+    -fx-alignment: center;
+}
+
+#prioritySpinner .increment-arrow-button {
+    -fx-background-color: linear-gradient(#5a5acd, #5bc279);
+}
+#prioritySpinner .decrement-arrow-button {
+    -fx-background-color: linear-gradient(#5bc279, #5a5acd);
+}
+#prioritySpinner .increment-arrow-button:hover {
+    -fx-background-color: linear-gradient(#9dd2ad, #2727b0);
+}
+#prioritySpinner .decrement-arrow-button:hover {
+    -fx-background-color: linear-gradient(#9dd2ad, #2727b0);
+}
+#prioritySpinner .increment-arrow-button:pressed {
+    -fx-background-color: linear-gradient(#9dd2ad, #b7a138);
+}
+#prioritySpinner .decrement-arrow-button:pressed {
+    -fx-background-color: linear-gradient(#9dd2ad, #b7a138);
+}
+
+.spinner .increment-arrow-button .increment-arrow {
+    -fx-background-color: white;
+}
+
+.spinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: white;
+}
+
+#orarioField:focused, #prioritySpinner:focused {
     -fx-prompt-text-fill: black;
-    -fx-border-color: #bb0909;
+    -fx-background-color: white;
+    -fx-border-color: #2ea3f0;
 }
 
 .color {
@@ -159,6 +192,7 @@
 
 #scadenza:hover, #scadenza:focused {
     -fx-background-radius: 0;
+    -fx-background-color: white;
 }
 
 #scadenza > .arrow-button {

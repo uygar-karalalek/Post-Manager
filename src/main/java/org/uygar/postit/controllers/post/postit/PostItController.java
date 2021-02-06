@@ -1,10 +1,7 @@
 package org.uygar.postit.controllers.post.postit;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -31,7 +28,9 @@ public class PostItController extends BaseController {
     @FXML
     public DatePicker dataField;
     @FXML
-    public TextField titoloField, oraField, minutoField, priorityField;
+    public TextField titoloField, oraField, minutoField;
+    @FXML
+    public Spinner<Integer> prioritySpinner;
     @FXML
     public TextArea compitoField;
     @FXML

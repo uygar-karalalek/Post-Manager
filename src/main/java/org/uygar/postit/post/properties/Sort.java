@@ -15,6 +15,13 @@ public enum Sort {
         }
     },
 
+    COLORS("Colori") {
+        @Override
+        public void sort(List<PostIt> postItList) {
+            postItList.sort(BY_COLOR);
+        }
+    },
+
     PRIORITY("Priorità") {
         @Override
         public void sort(List<PostIt> postItList) {
@@ -60,6 +67,7 @@ public enum Sort {
     String name;
 
     static Comparator<PostIt> BY_DONE = Comparator.comparing(postIt -> !postIt.isFatto());
+    static Comparator<PostIt> BY_COLOR = Comparator.comparing(postIt -> postIt.getColore().colorId);
     static Comparator<PostIt> BY_ID = Comparator.comparing(PostIt::getId).reversed();
     static Comparator<PostIt> BY_DATE = Comparator.comparing(PostIt::getDataCreazione).reversed();
     static Comparator<PostIt> BY_PRIORITY = Comparator.comparing(PostIt::getPriority).reversed();

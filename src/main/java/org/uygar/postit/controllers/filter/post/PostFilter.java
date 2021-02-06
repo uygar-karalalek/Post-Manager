@@ -35,7 +35,8 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
     }
 
     // FOR OBJECT SERIALIZATION
-    public PostFilter() {}
+    public PostFilter() {
+    }
 
     private void setTextOfUnits() {
         inizioEnabled = isSelected(getFilterController().inizio);
@@ -47,7 +48,6 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
         contieneText = trimmedTextOfField(getFilterController().contieneField);
         inizioText = trimmedTextOfField(getFilterController().inizioField);
         finisceText = trimmedTextOfField(getFilterController().finisceField);
-
         date1 = getFilterController().data1.getValue();
         date2 = getFilterController().data2.getValue();
 
@@ -59,7 +59,13 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
     }
 
     public String trimmedTextOfField(TextField textField) {
-        return textField.getText() != null ? textField.getText() : "";
+        if (textField.isDisabled()) {
+            textField.setDisable(false);
+            String text = textField.getText();
+            textField.setDisable(true);
+            return textField.getText() != null ? text.trim() : "";
+        }
+        return textField.getText() != null ? textField.getText().trim() : "";
     }
 
     @Override
@@ -78,16 +84,11 @@ public class PostFilter extends GeneralFilter<FilterController, Post> implements
 
     @Override
     public void applyFilterToController() {
-        if (inizioEnabled)
-            applyToField(getFilterController().inizioField, inizioText, Optional.of(getFilterController().inizio));
-        if (contieneEnabled)
-            applyToField(getFilterController().contieneField, contieneText, Optional.of(getFilterController().contiene));
-        if (finisceEnabled)
-            applyToField(getFilterController().finisceField, finisceText, Optional.of(getFilterController().finisce));
-        if (datesEnabled)
-            applyToDatePicker(getFilterController().data1, getFilterController().data2, date1, date2, Optional.of(getFilterController().tra));
-        if (isIgnoreCase != null)
-            getFilterController().ignoraMaiusc.setSelected(isIgnoreCase);
+        applyToField(getFilterController().inizioField, inizioText);
+        applyToField(getFilterController().contieneField, contieneText);
+        applyToField(getFilterController().finisceField, finisceText);
+        applyToDatePicker(getFilterController().data1, getFilterController().data2, date1, date2);
+        getFilterController().ignoraMaiusc.setSelected(isIgnoreCase);
     }
 
     @Override

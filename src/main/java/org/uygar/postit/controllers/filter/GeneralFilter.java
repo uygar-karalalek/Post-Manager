@@ -86,16 +86,14 @@ public abstract class GeneralFilter<FILTER_TYPE extends BaseController, FILTER_U
         return alwaysTrue -> true;
     }
 
-    protected void applyToField(TextField field, String text, Optional<CheckBox> relatedBox) {
-        relatedBox.ifPresent(checkBox -> checkBox.setSelected(true));
+    protected void applyToField(TextField field, String text) {
         field.setText(text);
     }
 
     protected void applyToDatePicker(DatePicker picker1, DatePicker picker2,
-                                     LocalDate value1, LocalDate value2, Optional<CheckBox> relatedBox) {
+                                     LocalDate value1, LocalDate value2) {
         picker1.setValue(value1);
         picker2.setValue(value2);
-        relatedBox.ifPresent(checkBox -> checkBox.setSelected(true));
     }
 
     public void resetUnitContainer() {

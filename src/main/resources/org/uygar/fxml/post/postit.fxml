@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.BorderPane?>
@@ -85,11 +86,11 @@
             <VBox id="scadenzaBox" maxHeight="50.0" prefHeight="184.0" prefWidth="165.0" styleClass="property-class">
                <children>
                   <Label alignment="CENTER" prefHeight="19.0" prefWidth="200.0" styleClass="propTitle" text="Priorità" />
-                  <TextField id="priorityField" fx:id="priorityField" prefHeight="25.0" prefWidth="56.0" promptText="1-10">
+                  <Spinner id="prioritySpinner" fx:id="prioritySpinner" editable="true" prefHeight="26.0" prefWidth="60.0">
                      <VBox.margin>
-                        <Insets />
+                        <Insets left="8.0" top="10.0" />
                      </VBox.margin>
-                  </TextField>
+                  </Spinner>
                </children>
                <VBox.margin>
                   <Insets left="90.0" />

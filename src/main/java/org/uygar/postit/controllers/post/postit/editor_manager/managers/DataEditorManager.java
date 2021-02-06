@@ -30,7 +30,7 @@ public class DataEditorManager extends EditorManager {
             getManager().getPostItController().dataField.setValue(loadedPostIt.getDataScadenza().toLocalDate());
             getManager().getPostItController().oraField.setText(String.valueOf(loadedPostIt.getDataScadenza().getHour()));
             getManager().getPostItController().minutoField.setText(String.valueOf(loadedPostIt.getDataScadenza().getMinute()));
-            getManager().getPostItController().priorityField.setText(String.valueOf(loadedPostIt.getPriority()));
+            getManager().getPostItController().prioritySpinner.getEditor().setText(String.valueOf(loadedPostIt.getPriority()));
         }
     }
 
