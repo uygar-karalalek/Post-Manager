@@ -33,8 +33,9 @@ public class DMLQueryBuilder implements DML {
     public DML values(String... values) {
         convertValues(values);
         this.query += " VALUES (" + values[0];
-        for (int i = 1; i < values.length; i++)
+        for (int i = 1; i < values.length; i++) {
             this.query += ", " + values[i];
+        }
         this.query += ")";
         return this;
     }
@@ -42,7 +43,7 @@ public class DMLQueryBuilder implements DML {
     public void convertValues(String[] values) {
         for (int i = 0; i < values.length; i++)
             if (!values[i].equals("null"))
-                values[i] = "'" + values[i] + "'";
+                values[i] = "'" + values[i].replace("'", "''") + "'";
     }
 
     @Override
