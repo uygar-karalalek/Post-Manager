@@ -10,19 +10,21 @@ import static java.lang.Integer.parseInt;
 
 public class PostItUtils {
 
-    public static void copyBaseValuesFromByPostIts(PostIt first, PostIt second) {
-        first.setId(second.getId());
-        first.setColore(second.getColore());
-        first.setTitolo(second.getTitolo());
-        first.setPriority(second.getPriority());
-        first.setDataScadenza(second.getDataScadenza());
-        first.setColore(second.getColore());
-        first.setTesto(second.getTesto());
+    public static void copyFirstToSecond(PostIt first, PostIt second) {
+        second.setId(first.getId());
+        second.setColore(first.getColore());
+        second.setTitolo(first.getTitolo());
+        second.setPriority(first.getPriority());
+        second.setDataScadenza(first.getDataScadenza());
+        second.setColore(first.getColore());
+        second.setTesto(first.getTesto());
     }
 
     public static Optional<PostIt> getPostItFromControllerWhenModifying(PostItController postItController) {
         Optional<PostIt> returned;
         try {
+            // in this line we get postIt with values that you specify when create a completely new postIt
+            // that is, without id and creation date, that in this case I fill if postIt data is valid.
             returned = getPostItFromControllerWhenCreating(postItController);
             if (returned.isPresent()) {
                 returned.get().setId(postItController.loadedPostIt.getId());

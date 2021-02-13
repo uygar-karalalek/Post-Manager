@@ -38,7 +38,7 @@ public class DataEditorManager extends EditorManager {
         boolean operationSucceed;
         if (getManager().getPostItController().modifying) {
             if (operationSucceed = tryModifyPostItOnDB(getManager().getPostItController().miner, postIt)) {
-                PostItUtils.copyBaseValuesFromByPostIts(getManager().getPostItController().loadedPostIt, postIt);
+                PostItUtils.copyFirstToSecond(postIt, getManager().getPostItController().loadedPostIt);
             }
         } else {
             if (operationSucceed = tryCreateNewPostItOnDB(getManager().getPostItController().miner, postIt)) {

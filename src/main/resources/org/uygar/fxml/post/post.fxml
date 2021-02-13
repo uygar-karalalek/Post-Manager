@@ -13,6 +13,7 @@
 <?import javafx.scene.control.TitledPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.FlowPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
@@ -66,10 +67,10 @@
                      <children>
                         <TitledPane text="Post Settings">
                            <content>
-                              <GridPane id="settingsGrid" hgap="5.0" vgap="10.0">
+                              <GridPane id="settingsGrid" alignment="CENTER" hgap="5.0" vgap="10.0">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="112.0" minWidth="10.0" prefWidth="112.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="463.0" minWidth="10.0" prefWidth="463.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="217.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -86,7 +87,7 @@
                                     <Label styleClass="setLabel" text="Tipo ordinamento" GridPane.rowIndex="1" />
                                     <Label styleClass="setLabel" text="Modifica post" GridPane.rowIndex="2" />
                                     <SplitMenuButton id="tipoOrdinamentoField" fx:id="tipoOrdinamentoField" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                    <HBox alignment="CENTER_LEFT" prefHeight="30.0" prefWidth="180.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="30.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                                        <children>
                                           <Button id="setSalvaBtn" fx:id="postSaveButton" mnemonicParsing="false" onMouseClicked="#onSavePostSettings" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Salva" />
                                           <Button id="setResetBtn" fx:id="postResetButton" mnemonicParsing="false" onMouseClicked="#onResetPostSettings" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" />
@@ -96,7 +97,7 @@
                                           <Insets />
                                        </GridPane.margin>
                                        <padding>
-                                          <Insets right="230.0" />
+                                          <Insets right="-10.0" />
                                        </padding>
                                     </HBox>
                                  </children>
@@ -105,7 +106,7 @@
                         </TitledPane>
                         <TitledPane text="Filter">
                            <content>
-                              <GridPane id="settingsGrid" hgap="5.0" vgap="10.0">
+                              <GridPane id="settingsGrid" alignment="CENTER" hgap="5.0" vgap="10.0">
                                  <columnConstraints>
                                     <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="70.0" minWidth="10.0" prefWidth="70.0" />
                                     <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="217.0" />
@@ -125,7 +126,7 @@
                                        </GridPane.margin>
                                     </TextField>
                                     <Label styleClass="setLabel" text="Modifica" GridPane.rowIndex="4" />
-                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="100.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
                                        <children>
                                           <Button id="setRimuoviBtn" fx:id="filterButton" mnemonicParsing="false" onMouseClicked="#onFilter" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Filtra" />
                                           <Button id="setSalvaBtn" fx:id="filterSaveButton" mnemonicParsing="false" onMouseClicked="#onSaveFilter" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Salva" />
@@ -150,7 +151,14 @@
                      </children>
                   </VBox>
                </content></Tab>
-            <Tab text="Statistics" />
+            <Tab text="Statistics">
+               <content>
+                  <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
+                     <content>
+                        <FlowPane fx:id="statsPane" maxWidth="800.0" prefHeight="200.0" prefWidth="404.0" style="-fx-background-color: blue;" />
+                     </content>
+                  </ScrollPane>
+               </content></Tab>
          </tabs>
       </TabPane>
    </children>

@@ -5,18 +5,19 @@ import org.uygar.postit.controllers.post.postit.editor_manager.PostItEditorManag
 
 import java.util.stream.IntStream;
 
-public class FieldInitialValuesManager extends EditorManager {
+public class InitialValuesManager extends EditorManager {
 
     public static final int MAX_PRIORITY = 10;
+    public static final int MIN_PRIORITY = 1;
 
-    public FieldInitialValuesManager(PostItEditorManager manager) {
+    public InitialValuesManager(PostItEditorManager manager) {
         super(manager);
     }
 
     @Override
     public void initialize() {
         this.getManager().getPostItController().prioritySpinner.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, MAX_PRIORITY));
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_PRIORITY, MAX_PRIORITY));
     }
 
 }

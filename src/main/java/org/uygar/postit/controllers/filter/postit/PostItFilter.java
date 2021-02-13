@@ -77,6 +77,8 @@ public class PostItFilter extends GeneralFilter<PostController, PostIt> implemen
             applyToField(getFilterController().postItTitleBegins, inizioText);
         if (notEmpty(contieneText))
             applyToField(getFilterController().postItTitleContains, contieneText);
+        if (priority != null)
+            applyToField(getFilterController().postItPriorityField, priority.toString());
         if (date1 != null && date2 != null)
             applyToDatePicker(getFilterController().postTraField1, getFilterController().postTraField2, date1, date2);
     }

@@ -51,6 +51,9 @@ public class PostController extends BaseController {
     @FXML
     public Button filterResetButton, filterSaveButton, filterButton;
 
+    @FXML
+    public FlowPane statsPane;
+
     public Post loadedPost;
     public DataMiner dataMiner;
     public Dimension2D minDimension;
@@ -65,9 +68,7 @@ public class PostController extends BaseController {
         loadedPost = fatherPost;
         minDimension = initialWindowDimension;
         postTabManager = new PostTabManager(this);
-        postTabManager.initPostControllerTab();
-        postTabManager.initSettingsControllerTab();
-        postTabManager.initStatisticsControllerTab();
+        postTabManager.initPostControllerTabs();
 
         postItFilter = new PostItFilter(this, new FilterUnitContainer<>());
         deserializePostItFilter();
@@ -94,7 +95,7 @@ public class PostController extends BaseController {
 
     @FXML
     public void onOrdina() {
-        postItGrid.sortFilteredPostIts();
+        postItGrid.sortVisiblePostIts();
     }
 
     @FXML
@@ -130,17 +131,18 @@ public class PostController extends BaseController {
         if (fieldsAreNotValid())
             throw new WrongFieldsException("Devi inserire le date in modo corretto!",
                     new WindowCoordinatesContainer(this.post.getScene().getWindow()));
-        else {
-            postItFilter.resetUnitContainer();
-            postItFilter.buildFilterSettingUnits();
-            postItGrid.filter(postItFilter.getResult());
-            rootTabPane.getSelectionModel().selectPrevious();
-            postItFilter.serialize();
-        }
+        postItFilter.resetUnitContainer();
+        postItFilter.buildFilterSettingUnits();
+        postItGrid.filter(postItFilter.getResult());
+        rootTabPane.getSelectionModel().selectPrevious();
+        postItFilter.serialize();
     }
 
     @FXML
-    public void onSaveFilter() {
+    public void onSaveFilter() throws WrongFieldsException {
+        if (fieldsAreNotValid())
+            throw new WrongFieldsException("Devi inserire le date in modo corretto!",
+                    new WindowCoordinatesContainer(this.post.getScene().getWindow()));
         postItFilter.buildFilterSettingUnits();
         postItFilter.serialize();
     }

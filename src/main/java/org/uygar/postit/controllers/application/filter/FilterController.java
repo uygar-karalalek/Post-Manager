@@ -48,14 +48,18 @@ public class FilterController extends BaseController {
         finisceField.setDisable(!finisce.isSelected());
 
         bindTextFieldWithCheckBox(inizioField, inizio);
-        bindTextFieldWithCheckBox(data1.getEditor(), tra);
-        bindTextFieldWithCheckBox(data2.getEditor(), tra);
+        bindDatePickerWithCheckBox(data1, tra);
+        bindDatePickerWithCheckBox(data2, tra);
         bindTextFieldWithCheckBox(contieneField, contiene);
         bindTextFieldWithCheckBox(finisceField, finisce);
     }
 
     public void bindTextFieldWithCheckBox(TextField field, CheckBox box) {
         box.selectedProperty().addListener((observableValue, oldVal, newVal) -> field.setDisable(oldVal));
+    }
+
+    public void bindDatePickerWithCheckBox(DatePicker datePicker, CheckBox box) {
+        box.selectedProperty().addListener((observableValue, oldVal, newVal) -> datePicker.setDisable(oldVal));
     }
 
     private void deserializeFilter() {
@@ -108,6 +112,7 @@ public class FilterController extends BaseController {
         contieneField.setText(null);
         finisceField.setText(null);
     }
+
     private void serializedFilterFileDeleteIfExists() {
         File file = new File("filter.ser");
         file.delete();

@@ -13,6 +13,7 @@ import org.uygar.postit.controllers.post.utils.PostStatistics;
 import org.uygar.postit.controllers.post.utils.PostStatisticsViewManager;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.post.PostTabInitializer;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.settings.PostSettingsInitializer;
+import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.PostStatisticsInitializer;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
@@ -23,27 +24,32 @@ public class PostTabManager extends PostControllerWrapper implements PostControl
 
     public PostTabInitializer postTabInitializer;
     public PostSettingsInitializer postSettingsInitializer;
-    // TODO : PostStatisticsInitializer
+    public PostStatisticsInitializer postStatisticsInitializer;
 
     public PostTabManager(PostController postController) {
         super(postController);
     }
 
     @Override
-    public void initPostControllerTab() {
+    public void initPostControllerTabs() {
+        initPostControllerTab();
+        initSettingsControllerTab();
+        initStatisticsControllerTab();
+    }
+
+    private void initPostControllerTab() {
         this.postTabInitializer = new PostTabInitializer(postController);
         this.postTabInitializer.initializeTab();
     }
 
-    @Override
-    public void initSettingsControllerTab() {
-        postSettingsInitializer = new PostSettingsInitializer(postController);
-        postSettingsInitializer.initializeTab();
+    private void initSettingsControllerTab() {
+        this.postSettingsInitializer = new PostSettingsInitializer(postController);
+        this.postSettingsInitializer.initializeTab();
     }
 
-    @Override
-    public void initStatisticsControllerTab() {
-        // NOT SUPPORTED YET
+    private void initStatisticsControllerTab() {
+        this.postStatisticsInitializer = new PostStatisticsInitializer(postController);
+        this.postStatisticsInitializer.initializeTab();
     }
 
     public void setMinSizeListenerByDimensionOfStage(Stage stage) {

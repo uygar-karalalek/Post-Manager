@@ -193,7 +193,7 @@
 }
 
 #settingsGrid {
-    -fx-background-color: radial-gradient(center 0px 0px, radius 1000px, #060b2c, #200b5a);
+    -fx-background-color: radial-gradient(center 0px 0px, radius 1000px, #444d8844, #1f94d011);
     -fx-border-width: 0;
 }
 
@@ -212,7 +212,7 @@
 
 .titled-pane > .title {
     -fx-font-family: "Arial Rounded MT Bold";
-    -fx-background-color: linear-gradient(to bottom right, #240854, transparent);
+    -fx-background-color: linear-gradient(to bottom right, #0090d733, #0f90cc33);
     -fx-background-insets: 0, 1, 2;
     -fx-pref-height: 30;
     -fx-padding: 0.166667em 0.833333em 0.25em 0.833333em; /* 2 10 3 10 */

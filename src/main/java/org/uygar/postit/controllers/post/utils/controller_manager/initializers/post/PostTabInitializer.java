@@ -27,15 +27,19 @@ public class PostTabInitializer extends PostControllerWrapper implements TabInit
 
     @Override
     public void initializeTab() {
-        postController.srcBar.textProperty().addListener(this::onSearchTextChangeDoFilter);
-        postController.postItGrid = new PostItGridViewer(postController.loadedPost, postController.dataMiner);
-        postController.rootTabPane.prefWidthProperty().bind(postController.post.widthProperty());
-        postController.rootTabPane.prefHeightProperty().bind(postController.post.heightProperty());
-
         initGridPane();
         initPostTitle();
+        bindRootTabPaneSizeWithWindow();
+
         PostStatisticsViewManager.buildChart(postController.pieChart,
                 new PostStatistics(postController.postItGrid.getPostItOrganizer()));
+
+        postController.srcBar.textProperty().addListener(this::onSearchTextChangeDoFilter);
+    }
+
+    private void bindRootTabPaneSizeWithWindow() {
+        postController.rootTabPane.prefWidthProperty().bind(postController.post.widthProperty());
+        postController.rootTabPane.prefHeightProperty().bind(postController.post.heightProperty());
     }
 
     public void onSearchTextChangeDoFilter(ObservableValue<? extends String> obs, String oldVal, String newVal) {
@@ -43,6 +47,8 @@ public class PostTabInitializer extends PostControllerWrapper implements TabInit
     }
 
     private void initGridPane() {
+        postController.postItGrid = new PostItGridViewer(postController.loadedPost, postController.dataMiner);
+
         postController.gridFatherScroll.setContent(postController.postItGrid);
         postController.postItGrid.prefWidthProperty().bind(postController.gridFatherScroll.widthProperty());
         postController.postItGrid.prefHeightProperty().bind(postController.gridFatherScroll.heightProperty());

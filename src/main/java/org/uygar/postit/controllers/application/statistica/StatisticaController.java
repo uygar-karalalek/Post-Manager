@@ -101,7 +101,7 @@ public class StatisticaController extends BaseController {
 
     public void initScatterChart() {
         initOreEFrequenza();
-        scatterChart.setTitle("Frequenza ore del giorno");
+        scatterChart.setTitle("Frequenza degli accessi durante le ore del giorno");
         scatterChart.prefHeightProperty().bind(scatterBox.heightProperty());
     }
 
@@ -125,7 +125,7 @@ public class StatisticaController extends BaseController {
         NumberAxis frequenzaLine = getFrequenzaAxis(0, 2000, 100, "Numero accessi nei mesi (in decine)");
 
         lineChart = new LineChart<>(mese, frequenzaLine);
-        lineChart.setTitle("Frequenza accessi nei mesi");
+        lineChart.setTitle("Frequenza degli accessi durante i mesi");
         lineChart.prefHeightProperty().bind(lineBox.heightProperty());
 
         XYChart.Series<String, Number> xyData = getMonthFrequences(getMonthFrequenceChartData(properties));

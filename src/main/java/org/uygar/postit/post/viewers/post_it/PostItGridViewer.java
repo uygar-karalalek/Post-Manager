@@ -32,10 +32,10 @@ public class PostItGridViewer extends FlowPane {
     }
 
     public void init() {
-        sortPostIts();
+        sortAllPostIts();
     }
 
-    public void sortFilteredPostIts() {
+    public void sortVisiblePostIts() {
         List<PostIt> mappedPostIts = mappedPostItsFromChildren();
         getChildren().setAll(getSortedAndMappedPostIts(mappedPostIts));
     }
@@ -44,11 +44,11 @@ public class PostItGridViewer extends FlowPane {
         return getChildren().stream().map(node -> ((PostItViewer) node).getPostIt()).collect(Collectors.toList());
     }
 
-    public void sortPostIts() {
-        setSortedAndMappedPostItsAsChildren();
+    public void sortAllPostIts() {
+        setAllSortedAndMappedPostItsAsChildren();
     }
 
-    private void setSortedAndMappedPostItsAsChildren() {
+    private void setAllSortedAndMappedPostItsAsChildren() {
         getChildren().setAll(getSortedAndMappedPostIts(postItOrganizer.getSorted()));
     }
 
@@ -87,11 +87,11 @@ public class PostItGridViewer extends FlowPane {
                 return (((PostItViewer) node).getPostIt().equals(postIt));
             return false;
         });
-        sortPostIts();
+        sortAllPostIts();
     }
 
     public void filter(Predicate<PostIt> postItPredicate) {
-        sortPostIts();
+        sortAllPostIts();
         Predicate<Node> doNotPassesTest = node -> !postItPredicate.test(((PostItViewer) node).getPostIt());
         this.getChildren()
                 .removeIf(doNotPassesTest);
