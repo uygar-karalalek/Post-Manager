@@ -1,20 +1,20 @@
-package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts;
+package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.general.state;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.*;
+import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.general.GeneralPostXYChart;
 import org.uygar.postit.data.structures.PostItContainer;
 import org.uygar.postit.post.PostIt;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class StateChart extends GeneralPostXYChart {
+public class StateBarChart extends GeneralPostXYChart {
 
-    public StateChart(PostItContainer container) {
+    public StateBarChart(PostItContainer container) {
         super(container, "PostIt State", "Recurrence");
         chart = new BarChart<>(xAxis, yAxis);
-        chart.setData(getData());
+        updateChartData();
     }
 
     @Override
@@ -26,11 +26,6 @@ public class StateChart extends GeneralPostXYChart {
     @Override
     public void initYAxisWithName(String axisName) {
         yAxis.setLabel(axisName);
-    }
-
-    @Override
-    public Chart getChart() {
-        return this.chart;
     }
 
     @Override

@@ -1,11 +1,9 @@
 package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.manager;
 
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.XYChart;
 import org.uygar.postit.controllers.post.PostController;
-import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.StateChart;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.chunks.StatisticsChunk;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.chunks.StatisticsChunkPane;
+import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.chunks.creation_date.CreationDateChunk;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.chunks.state.StateChunk;
 
 import java.util.ArrayList;
@@ -18,6 +16,7 @@ public class ChartGroupManager {
     public ChartGroupManager(PostController postController) {
         this.chunks = new ArrayList<>();
         this.chunks.add(new StateChunk(postController.postItGrid.getPostItOrganizer()));
+        this.chunks.add(new CreationDateChunk(postController.postItGrid.getPostItOrganizer()));
     }
 
     public void updateAllCharts() {

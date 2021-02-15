@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts;
+package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.general;
 
 import javafx.collections.ObservableList;
 import javafx.scene.chart.*;
@@ -20,8 +20,16 @@ public abstract class GeneralPostXYChart extends GeneralPostChart {
         initYAxisWithName(yAxisName);
     }
 
+    protected abstract void initXAxisWithName(String axisName);
+    protected abstract void initYAxisWithName(String axisName);
+
     public void updateChartData() {
         chart.setData((ObservableList<XYChart.Series<String, Number>>) getData());
+    }
+
+    @Override
+    public XYChart<String, Number> getChart() {
+        return chart;
     }
 
 }

@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts;
+package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.general;
 
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.statistical_data.PostStatisticalData;
 import org.uygar.postit.data.structures.PostItContainer;

@@ -5,7 +5,6 @@ import javafx.scene.control.Tab;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.controllers.post.utils.controller_manager.PostControllerWrapper;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.TabInitializer;
-import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.StateChart;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.manager.ChartGroupManager;
 
 public class PostStatisticsInitializer extends PostControllerWrapper implements TabInitializer {

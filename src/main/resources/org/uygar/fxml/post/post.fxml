@@ -155,7 +155,7 @@
                <content>
                   <ScrollPane fitToWidth="true" prefHeight="200.0" prefWidth="200.0">
                      <content>
-                        <FlowPane fx:id="statsPane" maxWidth="800.0" prefHeight="200.0" prefWidth="404.0" style="-fx-background-color: blue;" />
+                        <FlowPane fx:id="statsPane" maxWidth="800.0" prefHeight="200.0" prefWidth="198.0" style="-fx-background-color: blue;" />
                      </content>
                   </ScrollPane>
                </content></Tab>

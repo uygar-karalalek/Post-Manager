@@ -20,4 +20,8 @@ public class InitialValuesManager extends EditorManager {
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(MIN_PRIORITY, MAX_PRIORITY));
     }
 
+    public static boolean isPriorityValid(Integer priority) {
+        return priority != null && (priority >= MIN_PRIORITY && priority <= MAX_PRIORITY);
+    }
+
 }

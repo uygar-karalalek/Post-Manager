@@ -125,6 +125,9 @@ public class PostIt {
         this.colore.set(colore);
     }
 
+    public boolean isExpiredAndTodo() {
+        return isExpired() && isUndone();
+    }
     public boolean isExpired() {
        return LocalDateTime.now().isAfter(dataScadenza.get());
     }

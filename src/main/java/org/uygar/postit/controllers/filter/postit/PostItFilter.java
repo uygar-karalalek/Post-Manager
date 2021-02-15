@@ -7,6 +7,8 @@ import org.uygar.postit.controllers.filter.unit.DateFilterUnit;
 import org.uygar.postit.controllers.filter.unit.IntFilterUnit;
 import org.uygar.postit.controllers.filter.unit.StringFilterUnit;
 import org.uygar.postit.controllers.post.PostController;
+import org.uygar.postit.controllers.post.postit.editor_manager.PostItEditorManager;
+import org.uygar.postit.controllers.post.postit.editor_manager.managers.InitialValuesManager;
 import org.uygar.postit.post.PostIt;
 
 import java.io.*;
@@ -15,15 +17,17 @@ import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Predicate;
 
+import static org.uygar.postit.controllers.post.postit.editor_manager.managers.InitialValuesManager.*;
+
 public class PostItFilter extends GeneralFilter<PostController, PostIt> implements Serializable {
 
     public static final long serialVersionUID = 222L;
 
-    String contieneText, inizioText;
-    Integer priority;
-    LocalDate date1, date2;
+    private String contieneText, inizioText;
+    private Integer priority;
+    private LocalDate date1, date2;
 
-    Boolean priorityEnabled;
+    private Boolean priorityEnabled;
 
     public PostItFilter(PostController controller, FilterUnitContainer<PostIt> unitContainer) {
         super(controller, unitContainer);
@@ -77,7 +81,7 @@ public class PostItFilter extends GeneralFilter<PostController, PostIt> implemen
             applyToField(getFilterController().postItTitleBegins, inizioText);
         if (notEmpty(contieneText))
             applyToField(getFilterController().postItTitleContains, contieneText);
-        if (priority != null)
+        if (isPriorityValid(priority))
             applyToField(getFilterController().postItPriorityField, priority.toString());
         if (date1 != null && date2 != null)
             applyToDatePicker(getFilterController().postTraField1, getFilterController().postTraField2, date1, date2);
