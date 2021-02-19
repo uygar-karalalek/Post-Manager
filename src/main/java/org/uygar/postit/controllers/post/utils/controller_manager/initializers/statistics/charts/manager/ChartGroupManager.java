@@ -15,8 +15,8 @@ public class ChartGroupManager {
 
     public ChartGroupManager(PostController postController) {
         this.chunks = new ArrayList<>();
-        this.chunks.add(new StateChunk(postController.postItGrid.getPostItOrganizer()));
-        this.chunks.add(new CreationDateChunk(postController.postItGrid.getPostItOrganizer()));
+        this.chunks.add(new StateChunk(postController.statsPane, postController.postItGrid.getPostItOrganizer()));
+        this.chunks.add(new CreationDateChunk(postController.statsPane, postController.postItGrid.getPostItOrganizer()));
     }
 
     public void updateAllCharts() {

@@ -1,13 +1,13 @@
-package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.general;
+package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views;
 
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.statistical_data.PostStatisticalData;
 import org.uygar.postit.data.structures.PostItContainer;
 
-public abstract class GeneralPostChart implements PostChart {
+public abstract class PostChartDataProcessor implements PostChart {
 
     protected PostStatisticalData postStatisticalData;
 
-    public GeneralPostChart(PostItContainer container) {
+    public PostChartDataProcessor(PostItContainer container) {
         this.postStatisticalData = new PostStatisticalData(container);
     }
 

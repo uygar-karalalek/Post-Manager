@@ -1,28 +1,16 @@
-package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.general.creation_date;
+package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views.base.spec.creation_date;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
-import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.general.GeneralPostXYChart;
+import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views.base.VerticalPostBarChart;
 import org.uygar.postit.data.structures.PostItContainer;
 
-public class CreationDateBarChart extends GeneralPostXYChart {
+public class CreationDateBarChart extends VerticalPostBarChart {
 
     public CreationDateBarChart(PostItContainer container) {
-        super(container, "Creation Year", "Number of Post-its");
-        chart = new BarChart<>(xAxis, yAxis);
-        updateChartData();
-    }
-
-    @Override
-    protected void initXAxisWithName(String axisName) {
-        xAxis.setLabel(axisName);
-    }
-
-    @Override
-    protected void initYAxisWithName(String axisName) {
-        yAxis.setLabel(axisName);
+        super("Number of Post-its", "Creation Year", container);
     }
 
     @Override

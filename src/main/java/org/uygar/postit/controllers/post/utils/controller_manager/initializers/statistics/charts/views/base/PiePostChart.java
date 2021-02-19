@@ -1,15 +1,24 @@
-package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.general;
+package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views.base;
 
 import javafx.collections.ObservableList;
 import javafx.scene.chart.PieChart;
+import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views.PostChartDataProcessor;
 import org.uygar.postit.data.structures.PostItContainer;
 
-public abstract class GeneralPieChart extends GeneralPostChart {
+public abstract class PiePostChart extends PostChartDataProcessor {
 
     protected PieChart chart;
 
-    public GeneralPieChart(PostItContainer container) {
+    public PiePostChart(PostItContainer container) {
         super(container);
+        this.initChart();
+    }
+
+    protected abstract void initChart();
+
+    @Override
+    public PieChart getChart() {
+        return chart;
     }
 
     @Override
@@ -20,11 +29,6 @@ public abstract class GeneralPieChart extends GeneralPostChart {
         chart.layout();
         chart.setData((ObservableList<PieChart.Data>) getData());
         chart.layout();
-    }
-
-    @Override
-    public PieChart getChart() {
-        return chart;
     }
 
 }
