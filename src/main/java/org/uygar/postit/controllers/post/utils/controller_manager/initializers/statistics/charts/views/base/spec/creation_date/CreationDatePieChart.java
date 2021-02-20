@@ -6,6 +6,8 @@ import javafx.scene.chart.PieChart;
 import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views.base.PiePostChart;
 import org.uygar.postit.data.structures.PostItContainer;
 
+import java.time.Month;
+
 public class CreationDatePieChart extends PiePostChart {
 
     public CreationDatePieChart(PostItContainer container) {
@@ -22,8 +24,8 @@ public class CreationDatePieChart extends PiePostChart {
     public ObservableList<PieChart.Data> getData() {
         ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
 
-        for (Integer year : postStatisticalData.getCreationDateYears()) {
-            list.add(new PieChart.Data(year.toString(), postStatisticalData.countPostItBasedOnCreationYear(year)));
+        for (Month month : postStatisticalData.getCreationDateMonths()) {
+            list.add(new PieChart.Data(month.toString(), postStatisticalData.countPostItBasedOnCreationYear(month)));
         }
 
         return list;

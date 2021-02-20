@@ -4,6 +4,7 @@ import org.uygar.postit.data.structures.PostItContainer;
 import org.uygar.postit.post.PostIt;
 
 import java.time.LocalDateTime;
+import java.time.Month;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -20,16 +21,16 @@ public class PostStatisticalData {
         return postItContainer.getSorted().stream().filter(stateCondition).count();
     }
 
-    public Set<Integer> getCreationDateYears() {
+    public Set<Month> getCreationDateMonths() {
         return postItContainer.getSorted().stream()
                 .map(PostIt::getDataCreazione)
-                .map(LocalDateTime::getYear)
+                .map(LocalDateTime::getMonth)
                 .collect(Collectors.toSet());
     }
 
-    public int countPostItBasedOnCreationYear(Integer creationYear) {
+    public int countPostItBasedOnCreationYear(Month month) {
         return (int) postItContainer.getSorted().stream()
-                .filter(postIt -> postIt.getDataCreazione().getYear() == creationYear).count();
+                .filter(postIt -> postIt.getDataCreazione().getMonth() == month).count();
     }
 
 }
