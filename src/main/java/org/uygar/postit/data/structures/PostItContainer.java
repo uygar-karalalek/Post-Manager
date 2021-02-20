@@ -11,6 +11,7 @@ public interface PostItContainer extends Container {
 
     void sortPostIts();
 
+    List<PostIt> getList();
     List<PostIt> getSorted();
 
 }

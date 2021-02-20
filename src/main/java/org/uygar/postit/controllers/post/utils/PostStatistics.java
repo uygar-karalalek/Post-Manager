@@ -4,24 +4,27 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
+import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.statistical_data.PostStatisticalData;
 import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.PostIt;
 
 public class PostStatistics {
 
     private final PostItContainerOrganizer postIts;
+    private final PostStatisticalData postStatisticalData;
     private final DoubleProperty numOfDonePercentage = new SimpleDoubleProperty();
     private final DoubleProperty numOfUndonePercentage = new SimpleDoubleProperty();
 
     public PostStatistics(PostItContainerOrganizer containerOrganizer) {
         this.postIts = containerOrganizer;
+        this.postStatisticalData = new PostStatisticalData(this.postIts);
         updatePercentages();
         onPostItChanges();
     }
 
     private void onPostItChanges() {
-        this.postIts.getList().addListener(this::onPostItListUpdate);
-        this.postIts.getList().forEach(this::addDonePropertyListener);
+        this.postIts.getObservableList().addListener(this::onPostItListUpdate);
+        this.postIts.getObservableList().forEach(this::addDonePropertyListener);
     }
 
     private void onPostItListUpdate(ListChangeListener.Change<? extends PostIt> change) {
@@ -57,12 +60,12 @@ public class PostStatistics {
     }
 
     private Double getNumOfUnDonePostIts() {
-        return postIts.getList().stream()
-                .filter(PostIt::isUndone).count() * 1.0;
+        return postStatisticalData.
+                getNumberOfPostItBasedOnStateCondition(PostIt::isUndone) * 1.0;
     }
 
     private int getNumOfPostIts() {
-        return postIts.getList().size();
+        return postIts.getObservableList().size();
     }
 
     public DoubleProperty numOfDonePercentageProperty() {

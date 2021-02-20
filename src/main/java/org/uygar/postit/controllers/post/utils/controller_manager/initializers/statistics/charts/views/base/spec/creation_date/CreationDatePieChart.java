@@ -24,9 +24,8 @@ public class CreationDatePieChart extends PiePostChart {
     public ObservableList<PieChart.Data> getData() {
         ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
 
-        for (Month month : postStatisticalData.getCreationDateMonths()) {
+        for (Month month : postStatisticalData.getCreationDateMonths())
             list.add(new PieChart.Data(month.toString(), postStatisticalData.countPostItBasedOnCreationYear(month)));
-        }
 
         return list;
     }

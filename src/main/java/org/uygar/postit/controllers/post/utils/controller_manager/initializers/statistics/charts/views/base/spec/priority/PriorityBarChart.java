@@ -23,6 +23,7 @@ public class PriorityBarChart extends HorizontalPostBarChart {
 
     @Override
     public ObservableList<XYChart.Series<Number, String>> getData() {
+
         return null;
     }
 

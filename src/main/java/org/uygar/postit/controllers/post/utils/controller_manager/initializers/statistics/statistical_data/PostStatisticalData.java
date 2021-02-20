@@ -8,6 +8,7 @@ import java.time.Month;
 import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PostStatisticalData {
 
@@ -18,19 +19,21 @@ public class PostStatisticalData {
     }
 
     public long getNumberOfPostItBasedOnStateCondition(Predicate<PostIt> stateCondition) {
-        return postItContainer.getSorted().stream().filter(stateCondition).count();
+        return getListStream().filter(stateCondition).count();
     }
 
     public Set<Month> getCreationDateMonths() {
-        return postItContainer.getSorted().stream()
-                .map(PostIt::getDataCreazione)
+        return getListStream().map(PostIt::getDataCreazione)
                 .map(LocalDateTime::getMonth)
                 .collect(Collectors.toSet());
     }
 
     public int countPostItBasedOnCreationYear(Month month) {
-        return (int) postItContainer.getSorted().stream()
-                .filter(postIt -> postIt.getDataCreazione().getMonth() == month).count();
+        return (int) getListStream().filter(postIt -> postIt.getDataCreazione().getMonth() == month).count();
+    }
+
+    private Stream<PostIt> getListStream() {
+        return postItContainer.getList().stream();
     }
 
 }

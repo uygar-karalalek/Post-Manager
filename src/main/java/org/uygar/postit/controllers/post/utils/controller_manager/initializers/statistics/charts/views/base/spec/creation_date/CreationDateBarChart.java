@@ -15,8 +15,8 @@ public class CreationDateBarChart extends VerticalPostBarChart {
     }
 
     @Override
-    public ObservableList<XYChart.Series<String, Integer>> getData() {
-        ObservableList<XYChart.Data<String, Integer>> data = FXCollections.observableArrayList();
+    public ObservableList<XYChart.Series<String, Number>> getData() {
+        ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
         for (Month month : postStatisticalData.getCreationDateMonths()) {
             data.add(new XYChart.Data<>(month.toString(), postStatisticalData.countPostItBasedOnCreationYear(month)));
         }

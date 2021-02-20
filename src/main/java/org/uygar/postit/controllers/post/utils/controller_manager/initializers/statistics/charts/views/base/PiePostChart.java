@@ -22,12 +22,15 @@ public abstract class PiePostChart extends PostChartDataProcessor {
     }
 
     @Override
+    public abstract ObservableList<PieChart.Data> getData();
+
+    @Override
     public void updateChartData() {
         // layout() method forces the hbox to layout pichart labels, that
         // without the call go to the coordinate (0,0) of the box.
 
         chart.layout();
-        chart.setData((ObservableList<PieChart.Data>) getData());
+        chart.setData(getData());
         chart.layout();
     }
 

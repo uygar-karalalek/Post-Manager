@@ -7,10 +7,7 @@ import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.database.queries.DQL;
 import org.uygar.postit.data.database.queries.DQLQueryBuilder;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 public abstract class BaseDataContainer<T> implements Container, Iterable<T> {
 
@@ -72,11 +69,16 @@ public abstract class BaseDataContainer<T> implements Container, Iterable<T> {
         return list.listIterator();
     }
 
+    @Override
+    public List<T> getList() {
+        return list;
+    }
+
     public DataMiner getDataMiner() {
         return dataMiner;
     }
 
-    public ObservableList<T> getList() {
+    public ObservableList<T> getObservableList() {
         return list;
     }
 
