@@ -1,10 +1,11 @@
 package org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views.base.spec.priority;
 
 import javafx.collections.ObservableList;
-import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views.base.VerticalPostBarChart;
+import javafx.scene.chart.XYChart;
+import org.uygar.postit.controllers.post.utils.controller_manager.initializers.statistics.charts.views.base.HorizontalPostBarChart;
 import org.uygar.postit.data.structures.PostItContainer;
 
-public class PriorityBarChart extends VerticalPostBarChart {
+public class PriorityBarChart extends HorizontalPostBarChart {
 
     public PriorityBarChart(PostItContainer container, String xAxisName, String yAxisName) {
         super("priority average", "month", container);
@@ -21,7 +22,7 @@ public class PriorityBarChart extends VerticalPostBarChart {
     }
 
     @Override
-    public ObservableList<?> getData() {
+    public ObservableList<XYChart.Series<Number, String>> getData() {
         return null;
     }
 

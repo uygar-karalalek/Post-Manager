@@ -33,6 +33,10 @@ public abstract class XYPostChart<X, Y> extends PostChartDataProcessor {
 
     @Override
     public void updateChartData() {
-        this.chart.setData((ObservableList<XYChart.Series<X, Y>>) getData());
+        this.chart.setData(getData());
     }
+
+    @Override
+    public abstract ObservableList<XYChart.Series<X, Y>> getData();
+
 }

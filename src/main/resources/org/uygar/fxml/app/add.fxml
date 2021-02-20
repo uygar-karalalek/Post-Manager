@@ -47,7 +47,7 @@
                   <Font name="Arial" size="19.0" />
                </font>
             </Label>
-            <SplitMenuButton fx:id="sortType" mnemonicParsing="false" popupSide="RIGHT" prefHeight="32.0" prefWidth="178.0">
+            <SplitMenuButton fx:id="sortType" mnemonicParsing="false" popupSide="RIGHT" prefHeight="32.0" prefWidth="205.0">
             </SplitMenuButton>
          </children>
          <VBox.margin>
