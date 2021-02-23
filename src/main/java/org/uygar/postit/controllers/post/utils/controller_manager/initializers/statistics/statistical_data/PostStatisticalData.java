@@ -6,7 +6,10 @@ import org.uygar.postit.post.PostIt;
 import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.Set;
+import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,6 +33,10 @@ public class PostStatisticalData {
 
     public int countPostItBasedOnCreationYear(Month month) {
         return (int) getListStream().filter(postIt -> postIt.getDataCreazione().getMonth() == month).count();
+    }
+
+    public int getSumOfPostField(Function<PostIt, Integer> postItToPropertyMapping) {
+        return getListStream().map(postItToPropertyMapping).reduce(0, Integer::sum);
     }
 
     private Stream<PostIt> getListStream() {
