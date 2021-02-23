@@ -11,9 +11,8 @@ import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.exception.WrongFieldsException;
 import org.uygar.postit.controllers.filter.FilterUnitContainer;
 import org.uygar.postit.controllers.filter.postit.PostItFilter;
-import org.uygar.postit.controllers.post.postit.editor_manager.managers.InitialValuesManager;
-import org.uygar.postit.controllers.post.utils.controller_manager.PostTabManager;
-import org.uygar.postit.controllers.post.utils.loader.PostItLoader;
+import org.uygar.postit.controllers.post.controller_utilities.controller_manager.PostTabManager;
+import org.uygar.postit.controllers.post.controller_utilities.loader.PostItLoader;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.query_utils.QueryUtils;
 import org.uygar.postit.post.Post;
@@ -23,7 +22,6 @@ import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 import java.io.File;
 import java.time.LocalDate;
 
-import static org.uygar.postit.controllers.post.postit.editor_manager.managers.InitialValuesManager.*;
 import static org.uygar.postit.controllers.post.postit.editor_manager.managers.InitialValuesManager.isPriorityValid;
 
 public class PostController extends BaseController {
