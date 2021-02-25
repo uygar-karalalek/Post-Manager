@@ -33,7 +33,12 @@ public abstract class XYPostChart<X, Y> extends PostChartDataProcessor {
 
     @Override
     public void updateChartData() {
+        // layout() method forces the hbox to layout pichart labels, that
+        // without the call go to the coordinate (0,0) of the box.
+
+        this.chart.layout();
         this.chart.setData(getData());
+        this.chart.layout();
     }
 
     @Override

@@ -55,6 +55,8 @@ public class PostController extends BaseController {
     public Button filterResetButton, filterSaveButton, filterButton;
 
     @FXML
+    public ScrollPane statsScrollPane;
+    @FXML
     public FlowPane statsPane;
 
     public Post loadedPost;

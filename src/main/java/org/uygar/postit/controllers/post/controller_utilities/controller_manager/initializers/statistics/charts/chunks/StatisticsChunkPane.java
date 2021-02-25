@@ -16,16 +16,13 @@ import java.util.stream.Collectors;
 
 public abstract class StatisticsChunkPane extends BorderPane implements StatisticsChunk {
 
-    private static final int CHART_AND_FRAME_GAP = 40;
+    private static final int CHART_AND_FRAME_GAP = 10;
 
     protected Text topTitle;
-
     protected Pane parentPane;
     protected HBox centerChartBox;
     protected List<PostChartDataProcessor> charts;
-
     protected Slider bottomSizeSlider;
-
     protected PostItContainer postItContainer;
 
     public StatisticsChunkPane(String title, List<PostChartDataProcessor> charts, Pane parentPane, PostItContainer postItContainer) {

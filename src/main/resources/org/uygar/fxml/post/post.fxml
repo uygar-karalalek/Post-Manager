@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox fx:id="post" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../stylesheets/post/post_black.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
+<VBox fx:id="post" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../stylesheets/post/post_black.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.post.PostController">
    <children>
       <TabPane fx:id="rootTabPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="602.0" tabClosingPolicy="UNAVAILABLE">
          <tabs>
@@ -153,7 +153,7 @@
                </content></Tab>
             <Tab text="Statistics">
                <content>
-                  <ScrollPane fitToWidth="true" prefHeight="200.0" style="-fx-background-color: brown;">
+                  <ScrollPane fx:id="statsScrollPane" fitToWidth="true" prefHeight="200.0" style="-fx-background-color: brown;">
                      <content>
                         <HBox alignment="TOP_CENTER">
                            <children>

@@ -26,6 +26,7 @@ public class StateBarChart extends HorizontalPostBarChart {
 
         data.add(new XYChart.Data<>(numberOfDonePostIts, "Done"));
         data.add(new XYChart.Data<>(numberOfUnDonePostIts, "Todo"));
+
         // If we have no expired post-its, then the chart does not show the expired post-its
         if (numberOfExpiredPostIts > 0) data.add(new XYChart.Data<>(numberOfExpiredPostIts, "Expired"));
 
