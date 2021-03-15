@@ -8,9 +8,9 @@ import org.uygar.postit.data.structures.PostItContainer;
 
 import java.util.List;
 
-public class ColorChunk extends StatisticsChunkPane {
+public class ColoreChunk extends StatisticsChunkPane {
 
-    public ColorChunk(Pane parentPane, PostItContainer postItContainer) {
+    public ColoreChunk(Pane parentPane, PostItContainer postItContainer) {
         super("Colors", List.of(new ColorPieChart(postItContainer)), parentPane, postItContainer);
     }
 

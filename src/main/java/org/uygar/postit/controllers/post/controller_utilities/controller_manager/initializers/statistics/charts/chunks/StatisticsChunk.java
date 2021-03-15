@@ -4,7 +4,7 @@ public interface StatisticsChunk {
 
     void initTitleSide();
     void initChartSide();
-    void initSliderSide();
+    void initBottomSide();
     void updateCharts();
 
 }

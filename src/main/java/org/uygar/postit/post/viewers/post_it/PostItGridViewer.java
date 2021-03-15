@@ -67,7 +67,7 @@ public class PostItGridViewer extends FlowPane {
     public void addListenertoPostItViewer(PostItViewer postItViewer) {
         postItViewer.getMainGraphic().setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.PRIMARY)
-                PostController.openPostItController(postItViewer.getPostIt(), this);
+                PostController.openPostItController(postItViewer, this);
             else if (mouseEvent.getButton() == MouseButton.SECONDARY)
                 postItViewer.changePostItAspectBasedOnStateAndSaveToDatabase(postItOrganizer.getDataMiner());
         });

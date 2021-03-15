@@ -7,6 +7,7 @@ import org.uygar.postit.controllers.post.controller_utilities.controller_manager
 import org.uygar.postit.data.structures.PostItContainer;
 
 import java.time.Month;
+import java.util.Comparator;
 import java.util.Map;
 
 public class CreationDateBarChart extends VerticalPostBarChart {
@@ -20,8 +21,8 @@ public class CreationDateBarChart extends VerticalPostBarChart {
         ObservableList<XYChart.Data<String, Number>> data = FXCollections.observableArrayList();
         Map<String, Integer> creationDateMonthCount = postStatisticalData.getCreationDateMonthsAndValues();
 
-        for (String keyEntry : creationDateMonthCount.keySet())
-            data.add(new XYChart.Data<>(keyEntry, creationDateMonthCount.get(keyEntry)));
+        creationDateMonthCount.keySet().stream().sorted(Comparator.comparing(Month::valueOf)).forEach(keyEntry ->
+                data.add(new XYChart.Data<>(keyEntry, creationDateMonthCount.get(keyEntry))));
 
         return FXCollections.singletonObservableList(new XYChart.Series<>(data));
     }

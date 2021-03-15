@@ -178,13 +178,13 @@
     -fx-background-color: white;
 }
 
-.default-color0.chart-pie {
-    -fx-background-color: radial-gradient(center 0px 50px, radius 50px, grey, darkblue);
-}
+/*.default-color0.chart-pie {*/
+/*    -fx-background-color: radial-gradient(center 0px 50px, radius 50px, grey, darkblue);*/
+/*}*/
 
-.default-color1.chart-pie {
-    -fx-background-color: radial-gradient(center 0px 0px, radius 50px, red, darkblue);
-}
+/*.default-color1.chart-pie {*/
+/*    -fx-background-color: radial-gradient(center 0px 0px, radius 50px, red, darkblue);*/
+/*}*/
 
 /* SETTINGS */
 

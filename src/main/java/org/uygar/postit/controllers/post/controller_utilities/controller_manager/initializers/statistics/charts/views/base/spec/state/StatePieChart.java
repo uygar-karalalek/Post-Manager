@@ -9,6 +9,11 @@ import org.uygar.postit.post.PostIt;
 
 public class StatePieChart extends PiePostChart {
 
+    private final long
+            donePostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isFatto),
+            toDoPostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isUndone),
+            expiredPostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isExpiredAndTodo);
+
     public StatePieChart(PostItContainer container) {
         super(container);
     }
@@ -27,9 +32,10 @@ public class StatePieChart extends PiePostChart {
     @Override
     public ObservableList<PieChart.Data> getData() {
         ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
-        list.add(new PieChart.Data("Done", postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isFatto)));
-        list.add(new PieChart.Data("Todo", postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isUndone)));
-        list.add(new PieChart.Data("Expired", postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isExpiredAndTodo)));
+
+        list.add(new PieChart.Data("Done", donePostIts));
+        list.add(new PieChart.Data("Todo", toDoPostIts));
+        list.add(new PieChart.Data("Expired", expiredPostIts));
         return list;
     }
 
