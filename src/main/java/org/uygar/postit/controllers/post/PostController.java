@@ -12,17 +12,15 @@ import org.uygar.postit.controllers.exception.WrongFieldsException;
 import org.uygar.postit.controllers.filter.FilterUnitContainer;
 import org.uygar.postit.controllers.filter.postit.PostItFilter;
 import org.uygar.postit.controllers.post.controller_utilities.controller_manager.PostTabManager;
-import org.uygar.postit.controllers.post.controller_utilities.loader.PostItLoader;
+import org.uygar.postit.controllers.post.controller_utilities.loader.PostItCreator;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.query_utils.QueryUtils;
 import org.uygar.postit.post.Post;
-import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer;
 
 import java.io.File;
 import java.time.LocalDate;
-import java.util.Optional;
 
 import static org.uygar.postit.controllers.post.postit.editor_manager.managers.InitialValuesManager.isPriorityValid;
 
@@ -91,7 +89,7 @@ public class PostController extends BaseController {
     }
 
     public static void openPostItController(PostItViewer postIt, PostItGridViewer postItGrid) {
-        PostItLoader loader = new PostItLoader(postIt, postItGrid);
+        PostItCreator loader = new PostItCreator(postIt, postItGrid);
         loader.load();
     }
 

@@ -10,7 +10,7 @@ public abstract class WindowLoader<P extends BaseController, C extends BaseContr
     protected P parentController;
     protected C childController;
 
-    protected Stage stage;
+    protected Stage parentStage;
     protected WindowInitializer windowInitializer;
 
     public WindowLoader() {
@@ -22,8 +22,8 @@ public abstract class WindowLoader<P extends BaseController, C extends BaseContr
     }
 
     public WindowLoader(ControllerType parentController) {
-        this.stage = findStageByControllerType(parentController);
-        setWindowInitializerByStage(this.stage);
+        this.parentStage = findStageByControllerType(parentController);
+        setWindowInitializerByStage(this.parentStage);
     }
 
     protected Stage findStageByControllerType(ControllerType controllerType) {
