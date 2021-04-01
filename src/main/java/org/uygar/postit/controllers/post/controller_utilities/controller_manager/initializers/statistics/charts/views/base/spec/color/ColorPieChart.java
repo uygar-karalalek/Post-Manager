@@ -45,7 +45,7 @@ public class ColorPieChart extends PiePostChart {
     private void initChartColors() {
         for (PieChart.Data data : chart.getData()) {
             // The name of the data is the same of the Color Enum element name.
-            data.getNode().setStyle("-fx-pie-color: " + Colore.valueOf(data.getName()).getPostItColorWebFormat()+";");
+            data.getNode().setStyle("-fx-pie-color: " + Colore.valueOf(data.getName()).getPostItColorRGBWebFormat()+";");
         }
     }
 

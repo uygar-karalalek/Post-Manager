@@ -7,9 +7,9 @@ import org.uygar.postit.post.PostIt;
 import static org.uygar.postit.data.query_utils.QueryUtils.tryCreateNewPostItOnDB;
 import static org.uygar.postit.data.query_utils.QueryUtils.tryModifyPostItOnDB;
 
-public class DataEditorManager extends EditorManager {
+public class EditorDataManager extends EditorManager {
 
-    public DataEditorManager(PostItEditorManager manager) {
+    public EditorDataManager(PostItEditorManager manager) {
         super(manager);
     }
 

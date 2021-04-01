@@ -1,6 +1,7 @@
 package org.uygar.postit.post.properties;
 
 import javafx.scene.paint.Color;
+import org.jetbrains.annotations.NotNull;
 
 public enum Colore {
 
@@ -30,19 +31,43 @@ public enum Colore {
     Colore(int colorId, Color color, String colorName, Color postItTextColor) {
         this.colorId = colorId;
         this.postItColor = color;
+
         this.colorName = colorName;
         this.postItTextColor = postItTextColor;
     }
 
-    public String getPostItColorWebFormat() {
-        return getWebFormat(postItColor);
-    }
-
     public String getPostItTextColorWebFormat() {
-        return getWebFormat(postItTextColor);
+        return getWebFormatColor(postItTextColor);
     }
 
-    private String getWebFormat(Color color) {
+    public String getPostItColorWebFormat() {
+        return getWebFormatColor(postItColor);
+    }
+
+    @NotNull
+    private String getWebFormatColor(Color color) {
+        int redInt = (int) (color.getRed() * 255);
+        String red = getHexFromCode(redInt);
+
+        int greenInt = (int) (color.getGreen() * 255);
+        String green = getHexFromCode(greenInt);
+
+        int blueInt = (int) (color.getBlue() * 255);
+        String blue = getHexFromCode(blueInt);
+
+        return "#" + red + green + blue;
+    }
+
+    private String getHexFromCode(int code) {
+        String hex = Integer.toHexString(code);
+        return hex.length() == 1 ? "0"+hex : hex;
+    }
+
+    public String getPostItColorRGBWebFormat() {
+        return getRGBWebFormat(postItColor);
+    }
+
+    private String getRGBWebFormat(Color color) {
         return "rgb(" + (color.getRed() * 255)
                 + ", " +
                 (color.getGreen() * 255)

@@ -4,9 +4,9 @@ import javafx.application.Platform;
 import javafx.scene.control.TextInputControl;
 import org.uygar.postit.controllers.post.postit.editor_manager.PostItEditorManager;
 
-public class FocusManager extends EditorManager {
+public class EditorFocusManager extends EditorManager {
 
-    public FocusManager(PostItEditorManager manager) {
+    public EditorFocusManager(PostItEditorManager manager) {
         super(manager);
     }
 

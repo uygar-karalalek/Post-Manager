@@ -171,7 +171,7 @@
 
 #orarioField:focused, #prioritySpinner:focused {
     -fx-prompt-text-fill: black;
-    -fx-background-color: white;
+    -fx-background-color: transparent;
     -fx-border-color: #2ea3f0;
 }
 
@@ -192,7 +192,9 @@
 
 #scadenza:hover, #scadenza:focused {
     -fx-background-radius: 0;
-    -fx-background-color: white;
+    -fx-scale-x: 1.05;
+    -fx-scale-y: 1.05;
+    -fx-background-color: transparent;
 }
 
 #scadenza > .arrow-button {

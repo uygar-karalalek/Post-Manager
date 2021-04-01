@@ -6,36 +6,28 @@ public class EditorInitializer {
 
     private final InitialValuesManager initialValuesManager;
     private final EditorColorChangeManager colorChangeManager;
-    private final EditorDragManager editorDragManager;
-    private final DataEditorManager dataManager;
-    private final FocusManager focusManager;
+    private final EditorDragManager dragManager;
+    private final EditorDataManager dataManager;
+    private final EditorFocusManager focusManager;
 
     public EditorInitializer(PostItEditorManager manager) {
         this.initialValuesManager = new InitialValuesManager(manager);
         this.colorChangeManager = new EditorColorChangeManager(manager);
-        this.editorDragManager = new EditorDragManager(manager);
-        this.dataManager = new DataEditorManager(manager);
-        this.focusManager = new FocusManager(manager);
+        this.dragManager = new EditorDragManager(manager);
+        this.dataManager = new EditorDataManager(manager);
+        this.focusManager = new EditorFocusManager(manager);
     }
 
     public void initialize() {
         this.initialValuesManager.initialize();
         this.colorChangeManager.initialize();
-        this.editorDragManager.initialize();
+        this.dragManager.initialize();
         this.dataManager.initialize();
         this.focusManager.initialize();
     }
 
-    public EditorColorChangeManager getColorChangeManager() {
-        return colorChangeManager;
-    }
-
-    public DataEditorManager getDataManager() {
+    public EditorDataManager getDataManager() {
         return dataManager;
-    }
-
-    public FocusManager getFocusManager() {
-        return focusManager;
     }
 
 }

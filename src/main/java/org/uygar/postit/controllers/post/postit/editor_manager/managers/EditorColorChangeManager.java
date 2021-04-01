@@ -2,8 +2,14 @@ package org.uygar.postit.controllers.post.postit.editor_manager.managers;
 
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Box;
 import javafx.scene.shape.Rectangle;
 import org.uygar.postit.controllers.post.postit.editor_manager.PostItEditorManager;
 import org.uygar.postit.post.properties.Colore;
@@ -35,11 +41,27 @@ public class EditorColorChangeManager extends EditorManager {
         double green = newColore.postItTextColor.getGreen() * 255;
         double blue = newColore.postItTextColor.getBlue() * 255;
 
-        String fieldColor = "-fx-text-fill: rgb(" + red + ", " + green + ", " + blue +");";
+        String fieldColor = "-fx-text-fill: rgb(" + red + ", " + green + ", " + blue + ");";
         getManager().getPostItController().titoloField.setStyle(fieldColor);
         // I DON'T KNOW WHY JAVAFX DOES ALSO AN ALIGNMENT OVERRIDE
         getManager().getPostItController().titoloField.setAlignment(Pos.CENTER);
         getManager().getPostItController().compitoField.setStyle(fieldColor);
+
+        getManager().getPostItController().propertyBox.getChildren().forEach(node -> {
+                    node.setStyle("-fx-background-color: linear-gradient(" + newColore.getPostItColorWebFormat() + " 95%, #ffc9c9);");
+                    if (node instanceof Pane) setLabelColorRecursively((Pane) node, newColore.getPostItTextColorWebFormat());
+                }
+        );
+    }
+
+    private void setLabelColorRecursively(Pane pane, String labelWebColor) {
+        if (pane.getChildren().size() == 0) return;
+        pane.getChildren().forEach(innerNode -> {
+            if (innerNode instanceof Pane) setLabelColorRecursively((Pane) innerNode, labelWebColor);
+            else if (innerNode instanceof Label) ((Label)innerNode).setTextFill(Color.web(labelWebColor));
+            else if (innerNode instanceof TextField) innerNode.setStyle("-fx-text-fill: " + labelWebColor);
+            else if (innerNode instanceof DatePicker) ((DatePicker) innerNode).getEditor().setStyle("-fx-text-fill: " + labelWebColor);
+        });
     }
 
     public void addPosItColorChoicesAsRectangles() {
