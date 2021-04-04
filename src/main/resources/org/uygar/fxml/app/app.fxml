@@ -86,6 +86,16 @@
                               <MenuItem mnemonicParsing="false" onAction="#onBlueStyleClicked" text="Blue" />
                            </items>
                         </Menu>
+                        <Menu mnemonicParsing="false" text="Import">
+                          <items>
+                            <MenuItem mnemonicParsing="false" text="Action 1" />
+                          </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Export">
+                           <items>
+                              <MenuItem mnemonicParsing="false" text="Action 1" />
+                           </items>
+                        </Menu>
                      </items>
                   </Menu>
                   <Menu mnemonicParsing="false" text="Help">

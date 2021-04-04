@@ -9,11 +9,6 @@ import org.uygar.postit.post.PostIt;
 
 public class StatePieChart extends PiePostChart {
 
-    private final long
-            donePostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isFatto),
-            toDoPostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isUndone),
-            expiredPostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isExpiredAndTodo);
-
     public StatePieChart(PostItContainer container) {
         super(container);
     }
@@ -33,9 +28,16 @@ public class StatePieChart extends PiePostChart {
     public ObservableList<PieChart.Data> getData() {
         ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
 
+        long donePostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isFatto);
+        long toDoPostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isUndone);
+        long expiredPostIts = postStatisticalData.getNumberOfPostItBasedOnStateCondition(PostIt::isExpiredAndTodo);
+
         list.add(new PieChart.Data("Done", donePostIts));
         list.add(new PieChart.Data("Todo", toDoPostIts));
-        list.add(new PieChart.Data("Expired", expiredPostIts));
+
+        // If there are no expired post-its, we should not add them to the statistics
+        if (expiredPostIts > 0) list.add(new PieChart.Data("Expired", expiredPostIts));
+
         return list;
     }
 

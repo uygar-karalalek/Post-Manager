@@ -32,7 +32,6 @@ public class StateBarChart extends HorizontalPostBarChart {
 
         XYChart.Series<Number, String> statesData = new XYChart.Series<>();
         statesData.getData().addAll(data);
-
         return FXCollections.singletonObservableList(statesData);
     }
 
