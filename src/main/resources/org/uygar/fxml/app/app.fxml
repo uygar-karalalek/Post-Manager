@@ -42,7 +42,7 @@
             </VBox>
             <VBox id="vbox" alignment="CENTER" maxHeight="492.0" maxWidth="230.0" prefHeight="492.0" prefWidth="219.0" spacing="20.0">
                <children>
-                  <VBox id="modificaBox" alignment="TOP_CENTER" prefHeight="283.0" prefWidth="218.0" spacing="10.0">
+                  <VBox id="modificaBox" alignment="TOP_CENTER" prefHeight="320.0" prefWidth="218.0" spacing="10.0">
                      <children>
                         <Text id="modifica" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifica" textAlignment="CENTER" wrappingWidth="197.79296875" />
                         <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" onAction="#onAggiungiPostClicked" prefWidth="200.0" text="Aggiungi">
@@ -50,6 +50,7 @@
                               <Insets top="20.0" />
                            </VBox.margin>
                         </Button>
+                        <Button fx:id="importButton" alignment="CENTER" mnemonicParsing="false" prefWidth="200.0" text="Import" />
                         <Button fx:id="filterButton" alignment="CENTER" mnemonicParsing="false" onAction="#onOpenFilterClicked" prefWidth="200.0" text="Filtra" />
                         <Button fx:id="statisticaBtn" alignment="CENTER" mnemonicParsing="false" onAction="#onOpenStatisticaClicked" prefWidth="200.0" text="Statistiche" />
                         <Button id="btnEsci" alignment="CENTER" mnemonicParsing="false" onAction="#onExitClicked" prefWidth="200.0" text="Esci" />

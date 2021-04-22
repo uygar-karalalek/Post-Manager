@@ -22,6 +22,7 @@ import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
+import java.nio.file.Paths;
 import java.util.Optional;
 
 public class AppController extends BaseController {
@@ -47,6 +48,8 @@ public class AppController extends BaseController {
     public PostGridViewer postGrid;
     public DataMiner dataMiner = new DataMiner();
     public PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
+
+    public String defaultPostFilesAbsolutePath = Paths.get("").toAbsolutePath().toString();
 
     public void init() {
         initAndRequestFocusToSearchField();
