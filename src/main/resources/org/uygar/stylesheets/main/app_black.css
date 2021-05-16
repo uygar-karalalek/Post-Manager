@@ -178,6 +178,7 @@
     -fx-font-size: 12pt;
     -fx-pref-height: 40;
     -fx-padding: 0 0 0 20;
+    -fx-max-height: 50px;
 }
 
 #post:hover {

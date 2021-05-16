@@ -9,6 +9,7 @@ import javafx.stage.StageStyle;
 import javafx.util.Duration;
 import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.FXLoader;
+import org.uygar.postit.controllers.application.app.ResizeHelper;
 import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.data.properties.LogProperties;
@@ -45,7 +46,7 @@ public class Main extends Application {
         this.appController = (AppController) FXLoader.getLoadedController("app", "app");
         this.appController.setStage(this.stage);
         this.appController.init();
-        this.appController.setTheme(applicationProperties.getStringProperty("theme"));
+        this.appController.styleManager.setTheme(applicationProperties.getStringProperty("theme"));
         this.appController.setLogProperties(properties);
 
         this.scene = new Scene(this.appController.application);
@@ -54,12 +55,13 @@ public class Main extends Application {
         WindowInitializer.fadeWindowEffect(this.appController.application, 1);
 
         this.stage.setOnHiding(event -> Platform.exit());
+        ResizeHelper.addResizeListener(stage);
         this.stage.show();
     }
 
     @Override
     public void stop() {
-        applicationProperties.putProperty("theme", appController.getCurrentStyleCssFilePath());
+        applicationProperties.putProperty("theme", appController.styleManager.getCurrentStyleCssFilePath());
         applicationProperties.storeProperties();
     }
 

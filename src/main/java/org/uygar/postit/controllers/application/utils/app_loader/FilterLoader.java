@@ -32,7 +32,7 @@ public class FilterLoader extends WindowLoader<AppController, FilterController> 
     private void initFilterController() {
         this.childController = (FilterController) FXLoader.getLoadedController("filter", "app");
         this.childController.init(parentController.postGrid);
-        parentController.bindStyleSheetWithControllerName("filter", "main", childController.filter);
+        parentController.styleManager.bindStyleSheetWithControllerName("filter", "main", childController.filter);
         initFilterFade();
     }
 

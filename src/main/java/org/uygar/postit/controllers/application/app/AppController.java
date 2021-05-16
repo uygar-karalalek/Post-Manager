@@ -11,6 +11,7 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.BaseController;
@@ -19,11 +20,9 @@ import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
-import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
-import java.nio.file.Paths;
-import java.util.Optional;
+import javax.swing.text.Style;
 
 public class AppController extends BaseController {
 
@@ -39,6 +38,8 @@ public class AppController extends BaseController {
     TextField searchField;
     @FXML
     MenuBar menuBar;
+    @FXML
+    VBox pannelloModifica;
 
     public LogProperties properties;
     public StatisticaLoader statisticaLoader;
@@ -49,33 +50,13 @@ public class AppController extends BaseController {
     public DataMiner dataMiner = new DataMiner();
     public PostContainerOrganizer postOrganizer = new PostContainerOrganizer(dataMiner);
 
-    public String defaultPostFilesAbsolutePath = Paths.get("").toAbsolutePath().toString();
+    public AppControllerManager controllerManager;
+    public AppStyleManager styleManager;
 
     public void init() {
-        initAndRequestFocusToSearchField();
-        initPostGrid();
-        this.searchField.textProperty().addListener(this::onSearchChanged);
-    }
-
-    private void initAndRequestFocusToSearchField() {
-        searchField.setFocusTraversable(true);
-        searchField.requestFocus();
-    }
-
-    private void initPostGrid() {
-        postGrid = new PostGridViewer(postOrganizer);
-        postGrid.selected.addListener(this::onSelectedPostChange);
-        this.scrollPane.setContent(postGrid);
-    }
-
-    public void onSelectedPostChange(ObservableValue<? extends Post> v, Post oldV, Post newV) {
-        Optional<Post> newPost = Optional.ofNullable(newV);
-        newPost.ifPresent(this::loadPost);
-    }
-
-    private void loadPost(Post post) {
-        PostLoader loader = new PostLoader(this, post);
-        loader.load();
+        controllerManager = new AppControllerManager(this);
+        styleManager = new AppStyleManager(this);
+        controllerManager.appInitializer.initialize();
     }
 
     @FXML
@@ -96,36 +77,24 @@ public class AppController extends BaseController {
         statisticaLoader.load();
     }
 
-    private double onClickedX, onClickedY;
-
     @FXML
     public void onMousePressed(MouseEvent event) {
-        onClickedX = event.getX();
-        onClickedY = event.getY();
+        controllerManager.positionManager.savePositionOnMousePressed(event);
     }
 
     @FXML
     public void onMouseDragged(MouseEvent event) {
-        Stage mainStage = (Stage) this.application.getScene().getWindow();
-        double xDiff = event.getScreenX() - onClickedX;
-        double yDiff = event.getScreenY() - onClickedY;
-
-        mainStage.setX(xDiff);
-        mainStage.setY(yDiff);
+        controllerManager.positionManager.changePositionOnMouseDragged(event);
     }
 
     @FXML
     public void onAbout() {
-
+        // TODO : NOT YET IMPLEMENTED
     }
 
     @FXML
     public void onExitClicked() {
         Platform.exit();
-    }
-
-    public void onSearchChanged(ObservableValue<? extends String> obs, String oldVal, String newVal) {
-        this.postGrid.filterPostsNameContaining(newVal);
     }
 
     public void setHidingStageEventAndShowAndWait(Stage stage, ButtonDisableBinding disableBinding) {
@@ -136,40 +105,16 @@ public class AppController extends BaseController {
 
     @FXML
     public void onBlackStyleClicked() {
-        setTheme("org/uygar/stylesheets/main/app_black.css");
+        styleManager.setTheme("org/uygar/stylesheets/main/app_black.css");
     }
 
     @FXML
     public void onNormalStyleClicked() {
-        setTheme("org/uygar/stylesheets/main/app_normal.css");
+        styleManager.setTheme("org/uygar/stylesheets/main/app_normal.css");
     }
 
     @FXML
     public void onBlueStyleClicked() {
-    }
-
-    public String getCurrentStyleCssFilePath() {
-        return this.application.getStylesheets().get(0);
-    }
-
-    public void bindStyleSheetWithControllerName(String controllerName, String pkgName, Parent pane) {
-        String stdPath = "org/uygar/stylesheets/" + pkgName + "/";
-        String endPath = controllerName + "_" + getCurrentStyleColorFileName();
-        pane.getStylesheets().setAll(stdPath + endPath);
-        this.application.getProperties().addListener((InvalidationListener) change -> {
-            String updatedPath = controllerName + "_" + getCurrentStyleColorFileName();
-            pane.getStylesheets().setAll(stdPath + updatedPath);
-        });
-    }
-
-    private String getCurrentStyleColorFileName() {
-        String current = getCurrentStyleCssFilePath();
-        return current.substring(current.lastIndexOf('_') + 1);
-    }
-
-    public void setTheme(String cssFilePath) {
-        this.application.getStylesheets().setAll(cssFilePath);
-        this.application.getProperties().put("style", cssFilePath);
     }
 
     public void setLogProperties(LogProperties properties) {

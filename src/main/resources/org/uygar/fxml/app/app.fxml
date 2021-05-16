@@ -14,11 +14,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane fx:id="application" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.app.AppController">
+<BorderPane fx:id="application" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="544.0" prefWidth="850.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.uygar.postit.controllers.application.app.AppController">
    <center>
       <SplitPane dividerPositions="0.638771186440678" prefHeight="524.0" prefWidth="796.0" BorderPane.alignment="CENTER">
          <items>
-            <VBox id="vbox" alignment="TOP_CENTER" maxHeight="492.0" maxWidth="600.0" prefHeight="0.0" prefWidth="258.0" spacing="20.0">
+            <VBox id="vbox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="0.0" prefWidth="258.0" spacing="20.0">
                <children>
                   <Text id="title" fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="I tuoi post" wrappingWidth="374.79296875" />
                   <HBox id="searchBox" alignment="CENTER" prefHeight="52.0" prefWidth="440.0">
@@ -33,16 +33,16 @@
                         <Insets left="30.0" right="40.0" />
                      </VBox.margin>
                   </HBox>
-                  <ScrollPane fx:id="scrollPane" prefHeight="326.0" prefWidth="530.0">
+                  <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" prefHeight="326.0" prefWidth="530.0">
                   </ScrollPane>
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="20.0" />
                </padding>
             </VBox>
-            <VBox id="vbox" alignment="CENTER" maxHeight="492.0" maxWidth="230.0" prefHeight="492.0" prefWidth="219.0" spacing="20.0">
+            <VBox id="vbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="492.0" prefWidth="219.0" spacing="20.0">
                <children>
-                  <VBox id="modificaBox" alignment="TOP_CENTER" prefHeight="320.0" prefWidth="218.0" spacing="10.0">
+                  <VBox id="modificaBox" fx:id="pannelloModifica" alignment="TOP_CENTER" prefHeight="320.0" prefWidth="218.0" spacing="10.0">
                      <children>
                         <Text id="modifica" strokeType="OUTSIDE" strokeWidth="0.0" text="Modifica" textAlignment="CENTER" wrappingWidth="197.79296875" />
                         <Button fx:id="addButton" alignment="CENTER" mnemonicParsing="false" onAction="#onAggiungiPostClicked" prefWidth="200.0" text="Aggiungi">
@@ -68,9 +68,9 @@
       </SplitPane>
    </center>
    <top>
-      <HBox prefHeight="30.0" prefWidth="800.0" BorderPane.alignment="CENTER">
+      <HBox prefHeight="30.0" BorderPane.alignment="CENTER">
          <children>
-            <MenuBar id="menuBar" fx:id="menuBar" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" prefHeight="30.0" prefWidth="907.0">
+            <MenuBar id="menuBar" fx:id="menuBar" onMouseDragged="#onMouseDragged" onMousePressed="#onMousePressed" prefHeight="30.0" prefWidth="4000.0">
                <menus>
                   <Menu mnemonicParsing="false" text="File">
                      <items>
