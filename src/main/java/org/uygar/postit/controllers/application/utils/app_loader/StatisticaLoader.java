@@ -25,7 +25,7 @@ public class StatisticaLoader extends WindowLoader<AppController, StatisticaCont
     private void init() {
         initDisableBinding();
         initStatisticaController();
-        parentController.bindStyleSheetWithControllerName("statistica", "main", childController.statistica);
+        parentController.styleManager.bindStyleSheetWithControllerName("statistica", "main", childController.statistica);
         showStage(getWindow());
     }
 

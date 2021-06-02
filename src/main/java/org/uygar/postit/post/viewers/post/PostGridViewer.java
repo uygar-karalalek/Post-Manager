@@ -24,7 +24,7 @@ public class PostGridViewer extends GridPane {
     private static final double HEIGHT = 300;
     private static final double WIDTH = 500;
 
-    private static final int POST_BUTTON_HEIGHT = 40;
+    private static final double POST_BUTTON_HEIGHT = 60;
     private static final int DEF_COLS = 2;
 
     public PostGridViewer(PostContainerOrganizer postOrganizer) {
@@ -88,7 +88,8 @@ public class PostGridViewer extends GridPane {
 
     private void addAndInitPostButton(PostButton view, int col, int row) {
         handleOnPostViewSelected(view);
-        view.setPrefSize(this.getMinWidth() / POST_BUTTON_WIDTH_DIVISOR, POST_BUTTON_HEIGHT);
+        view.prefWidthProperty().bind(this.widthProperty().divide(POST_BUTTON_WIDTH_DIVISOR));
+        view.prefHeightProperty().bind(this.heightProperty().multiply(POST_BUTTON_HEIGHT / 487));
         this.add(view, col, row);
     }
 

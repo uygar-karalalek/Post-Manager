@@ -33,7 +33,7 @@ public class PostLoader extends WindowLoader<AppController, PostController> {
             parentController.postGrid.enablePostButtonWhenFrameClosed(childController.loadedPost);
         });
 
-        parentController.bindStyleSheetWithControllerName("post", "post", childController.post);
+        parentController.styleManager.bindStyleSheetWithControllerName("post", "post", childController.post);
         childController.postTabManager.setMinSizeListenerByDimensionOfStage(postStage);
         postStage.setResizable(true);
 
