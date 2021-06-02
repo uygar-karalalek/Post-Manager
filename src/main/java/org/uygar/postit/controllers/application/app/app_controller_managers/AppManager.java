@@ -1,4 +1,6 @@
-package org.uygar.postit.controllers.application.app;
+package org.uygar.postit.controllers.application.app.app_controller_managers;
+
+import org.uygar.postit.controllers.application.app.AppController;
 
 public class AppManager {
 

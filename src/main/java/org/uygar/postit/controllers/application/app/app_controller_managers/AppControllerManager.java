@@ -1,13 +1,16 @@
-package org.uygar.postit.controllers.application.app;
+package org.uygar.postit.controllers.application.app.app_controller_managers;
 
 import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import org.uygar.postit.controllers.application.app.AppController;
 import org.uygar.postit.controllers.application.utils.app_loader.PostLoader;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.util.Optional;
+import java.util.function.Consumer;
 
 public class AppControllerManager extends AppManager {
 
@@ -17,15 +20,30 @@ public class AppControllerManager extends AppManager {
 
     public AppInitializer appInitializer = new AppInitializer();
 
-    class AppInitializer {
+    public class AppInitializer {
 
-        void initialize() {
+        public static final int MODIFICA_BTNS_HORIZONTAL_MARGIN = 60;
+
+        public void initialize() {
             initAndRequestFocusToSearchField();
+            initModificaButtonsSize();
             initPostGrid();
             appController.controllerManager.sizeManager.changeOnStageSize();
             appController.searchField.textProperty().addListener(this::onSearchChanged);
             appController.controllerManager = new AppControllerManager(appController);
             appController.styleManager = new AppStyleManager(appController);
+        }
+
+        private void initModificaButtonsSize() {
+            Consumer<Button> applyToButton = button -> {
+                button.prefWidthProperty().bind(appController.pannelloModifica.widthProperty().subtract(MODIFICA_BTNS_HORIZONTAL_MARGIN));
+            };
+
+            applyToButton.accept(appController.addButton);
+            applyToButton.accept(appController.importButton);
+            applyToButton.accept(appController.filterButton);
+            applyToButton.accept(appController.statisticaBtn);
+            applyToButton.accept(appController.esciBtn);
         }
 
         private void initAndRequestFocusToSearchField() {
@@ -56,7 +74,7 @@ public class AppControllerManager extends AppManager {
 
     public AppPositionResponsivenessManager positionManager = new AppPositionResponsivenessManager();
 
-    class AppPositionResponsivenessManager {
+    public class AppPositionResponsivenessManager {
         private double onClickedX, onClickedY;
 
         public void savePositionOnMousePressed(MouseEvent event) {
@@ -77,7 +95,7 @@ public class AppControllerManager extends AppManager {
 
     public AppSizeResponsivenessManager sizeManager = new AppSizeResponsivenessManager();
 
-    class AppSizeResponsivenessManager {
+    public class AppSizeResponsivenessManager {
 
         public void changeOnStageSize() {
             appController.getStage().widthProperty().addListener((obs, oldWidth, newWidth) -> {

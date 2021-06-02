@@ -1,10 +1,7 @@
 package org.uygar.postit.controllers.application.app;
 
 import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
@@ -15,6 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.BaseController;
+import org.uygar.postit.controllers.application.app.app_controller_managers.AppControllerManager;
+import org.uygar.postit.controllers.application.app.app_controller_managers.AppStyleManager;
 import org.uygar.postit.controllers.application.utils.app_loader.*;
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
 import org.uygar.postit.data.database.DataMiner;
@@ -22,24 +21,22 @@ import org.uygar.postit.data.properties.LogProperties;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
-import javax.swing.text.Style;
-
 public class AppController extends BaseController {
 
     @FXML
     public BorderPane application;
     @FXML
-    Text title;
+    public Text title;
     @FXML
-    ScrollPane scrollPane;
+    public ScrollPane scrollPane;
     @FXML
-    public Button addButton, filterButton, statisticaBtn;
+    public Button addButton, importButton, filterButton, statisticaBtn, esciBtn;
     @FXML
-    TextField searchField;
+    public TextField searchField;
     @FXML
-    MenuBar menuBar;
+    public MenuBar menuBar;
     @FXML
-    VBox pannelloModifica;
+    public VBox pannelloModifica;
 
     public LogProperties properties;
     public StatisticaLoader statisticaLoader;
