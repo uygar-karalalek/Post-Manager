@@ -70,7 +70,7 @@ public class AggiungiController extends BaseController implements Initializable 
         boolean fieldsNotValid = areFieldsValid(name, sortingType);
         throwWrongFieldExceptionIf(fieldsNotValid, "Hai sbagliato ad inserire i campi!", coordinates);
 
-        boolean notCreatedCorrectly = !(tryCreateNewPost(dataMiner, post));
+        boolean notCreatedCorrectly = !(tryCreateNewPostOnDB(dataMiner, post));
         throwWrongFieldExceptionIf(notCreatedCorrectly, "Il post esiste già!", coordinates);
 
         addPostToViewAndUpdate(new Post(getLastCreatedPostId(dataMiner), name));

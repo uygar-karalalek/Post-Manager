@@ -83,7 +83,7 @@ public class QueryUtils {
         return miner.tryExecute(query);
     }
 
-    public static boolean tryCreateNewPost(DataMiner miner, Post post) {
+    public static boolean tryCreateNewPostOnDB(DataMiner miner, Post post) {
         DMLQueryBuilder query = new DMLQueryBuilder();
         query.insert().into("post").values(
                 "null", // visto che c'è l'auto increment

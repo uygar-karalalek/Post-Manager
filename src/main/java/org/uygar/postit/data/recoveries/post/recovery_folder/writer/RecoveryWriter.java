@@ -24,6 +24,7 @@ public class RecoveryWriter extends RecoveryFolder {
 
     public RecoveryWriter(@NotNull String pathname, PostItContainerOrganizer postIts) throws IllegalArgumentException {
         super(pathname);
+        createMainFolder();
         this.postIts = postIts;
         this.post = postIts.getFatherPost();
     }
