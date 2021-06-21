@@ -29,7 +29,7 @@ public class RecoveryWriter extends RecoveryFolder {
         this.post = postIts.getFatherPost();
     }
 
-    public void createMainFolder() {
+    private void createMainFolder() {
         // folder name : recovery_<post-name>_<current-time-stamp>
         String pathname = "recovery_" + post.getName() + "_" + Instant.now().toString();
 
@@ -64,11 +64,9 @@ public class RecoveryWriter extends RecoveryFolder {
         writeNewLine(outputStream, post.getSortType().toString());
         writeNewLine(outputStream, post.getCreationDate().toString());
         writeNewLine(outputStream, post.getLastModifiedDate().toString());
-
-        createPostItFiles();
     }
 
-    public void createPostItFiles() {
+    public void writePostItFiles() {
         Stream.iterate(0, cycle -> cycle + 1).forEachOrdered(currCycle ->
                 writePostItToFile(postIts.getList().get(currCycle), currCycle));
     }
@@ -102,6 +100,14 @@ public class RecoveryWriter extends RecoveryFolder {
     private void writeNewLine(FileOutputStream fileOutputStream, String data) throws IOException {
         fileOutputStream.write(data.getBytes());
         fileOutputStream.write(System.getProperty("line.separator").getBytes());
+    }
+
+    public Post getOldPost() {
+        return post;
+    }
+
+    public PostItContainerOrganizer getOldPostIts() {
+        return postIts;
     }
 
 }

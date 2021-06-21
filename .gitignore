@@ -1,5 +1,5 @@
 *.ser
 post.db
-/target/
 /src/main/resources/application.properties
 /src/main/resources/logs.properties
+/target/
