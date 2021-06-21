@@ -5,9 +5,9 @@ import org.uygar.postit.data.query_utils.QueryUtils;
 import org.uygar.postit.data.recoveries.post.recovery_folder.writer.RecoveryWriter;
 import org.uygar.postit.post.PostIt;
 
-public class RecoveryDBEraser extends Recovery<RecoveryWriter> {
+public class RecoveryDBExport extends Recovery<RecoveryWriter> {
 
-    public RecoveryDBEraser(RecoveryWriter recoveryFolder, DataMiner dataMiner) {
+    public RecoveryDBExport(RecoveryWriter recoveryFolder, DataMiner dataMiner) {
         super(recoveryFolder, dataMiner);
     }
 

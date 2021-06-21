@@ -5,9 +5,9 @@ import org.uygar.postit.data.query_utils.QueryUtils;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryReader;
 import org.uygar.postit.post.PostIt;
 
-public class RecoveryDBSaver extends Recovery<RecoveryReader> {
+public class RecoveryDBImport extends Recovery<RecoveryReader> {
 
-    public RecoveryDBSaver(RecoveryReader recoveryReader, DataMiner dataMiner) {
+    public RecoveryDBImport(RecoveryReader recoveryReader, DataMiner dataMiner) {
         super(recoveryReader, dataMiner);
     }
 

@@ -5,6 +5,7 @@ import javafx.geometry.Dimension2D;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import javafx.stage.DirectoryChooser;
 import org.apache.commons.lang.StringUtils;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
@@ -15,6 +16,8 @@ import org.uygar.postit.controllers.post.controller_utilities.controller_manager
 import org.uygar.postit.controllers.post.controller_utilities.loader.PostItCreator;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.query_utils.QueryUtils;
+import org.uygar.postit.data.recoveries.post.recovery_db.RecoveryDBExport;
+import org.uygar.postit.data.recoveries.post.recovery_folder.writer.RecoveryWriter;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer;
@@ -44,7 +47,7 @@ public class PostController extends BaseController {
     @FXML
     public TextField nomePostField;
     @FXML
-    public SplitMenuButton tipoOrdinamentoField;
+    public SplitMenuButton tipoOrdinamentoField, defaultFolderButton;
     @FXML
     public Button postResetButton, postSaveButton, postRemoveButton;
     @FXML
@@ -154,17 +157,46 @@ public class PostController extends BaseController {
 
     @FXML
     public void onFilterReset() {
-        this.resetFields();
+        this.resetFilterFields();
         this.postItGrid.filter(postIt -> true);
         this.serializedFilterFileDeleteIfExists();
     }
 
-    private void resetFields() {
+    private void resetFilterFields() {
         this.postItTitleContains.setText("");
         this.postItPriorityField.setText("");
         this.postItTitleBegins.setText("");
         this.postTraField1.setValue(null);
         this.postTraField2.setValue(null);
+    }
+
+    public void initOnChooseDirectoryClicked() {
+        defaultFolderButton.showingProperty().addListener((a, b, c) -> {
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            File chosenDir = directoryChooser.showDialog(this.getStage());
+            if (chosenDir != null) defaultFolderButton.setText(chosenDir.getAbsolutePath());
+        });
+    }
+
+    @FXML
+    public void onExport() {
+        getRecoveryExport().saveFiles();
+    }
+
+    @FXML
+    public void onExportAndDelete() {
+        RecoveryDBExport recoveryExport = getRecoveryExport();
+
+        recoveryExport.saveFiles();
+        recoveryExport.deleteDatabaseData();
+    }
+
+    private RecoveryDBExport getRecoveryExport() {
+        RecoveryWriter recoveryWriter = new RecoveryWriter(
+                defaultFolderButton.getText(),
+                postItGrid.getPostItOrganizer());
+
+        return new RecoveryDBExport(recoveryWriter, dataMiner);
     }
 
     private void serializedFilterFileDeleteIfExists() {

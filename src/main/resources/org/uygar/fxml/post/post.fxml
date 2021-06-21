@@ -150,10 +150,10 @@
                         </TitledPane>
                         <TitledPane prefHeight="200.0" prefWidth="200.0" text="Export">
                            <content>
-                              <GridPane id="settingsGrid" alignment="CENTER" hgap="5.0" vgap="10.0">
+                              <GridPane id="settingsGrid" alignment="CENTER" hgap="5.0" prefHeight="167.0" prefWidth="541.0" vgap="10.0">
                                  <columnConstraints>
-                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="80.0" minWidth="10.0" prefWidth="80.0" />
-                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" prefWidth="217.0" />
+                                    <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="90.0" minWidth="10.0" prefWidth="90.0" />
+                                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="217.0" minWidth="10.0" percentWidth="40.0" prefWidth="217.0" />
                                  </columnConstraints>
                                  <rowConstraints>
                                     <RowConstraints maxHeight="40.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
@@ -162,11 +162,10 @@
                                  <children>
                                     <Label prefHeight="15.0" prefWidth="103.0" styleClass="setLabel" text="Default folder" />
                                     <SplitMenuButton id="tipoOrdinamentoField" fx:id="defaultFolderButton" mnemonicParsing="false" popupSide="RIGHT" prefHeight="26.0" prefWidth="200.0" GridPane.columnIndex="1" />
-                                    <HBox alignment="CENTER_LEFT" prefHeight="30.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                    <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="329.0" spacing="20.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                        <children>
-                                          <Button id="setSalvaBtn" fx:id="postSaveButton1" mnemonicParsing="false" onMouseClicked="#onSavePostSettings" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Salva" />
-                                          <Button id="setResetBtn" fx:id="postResetButton1" mnemonicParsing="false" onMouseClicked="#onResetPostSettings" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Reset" />
-                                          <Button id="setRimuoviBtn" fx:id="postRemoveButton1" mnemonicParsing="false" onMouseClicked="#onRemovePost" prefHeight="32.0" prefWidth="121.0" styleClass="setBtn" text="Rimuovi" />
+                                          <Button id="setSalvaBtn" maxWidth="70.0" mnemonicParsing="false" onAction="#onExport" onMouseClicked="#onSavePostSettings" prefHeight="23.0" prefWidth="80.0" styleClass="setBtn" text="Esporta" />
+                                          <Button id="setRimuoviBtn" minWidth="119.0" mnemonicParsing="false" onAction="#onExportAndDelete" onMouseClicked="#onRemovePost" prefHeight="23.0" prefWidth="119.0" styleClass="setBtn" text="Esporta ed elimina" />
                                        </children>
                                        <padding>
                                           <Insets right="-10.0" />

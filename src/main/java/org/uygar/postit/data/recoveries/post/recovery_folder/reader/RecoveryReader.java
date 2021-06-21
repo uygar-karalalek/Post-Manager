@@ -45,6 +45,8 @@ public class RecoveryReader extends RecoveryFolder {
 
         // Right order: id, creationDate, name, sort, lastModifiedDate
         this.newPost = new Post(-1, postName, postCreationDate, lastModifiedDate, postSort);
+
+        bufferedReader.close();
     }
 
     private void readPostItFiles() {
@@ -79,6 +81,8 @@ public class RecoveryReader extends RecoveryFolder {
                 , postItCreationDate, postItEndDate
                 , postItColore
                 , postItPriority));
+
+        bufferedReader.close();
     }
 
     public Post getNewPost() {

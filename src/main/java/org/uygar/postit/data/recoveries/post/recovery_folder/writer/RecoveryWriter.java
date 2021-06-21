@@ -7,33 +7,31 @@ import org.uygar.postit.post.Post;
 import org.uygar.postit.post.PostIt;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.time.DateTimeException;
+import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.Date;
 import java.util.stream.Stream;
 
 public class RecoveryWriter extends RecoveryFolder {
 
     private final Post post;
     private final PostItContainerOrganizer postIts;
+    private String recoveryDir;
 
-    public RecoveryWriter(@NotNull String pathname, PostItContainerOrganizer postIts) throws IllegalArgumentException {
-        super(pathname);
-        createMainFolder();
+    public RecoveryWriter(@NotNull String absPath, PostItContainerOrganizer postIts) throws IllegalArgumentException {
+        super(absPath);
         this.postIts = postIts;
         this.post = postIts.getFatherPost();
+        createMainFolder();
     }
 
     private void createMainFolder() {
         // folder name : recovery_<post-name>_<current-time-stamp>
-        String pathname = "recovery_" + post.getName() + "_" + Instant.now().toString();
+        String recoverySubDir = "recovery_" + post.getName() + "_" + Timestamp.from(Instant.now()).getTime();
+        recoveryDir = fromParentPath(recoverySubDir);
 
-        File file = new File(pathname);
+        File file = new File(recoveryDir);
 
         try {
             file.mkdir();
@@ -52,7 +50,7 @@ public class RecoveryWriter extends RecoveryFolder {
     }
 
     private File createPostFile() throws IOException {
-        File postFile = new File(post.getName() + ".txt");
+        File postFile = new File(fromParentPath(recoveryDir, post.getName() + ".txt"));
         postFile.createNewFile();
         return postFile;
     }
@@ -64,10 +62,13 @@ public class RecoveryWriter extends RecoveryFolder {
         writeNewLine(outputStream, post.getSortType().toString());
         writeNewLine(outputStream, post.getCreationDate().toString());
         writeNewLine(outputStream, post.getLastModifiedDate().toString());
+
+        outputStream.flush();
+        outputStream.close();
     }
 
     public void writePostItFiles() {
-        Stream.iterate(0, cycle -> cycle + 1).forEachOrdered(currCycle ->
+        Stream.iterate(0, cycle -> cycle + 1).limit(postIts.getList().size()).forEachOrdered(currCycle ->
                 writePostItToFile(postIts.getList().get(currCycle), currCycle));
     }
 
@@ -89,10 +90,12 @@ public class RecoveryWriter extends RecoveryFolder {
         writeNewLine(fio, Integer.toString(postIt.getPriority()));
         writeNewLine(fio, Boolean.toString(postIt.isFatto()));
         writeNewLine(fio, postIt.getColore().toString());
+        fio.flush();
+        fio.close();
     }
 
     private File createPostItFile(int fileNumber) throws IOException {
-        File file = new File("postit_" + fileNumber);
+        File file = new File(fromParentPath(recoveryDir, "postit_" + fileNumber + ".txt"));
         file.createNewFile();
         return file;
     }
