@@ -1,10 +1,8 @@
 package org.uygar.postit.controllers.filter.post;
 
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import org.jetbrains.annotations.NotNull;
-import org.uygar.postit.controllers.application.filter.FilterController;
+import org.uygar.postit.controllers.application.filter_controller.FilterController;
 import org.uygar.postit.controllers.filter.Filter;
 import org.uygar.postit.controllers.filter.FilterUnitContainer;
 import org.uygar.postit.controllers.filter.GeneralFilter;
@@ -14,7 +12,6 @@ import org.uygar.postit.post.Post;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.util.Optional;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 import java.util.function.Predicate;

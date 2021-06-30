@@ -1,8 +1,8 @@
-package org.uygar.postit.controllers.application.app.app_controller_managers;
+package org.uygar.postit.controllers.application.app_controller.app_controller_managers;
 
 import javafx.beans.InvalidationListener;
 import javafx.scene.Parent;
-import org.uygar.postit.controllers.application.app.AppController;
+import org.uygar.postit.controllers.application.app_controller.AppController;
 
 public class AppStyleManager extends AppManager {
 

@@ -2,12 +2,11 @@ package org.uygar.postit.controllers.application.utils.app_loader;
 
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.controllers.ControllerType;
-import org.uygar.postit.controllers.application.add.AggiungiController;
+import org.uygar.postit.controllers.application.add_controller.AggiungiController;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
-import org.uygar.postit.controllers.application.app.AppController;
+import org.uygar.postit.controllers.application.app_controller.AppController;
 import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.controllers.loader.WindowLoader;
 

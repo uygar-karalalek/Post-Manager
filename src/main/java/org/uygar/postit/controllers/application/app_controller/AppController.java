@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.app;
+package org.uygar.postit.controllers.application.app_controller;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -12,8 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.BaseController;
-import org.uygar.postit.controllers.application.app.app_controller_managers.AppControllerManager;
-import org.uygar.postit.controllers.application.app.app_controller_managers.AppStyleManager;
+import org.uygar.postit.controllers.application.app_controller.app_controller_managers.AppControllerManager;
+import org.uygar.postit.controllers.application.app_controller.app_controller_managers.AppStyleManager;
 import org.uygar.postit.controllers.application.utils.app_loader.*;
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
 import org.uygar.postit.data.database.DataMiner;
@@ -42,6 +42,7 @@ public class AppController extends BaseController {
     public StatisticaLoader statisticaLoader;
     public FilterLoader filterLoader;
     public AggiungiLoader aggiungiLoader;
+    public ImportLoader importLoader;
 
     public PostGridViewer postGrid;
     public DataMiner dataMiner = new DataMiner();
@@ -87,6 +88,12 @@ public class AppController extends BaseController {
     @FXML
     public void onAbout() {
         // TODO : NOT YET IMPLEMENTED
+    }
+
+    @FXML
+    public void onImport() {
+        importLoader = new ImportLoader(this);
+        importLoader.load();
     }
 
     @FXML

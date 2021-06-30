@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.filter;
+package org.uygar.postit.controllers.application.filter_controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;

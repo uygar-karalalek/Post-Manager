@@ -1,10 +1,10 @@
-package org.uygar.postit.controllers.application.app.app_controller_managers;
+package org.uygar.postit.controllers.application.app_controller.app_controller_managers;
 
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import org.uygar.postit.controllers.application.app.AppController;
+import org.uygar.postit.controllers.application.app_controller.AppController;
 import org.uygar.postit.controllers.application.utils.app_loader.PostLoader;
 import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostGridViewer;

@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.add;
+package org.uygar.postit.controllers.application.add_controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

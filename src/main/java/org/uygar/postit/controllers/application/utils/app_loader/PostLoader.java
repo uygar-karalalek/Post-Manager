@@ -5,7 +5,7 @@ import javafx.stage.Stage;
 import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.FXLoader;
-import org.uygar.postit.controllers.application.app.AppController;
+import org.uygar.postit.controllers.application.app_controller.AppController;
 import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.post.Post;

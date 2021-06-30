@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.app.app_controller_managers;
+package org.uygar.postit.controllers.application.app_controller.app_controller_managers;
 
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;

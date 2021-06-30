@@ -1,9 +1,8 @@
-package org.uygar.postit.controllers.application.statistica.utility;
+package org.uygar.postit.controllers.application.statistica_controller.utility;
 
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import org.jetbrains.annotations.NotNull;
 import org.uygar.postit.data.properties.LogProperties;
 
 import java.time.Month;

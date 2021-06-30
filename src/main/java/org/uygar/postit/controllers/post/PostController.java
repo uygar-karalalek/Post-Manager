@@ -179,7 +179,10 @@ public class PostController extends BaseController {
     }
 
     @FXML
-    public void onExport() {
+    public void onExport() throws WrongFieldsException {
+        if (defaultFolderButton.getText().isEmpty())
+            throw new WrongFieldsException("Scegli almeno un percorso!",
+                    new WindowCoordinatesContainer(this.getStage()));
         getRecoveryExport().saveFiles();
     }
 

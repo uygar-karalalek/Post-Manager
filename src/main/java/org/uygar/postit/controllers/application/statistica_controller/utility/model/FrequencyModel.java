@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.statistica.utility.model;
+package org.uygar.postit.controllers.application.statistica_controller.utility.model;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TableColumn;

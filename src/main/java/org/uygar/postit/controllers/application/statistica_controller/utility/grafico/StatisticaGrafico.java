@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.statistica.utility.grafico;
+package org.uygar.postit.controllers.application.statistica_controller.utility.grafico;
 
 import javafx.scene.text.Text;
 import org.uygar.postit.data.properties.LogProperties;
@@ -6,12 +6,8 @@ import org.uygar.postit.data.properties.LogProperties;
 import java.util.Collection;
 import java.util.DoubleSummaryStatistics;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.function.Function;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.*;
 

@@ -3,21 +3,23 @@ package org.uygar.postit.controllers.application.utils.app_loader;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import org.uygar.postit.controllers.ControllerType;
-import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.WindowDimensions;
+import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.application.app_controller.AppController;
+import org.uygar.postit.controllers.application.import_controller.ImportController;
 import org.uygar.postit.controllers.application.statistica_controller.StatisticaController;
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
 import org.uygar.postit.controllers.loader.WindowLoader;
 
-public class StatisticaLoader extends WindowLoader<AppController, StatisticaController> {
+public class ImportLoader extends WindowLoader<AppController, ImportController> {
 
-   private ButtonDisableBinding statisticaDisableBinding;
+    private ButtonDisableBinding importDisableBinding;
 
-    public StatisticaLoader(AppController controller) {
+    public ImportLoader(AppController controller) {
         super(controller, ControllerType.APPLICATION);
     }
 
+    @Override
     public void load() {
         init();
     }
@@ -25,29 +27,27 @@ public class StatisticaLoader extends WindowLoader<AppController, StatisticaCont
     private void init() {
         initDisableBinding();
         initStatisticaController();
-        parentController.styleManager.bindStyleSheetWithControllerName("statistica", "main", childController.statistica);
+//        parentController.styleManager.bindStyleSheetWithControllerName("import", "main", childController.import_root_pane);
         showStage(getWindow());
     }
 
     private void showStage(Stage stage) {
-        stage.setOnHiding(statisticaDisableBinding::enableButton);
+        stage.setOnHiding(importDisableBinding::enableButton);
         stage.showAndWait();
     }
 
     private void initStatisticaController() {
-        this.childController = (StatisticaController) FXLoader.getLoadedController("statistica", "app");
-        this.childController.setLogProperties(parentController.properties);
-        this.childController.init();
+        this.childController = (ImportController) FXLoader.getLoadedController("import", "app");
     }
 
     private Stage getWindow() {
         return windowInitializer.initializeApplicationWindowAndGet
-                (WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, childController.statistica, true);
+                (WindowDimensions.STATISTICA_WINDOW_DIMENSION, Modality.WINDOW_MODAL, childController.import_root_pane, true);
     }
 
     private void initDisableBinding() {
-        statisticaDisableBinding = new ButtonDisableBinding(parentController.statisticaBtn);
-        statisticaDisableBinding.disableOpenWindowButton();
+        importDisableBinding = new ButtonDisableBinding(parentController.importButton);
+        importDisableBinding.disableOpenWindowButton();
     }
 
 }
