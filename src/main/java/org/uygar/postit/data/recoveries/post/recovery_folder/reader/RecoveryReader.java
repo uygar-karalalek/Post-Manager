@@ -21,19 +21,16 @@ public class RecoveryReader extends RecoveryFolder {
     private List<PostIt> newPostIts;
 
     // The path name must follow this signature: recovery_<post-name>_<current-time-stamp>
-    public RecoveryReader(@NotNull String pathname) throws IllegalArgumentException {
+    public RecoveryReader(@NotNull String pathname) throws IllegalArgumentException, IOException {
         super(pathname);
         readPostFile();
         readPostItFiles();
     }
 
-    private void readPostFile() {
-        try (FileInputStream fio = new FileInputStream(postFile)) {
-            postFile = new File(this.getAbsolutePath() + "/post.txt");
-            this.readPostFileAndInit(fio);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    private void readPostFile() throws IOException {
+        FileInputStream fio = new FileInputStream(postFile);
+        postFile = new File(this.getAbsolutePath() + "/post.txt");
+        this.readPostFileAndInit(fio);
     }
 
     private void readPostFileAndInit(FileInputStream fileInputStream) throws IOException {
@@ -83,6 +80,14 @@ public class RecoveryReader extends RecoveryFolder {
                 , postItPriority));
 
         bufferedReader.close();
+    }
+
+    public static boolean exists(String path) {
+        return new File(path + "/post.txt").exists();
+    }
+
+    public static boolean doesNotExist(String path) {
+        return !exists(path);
     }
 
     public Post getNewPost() {

@@ -25,12 +25,11 @@
                                 <HBox alignment="CENTER_LEFT" minHeight="45.0" prefHeight="79.0" prefWidth="738.0" spacing="10.0">
                                     <children>
                                         <Label text="Choose file from default source list" />
-                                        <TextField prefHeight="25.0" prefWidth="337.0" promptText="set default source folder..." />
-                                        <Button mnemonicParsing="false" text="..." />
+                                        <TextField fx:id="default_source_folder" prefHeight="25.0" prefWidth="337.0" promptText="set default source folder..." />
+                                        <Button mnemonicParsing="false" onAction="#onSetDefaultFolder" text="..." />
                                     </children>
                                 </HBox>
-                                <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="116.0" text="OK" />
-                                <ListView maxHeight="1.7976931348623157E308" prefHeight="474.0" prefWidth="738.0">
+                                <ListView fx:id="post_list" maxHeight="1.7976931348623157E308" prefHeight="474.0" prefWidth="738.0">
                                     <VBox.margin>
                                         <Insets top="20.0" />
                                     </VBox.margin>
@@ -42,15 +41,15 @@
                         </VBox>
                     </content>
                 </Tab>
-                <Tab text="Choose File">
+                <Tab text="Choose Post Folder">
                     <content>
                         <VBox maxHeight="2000.0" prefHeight="1000.0" prefWidth="100.0" spacing="10.0">
                             <children>
                                 <Label text="Choose from specific path" />
                                 <HBox prefHeight="15.0" prefWidth="600.0" spacing="10.0">
                                     <children>
-                                        <TextField prefHeight="25.0" prefWidth="330.0" />
-                                        <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="28.0" text="..." />
+                                        <TextField fx:id="post_recovery_folder" prefHeight="25.0" prefWidth="330.0" promptText="Post recovery folder..." />
+                                        <Button mnemonicParsing="false" onAction="#onPostRecoveryFolder" prefHeight="25.0" prefWidth="28.0" text="..." />
                                     </children>
                                 </HBox>
                                 <Button mnemonicParsing="false" prefHeight="25.0" prefWidth="91.0" text="OK" />

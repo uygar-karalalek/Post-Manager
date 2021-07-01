@@ -1,4 +1,4 @@
-package org.uygar.postit.controllers.application.import_controller.import_controller_managers;
+package org.uygar.postit.controllers.application.import_controller.import_controller_utils.manager;
 
 import org.uygar.postit.controllers.application.import_controller.ImportController;
 

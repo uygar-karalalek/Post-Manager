@@ -92,7 +92,7 @@ public class AppController extends BaseController {
 
     @FXML
     public void onImport() {
-        importLoader = new ImportLoader(this);
+        importLoader = new ImportLoader(this, this.postGrid);
         importLoader.load();
     }
 
