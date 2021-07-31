@@ -23,8 +23,9 @@ public class PostListItem extends HBox {
     }
 
     private void buildItem() {
-        this.nameLbl = new Label(reader.getNewPost().getName());
-        this.numOfPostItsLbl = new Label(Integer.toString(reader.getNewPostIts().size()));
+        this.nameLbl = new Label("Name: " + reader.getNewPost().getName() + " | ");
+        String numOfPostIts = Integer.toString(reader.getNewPostIts().size() - 1);
+        this.numOfPostItsLbl = new Label("Num of post its: " + numOfPostIts + " | ");
         this.creationDateLbl = new Label(reader.getNewPost()
                 .getCreationDate().toLocalDate().format(DateTimeFormatter.ofPattern("dd - MMM - yyyy")));
     }

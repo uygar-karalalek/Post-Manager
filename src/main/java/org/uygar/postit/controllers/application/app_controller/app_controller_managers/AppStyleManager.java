@@ -25,6 +25,11 @@ public class AppStyleManager extends AppManager {
         return current.substring(current.lastIndexOf('_') + 1);
     }
 
+    public void setThemeFromAppProperties() {
+        String cssFilePath = appController.appProperties.getStringProperty("theme");
+        setTheme(cssFilePath);
+    }
+
     public void setTheme(String cssFilePath) {
         appController.application.getStylesheets().setAll(cssFilePath);
         appController.application.getProperties().put("style", cssFilePath);

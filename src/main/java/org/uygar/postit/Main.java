@@ -48,8 +48,11 @@ public class Main extends Application {
         this.appController = (AppController) FXLoader.getLoadedController("app", "app");
         this.appController.setStage(this.stage);
         this.appController.init();
-        this.appController.styleManager.setTheme(applicationProperties.getStringProperty("theme"));
+
+        this.appController.setAppProperties(applicationProperties);
         this.appController.setLogProperties(properties);
+
+        this.appController.styleManager.setThemeFromAppProperties();
 
         this.scene = new Scene(this.appController.application);
         this.stage.setScene(scene);

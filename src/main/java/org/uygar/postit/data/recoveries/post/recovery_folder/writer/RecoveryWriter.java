@@ -50,7 +50,7 @@ public class RecoveryWriter extends RecoveryFolder {
     }
 
     private File createPostFile() throws IOException {
-        File postFile = new File(fromParentPath(recoveryDir, post.getName() + ".txt"));
+        File postFile = new File(fromParentPath(recoveryDir, "post.txt"));
         postFile.createNewFile();
         return postFile;
     }

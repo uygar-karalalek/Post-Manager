@@ -35,7 +35,6 @@ public class ImportController extends BaseController implements Initializable {
     public TextField post_recovery_folder;
 
 
-
     public PostProperties postProperties = new PostProperties();
 
     @Override
@@ -58,7 +57,7 @@ public class ImportController extends BaseController implements Initializable {
 
     @FXML
     public void onPostRecoveryFolder() {
-        
+
     }
 
     private void updateList() {
@@ -67,12 +66,20 @@ public class ImportController extends BaseController implements Initializable {
 
         if (RecoveryReader.exists(dir.getAbsolutePath())) {
             // ENTER IN THIS SECTION MEANS THAT THE USER CHOOSED
-                // DIRECTLY THE POST RECOVERY FOLDER
-
+            // DIRECTLY THE POST RECOVERY FOLDER
+            try (RecoveryReader reader = new RecoveryReader(dir.getAbsolutePath()) ){
+                PostListItem postListItem = new PostListItem(reader);
+                this.post_list.getItems().add(postListItem);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             // TODO : CREATE SINGLE LIST POST
         } else {
+            // ENTER IN THIS SECTION MEANS THAT ALL THE FOLDERS (UNDER THE FIRST LAYER!)
+            // THAT CONTAIN POST RECOVERY FILES WILL BE IMPORTED
+
             for (File current : dir.listFiles()) {
-                try(RecoveryReader currentReader = new RecoveryReader(current.getAbsolutePath())) {
+                try (RecoveryReader currentReader = new RecoveryReader(current.getAbsolutePath())) {
                     PostListItem postListItem = new PostListItem(currentReader);
                     this.post_list.getItems().add(postListItem);
                 } catch (IOException e) {
