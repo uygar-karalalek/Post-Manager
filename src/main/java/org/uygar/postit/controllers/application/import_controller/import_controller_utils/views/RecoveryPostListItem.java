@@ -1,6 +1,8 @@
 package org.uygar.postit.controllers.application.import_controller.import_controller_utils.views;
 
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.layout.HBox;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryReader;
 import org.uygar.postit.post.Post;
@@ -8,7 +10,7 @@ import org.uygar.postit.post.Post;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 
-public class PostListItem extends HBox {
+public class RecoveryPostListItem extends ListCell<Post> {
 
     private final RecoveryReader reader;
 
@@ -16,10 +18,23 @@ public class PostListItem extends HBox {
     private Label numOfPostItsLbl;
     private Label creationDateLbl;
 
-    public PostListItem(RecoveryReader reader) {
+    public RecoveryPostListItem(RecoveryReader reader) {
+
         this.reader = reader;
         buildItem();
         addLabelsToItemBox();
+    }
+
+    @Override
+    protected void updateItem(Post post, boolean empty) {
+        super.updateItem(post, empty);
+
+        if (empty || post == null) {
+            setText(null);
+            setContentDisplay(ContentDisplay.TEXT_ONLY);
+        } else {
+
+        }
     }
 
     private void buildItem() {

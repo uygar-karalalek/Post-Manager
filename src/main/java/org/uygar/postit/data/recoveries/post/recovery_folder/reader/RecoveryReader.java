@@ -82,12 +82,12 @@ public class RecoveryReader extends RecoveryFolder {
         bufferedReader.close();
     }
 
-    public static boolean exists(String path) {
+    public static boolean existsPostRecoveryFile(String path) {
         return new File(path + "/post.txt").exists();
     }
 
     public static boolean doesNotExist(String path) {
-        return !exists(path);
+        return !existsPostRecoveryFile(path);
     }
 
     public Post getNewPost() {

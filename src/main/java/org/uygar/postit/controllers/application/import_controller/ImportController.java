@@ -7,17 +7,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import org.uygar.postit.controllers.BaseController;
-import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.PostListItem;
-import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
-import org.uygar.postit.controllers.exception.WrongFieldsException;
+import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.RecoveryPostListItem;
 import org.uygar.postit.data.properties.PostProperties;
-import org.uygar.postit.data.recoveries.post.recovery_db.Recovery;
-import org.uygar.postit.data.recoveries.post.recovery_folder.RecoveryFolder;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryReader;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 public class ImportController extends BaseController implements Initializable {
@@ -25,15 +22,19 @@ public class ImportController extends BaseController implements Initializable {
     @FXML
     public BorderPane import_root_pane;
 
+    // TODO : ON PATH CHANGE, CHANGE LIST ITEMS
+    // TODO : ON PATH CHANGE, CHANGE PROPERTIES FILE
+
     @FXML
     public TextField default_source_folder;
 
+    // TODO : CUSTOMIZE LIST CELLS WITH CUSTOM FXML VIEW -> https://stackoverflow.com/questions/47511132/javafx-custom-listview
+
     @FXML
-    public ListView<PostListItem> post_list;
+    public ListView<RecoveryPostListItem> post_list;
 
     @FXML
     public TextField post_recovery_folder;
-
 
     public PostProperties postProperties = new PostProperties();
 
@@ -61,31 +62,26 @@ public class ImportController extends BaseController implements Initializable {
     }
 
     private void updateList() {
-        File dir = new File(this.default_source_folder.getText());
+        File dir = getDefaultFolder();
         this.post_list.getItems().clear();
 
-        if (RecoveryReader.exists(dir.getAbsolutePath())) {
+        if (RecoveryReader.existsPostRecoveryFile(dir.getAbsolutePath())) {
             // ENTER IN THIS SECTION MEANS THAT THE USER CHOOSED
             // DIRECTLY THE POST RECOVERY FOLDER
-            try (RecoveryReader reader = new RecoveryReader(dir.getAbsolutePath()) ){
-                PostListItem postListItem = new PostListItem(reader);
-                this.post_list.getItems().add(postListItem);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            // TODO : CREATE SINGLE LIST POST
+            tryAddPostListItem(dir);
         } else {
             // ENTER IN THIS SECTION MEANS THAT ALL THE FOLDERS (UNDER THE FIRST LAYER!)
             // THAT CONTAIN POST RECOVERY FILES WILL BE IMPORTED
+            Arrays.stream(dir.listFiles()).forEach(this::tryAddPostListItem);
+        }
+    }
 
-            for (File current : dir.listFiles()) {
-                try (RecoveryReader currentReader = new RecoveryReader(current.getAbsolutePath())) {
-                    PostListItem postListItem = new PostListItem(currentReader);
-                    this.post_list.getItems().add(postListItem);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+    private void tryAddPostListItem(File file) {
+        try (RecoveryReader reader = new RecoveryReader(file.getAbsolutePath())) {
+            RecoveryPostListItem postListItem = new RecoveryPostListItem(reader);
+            this.post_list.getItems().add(postListItem);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
