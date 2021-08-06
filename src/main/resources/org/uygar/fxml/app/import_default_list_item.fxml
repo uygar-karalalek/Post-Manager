@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<fx:root type="javafx.scene.control.ListCell" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <graphic>
+      <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="105.0" prefWidth="376.0">
+         <center>
+            <HBox alignment="CENTER" prefHeight="29.0" prefWidth="634.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label fx:id="postName" text="Post Name" />
+                  <Separator orientation="VERTICAL" prefHeight="11.0" prefWidth="0.0">
+                     <opaqueInsets>
+                        <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
+                     </opaqueInsets>
+                     <cursor>
+                        <Cursor fx:constant="CROSSHAIR" />
+                     </cursor>
+                     <HBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </HBox.margin>
+                  </Separator>
+                  <Label fx:id="numOfPostIts" text="Number of post-its" />
+                  <Button mnemonicParsing="false" text="IMPORT">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <HBox.margin>
+                        <Insets left="100.0" />
+                     </HBox.margin>
+                  </Button>
+               </children>
+            </HBox>
+         </center>
+         <top>
+            <Label fx:id="date" text="Date" BorderPane.alignment="CENTER" />
+         </top>
+      </BorderPane>
+   </graphic>
+</fx:root>

@@ -7,9 +7,11 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import org.uygar.postit.controllers.BaseController;
-import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.RecoveryPostListItem;
+import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.recovery_post_list_view.RecoveryListCellFactory;
+import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.recovery_post_list_view.RecoveryPostListItem;
 import org.uygar.postit.data.properties.PostProperties;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryReader;
+import org.uygar.postit.post.Post;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +33,7 @@ public class ImportController extends BaseController implements Initializable {
     // TODO : CUSTOMIZE LIST CELLS WITH CUSTOM FXML VIEW -> https://stackoverflow.com/questions/47511132/javafx-custom-listview
 
     @FXML
-    public ListView<RecoveryPostListItem> post_list;
+    public ListView<Post> post_list;
 
     @FXML
     public TextField post_recovery_folder;
@@ -42,6 +44,7 @@ public class ImportController extends BaseController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         String lastFolder = postProperties.getStringProperty("lastFolder");
         default_source_folder.setText(lastFolder);
+        post_list.setCellFactory(new RecoveryListCellFactory());
     }
 
     @FXML
@@ -78,8 +81,7 @@ public class ImportController extends BaseController implements Initializable {
 
     private void tryAddPostListItem(File file) {
         try (RecoveryReader reader = new RecoveryReader(file.getAbsolutePath())) {
-            RecoveryPostListItem postListItem = new RecoveryPostListItem(reader);
-            this.post_list.getItems().add(postListItem);
+            this.post_list.getItems().add(reader.getNewPost());
         } catch (IOException e) {
             e.printStackTrace();
         }

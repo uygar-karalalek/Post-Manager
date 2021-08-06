@@ -11,18 +11,21 @@ import java.util.Objects;
 
 public class FXLoader {
 
-    public static Object getLoadedController(String fxml, String pkg) {
+    public static Object getLoadedController(String fxmlFileName, String fxmlPackage) {
         try {
-            String initPath = "org/uygar/fxml/";
-            String endPath = pkg + "/" + fxml + ".fxml";
-            FXMLLoader loader = new FXMLLoader(getUrl(initPath, endPath));
-            System.out.println(getUrl(initPath, endPath).toString());
-            loader.load();
-            return loader.getController();
+            FXMLLoader fxmlLoader = Objects.requireNonNull(getFXMLLoader(fxmlFileName, fxmlPackage));
+            fxmlLoader.load();
+            return fxmlLoader.getController();
         } catch (IOException e) {
             e.printStackTrace();
         }
         return null;
+    }
+
+    public static FXMLLoader getFXMLLoader(String fxmlFileName, String fxmlPackage) {
+        String initPath = "org/uygar/fxml/";
+        String endPath = fxmlPackage + "/" + fxmlFileName + ".fxml";
+        return new FXMLLoader(getUrl(initPath, endPath));
     }
 
     @NotNull
