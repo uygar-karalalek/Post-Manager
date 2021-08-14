@@ -6,18 +6,18 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.util.Properties;
 
-public class PostProperties {
+public class PostManagerProperties {
 
     Path propPath;
     Properties properties;
 
-    public PostProperties(Path propPath) {
+    public PostManagerProperties(Path propPath) {
         this.propPath = propPath;
         properties = new Properties();
         loadProperties();
     }
 
-    public PostProperties() {
+    public PostManagerProperties() {
         this.propPath = Paths.get("src/main/resources/application.properties");
         properties = new Properties();
         loadProperties();

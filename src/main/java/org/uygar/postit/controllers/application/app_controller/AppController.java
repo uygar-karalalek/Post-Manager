@@ -18,7 +18,7 @@ import org.uygar.postit.controllers.application.utils.app_loader.*;
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.properties.LogProperties;
-import org.uygar.postit.data.properties.PostProperties;
+import org.uygar.postit.data.properties.PostManagerProperties;
 import org.uygar.postit.data.structures.PostContainerOrganizer;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
@@ -40,7 +40,7 @@ public class AppController extends BaseController {
     public VBox pannelloModifica;
 
     public LogProperties properties;
-    public PostProperties appProperties;
+    public PostManagerProperties appProperties;
     public StatisticaLoader statisticaLoader;
     public FilterLoader filterLoader;
     public AggiungiLoader aggiungiLoader;
@@ -127,6 +127,6 @@ public class AppController extends BaseController {
         this.properties = properties;
     }
 
-    public void setAppProperties(PostProperties applicationProperties) { this.appProperties = applicationProperties; }
+    public void setAppProperties(PostManagerProperties applicationProperties) { this.appProperties = applicationProperties; }
 
 }

@@ -34,9 +34,9 @@ public class PostItCreator extends WindowLoader<PostController, PostItController
     }
 
     private Stage initializedPostItStage() {
-        Stage postItStage = this.getWindowInitializer().
+        Stage postItStage = this.windowInitializer.
                 initializeApplicationWindowAndGet(WindowDimensions.POST_IT_WINDOW_DIMENSION,
-                        Modality.APPLICATION_MODAL, this.getPostItController().postIt, true);
+                        Modality.APPLICATION_MODAL, this.childController.postIt, true);
 
         this.postItResponsibilities.getDimensionalBoundResponsibilities().initStageBounds(postItStage);
         postItStage.initStyle(StageStyle.TRANSPARENT);
@@ -58,22 +58,12 @@ public class PostItCreator extends WindowLoader<PostController, PostItController
         stage.showAndWait();
     }
 
-    // TODO : Maybe these are not placed in the right way...
-
     public PostItViewer getPostItViewer() {
         return this.postItViewer;
     }
 
     public PostItGridViewer getPostItGridViewer() {
         return this.postItGridViewer;
-    }
-
-    public WindowInitializer getWindowInitializer() {
-        return this.windowInitializer;
-    }
-
-    public PostItController getPostItController() {
-        return this.childController;
     }
 
 }

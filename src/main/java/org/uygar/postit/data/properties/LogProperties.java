@@ -9,10 +9,9 @@ import java.time.Month;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
-public class LogProperties extends PostProperties {
+public class LogProperties extends PostManagerProperties {
 
     private Map<Integer, Integer> hoursAndFrequencies;
     private Map<String, Integer> monthsAndFrequencies;

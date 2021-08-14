@@ -2,12 +2,12 @@ package org.uygar.postit.data.recoveries.post.recovery_db;
 
 import org.uygar.postit.data.database.DataMiner;
 import org.uygar.postit.data.query_utils.QueryUtils;
-import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryReader;
+import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryPostReader;
 import org.uygar.postit.post.PostIt;
 
-public class RecoveryDBImport extends Recovery<RecoveryReader> {
+public class RecoveryDBImport extends Recovery<RecoveryPostReader> {
 
-    public RecoveryDBImport(RecoveryReader recoveryReader, DataMiner dataMiner) {
+    public RecoveryDBImport(RecoveryPostReader recoveryReader, DataMiner dataMiner) {
         super(recoveryReader, dataMiner);
     }
 

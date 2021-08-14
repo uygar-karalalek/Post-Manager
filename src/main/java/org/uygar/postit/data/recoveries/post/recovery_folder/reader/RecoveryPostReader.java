@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecoveryReader extends RecoveryFolder {
+public class RecoveryPostReader extends RecoveryFolder {
 
     private File postFile;
     private final List<File> postItFiles = new ArrayList<>();
@@ -21,7 +21,7 @@ public class RecoveryReader extends RecoveryFolder {
     private final List<PostIt> newPostIts = new ArrayList<>();
 
     // The path name must follow this signature: recovery_<post-name>_<current-time-stamp>
-    public RecoveryReader(@NotNull String pathname) throws IllegalArgumentException, IOException {
+    public RecoveryPostReader(@NotNull String pathname) throws IllegalArgumentException, IOException {
         super(pathname);
         readPostFile();
         readPostItFiles();

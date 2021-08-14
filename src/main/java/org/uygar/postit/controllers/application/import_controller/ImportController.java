@@ -8,10 +8,8 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.DirectoryChooser;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.recovery_post_list_view.RecoveryListCellFactory;
-import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.recovery_post_list_view.RecoveryPostListItem;
-import org.uygar.postit.data.properties.PostProperties;
-import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryReader;
-import org.uygar.postit.post.Post;
+import org.uygar.postit.data.properties.PostManagerProperties;
+import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryPostReader;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,27 +22,23 @@ public class ImportController extends BaseController implements Initializable {
     @FXML
     public BorderPane import_root_pane;
 
-    // TODO : ON PATH CHANGE, CHANGE LIST ITEMS
-    // TODO : ON PATH CHANGE, CHANGE PROPERTIES FILE
-
     @FXML
     public TextField default_source_folder;
 
-    // TODO : CUSTOMIZE LIST CELLS WITH CUSTOM FXML VIEW -> https://stackoverflow.com/questions/47511132/javafx-custom-listview
-
     @FXML
-    public ListView<Post> post_list;
+    public ListView<RecoveryPostReader> post_list;
 
     @FXML
     public TextField post_recovery_folder;
 
-    public PostProperties postProperties = new PostProperties();
+    public PostManagerProperties applicationProperties = new PostManagerProperties();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        String lastFolder = postProperties.getStringProperty("lastFolder");
+        String lastFolder = applicationProperties.getStringProperty("defaultImportFolder");
         default_source_folder.setText(lastFolder);
         post_list.setCellFactory(new RecoveryListCellFactory());
+        updateList();
     }
 
     @FXML
@@ -54,9 +48,15 @@ public class ImportController extends BaseController implements Initializable {
 
         if (chosenDir != null) {
             default_source_folder.setText(chosenDir.getAbsolutePath());
-            postProperties.putProperty("lastFolder", default_source_folder.getText());
+            applicationProperties.putProperty("lastFolder", default_source_folder.getText());
             updateList();
+            updateDefaultFolderProperty();
         }
+    }
+
+    private void updateDefaultFolderProperty() {
+        applicationProperties.putProperty("defaultImportFolder", default_source_folder.getText());
+        applicationProperties.storeProperties();
     }
 
     @FXML
@@ -65,10 +65,13 @@ public class ImportController extends BaseController implements Initializable {
     }
 
     private void updateList() {
+        if (default_source_folder.getText() == null
+                || default_source_folder.getText().isBlank()) return;
+
         File dir = getDefaultFolder();
         this.post_list.getItems().clear();
 
-        if (RecoveryReader.existsPostRecoveryFile(dir.getAbsolutePath())) {
+        if (RecoveryPostReader.existsPostRecoveryFile(dir.getAbsolutePath())) {
             // ENTER IN THIS SECTION MEANS THAT THE USER CHOOSED
             // DIRECTLY THE POST RECOVERY FOLDER
             tryAddPostListItem(dir);
@@ -80,8 +83,8 @@ public class ImportController extends BaseController implements Initializable {
     }
 
     private void tryAddPostListItem(File file) {
-        try (RecoveryReader reader = new RecoveryReader(file.getAbsolutePath())) {
-            this.post_list.getItems().add(reader.getNewPost());
+        try (RecoveryPostReader reader = new RecoveryPostReader(file.getAbsolutePath())) {
+            this.post_list.getItems().add(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }

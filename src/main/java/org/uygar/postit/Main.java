@@ -10,7 +10,7 @@ import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.application.app_controller.app_controller_managers.ResizeHelper;
 import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.data.properties.LogProperties;
-import org.uygar.postit.data.properties.PostProperties;
+import org.uygar.postit.data.properties.PostManagerProperties;
 
 public class Main extends Application {
 
@@ -23,12 +23,12 @@ public class Main extends Application {
     private Scene scene;
     private LogProperties properties;
     private AppController appController;
-    private PostProperties applicationProperties;
+    private PostManagerProperties applicationProperties;
 
     @Override
     public void init() {
         initLogProperties();
-        applicationProperties = new PostProperties();
+        applicationProperties = new PostManagerProperties();
         applicationProperties.loadProperties();
     }
 

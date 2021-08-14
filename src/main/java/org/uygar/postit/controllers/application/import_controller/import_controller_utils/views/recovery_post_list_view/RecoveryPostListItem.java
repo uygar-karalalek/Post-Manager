@@ -5,16 +5,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
-import javafx.scene.layout.HBox;
 import org.uygar.postit.controllers.application.FXLoader;
-import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryReader;
+import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryPostReader;
 import org.uygar.postit.post.Post;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 
-public class RecoveryPostListItem extends ListCell<Post> {
+public class RecoveryPostListItem extends ListCell<RecoveryPostReader> {
 
     @FXML
     public Label date;
@@ -25,8 +23,6 @@ public class RecoveryPostListItem extends ListCell<Post> {
 
     public RecoveryPostListItem() {
         this.inflateFXML();
-//        buildItem();
-//        addLabelsToItemBox();
     }
 
     private void inflateFXML() {
@@ -42,33 +38,18 @@ public class RecoveryPostListItem extends ListCell<Post> {
     }
 
     @Override
-    protected void updateItem(Post post, boolean empty) {
-        super.updateItem(post, empty);
-        if (empty || post == null) {
+    protected void updateItem(RecoveryPostReader postReader, boolean empty) {
+        super.updateItem(postReader, empty);
+        if (empty || postReader == null) {
             setDisable(false);
             setContentDisplay(ContentDisplay.TEXT_ONLY);
         } else {
-            System.out.println(post.getName());
-            postName.setText(post.getName());
-            numOfPostIts.setText("0");
-            date.setText("");
+            postName.setText(postReader.getNewPost().getName());
+            numOfPostIts.setText(Integer.toString(postReader.getNewPostIts().size()));
+            date.setText(postReader.getNewPost().getCreationDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
         }
     }
-
-//    private void buildItem() {
-//        this.nameLbl = new Label("Name: " + reader.getNewPost().getName() + " | ");
-//        String numOfPostIts = Integer.toString(reader.getNewPostIts().size() - 1);
-//        this.numOfPostItsLbl = new Label("Num of post its: " + numOfPostIts + " | ");
-//        this.creationDateLbl = new Label(reader.getNewPost()
-//                .getCreationDate().toLocalDate().format(DateTimeFormatter.ofPattern("dd - MMM - yyyy")));
-//    }
-//
-//    private void addLabelsToItemBox() {
-//        this.getChildren().add(nameLbl);
-//        this.getChildren().add(numOfPostItsLbl);
-//        this.getChildren().add(creationDateLbl);
-//    }
 
 }
