@@ -4,6 +4,7 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Properties;
 
 public class PostManagerProperties {
@@ -29,6 +30,19 @@ public class PostManagerProperties {
 
     public String getStringProperty(String propertyName) {
         return (String) this.properties.get(propertyName);
+    }
+
+    public Optional<Double> getDoubleProperty(String key) {
+        try {
+            return Optional.of(Double.parseDouble
+                    (this.properties.getProperty(key)));
+        } catch (Exception e) {
+            return Optional.empty();
+        }
+    }
+
+    public Double getDoublePropertyOr(String key, double orValue) {
+        return getDoubleProperty(key).orElse(orValue);
     }
 
     public Object getProperty(String propertyName) {
