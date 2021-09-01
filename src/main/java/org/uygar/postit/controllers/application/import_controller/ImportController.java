@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.application.import_controller.import_controller_utils.manager.ImportControllerManager;
 import org.uygar.postit.data.properties.PostManagerProperties;
@@ -26,6 +27,9 @@ public class ImportController extends BaseController {
 
     @FXML
     public TextField post_recovery_folder;
+
+    @FXML
+    public HBox choosen_folder;
 
     public ImportControllerManager importControllerManager = new ImportControllerManager(this);
     public PostManagerProperties applicationProperties;
