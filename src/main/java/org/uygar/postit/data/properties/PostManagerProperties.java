@@ -28,6 +28,13 @@ public class PostManagerProperties {
         return properties.put(key, value);
     }
 
+    public Object putSpecificFolderProperty(String path) {
+        int numOfFolders = Integer.parseInt(this.getProperty("num_of_folders").toString());
+        this.putProperty("num_of_folders", Integer.toString(numOfFolders + 1));
+        String folderName = "folder_" + numOfFolders;
+        return properties.put(folderName, path);
+    }
+
     public String getStringProperty(String propertyName) {
         return (String) this.properties.get(propertyName);
     }
