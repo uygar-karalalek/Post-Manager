@@ -9,6 +9,9 @@ import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.application.import_controller.import_controller_utils.manager.ImportControllerManager;
 import org.uygar.postit.data.properties.PostManagerProperties;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryPostReader;
+import org.uygar.postit.data.structures.PostContainerOrganizer;
+import org.uygar.postit.data.structures.PostItContainerOrganizer;
+import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 public class ImportController extends BaseController {
 
@@ -30,11 +33,20 @@ public class ImportController extends BaseController {
     @FXML
     public HBox chosen_folder;
 
+    public PostGridViewer postGridViewer;
+    public PostItContainerOrganizer postIts;
+
     public ImportControllerManager importControllerManager = new ImportControllerManager(this);
     public ImportControllerManager.ImportInitializer importInitializer;
     public PostManagerProperties applicationProperties;
 
-    public void initialize(PostManagerProperties postManagerProperties) {
+    public void initialize(PostManagerProperties postManagerProperties,
+                           PostGridViewer postGridViewer,
+                           PostItContainerOrganizer postIts) {
+
+        this.postGridViewer = postGridViewer;
+        this.postIts = postIts;
+
         applicationProperties = postManagerProperties;
         importInitializer = importControllerManager.new ImportInitializer();
         importInitializer.initialize();

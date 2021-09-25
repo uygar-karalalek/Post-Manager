@@ -15,7 +15,7 @@
          <center>
             <HBox alignment="CENTER_LEFT" prefHeight="40.0" prefWidth="396.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="postName" prefWidth="250.0" text="Post Name" />
+                  <Label fx:id="post_name" prefWidth="250.0" text="Post Name" />
                   <Separator orientation="VERTICAL" prefHeight="11.0" prefWidth="0.0">
                      <opaqueInsets>
                         <Insets bottom="1.0" left="1.0" right="1.0" top="1.0" />
@@ -27,8 +27,8 @@
                         <Insets left="10.0" right="10.0" />
                      </HBox.margin>
                   </Separator>
-                  <Label fx:id="numOfPostIts" prefWidth="250.0" text="Number of post-its" />
-                  <Button mnemonicParsing="false" text="IMPORT">
+                  <Label fx:id="num_of_post_its" prefWidth="250.0" text="Number of post-its" />
+                  <Button fx:id="import_button" mnemonicParsing="false" text="IMPORT">
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>

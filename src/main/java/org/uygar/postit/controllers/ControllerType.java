@@ -7,6 +7,7 @@ public enum ControllerType {
     FILTER("filter"),
     STATISTICA("statistica"),
     POST("post"),
+    IMPORT("import"),
     POSTIT("postIt");
 
     public String controllerName;

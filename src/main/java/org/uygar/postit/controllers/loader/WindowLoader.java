@@ -1,6 +1,7 @@
 package org.uygar.postit.controllers.loader;
 
 import javafx.stage.Stage;
+import javafx.stage.Window;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.application.utils.WindowInitializer;
@@ -34,6 +35,12 @@ public abstract class WindowLoader<P extends BaseController, C extends BaseContr
 
     protected void setWindowInitializerByStage(Stage stage) {
         this.windowInitializer = new WindowInitializer(stage);
+    }
+
+    public static void hideAllControllersWindowsOfType(ControllerType controllerType) {
+        Stage.getWindows().stream().filter(window -> window.getScene()
+                .getRoot().getId().equals(controllerType.controllerName))
+                .forEach(Window::hide);
     }
 
 }

@@ -103,7 +103,13 @@ public class ImportControllerManager extends ImportManager {
         public void initialize() {
             String lastFolder = importController.applicationProperties.getStringProperty("defaultImportFolder");
             importController.default_source_folder.setText(lastFolder);
-            importController.post_list.setCellFactory(new RecoveryListCellFactory());
+
+            RecoveryListCellFactory recoveryFactoryCallBack =
+                    new RecoveryListCellFactory(importController.postGridViewer,
+                            importController.postIts);
+
+            importController.post_list.setCellFactory(recoveryFactoryCallBack);
+
             updateDefaultSourceList();
             updateSpecificSourceList();
         }

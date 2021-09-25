@@ -10,13 +10,16 @@ import org.uygar.postit.controllers.application.import_controller.ImportControll
 import org.uygar.postit.controllers.application.utils.ButtonDisableBinding;
 import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
+import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 
 public class ImportLoader extends WindowLoader<AppController, ImportController> {
 
     private ButtonDisableBinding importDisableBinding;
+    private PostGridViewer postGridViewer;
 
     public ImportLoader(AppController controller, PostGridViewer postGridViewer) {
         super(controller, ControllerType.APPLICATION);
+        this.postGridViewer = postGridViewer;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class ImportLoader extends WindowLoader<AppController, ImportController> 
 
     private void initImportController() {
         this.childController = (ImportController) FXLoader.getLoadedController("import", "app");
-        this.childController.initialize(parentController.appProperties);
+        this.childController.initialize(parentController.appProperties, parentController.postGrid, childController.postIts);
     }
 
     private Stage getWindow() {
