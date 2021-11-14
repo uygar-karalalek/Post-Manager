@@ -21,9 +21,9 @@ public class RecoveryPostListItem extends ListCell<RecoveryPostReader> {
     @FXML
     public Label date;
     @FXML
-    public Label postName;
+    public Label post_name;
     @FXML
-    public Label numOfPostIts;
+    public Label num_of_post_its;
     @FXML
     public Button import_button;
 
@@ -61,8 +61,8 @@ public class RecoveryPostListItem extends ListCell<RecoveryPostReader> {
             setDisable(false);
             setContentDisplay(ContentDisplay.TEXT_ONLY);
         } else {
-            postName.setText(postReader.getNewPost().getName());
-            numOfPostIts.setText(Integer.toString(postReader.getNewPostIts().size()));
+            post_name.setText(postReader.getNewPost().getName());
+            num_of_post_its.setText(Integer.toString(postReader.getNewPostIts().size()));
             date.setText(postReader.getNewPost().getCreationDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
             setContentDisplay(ContentDisplay.GRAPHIC_ONLY);

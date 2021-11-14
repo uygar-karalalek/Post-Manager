@@ -4,8 +4,8 @@ import java.io.*;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.util.Optional;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Stream;
 
 public class PostManagerProperties {
 
@@ -28,11 +28,35 @@ public class PostManagerProperties {
         return properties.put(key, value);
     }
 
-    public Object putSpecificFolderProperty(String path) {
-        int numOfFolders = Integer.parseInt(this.getProperty("num_of_folders").toString());
-        this.putProperty("num_of_folders", Integer.toString(numOfFolders + 1));
-        String folderName = "folder_" + numOfFolders;
-        return properties.put(folderName, path);
+    public Map<String, Integer> getAllSpecificFolders() {
+        Map<String, Integer> specific = new HashMap<>();
+
+        Iterator<Object> keysIterator = this.properties.keys().asIterator();
+        while (keysIterator.hasNext()) {
+            String folder = (String) keysIterator.next();
+            if (folder.contains("folder_")) {
+                specific.put(
+                        folder.substring("folder_".length()),
+                        Integer.parseInt(properties.getProperty(folder))
+                );
+            }
+        }
+
+        return specific;
+    }
+
+    public void putSpecificFolderProperty(String path) {
+        String folderName = "folder_" + path;
+        try {
+            int numOfVisitedFolder = Integer.parseInt(getNumOfVisitedFolder(path));
+            properties.put(folderName, Integer.toString(numOfVisitedFolder + 1));
+        } catch (Exception exception) {
+            this.putProperty(folderName, "1");
+        }
+    }
+
+    private String getNumOfVisitedFolder(String path) {
+        return (String) this.properties.get("folder_" + path);
     }
 
     public String getStringProperty(String propertyName) {
