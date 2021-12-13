@@ -40,13 +40,8 @@ public class ImportController extends BaseController {
     public ImportControllerManager.ImportInitializer importInitializer;
     public PostManagerProperties applicationProperties;
 
-    public void initialize(PostManagerProperties postManagerProperties,
-                           PostGridViewer postGridViewer,
-                           PostItContainerOrganizer postIts) {
-
+    public void initialize(PostManagerProperties postManagerProperties, PostGridViewer postGridViewer) {
         this.postGridViewer = postGridViewer;
-        this.postIts = postIts;
-
         applicationProperties = postManagerProperties;
         importInitializer = importControllerManager.new ImportInitializer();
         importInitializer.initialize();

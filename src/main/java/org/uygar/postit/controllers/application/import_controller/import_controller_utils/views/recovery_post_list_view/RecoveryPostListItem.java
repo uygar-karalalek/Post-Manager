@@ -39,6 +39,8 @@ public class RecoveryPostListItem extends ListCell<RecoveryPostReader> {
         this.import_button.setOnAction(event -> {
             // HIDE ALL POST-IT PAGES BEFORE THE IMPORT
             WindowLoader.hideAllControllersWindowsOfType(ControllerType.POSTIT);
+            this.postGridViewer.postOrganizer.add(this.getItem().getNewPost());
+            this.postIts.addAll(this.getItem().getNewPostIts());
         });
     }
 

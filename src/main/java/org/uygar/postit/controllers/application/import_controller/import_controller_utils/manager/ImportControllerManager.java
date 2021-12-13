@@ -15,11 +15,8 @@ import java.util.function.Consumer;
 
 public class ImportControllerManager extends ImportManager {
 
-    private final ImportInitializer initializer;
-
     public ImportControllerManager(ImportController importController) {
         super(importController);
-        initializer = this.new ImportInitializer();
     }
 
     public void chooseSpecificFolder() {
@@ -114,9 +111,10 @@ public class ImportControllerManager extends ImportManager {
             String lastFolder = importController.applicationProperties.getStringProperty("defaultImportFolder");
             importController.default_source_folder.setText(lastFolder);
 
-            RecoveryListCellFactory recoveryFactoryCallBack =
-                    new RecoveryListCellFactory(importController.postGridViewer,
-                            importController.postIts);
+            RecoveryListCellFactory recoveryFactoryCallBack = new RecoveryListCellFactory(
+                            importController.postGridViewer,
+                            importController.postIts
+                    );
 
             importController.post_list.setCellFactory(recoveryFactoryCallBack);
 

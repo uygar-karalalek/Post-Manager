@@ -7,6 +7,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import org.uygar.postit.controllers.BaseController;
+import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.exception.WindowCoordinatesContainer;
 import org.uygar.postit.controllers.exception.WrongFieldsException;
 import org.uygar.postit.controllers.post.postit.editor_manager.PostItEditorManager;

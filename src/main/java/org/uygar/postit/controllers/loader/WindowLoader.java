@@ -6,6 +6,9 @@ import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.application.utils.WindowInitializer;
 
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public abstract class WindowLoader<P extends BaseController, C extends BaseController> implements Loader {
 
     protected P parentController;
@@ -38,9 +41,9 @@ public abstract class WindowLoader<P extends BaseController, C extends BaseContr
     }
 
     public static void hideAllControllersWindowsOfType(ControllerType controllerType) {
-        Stage.getWindows().stream().filter(window -> window.getScene()
-                .getRoot().getId().equals(controllerType.controllerName))
-                .forEach(Window::hide);
+        Set<Window> collect = Stage.getWindows().stream().filter(window -> window.getScene()
+                .getRoot().getId().equals(controllerType.controllerName)).collect(Collectors.toSet());
+        collect.forEach(Window::hide);
     }
 
 }
