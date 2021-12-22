@@ -12,6 +12,8 @@ import javafx.util.Duration;
 
 public class WindowInitializer {
 
+    // ROOT STAGE IS FOR ALIGNING THE NEW
+    // WINDOW IN CENTER BASED ON ROOT!
     private final Stage rootStage;
 
     public WindowInitializer(Stage rootStage) {

@@ -60,11 +60,11 @@ public class PostItGridViewer extends FlowPane {
     }
 
     private List<PostItViewer> addListenersToPostItViewersAndThenReturn(List<PostItViewer> postItViewers) {
-        postItViewers.forEach(this::addListenertoPostItViewer);
+        postItViewers.forEach(this::addListenerToPostItViewer);
         return postItViewers;
     }
 
-    public void addListenertoPostItViewer(PostItViewer postItViewer) {
+    public void addListenerToPostItViewer(PostItViewer postItViewer) {
         postItViewer.getMainGraphic().setOnMouseClicked(mouseEvent -> {
             if (mouseEvent.getButton() == MouseButton.PRIMARY)
                 PostController.openPostItController(postItViewer, this);
@@ -76,7 +76,7 @@ public class PostItGridViewer extends FlowPane {
     public void add(PostIt postIt) {
         PostItViewer postItViewer = new PostItViewer(postIt);
         this.postItOrganizer.add(postIt);
-        this.addListenertoPostItViewer(postItViewer);
+        this.addListenerToPostItViewer(postItViewer);
         this.getChildren().add(postItViewer);
     }
 

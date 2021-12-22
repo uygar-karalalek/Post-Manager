@@ -4,12 +4,12 @@ import javafx.scene.paint.Color;
 import javafx.stage.*;
 import org.uygar.postit.controllers.WindowDimensions;
 import org.uygar.postit.controllers.application.FXLoader;
-import org.uygar.postit.controllers.application.utils.WindowInitializer;
 import org.uygar.postit.controllers.loader.WindowLoader;
 import org.uygar.postit.controllers.post.PostController;
 import org.uygar.postit.controllers.post.controller_utilities.loader.postit_responsabilities.PostItResponsibilities;
 import org.uygar.postit.controllers.post.postit.PostItController;
 import org.uygar.postit.post.Post;
+import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 import org.uygar.postit.post.viewers.post_it.post_it_viewer.PostItViewer;
 
@@ -27,16 +27,18 @@ public class PostItCreator extends WindowLoader<PostController, PostItController
         this.postItResponsibilities = new PostItResponsibilities(this);
 
         this.initLoadingStageBasedOnFatherPost(this.postItGridViewer.getPostItOrganizer().getFatherPost());
-        this.setWindowInitializerByStage(this.parentStage);
+        super.setWindowInitializerByStage(this.parentStage);
 
         this.childController = (PostItController) FXLoader.getLoadedController("postit", "post");
-        this.childController.init(Optional.ofNullable(postItViewer == null ? null : this.postItViewer.getPostIt()), this.postItGridViewer);
+        PostIt loadingPostIt = postItViewer == null ? null : this.postItViewer.getPostIt();
+
+        this.childController.init(Optional.ofNullable(loadingPostIt), this.postItGridViewer);
     }
 
     private Stage initializedPostItStage() {
-        Stage postItStage = this.windowInitializer.
+        Stage postItStage = super.windowInitializer.
                 initializeApplicationWindowAndGet(WindowDimensions.POST_IT_WINDOW_DIMENSION,
-                        Modality.APPLICATION_MODAL, this.childController.postIt, true);
+                        Modality.APPLICATION_MODAL, super.childController.postIt, true);
 
         this.postItResponsibilities.getDimensionalBoundResponsibilities().initStageBounds(postItStage);
         postItStage.initStyle(StageStyle.TRANSPARENT);
@@ -46,15 +48,15 @@ public class PostItCreator extends WindowLoader<PostController, PostItController
     }
 
     private void initLoadingStageBasedOnFatherPost(Post fatherPost) {
-        this.parentStage = postItResponsibilities.getLoadingResponsibilities().searchStageWithFatherPost(fatherPost);
+        super.parentStage = postItResponsibilities.getLoadingResponsibilities().searchStageWithFatherPost(fatherPost);
     }
 
     @Override
     public void load() {
         Stage stage = initializedPostItStage();
-        this.childController.setStage(stage);
-        stage.setOnShowing(this.postItResponsibilities.getResponseResponsibilities()::onStageShowingLowOpacityOfOtherPostIts);
-        stage.setOnHidden(this.postItResponsibilities.getResponseResponsibilities()::onStageResetOpacityOfOtherPostIts);
+        super.childController.setStage(stage);
+        stage.setOnShowing(this.postItResponsibilities.getResponseResponsibilities()::showLowOpacityOfOtherPostIts);
+        stage.setOnHidden(this.postItResponsibilities.getResponseResponsibilities()::resetOpacityOfOtherPostIts);
         stage.showAndWait();
     }
 

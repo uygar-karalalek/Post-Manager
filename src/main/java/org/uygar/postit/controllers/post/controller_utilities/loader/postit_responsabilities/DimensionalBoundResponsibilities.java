@@ -43,7 +43,8 @@ public class DimensionalBoundResponsibilities extends Responsibilities {
         return position.getMinY() - VERTICAL_INVISIBLE_BORDER;
     }
 
-    // This is the one of the post-it that lies behind the layout
+    // This is the one of the post-it that lies BELOW the layout!!!
+    // So it is not completely shown by the scroll layout as view!
     private double getPostItExternalYPosition() {
         return getStageMaxY() - WindowDimensions.POST_IT_WINDOW_DIMENSION.getHeight() - VERTICAL_INVISIBLE_BORDER;
     }

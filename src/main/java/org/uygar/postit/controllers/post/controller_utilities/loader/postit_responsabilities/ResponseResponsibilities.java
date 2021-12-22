@@ -9,12 +9,12 @@ public class ResponseResponsibilities extends Responsibilities {
         super(postItCreator);
     }
 
-    public void onStageShowingLowOpacityOfOtherPostIts(WindowEvent event) {
+    public void showLowOpacityOfOtherPostIts(WindowEvent event) {
         postItCreator.getPostItGridViewer().getChildren().stream().filter
                 (node -> node != postItCreator.getPostItViewer()).forEach(node -> node.setOpacity(0.6));
     }
 
-    public void onStageResetOpacityOfOtherPostIts(WindowEvent event) {
+    public void resetOpacityOfOtherPostIts(WindowEvent event) {
         postItCreator.getPostItGridViewer().getChildren().forEach(node -> node.setOpacity(1));
     }
 

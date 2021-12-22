@@ -9,6 +9,9 @@ import javafx.scene.control.ListCell;
 import org.uygar.postit.controllers.ControllerType;
 import org.uygar.postit.controllers.application.FXLoader;
 import org.uygar.postit.controllers.loader.WindowLoader;
+import org.uygar.postit.data.database.DataMiner;
+import org.uygar.postit.data.query_utils.QueryUtils;
+import org.uygar.postit.data.recoveries.post.recovery_db.RecoveryDBImport;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryPostReader;
 import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
@@ -27,12 +30,12 @@ public class RecoveryPostListItem extends ListCell<RecoveryPostReader> {
     @FXML
     public Button import_button;
 
-    private PostGridViewer postGridViewer;
-    private PostItContainerOrganizer postIts;
+    private DataMiner dataMiner = new DataMiner();
 
-    public RecoveryPostListItem(PostGridViewer postGridViewer, PostItContainerOrganizer postIts) {
+    private PostGridViewer postGridViewer;
+
+    public RecoveryPostListItem(PostGridViewer postGridViewer) {
         this.postGridViewer = postGridViewer;
-        this.postIts = postIts;
 
         this.inflateFXML();
 
@@ -40,7 +43,9 @@ public class RecoveryPostListItem extends ListCell<RecoveryPostReader> {
             // HIDE ALL POST-IT PAGES BEFORE THE IMPORT
             WindowLoader.hideAllControllersWindowsOfType(ControllerType.POSTIT);
             this.postGridViewer.postOrganizer.add(this.getItem().getNewPost());
-            this.postIts.addAll(this.getItem().getNewPostIts());
+
+            QueryUtils.tryCreateNewPostOnDB(dataMiner, this.getItem().getNewPost());
+            this.getItem().getNewPostIts().forEach(postIt -> QueryUtils.tryCreateNewPostItOnDB(dataMiner, postIt));
         });
     }
 
