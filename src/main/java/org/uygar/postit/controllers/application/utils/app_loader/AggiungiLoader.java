@@ -32,7 +32,7 @@ public class AggiungiLoader extends WindowLoader<AppController, AggiungiControll
     }
 
     private void initAggiungiController() {
-        this.childController = (AggiungiController) FXLoader.getLoadedController("add", "app");
+        super.childController = (AggiungiController) FXLoader.getLoadedController("add", "app");
         childController.setPostGridViewer(parentController.postGrid);
         WindowInitializer.fadeWindowEffect(childController.add, FADE_INIT_TIME_AGGIUNGI);
     }

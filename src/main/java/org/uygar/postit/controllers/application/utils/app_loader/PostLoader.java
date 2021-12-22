@@ -26,18 +26,18 @@ public class PostLoader extends WindowLoader<AppController, PostController> {
     }
 
     private Stage getPostStage() {
-        Stage postStage = windowInitializer
+        Stage postFrame = windowInitializer
                 .initializeApplicationWindowAndGet(WindowDimensions.POST_WINDOW_DIMENSION, Modality.WINDOW_MODAL, childController.post, true);
-        postStage.setOnHidden(windowEvent -> {
-            parentController.postGrid.nothingSelected();
-            parentController.postGrid.enablePostButtonWhenFrameClosed(childController.loadedPost);
+        postFrame.setOnHidden(windowEvent -> {
+            parentController.postGrid.noPostSelected();
+            parentController.postGrid.enablePostApplicationButton(childController.loadedPost);
         });
 
         parentController.styleManager.bindStyleSheetWithControllerName("post", "post", childController.post);
-        childController.postTabManager.setMinSizeListenerByDimensionOfStage(postStage);
-        postStage.setResizable(true);
+        childController.postTabManager.setMinSizeListenerByDimensionOfStage(postFrame);
+        postFrame.setResizable(true);
 
-        return postStage;
+        return postFrame;
     }
 
 }

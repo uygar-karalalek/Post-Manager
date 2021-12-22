@@ -111,7 +111,8 @@ public class ImportControllerManager extends ImportManager {
             String lastFolder = importController.applicationProperties.getStringProperty("defaultImportFolder");
             importController.default_source_folder.setText(lastFolder);
 
-            RecoveryListCellFactory recoveryFactoryCallBack = new RecoveryListCellFactory(importController.postGridViewer);
+            RecoveryListCellFactory recoveryFactoryCallBack = new RecoveryListCellFactory(
+                    importController.postGridViewer);
 
             importController.post_list.setCellFactory(recoveryFactoryCallBack);
 

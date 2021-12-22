@@ -45,6 +45,7 @@ public class ConverterUtil {
     private static Optional<PostIt> parseFromAbstractPostItToObject(Map<String, List<String>> postIts, int dataElementIndex) {
         if (isValidMappedObjectList(postIts)) {
             int id = Integer.parseInt(postIts.get("id").get(dataElementIndex));
+            int fatherId = Integer.parseInt(postIts.get("postId").get(dataElementIndex));
             int priority = Integer.parseInt(postIts.get("priority").get(dataElementIndex));
             boolean done = Boolean.parseBoolean(postIts.get("done").get(dataElementIndex));
             String title = postIts.get("title").get(dataElementIndex);
@@ -52,7 +53,7 @@ public class ConverterUtil {
             LocalDateTime creationDate = LocalDateTime.parse(postIts.get("creationDate").get(dataElementIndex));
             LocalDateTime endDate = LocalDateTime.parse(postIts.get("endDate").get(dataElementIndex));
             Colore colore = Colore.valueOf(postIts.get("colore").get(dataElementIndex));
-            return Optional.of(new PostIt(id, done, title, text, creationDate, endDate, colore, priority));
+            return Optional.of(new PostIt(id, fatherId, done, title, text, creationDate, endDate, colore, priority));
         }
         return Optional.empty();
     }

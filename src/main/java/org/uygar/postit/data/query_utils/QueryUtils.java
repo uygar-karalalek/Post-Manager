@@ -78,9 +78,17 @@ public class QueryUtils {
      */
 
     public static boolean tryRemovePostFromDB(DataMiner miner, Post post) {
-        Query query = new DMLQueryBuilder().delete().from("post")
+        // FIRST WE REMOVE ALL THE POST-ITS ASSOCIATED WITH IT
+        Query removePostIts = new DMLQueryBuilder()
+                .delete()
+                .from("postit")
+                .where("postId="+post.getId());
+
+        // NOW THAT WE HAVE NOT FOREIGN KEY PROBLEMS, WE CAN DELETE MAIN TABLE RECORD
+        Query removePost = new DMLQueryBuilder().delete().from("post")
                 .where().field("id").equalsTo(Integer.toString(post.getId()));
-        return miner.tryExecute(query);
+
+        return miner.tryExecute(removePostIts) && miner.tryExecute(removePost);
     }
 
     public static boolean tryCreateNewPostOnDB(DataMiner miner, Post post) {

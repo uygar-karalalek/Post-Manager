@@ -68,7 +68,7 @@ public class RecoveryPostReader extends RecoveryFolder {
         String postItText = bufferedReader.readLine();
         LocalDateTime postItEndDate = LocalDateTime.parse(bufferedReader.readLine());
         int postItPriority = Integer.parseInt(bufferedReader.readLine());
-        boolean postItDone = Boolean.getBoolean(bufferedReader.readLine());
+        boolean postItDone = Boolean.parseBoolean(bufferedReader.readLine());
         Colore postItColore = Colore.valueOf(bufferedReader.readLine());
 
         newPostIts.add(new PostIt(-1, -1

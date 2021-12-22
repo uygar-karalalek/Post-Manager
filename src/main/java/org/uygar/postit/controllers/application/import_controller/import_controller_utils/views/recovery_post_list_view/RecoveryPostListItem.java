@@ -14,10 +14,13 @@ import org.uygar.postit.data.query_utils.QueryUtils;
 import org.uygar.postit.data.recoveries.post.recovery_db.RecoveryDBImport;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryPostReader;
 import org.uygar.postit.data.structures.PostItContainerOrganizer;
+import org.uygar.postit.post.Post;
+import org.uygar.postit.post.PostIt;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 import java.io.IOException;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 public class RecoveryPostListItem extends ListCell<RecoveryPostReader> {
 
@@ -41,18 +44,30 @@ public class RecoveryPostListItem extends ListCell<RecoveryPostReader> {
 
         this.import_button.setOnAction(event -> {
             // HIDE ALL POST-IT PAGES BEFORE THE IMPORT
-            WindowLoader.hideAllControllersWindowsOfType(ControllerType.POSTIT);
-            this.postGridViewer.postOrganizer.add(this.getItem().getNewPost());
+            Post newPost = this.getItem().getNewPost();
+            List<PostIt> newPostIts = this.getItem().getNewPostIts();
 
-            QueryUtils.tryCreateNewPostOnDB(dataMiner, this.getItem().getNewPost());
-            this.getItem().getNewPostIts().forEach(postIt -> QueryUtils.tryCreateNewPostItOnDB(dataMiner, postIt));
+            WindowLoader.hideAllControllersWindowsOfType(ControllerType.POSTIT);
+
+            QueryUtils.tryCreateNewPostOnDB(dataMiner, newPost);
+            int newPostID = QueryUtils.getLastCreatedPostId(dataMiner);
+
+            // SET THE ID OF POST BECAUSE THE POST-ITS ORGANIZER RETRIEVES
+            // POST-ITS FROM DB BASED ON THAT DATA OF FATHER POST!
+            // SEE: controllers.post.controller_utilities.controller_manager.initializers.post.initGridPane()
+            newPost.setId(newPostID);
+            this.postGridViewer.postOrganizer.add(newPost);
+
+            newPostIts.forEach(postIt -> {
+                postIt.setPostFatherId(newPostID);
+                QueryUtils.tryCreateNewPostItOnDB(dataMiner, postIt);
+            });
         });
     }
 
     private void inflateFXML() {
         try {
-            FXMLLoader fxml = FXLoader.getFXMLLoader(
-                    "import_default_list_item", "app");
+            FXMLLoader fxml = FXLoader.getFXMLLoader("import_default_list_item", "app");
             fxml.setController(this);
             fxml.setRoot(this);
             fxml.load();

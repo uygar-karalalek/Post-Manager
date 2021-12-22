@@ -101,7 +101,7 @@ public class PostGridViewer extends GridPane {
                 });
     }
 
-    public void nothingSelected() {
+    public void noPostSelected() {
         this.selected.set(null);
     }
 
@@ -117,7 +117,7 @@ public class PostGridViewer extends GridPane {
         return -1;
     }
 
-    public void enablePostButtonWhenFrameClosed(Post post) {
+    public void enablePostApplicationButton(Post post) {
         this.getChildren().stream().filter(node -> {
             if (node instanceof Button)
                 return ((Button) node).getText().equals(post.getName());

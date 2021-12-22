@@ -52,6 +52,7 @@ public class AppControllerManager extends AppManager {
         }
 
         private void initPostGrid() {
+            // I WILL USE THIS OBJECT FROM NOW TO ADD POSTS TO THE GRID!
             appController.postGrid = new PostGridViewer(appController.postOrganizer);
             appController.postGrid.selected.addListener(this::onSelectedPostChange);
             appController.scrollPane.setContent(appController.postGrid);
