@@ -28,8 +28,8 @@ public class PostManagerProperties {
         return properties.put(key, value);
     }
 
-    public Map<String, Integer> getAllSpecificFolders() {
-        Map<String, Integer> specific = new HashMap<>();
+    public Map<String, LocalDateTime> getAllSpecificFolders() {
+        Map<String, LocalDateTime> specific = new HashMap<>();
 
         Iterator<Object> keysIterator = this.properties.keys().asIterator();
         while (keysIterator.hasNext()) {
@@ -37,7 +37,7 @@ public class PostManagerProperties {
             if (folder.contains("folder_")) {
                 specific.put(
                         folder.substring("folder_".length()),
-                        Integer.parseInt(properties.getProperty(folder))
+                        LocalDateTime.parse(properties.getProperty(folder))
                 );
             }
         }
@@ -48,8 +48,7 @@ public class PostManagerProperties {
     public void putSpecificFolderProperty(String path) {
         String folderName = "folder_" + path;
         try {
-            int numOfVisitedFolder = Integer.parseInt(getNumOfVisitedFolder(path));
-            properties.put(folderName, Integer.toString(numOfVisitedFolder + 1));
+            properties.put(folderName, LocalDateTime.now().toString());
         } catch (Exception exception) {
             this.putProperty(folderName, "1");
         }

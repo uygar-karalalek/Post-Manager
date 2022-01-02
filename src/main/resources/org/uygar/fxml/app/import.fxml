@@ -53,7 +53,11 @@
                                     </children>
                                 </HBox>
                         <Label text="Chosen" />
-                        <HBox fx:id="chosen_folder" prefHeight="112.0" prefWidth="738.0" />
+                                <HBox fx:id="chosen_folder" prefHeight="112.0" prefWidth="738.0">
+                           <children>
+                              <fx:include fx:id="importSpecific" source="import_specific_list_item.fxml" />
+                           </children>
+                                </HBox>
                                 <Label prefHeight="17.0" prefWidth="199.0" text="Last visited files" />
                                 <ListView fx:id="specific_folder_list" prefHeight="290.0" prefWidth="738.0" />
                             </children>

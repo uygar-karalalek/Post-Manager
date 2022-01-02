@@ -7,10 +7,9 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import org.uygar.postit.controllers.BaseController;
 import org.uygar.postit.controllers.application.import_controller.import_controller_utils.manager.ImportControllerManager;
+import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.recovery_post_list_view.RecoveryPostListSpecificItemController;
 import org.uygar.postit.data.properties.PostManagerProperties;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryPostReader;
-import org.uygar.postit.data.structures.PostContainerOrganizer;
-import org.uygar.postit.data.structures.PostItContainerOrganizer;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
 
 public class ImportController extends BaseController {
@@ -33,9 +32,10 @@ public class ImportController extends BaseController {
     @FXML
     public HBox chosen_folder;
 
-    public PostGridViewer postGridViewer;
-    public PostItContainerOrganizer postIts;
+    @FXML
+    public RecoveryPostListSpecificItemController importSpecificController;
 
+    public PostGridViewer postGridViewer;
     public ImportControllerManager importControllerManager = new ImportControllerManager(this);
     public ImportControllerManager.ImportInitializer importInitializer;
     public PostManagerProperties applicationProperties;

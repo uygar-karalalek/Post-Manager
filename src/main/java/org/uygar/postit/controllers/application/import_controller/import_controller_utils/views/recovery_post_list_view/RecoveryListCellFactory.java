@@ -4,10 +4,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.util.Callback;
 import org.uygar.postit.data.recoveries.post.recovery_folder.reader.RecoveryPostReader;
-import org.uygar.postit.data.structures.PostItContainerOrganizer;
-import org.uygar.postit.post.Post;
 import org.uygar.postit.post.viewers.post.PostGridViewer;
-import org.uygar.postit.post.viewers.post_it.PostItGridViewer;
 
 public class RecoveryListCellFactory implements Callback<ListView<RecoveryPostReader>, ListCell<RecoveryPostReader>> {
 
@@ -19,7 +16,7 @@ public class RecoveryListCellFactory implements Callback<ListView<RecoveryPostRe
 
     @Override
     public ListCell<RecoveryPostReader> call(ListView<RecoveryPostReader> postListView) {
-        return new RecoveryPostListItem(postGridViewer);
+        return new RecoveryPostListDefaultListItemController(postGridViewer);
     }
 
 }
