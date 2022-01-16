@@ -36,7 +36,7 @@ public class ScadenzaWrapper extends Text {
             public String toString(LocalDateTime fine) {
                 String wellFormattedDate = fine.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
                 String wellFormattedHour = fine.format(DateTimeFormatter.ofPattern("HH:mm"));
-                return "Entro: "+wellFormattedDate + " alle " + wellFormattedHour;
+                return "Entro: "+wellFormattedDate + " ore " + wellFormattedHour;
             }
 
             @Override
