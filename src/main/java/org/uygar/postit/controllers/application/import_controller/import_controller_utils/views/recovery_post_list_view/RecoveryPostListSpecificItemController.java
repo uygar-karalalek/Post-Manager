@@ -74,7 +74,6 @@ public class RecoveryPostListSpecificItemController implements Initializable {
     public void updateGraphicsByRecoveryPostReader() {
         if (!root.isVisible()) root.setVisible(true);
 
-        System.out.println(root.isVisible());
         post_name.setText(reader.getNewPost().getName());
         num_of_post_its.setText(Integer.toString(reader.getNewPostIts().size()));
         date.setText(reader.getNewPost().getCreationDate().format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));

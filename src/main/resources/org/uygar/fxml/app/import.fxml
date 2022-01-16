@@ -52,7 +52,6 @@
                                         <Button mnemonicParsing="false" onAction="#onPostRecoveryFolder" prefHeight="25.0" prefWidth="28.0" text="..." />
                                     </children>
                                 </HBox>
-                        <Label text="Chosen" />
                                 <HBox fx:id="chosen_folder" prefHeight="112.0" prefWidth="738.0">
                            <children>
                               <fx:include fx:id="importSpecific" source="import_specific_list_item.fxml" />

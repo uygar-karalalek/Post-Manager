@@ -1,6 +1,8 @@
 package org.uygar.postit.controllers.application.import_controller.import_controller_utils.manager;
 
+import javafx.beans.InvalidationListener;
 import javafx.scene.control.ListView;
+import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
@@ -68,7 +70,9 @@ public class ImportControllerManager extends ImportManager {
         ListView<RecoveryPostReader> specificList = importController.specific_folder_list;
         TextField sourceField = importController.post_recovery_field;
         updateListFromByNewFolder(specificList, sourceField);
-
+        // If we load list that has items, than we show first as chosen
+        if (specificList.getItems().size() > 0)
+            constructChosenItemToImport(specificList.getItems().get(0));
     }
 
     public void updateListFromByNewFolder(ListView<RecoveryPostReader> listView, TextField folderTextField) {
@@ -127,6 +131,12 @@ public class ImportControllerManager extends ImportManager {
         }
     }
 
+    private void constructChosenItemToImport(RecoveryPostReader selectedItem) {
+        importController.importSpecificController.setReader(selectedItem);
+        importController.importSpecificController.setPostGridViewer(importController.postGridViewer);
+        importController.importSpecificController.updateGraphicsByRecoveryPostReader();
+    }
+
     public class ImportInitializer {
 
         public void initialize() {
@@ -136,13 +146,10 @@ public class ImportControllerManager extends ImportManager {
             RecoveryListCellFactory recoveryFactoryCallBack = new RecoveryListCellFactory(importController.postGridViewer);
             importController.post_list.setCellFactory(recoveryFactoryCallBack);
 
-            importController.specific_folder_list.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2) {
-                    RecoveryPostReader selectedItem = importController.specific_folder_list.getSelectionModel().getSelectedItem();
-                    importController.importSpecificController.setReader(selectedItem);
-                    importController.importSpecificController.setPostGridViewer(importController.postGridViewer);
-                    importController.importSpecificController.updateGraphicsByRecoveryPostReader();
-                }
+            importController.specific_folder_list.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            importController.specific_folder_list.getSelectionModel().getSelectedItems().addListener((InvalidationListener) change ->  {
+                RecoveryPostReader selectedItem = importController.specific_folder_list.getSelectionModel().getSelectedItem();
+                constructChosenItemToImport(selectedItem);
             });
 
             updateDefaultSourceList();
