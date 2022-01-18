@@ -4,7 +4,6 @@ import javafx.beans.InvalidationListener;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.DirectoryChooser;
 import org.uygar.postit.controllers.application.import_controller.ImportController;
 import org.uygar.postit.controllers.application.import_controller.import_controller_utils.views.recovery_post_list_view.RecoveryListCellFactory;
@@ -26,11 +25,17 @@ public class ImportControllerManager extends ImportManager {
     public void chooseSpecificFolder() {
         chooseFolder(chosenFolder -> {
             String absolutePath = chosenFolder.getAbsolutePath();
-            importController.post_recovery_field.setText(absolutePath);
+            importController.import_specific_post_recovery_field.setText(absolutePath);
             importController.applicationProperties.putSpecificFolderProperty(absolutePath);
             importController.applicationProperties.storeProperties();
             updateSpecificSourceList();
+            updateSpecificFolderProperty();
         });
+    }
+
+    public void updateSpecificFolderProperty() {
+        importController.applicationProperties.putProperty("specificImportFolder", importController.default_source_folder.getText());
+        importController.applicationProperties.storeProperties();
     }
 
     public void chooseDefaultFolder() {
@@ -68,7 +73,7 @@ public class ImportControllerManager extends ImportManager {
 
     public void updateSpecificSourceList() {
         ListView<RecoveryPostReader> specificList = importController.specific_folder_list;
-        TextField sourceField = importController.post_recovery_field;
+        TextField sourceField = importController.import_specific_post_recovery_field;
         updateListFromByNewFolder(specificList, sourceField);
         // If we load list that has items, than we show first as chosen
         if (specificList.getItems().size() > 0)
@@ -141,7 +146,12 @@ public class ImportControllerManager extends ImportManager {
 
         public void initialize() {
             String lastFolder = importController.applicationProperties.getStringProperty("defaultImportFolder");
+
+            // TODO : Insert last chosen folders as array
+            String lastSpecificFolder = importController.applicationProperties.getStringProperty("specificImportFolder");
+
             importController.default_source_folder.setText(lastFolder);
+            importController.import_specific_post_recovery_field.setText(lastSpecificFolder);
 
             RecoveryListCellFactory recoveryFactoryCallBack = new RecoveryListCellFactory(importController.postGridViewer);
             importController.post_list.setCellFactory(recoveryFactoryCallBack);

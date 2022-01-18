@@ -27,7 +27,7 @@ public class ImportController extends BaseController {
     public ListView<RecoveryPostReader> specific_folder_list;
 
     @FXML
-    public TextField post_recovery_field;
+    public TextField import_specific_post_recovery_field;
 
     @FXML
     public HBox chosen_folder;

@@ -48,7 +48,7 @@
                                 <Label text="Choose from specific path" />
                                 <HBox prefHeight="15.0" prefWidth="600.0" spacing="10.0">
                                     <children>
-                                        <TextField fx:id="post_recovery_field" prefHeight="25.0" prefWidth="330.0" promptText="Post recovery folder..." />
+                                        <TextField fx:id="import_specific_post_recovery_field" prefHeight="25.0" prefWidth="330.0" promptText="Post recovery folder..." />
                                         <Button mnemonicParsing="false" onAction="#onPostRecoveryFolder" prefHeight="25.0" prefWidth="28.0" text="..." />
                                     </children>
                                 </HBox>
