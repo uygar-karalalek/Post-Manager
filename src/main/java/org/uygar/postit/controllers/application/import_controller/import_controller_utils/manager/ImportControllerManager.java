@@ -34,7 +34,12 @@ public class ImportControllerManager extends ImportManager {
     }
 
     public void updateSpecificFolderProperty() {
-        importController.applicationProperties.putProperty("specificImportFolder", importController.default_source_folder.getText());
+        String multiplePaths = importController.applicationProperties.getStringProperty("specificImportProperty");
+        String singlePath = importController.default_source_folder.getText();
+
+        multiplePaths += multiplePaths.isBlank() ? singlePath : "," + singlePath;
+
+        importController.applicationProperties.putProperty("specificImportFolder", multiplePaths);
         importController.applicationProperties.storeProperties();
     }
 
@@ -147,8 +152,8 @@ public class ImportControllerManager extends ImportManager {
         public void initialize() {
             String lastFolder = importController.applicationProperties.getStringProperty("defaultImportFolder");
 
-            // TODO : Insert last chosen folders as array
-            String lastSpecificFolder = importController.applicationProperties.getStringProperty("specificImportFolder");
+            String[] folders = importController.applicationProperties.getStringProperty("specificImportFolder").split(",");
+            String lastSpecificFolder = folders[folders.length - 1];
 
             importController.default_source_folder.setText(lastFolder);
             importController.import_specific_post_recovery_field.setText(lastSpecificFolder);
