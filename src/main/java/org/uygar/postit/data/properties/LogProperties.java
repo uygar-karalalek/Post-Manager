@@ -17,7 +17,7 @@ public class LogProperties extends PostManagerProperties {
     private Map<String, Integer> monthsAndFrequencies;
 
     public LogProperties() {
-        super(Paths.get("src/main/resources/logs.properties"));
+        super("/org/uygar/logs.properties");
         putAllInitialHoursIfAbsent();
     }
 

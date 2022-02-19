@@ -85,4 +85,8 @@ public class Main extends Application {
         applicationProperties.storeProperties();
     }
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
 }

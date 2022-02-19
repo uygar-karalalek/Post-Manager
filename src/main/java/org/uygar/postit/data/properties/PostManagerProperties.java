@@ -1,6 +1,9 @@
 package org.uygar.postit.data.properties;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -9,17 +12,17 @@ import java.util.stream.Stream;
 
 public class PostManagerProperties {
 
-    Path propPath;
     Properties properties;
+    String propPath;
 
-    public PostManagerProperties(Path propPath) {
+    public PostManagerProperties(String propPath) {
         this.propPath = propPath;
         properties = new Properties();
         loadProperties();
     }
 
     public PostManagerProperties() {
-        this.propPath = Paths.get("src/main/resources/application.properties");
+        this.propPath = "/org/uygar/application.properties";
         properties = new Properties();
         loadProperties();
     }
@@ -80,22 +83,23 @@ public class PostManagerProperties {
     }
 
     public void storeProperties() {
-        File property = new File(propPath.toAbsolutePath().toString());
         try {
-            OutputStream stream = new
-                    BufferedOutputStream(new FileOutputStream(property));
-            properties.store(stream, "changed properties: " + LocalDateTime.now());
+            InputStream resourceAsStream = PostManagerProperties.class.getResourceAsStream(propPath);
+
+            OutputStream outputStream = new ByteArrayOutputStream();
+            resourceAsStream.transferTo(outputStream);
+
+          //  OutputStream output = new FileOutputStream(getClass().getResource(propPath).getPath());
+            properties.store(outputStream, "changed properties: " + LocalDateTime.now());
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public void loadProperties() {
-        File property = new File(propPath.toAbsolutePath().toString());
         try {
-            InputStream stream = new
-                    BufferedInputStream(new FileInputStream(property));
-            properties.load(stream);
+            InputStream resourceAsStream = PostManagerProperties.class.getResourceAsStream(propPath);
+            properties.load(resourceAsStream);
         } catch (IOException e) {
             System.err.println("The file not already exists!");
         }
